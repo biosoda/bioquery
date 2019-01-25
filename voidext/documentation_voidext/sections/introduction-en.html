@@ -1,0 +1,42 @@
+<html><h2 id="intro" class="list">Introduction <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<p> This documentation describes a RDF schema called  Extended <a href="https://www.w3.org/TR/void/">Vocabulary of Interlinked Datasets</a> (VoIDext) to enhance data interchange between distributed data sets. Although VoID RDF schema provides the <a href="https://www.w3.org/TR/void/#link-predicate">void:linkPredicate</a> term to define 
+by which property two datasets are linked, solely this term is not enough to consider all possible virtual links (see definition in <a href="#vl">Subsection 1.1</a>) between two
+datasets. Because of this, we extended and adapted the VoID vocabulary to cover more possibilities of liking two distributed
+datasets of RDF triples.
+ In  <a href="#desc">Section 3</a>, we depict how to use this
+RDF schema in order to define the virtual links. VoIDext is fully relied on the RDF schema, thus no OWL terms are used. 
+In addition, VoIDext does not contain all VoID terms because VoIDext focus on the virtual links description. 
+This does not impedes to re-use other VoID RDF schema terms along with VoIDext.  
+ </p>
+ <div id="namespacedeclarations">
+<h3 id="vl" class="list">What is a <b>virtual link</b>?</h3>
+ A virtual link is an intersection data point between two or more data stores. The links are required in order to enable performing federated queries, 
+given that they act as join points between the federated sources.
+<p>
+
+</p>
+</div>
+<div id="namespacedeclarations">
+<h3 id="ns" class="list">Namespace declarations</h3>
+<div id="ns" align="center">
+<table>
+<caption> <a href="#ns"> Table 1</a>: Namespaces used in the document </caption>
+<tbody>
+<tr><td><b>voidext</b></td><td>&lt;http://purl.org/query/voidext&gt;</td></tr>
+<tr><td><b>void</b></td><td>&lt;http://rdfs.org/ns/void&gt;</td></tr>
+<tr><td><b>foaf</b></td><td>&lt;http://xmlns.com/foaf/0.1&gt;</td></tr>
+<tr><td><b>owl</b></td><td>&lt;http://www.w3.org/2002/07/owl&gt;</td></tr>
+<tr><td><b>rdf</b></td><td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns&gt;</td></tr>
+<tr><td><b>xsd</b></td><td>&lt;http://www.w3.org/2001/XMLSchema&gt;</td></tr>
+<tr><td><b>rdfs</b></td><td>&lt;http://www.w3.org/2000/01/rdf-schema&gt;</td></tr>
+<tr><td><b>purl-org</b></td><td>&lt;http://purl.org&gt;</td></tr>
+<tr><td><b>lscr</b></td><td>&lt;http://purl.org/lscr#&gt;</td></tr>
+<tr><td><b>orth</b></td><td>&lt;http://purl.org/net/orth#&gt;</td></tr>
+<tr><td><b>up</b></td><td>&lt;http://purl.uniprot.org/core/&gt;</td></tr>
+<tr><td><b>bioquery</b></td><td>&lt;http://purl.org/query/bioquery&gt;</td></tr>
+<tr><td><b>obo</b></td><td>&lt;http://purl.obolibrary.org/obo/&gt;</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</html>

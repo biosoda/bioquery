@@ -1,0 +1,599 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://purl.org/query/voidext#"
+     xml:base="http://purl.org/voidext"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:void="http://rdfs.org/ns/void#">
+    <owl:Ontology rdf:about="http://purl.org/voidext">
+        <owl:versionInfo xml:lang="en">The Extension of the Vocabulary of Interlinked Datasets (VoID) RDF Schema to include the concept of virtual links. Author: Tarcisio Mendes de Farias</owl:versionInfo>
+    </owl:Ontology>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://rdfs.org/ns/void#dataDump -->
+
+
+    <owl:AnnotationProperty rdf:about="http://rdfs.org/ns/void#dataDump">
+        <rdfs:comment xml:lang="en">An RDF dump, partial or complete, of a void:Dataset.</rdfs:comment>
+        <rdfs:label xml:lang="en">data dump</rdfs:label>
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#rootResource -->
+
+
+    <owl:AnnotationProperty rdf:about="http://rdfs.org/ns/void#rootResource">
+        <rdfs:comment>A top concept or entry point for a void:Dataset that is structured in a tree-like fashion. All resources in a dataset can be reached by following links from its root resources in a small number of steps.</rdfs:comment>
+        <rdfs:label>root resource</rdfs:label>
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#sparqlEndpoint -->
+
+
+    <owl:AnnotationProperty rdf:about="http://rdfs.org/ns/void#sparqlEndpoint">
+        <rdfs:label>has a SPARQL endpoint at</rdfs:label>
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#uriLookupEndpoint -->
+
+
+    <owl:AnnotationProperty rdf:about="http://rdfs.org/ns/void#uriLookupEndpoint">
+        <rdfs:comment>Defines a simple URI look-up protocol for accessing a dataset.</rdfs:comment>
+        <rdfs:label>has an URI look-up endpoint at</rdfs:label>
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#uriRegexPattern -->
+
+
+    <owl:AnnotationProperty rdf:about="http://rdfs.org/ns/void#uriRegexPattern">
+        <rdfs:comment>Defines a regular expression pattern matching URIs in the dataset.</rdfs:comment>
+        <rdfs:label>has URI regular expression pattern</rdfs:label>
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#vocabulary -->
+
+
+    <owl:AnnotationProperty rdf:about="http://rdfs.org/ns/void#vocabulary">
+        <rdfs:comment>A vocabulary that is used in the dataset.</rdfs:comment>
+        <rdfs:label>vocabulary</rdfs:label>
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+    </owl:AnnotationProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://purl.org/query/voidext#intersectAt -->
+
+
+    <owl:ObjectProperty rdf:about="http://purl.org/query/voidext#intersectAt">
+        <rdfs:domain rdf:resource="http://purl.org/query/voidext#ComplexLinkSet"/>
+        <rdfs:range rdf:resource="http://rdfs.org/ns/void#Linkset"/>
+        <rdfs:comment xml:lang="en">This property assings exactly two void:LinkSet(s) to compose a complex link set. For each void:LinkSet, either the subject or the object node of one link predicate intersects the another one. It means that the subject or object of a link predicate is exactly the same as the another link predicate. However, these predicates are stored in different void:datasets.</rdfs:comment>
+        <rdfs:label xml:lang="en">intersects at</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/query/voidext#intersectionType -->
+
+
+    <owl:ObjectProperty rdf:about="http://purl.org/query/voidext#intersectionType">
+        <rdfs:domain rdf:resource="http://purl.org/query/voidext#ComplexLinkSet"/>
+        <rdfs:range rdf:resource="http://purl.org/query/voidext#LinkSetIntersection"/>
+        <rdfs:comment xml:lang="en">This property assings the intersection type of the graph nodes in different void:Dataset(s) (i.e. either the subject or the object node of a link predicate).</rdfs:comment>
+        <rdfs:label xml:lang="en">intersection type</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/query/voidext#linkPredicateDomain -->
+
+
+    <owl:ObjectProperty rdf:about="http://purl.org/query/voidext#linkPredicateDomain">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Linkset"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+        <rdfs:comment xml:lang="en">the link predicate subject type if specified (i.e. relation domain).</rdfs:comment>
+        <rdfs:label xml:lang="en">link predicate domain</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/query/voidext#linkPredicateRange -->
+
+
+    <owl:ObjectProperty rdf:about="http://purl.org/query/voidext#linkPredicateRange">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Linkset"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+        <rdfs:comment xml:lang="en">the link predicate object type if specified (i.e. relation range).</rdfs:comment>
+        <rdfs:label xml:lang="en">link predicate range</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/query/voidext#sharedInstanceType -->
+
+
+    <owl:ObjectProperty rdf:about="http://purl.org/query/voidext#sharedInstanceType">
+        <rdfs:domain rdf:resource="http://purl.org/query/voidext#SharedInstanceSet"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2002/07/owl#Class"/>
+        <rdfs:comment xml:lang="en">This property assings the type (i.e. a common class) of the shared instances between two different void:Dataset(s). Shared instances implies the same IRI however stored in different data stores.</rdfs:comment>
+        <rdfs:label xml:lang="en">shared instance type</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#class -->
+
+
+    <owl:ObjectProperty rdf:about="http://rdfs.org/ns/void#class">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Class"/>
+        <rdfs:comment>The rdfs:Class that is the rdf:type of all entities in a class-based partition.</rdfs:comment>
+        <rdfs:label>class</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#classPartition -->
+
+
+    <owl:ObjectProperty rdf:about="http://rdfs.org/ns/void#classPartition">
+        <rdfs:subPropertyOf rdf:resource="http://rdfs.org/ns/void#subset"/>
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:range rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:comment>A subset of a void:Dataset that contains only the entities of a certain rdfs:Class.</rdfs:comment>
+        <rdfs:label>class partition</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#exampleResource -->
+
+
+    <owl:ObjectProperty rdf:about="http://rdfs.org/ns/void#exampleResource">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+        <rdfs:label>example resource of dataset</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#feature -->
+
+
+    <owl:ObjectProperty rdf:about="http://rdfs.org/ns/void#feature">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:range rdf:resource="http://rdfs.org/ns/void#TechnicalFeature"/>
+        <rdfs:comment xml:lang="en">A void:TechnicalFeature supported by a void:Datset.</rdfs:comment>
+        <rdfs:label xml:lang="en">feature</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#inDataset -->
+
+
+    <owl:ObjectProperty rdf:about="http://rdfs.org/ns/void#inDataset">
+        <rdfs:domain rdf:resource="http://xmlns.com/foaf/0.1/Document"/>
+        <rdfs:range rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:comment>Points to the void:Dataset that a document is a part of.</rdfs:comment>
+        <rdfs:label>in dataset</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#linkPredicate -->
+
+
+    <owl:ObjectProperty rdf:about="http://rdfs.org/ns/void#linkPredicate">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Linkset"/>
+        <rdfs:range rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+        <rdfs:label>a link predicate</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#objectsTarget -->
+
+
+    <owl:ObjectProperty rdf:about="http://rdfs.org/ns/void#objectsTarget">
+        <rdfs:subPropertyOf rdf:resource="http://rdfs.org/ns/void#target"/>
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Linkset"/>
+        <rdfs:range rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:comment>The dataset describing the objects of the triples contained in the Linkset.</rdfs:comment>
+        <rdfs:label>objects target</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#openSearchDescription -->
+
+
+    <owl:ObjectProperty rdf:about="http://rdfs.org/ns/void#openSearchDescription">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:range rdf:resource="http://xmlns.com/foaf/0.1/Document"/>
+        <rdfs:comment>An OpenSearch description document for a free-text search service over a void:Dataset.</rdfs:comment>
+        <rdfs:label>open search description</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#property -->
+
+
+    <owl:ObjectProperty rdf:about="http://rdfs.org/ns/void#property">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:range rdf:resource="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+        <rdfs:comment>The rdf:Property that is the predicate of all triples in a property-based partition.</rdfs:comment>
+        <rdfs:label>property</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#propertyPartition -->
+
+
+    <owl:ObjectProperty rdf:about="http://rdfs.org/ns/void#propertyPartition">
+        <rdfs:subPropertyOf rdf:resource="http://rdfs.org/ns/void#subset"/>
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:range rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:comment>A subset of a void:Dataset that contains only the triples of a certain rdf:Property.</rdfs:comment>
+        <rdfs:label>property partition</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#subjectsTarget -->
+
+
+    <owl:ObjectProperty rdf:about="http://rdfs.org/ns/void#subjectsTarget">
+        <rdfs:subPropertyOf rdf:resource="http://rdfs.org/ns/void#target"/>
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Linkset"/>
+        <rdfs:range rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:comment>The dataset describing the subjects of triples contained in the Linkset.</rdfs:comment>
+        <rdfs:label>subjects target</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#subset -->
+
+
+    <owl:ObjectProperty rdf:about="http://rdfs.org/ns/void#subset">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:range rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:label>has subset</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#target -->
+
+
+    <owl:ObjectProperty rdf:about="http://rdfs.org/ns/void#target">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Linkset"/>
+        <rdfs:range rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:comment>One of the two datasets linked by the Linkset.</rdfs:comment>
+        <rdfs:label>target</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://rdfs.org/ns/void#distinctObjects -->
+
+
+    <owl:DatatypeProperty rdf:about="http://rdfs.org/ns/void#distinctObjects">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment xml:lang="en">The total number of distinct subjects in the dataset. In other words, the number of distinct URIs or blank nodes that occur in the subject position of triples in the dataset.</rdfs:comment>
+        <rdfs:label xml:lang="en">number of distinct objects</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#distinctSubjects -->
+
+
+    <owl:DatatypeProperty rdf:about="http://rdfs.org/ns/void#distinctSubjects">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment xml:lang="en">The total number of distinct objects in the dataset. In other words, the number of distinct URIs, blank nodes, or literals that occur in the object position of triples in the dataset.</rdfs:comment>
+        <rdfs:label xml:lang="en">number of distinct subjects</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#documents -->
+
+
+    <owl:DatatypeProperty rdf:about="http://rdfs.org/ns/void#documents">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment xml:lang="en">If the dataset is published as a set of individual documents, such as RDF/XML documents or RDFa-annotated web pages, then this property indicates the total number of such documents. Non-RDF documents, such as web pages in HTML or images, are usually not included in this count. This property is intended for datasets where the total number of triples or entities is hard to determine. void:triples or void:entities should be preferred where practical.</rdfs:comment>
+        <rdfs:label xml:lang="en">number of documents</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#entities -->
+
+
+    <owl:DatatypeProperty rdf:about="http://rdfs.org/ns/void#entities">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment xml:lang="en">The total number of entities that are described in the dataset. To be an entity in a dataset, a resource must have a URI, and the URI must match the dataset&apos;s void:uriRegexPattern, if any. Authors of VoID files may impose arbitrary additional requirements, for example, they may consider any foaf:Document resources as not being entities.</rdfs:comment>
+        <rdfs:label xml:lang="en">number of entities</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#properties -->
+
+
+    <owl:DatatypeProperty rdf:about="http://rdfs.org/ns/void#properties">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment>The total number of distinct properties in a void:Dataset. In other words, the number of distinct resources that occur in the predicate position of triples in the dataset.</rdfs:comment>
+        <rdfs:label>number of properties</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#triples -->
+
+
+    <owl:DatatypeProperty rdf:about="http://rdfs.org/ns/void#triples">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#integer"/>
+        <rdfs:comment xml:lang="en">The total number of triples contained in a void:Dataset.</rdfs:comment>
+        <rdfs:label xml:lang="en">number of triples</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://rdfs.org/ns/void#uriSpace -->
+
+
+    <owl:DatatypeProperty rdf:about="http://rdfs.org/ns/void#uriSpace">
+        <rdfs:domain rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
+        <rdfs:comment>A URI that is a common string prefix of all the entity URIs in a void:Dataset.</rdfs:comment>
+        <rdfs:label>URI space</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://purl.org/query/voidext#ComplexLinkSet -->
+
+
+    <owl:Class rdf:about="http://purl.org/query/voidext#ComplexLinkSet">
+        <rdfs:subClassOf rdf:resource="http://purl.org/query/voidext#VirtualLinks"/>
+        <rdfs:comment xml:lang="en">It contains exactly two void:LinkSet(s) to compose a complex link set. Two link sets that intersects at some graph node (e.g. the object nodes of link predicates)</rdfs:comment>
+        <rdfs:label xml:lang="en">Complex link set</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/query/voidext#LinkSetIntersection -->
+
+
+    <owl:Class rdf:about="http://purl.org/query/voidext#LinkSetIntersection">
+        <rdfs:comment xml:lang="en">The possible intersection types between the graph nodes in different void:Dataset(s) (i.e. either the subject or the object node of a link predicate). The instances of this class are exclusively voidext:OBJECT_OBJECT, voidext:OBJECT_SUBJECT, and voidext:SUBJECT_SUBJECT.</rdfs:comment>
+        <rdfs:label xml:lang="en">Link set intersection</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/query/voidext#SharedInstanceSet -->
+
+
+    <owl:Class rdf:about="http://purl.org/query/voidext#SharedInstanceSet">
+        <rdfs:subClassOf rdf:resource="http://purl.org/query/voidext#VirtualLinks"/>
+        <rdfs:comment xml:lang="en">Shared IRI instances usually of the same OWL/RDFS class which are stored in two or more different void:Dataset(s).</rdfs:comment>
+        <rdfs:label xml:lang="en">Shared instance set</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/query/voidext#VirtualLinks -->
+
+
+    <owl:Class rdf:about="http://purl.org/query/voidext#VirtualLinks">
+        <rdfs:subClassOf rdf:resource="http://rdfs.org/ns/void#Dataset"/>
+        <rdfs:comment xml:lang="en">A virtual link is an intersection data point between two or more void:Dataset(s) that is not concretely stored. The link is established during the federated or distributed query execution.</rdfs:comment>
+        <rdfs:label xml:lang="en">Virtual link set</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://rdfs.org/ns/void#Dataset -->
+
+
+    <owl:Class rdf:about="http://rdfs.org/ns/void#Dataset">
+        <rdfs:comment>A set of RDF triples that are published, maintained or aggregated by a single provider.</rdfs:comment>
+        <rdfs:label>dataset</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://rdfs.org/ns/void#DatasetDescription -->
+
+
+    <owl:Class rdf:about="http://rdfs.org/ns/void#DatasetDescription">
+        <rdfs:subClassOf rdf:resource="http://xmlns.com/foaf/0.1/Document"/>
+        <rdfs:comment>A web resource whose foaf:primaryTopic or foaf:topics include void:Datasets.</rdfs:comment>
+        <rdfs:label>dataset description</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://rdfs.org/ns/void#Linkset -->
+
+
+    <owl:Class rdf:about="http://rdfs.org/ns/void#Linkset">
+        <rdfs:subClassOf rdf:resource="http://purl.org/query/voidext#VirtualLinks"/>
+        <rdfs:comment>A collection of RDF links between two void:Datasets.</rdfs:comment>
+        <rdfs:label>Link set</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://rdfs.org/ns/void#TechnicalFeature -->
+
+
+    <owl:Class rdf:about="http://rdfs.org/ns/void#TechnicalFeature">
+        <rdfs:comment>A technical feature of a void:Dataset, such as a supported RDF serialization format.</rdfs:comment>
+        <rdfs:label>technical feature</rdfs:label>
+    </owl:Class>
+    
+
+
+    <!-- http://www.w3.org/1999/02/22-rdf-syntax-ns#Property -->
+
+
+    <owl:Class rdf:about="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property"/>
+    
+
+
+    <!-- http://www.w3.org/2000/01/rdf-schema#Class -->
+
+
+    <owl:Class rdf:about="http://www.w3.org/2000/01/rdf-schema#Class"/>
+    
+
+
+    <!-- http://www.w3.org/2000/01/rdf-schema#Resource -->
+
+
+    <owl:Class rdf:about="http://www.w3.org/2000/01/rdf-schema#Resource"/>
+    
+
+
+    <!-- http://www.w3.org/2002/07/owl#Class -->
+
+
+    <owl:Class rdf:about="http://www.w3.org/2002/07/owl#Class"/>
+    
+
+
+    <!-- http://xmlns.com/foaf/0.1/Document -->
+
+
+    <owl:Class rdf:about="http://xmlns.com/foaf/0.1/Document"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+
+    
+
+
+    <!-- http://purl.org/query/voidext#OBJECT_OBJECT -->
+
+
+    <owl:NamedIndividual rdf:about="http://purl.org/query/voidext#OBJECT_OBJECT">
+        <rdf:type rdf:resource="http://purl.org/query/voidext#LinkSetIntersection"/>
+        <rdfs:comment xml:lang="en">The intersection between two void:Dataset(s) (i.e. knowledge graphs) occurs at the object node in both data sets.</rdfs:comment>
+        <rdfs:label xml:lang="en">Object - Object intersection</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/query/voidext#SUBJECT_OBJECT -->
+
+
+    <owl:NamedIndividual rdf:about="http://purl.org/query/voidext#SUBJECT_OBJECT">
+        <rdf:type rdf:resource="http://purl.org/query/voidext#LinkSetIntersection"/>
+        <rdfs:comment xml:lang="en">The intersection between two void:Dataset(s) (i.e. knowledge graphs) occurs at the object node of one data set (graph) and the subject node of another data set (graph).</rdfs:comment>
+        <rdfs:label xml:lang="en">Subject - Object intersection</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/query/voidext#SUBJECT_SUBJECT -->
+
+
+    <owl:NamedIndividual rdf:about="http://purl.org/query/voidext#SUBJECT_SUBJECT">
+        <rdf:type rdf:resource="http://purl.org/query/voidext#LinkSetIntersection"/>
+        <rdfs:comment xml:lang="en">The intersection between two void:Dataset(s) (i.e. knowledge graphs) occurs at the subject node in both data sets.</rdfs:comment>
+        <rdfs:label xml:lang="en">Subject - Subject intersection</rdfs:label>
+    </owl:NamedIndividual>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 5.1.7) https://github.com/owlcs/owlapi/ -->
+
+

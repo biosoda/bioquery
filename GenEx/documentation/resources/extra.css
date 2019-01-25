@@ -1,0 +1,219 @@
+body {
+    text-align: justify;    
+}
+
+h1 {
+    line-height: 110%;    
+}
+
+.hlist {
+    border: 1px solid navy;
+    padding:5px;
+    background-color: #F4FFFF; 
+}
+
+.hlist li {
+    display: inline;
+    display: inline-table;
+    list-style-type: none;
+    padding-right: 20px;
+    
+}
+
+.entity {
+    border: 1px solid navy;
+    margin:5px 0px 5px 0px;
+    padding: 5px;    
+}
+
+.type-c {
+    cursor:help;
+    color:orange;
+}
+
+.type-op {
+    cursor:help;
+    color:navy;    
+}
+
+.type-dp {
+    cursor:help;
+    color:green;    
+}
+
+.type-ap {
+    cursor:help;
+    color:maroon;    
+}
+
+.type-ni {
+    cursor:help;
+    color:brown;    
+}
+
+.logic {
+    color:purple;
+    font-weight:bold;    
+}
+
+h3 {
+    margin-top: 3px;
+    padding-bottom: 5px;
+	border-bottom: 1px solid navy;
+}
+
+h2 {
+    margin-top:40px;    
+}
+
+.dotted {
+    border-bottom: 1px dotted gray;
+}
+
+dt {
+    margin-top:5px;
+}
+
+.description {
+    border-top: 1px dashed gray;
+    border-bottom: 1px dashed gray;
+    background-color: rgb(242, 243, 244);
+    margin-top:5px;
+    padding-bottom:5px;
+}
+
+.description dl {
+    background-color: rgb(242, 243, 244);
+}
+
+.description ul {
+    padding-left: 12px;
+    margin-top: 0px;
+}
+
+.backlink {
+    font-size:10pt;
+    text-align:right;
+    float:right;
+    color:black;
+    padding: 2px;
+    border: 1px dotted navy;
+    background-color: #F4FFFF;
+}
+
+.imageblock {
+	text-align: center;
+}
+
+.imageblock img {
+	border:1px solid gray;
+}
+
+.imagedesc {
+    margin-left: auto;
+    margin-right: auto;
+    width: 75%;
+    display: block;
+  
+
+}
+.imagedesc2 {
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
+    display: block;
+  
+
+}
+
+.endnote {
+	margin-top: 40px;
+	border-top: 1px solid gray;
+	padding-top: 10px;
+	text-align: center;
+	color:gray;
+	font-size:70%;
+}
+
+.literal {
+    color:green;
+    font-style:italic;
+}
+
+pre.example {
+    border-top: 1px solid #ff4500;
+    border-bottom: 1px solid #ff4500;
+    padding:    1em;
+    margin-top: 1em;
+}
+
+pre.example::before {
+    content:    "Horn-like rule";
+    display:    block;
+    width:      150px;
+    background: #ff4500;
+    color:  #fff;
+    font-family:    initial;
+    padding:    3px;
+    font-weight:    bold;
+    margin: -1em 0 1em -1em;
+}
+pre.query {
+    border-top: 1px solid #ff4500;
+    border-bottom: 1px solid #ff4500;
+    padding:    1em;
+    margin-top: 1em;
+       width: 60%;
+
+
+}
+pre.query::before {
+    content:    "SPARQL Query";
+    display:    block;
+    width:      150px;
+    background: #ff4500;
+    color:  #fff;
+    font-family:    initial;
+    padding:    3px;
+    font-weight:    bold;
+    margin: -1em 0 1em -1em;
+}
+
+pre.result {
+    border-top: 1px solid #0026ff;
+    border-bottom: 1px solid #0026ff;
+  /*padding: 1em;
+     */
+       width: 60%;
+       
+
+
+}
+pre.result::before {
+    content:    "Query Results";
+    display:    block;
+    width:      150px;
+    background: #0026ff;
+    color:  #fff;
+    font-family:    initial;
+    padding:    3px;
+    font-weight:    bold;
+    margin: -1em 0 1em -1em;
+}
+
+.result table	{ border-collapse: collapse; }
+.result table td{ border-width: 1px ;
+                  border-color : black ; 
+                  font-family: monospace ; font-size: 88% ;
+                  empty-cells: show;
+                 /* padding-left: 1ex ; padding-right: 1ex ;*/
+                  vertical-align:top;
+                  text-align: left ; } 
+/*  spacing: 0 ;*/
+.result table th{ border-width: 1px ;
+                  font-family: monospace ; font-size: 88% ;
+                  border-color: black ;
+                  empty-cells: show;
+                  padding-left: 1ex ; padding-right: 1ex ;
+                  vertical-align:top;
+                  text-align:center; } 

@@ -1,0 +1,129 @@
+<html>
+<h2 id="desc" class="list">GenEx semantic model: Description <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<p>
+The GenEx semantic model is designed to capture and structure gene expression information at a higher level relative to others such as the on at <a href="https://www.ebi.ac.uk/rdf/documentation/expressionatlas/">Expression Atlas semantic model</a>.
+By doing so, we intend to model the data meanings which are expected by the end-users such as biologists. 
+For example, often biologists are not interested in knowing expression scores,
+that depend on the method used; the data transformations; or the methods used. 
+Rather, for instance, they might look for an interpretation of expression scores,
+ such as whether a gene is highly expressed. <a href="#fig1">Figure 1</a>  illustrates a portion of GenEx.
+ This semantic model was defined by using the <a href="https://www.w3.org/TR/owl2-overview/">OWL 2 Description Logics (DL)</a> .
+ The methodology to develop GenEx was inspired by the Simplified Agile Methodology for Ontology Development (<a href="http://essepuntato.github.io/samod/">SAMOD</a>).  
+</p>				
+<figure id="fig1">
+<p><img src="images/Picture1.png" class="imagedesc"/>
+<figcaption><a href="#fig1">Figure 1</a>. GenEx - A portion of the gene expression semantic model. The terms between quotes are indeed the labels of the ontological entities.</figcaption>
+</figure>
+
+
+<p>						
+As depicted in <a href="#fig1">Figure 1</a>, we define a concept for describing absence of gene expression 
+so-called  <a href="#AbsenceExpression">genex:AbsenceExpression</a>. The  <a href="#AbsenceExpression">genex:AbsenceExpression</a> class is a subclass of  the complement of 
+ <a href="#Expression">genex:Expression</a> class (i.e.  <a href="#AbsenceExpression">genex:AbsenceExpression</a> ⊑ ¬ <a href="#Expression">genex:Expression</a>).  <a href="#Expression">genex:Expression</a> is the concept 
+for representing gene expression according to a given experimental condition (e.g. sex and anatomical entity). 
+ <a href="#AbsenceExpression">genex:AbsenceExpression</a> is not equivalent to the negation of the  <a href="#Expression">genex:Expression</a> because it may lack experiments 
+to conclude that a gene is expressed (i.e. missing gene expression information). Therefore, solely data processed 
+from experiments which confirm no presence of expression are described by using the  <a href="#AbsenceExpression">genex:AbsenceExpression</a> class. 
+</p>
+
+<p>
+
+We mostly considered to reuse the following ontologies:
+
+<ul>
+  <li>The <a href="http://www.obofoundry.org/ontology/ro.html">Relation Ontology (RO)</a>. For example, we reuse ro:RO_0002245 OWL object property labelled as
+   “over-expressed in” or “highly expressed”. In DL, we can formalise as follows: ∃<a href="#http://purl.obolibrary.org/obo/RO_0002245">ro:RO_0002245</a>.⊤ ⊑ <a href="#http://purl.org/net/orth#SequenceUnit">orth:SequenceUnit</a>
+    where <a href="#http://purl.org/net/orth#SequenceUnit">orth:SequenceUnit</a> is the inferred domain of  <a href="#http://purl.obolibrary.org/obo/RO_0002245">ro:RO_0002245</a> and ⊤ is the top concept (i.e. 
+    <a href="https://www.w3.org/TR/2004/REC-owl-semantics-20040210/#owl_Thing">owl:Thing</a> term).
+</li>
+  <li>The <a href="http://qfo.github.io/OrthologyOntology/">Orthology (ORTH) ontology</a>. For example, we reuse the 
+  <a href="#http://purl.org/net/orth#SequenceUnit">orth:SequenceUnit</a> class
+   (i.e. <a href="#http://purl.org/net/orth#SequenceUnit">orth:SequenceUnit</a> ⊑ ⊤). The reuse of terms and a part of
+    the data schema of ORTH ontology significantly facilitate 
+   the integration with orthology databases (e.g. OMA). In doing so, we address the use case of predicting presence or 
+   absence of expression for orthologous genes.   
+</li>
+  <li>The <a href="https://www.ebi.ac.uk/efo/">Experimental Factor Ontology (EFO)</a>. 
+  This ontology provides a description of various experimental variables
+   (e.g. organism part, material entity and developmental stage) available in EBI databases such as EA. In GenEx, we 
+   mainly reuse classes such as <a href="#http://www.ebi.ac.uk/efo/EFO_0000635">efo:EFO_0000635</a> (labelled “organism part”), 
+   <a href="#http://www.ebi.ac.uk/efo/EFO_0005135">efo:EFO_0005135</a> (labelled “strain”), and 
+   <a href="#http://www.ebi.ac.uk/efo/EFO_0000399">efo:EFO_0000399</a> (labelled “developmental stage”). 
+   </li>
+   <li>The <a href="http://www.obofoundry.org/ontology/cio.html">Confidence Information Ontology (CIO)</a> classes as instance
+    values of the <a href="#hasConfidenceLevel">genex:hasConfidenceLevel</a> OWL object property. In the GenEx context, CIO classes  are individuals to represent
+     the confidence levels of gene expression predictions. This is possible in OWL 2 thanks to <a href="https://www.w3.org/TR/owl2-new-features/#F12:_Punning">punning</a> .  The following DL
+      constraint is stated ⊤ ⊑∀<a href="#hasConfidenceLevel">genex:hasConfidenceLevel</a>.{<a href="#http://purl.obolibrary.org/obo/CIO_0000029">cio:0000029</a>, <a href="#http://purl.obolibrary.org/obo/CIO_0000030">cio:0000030</a>, <a href="#http://purl.obolibrary.org/obo/CIO_0000031">cio:0000031</a>}. This means that the
+      <a href="#hasConfidenceLevel">genex:hasConfidenceLevel</a> property values (i.e. property range) can only be  “high confidence level”',
+        “medium confidence level”, or “low confidence level”.     
+   </li>
+   <li>
+   The Uber-anatomy (UBERON) ontology. In the GenEx context, UBERON classes  are considered as individuals
+    of genex:AnatomicalEntity or <a href="#http://www.ebi.ac.uk/efo/EFO_0000399">efo:EFO_0000399</a>  (i.e.: developmental stage) classes. The classes of
+     the developmental stage per species ontologies in the <a href="#https://github.com/obophenotype/developmental-stage-ontologies/wiki">
+    developmental-stage-ontologies wiki</a> are also considered as individuals of 
+    <a href="#http://www.ebi.ac.uk/efo/EFO_0000399">efo:EFO_0000399</a>  class. Therefore, for GenEx, these ontologies are
+     controlled vocabularies assigned as values of <a href="#hasDevelopmentalStage">genex:hasDevelopmentalStage</a> and
+      genex:hasAnatomicalEntity OWL object properties. These properties describe gene expression experimental conditions. 
+      In UBERON, despite the “life cycle stage” term is a synonym of “developmental stage” EFO term, we decided to reuse EFO 
+      “developmental stage” term in GenEx rather than UBERON one. This is because we want to separate the UBERON terms
+       which are considered as OWL individuals in the GenEx context (by applying 
+        <a href="https://www.w3.org/TR/owl2-new-features/#F12:_Punning">OWL 2 punning</a> feature) and the
+         “developmental stage” class from EFO.    
+   </li>
+</ul>  
+
+</p>
+
+
+<p>
+One of the main semantic modelling issues GenEx addresses is to provide terms and a data schema for explicitly
+ describing and structuring multiple combined conditions for gene expression. For example, the HBB human gene
+  is highly expressed in the cerebellum of 6-12 year-old child stage. Thus, experiments to derive this conclusion
+   were mainly performed under two conditions: a human developmental stage and the cerebellum anatomical entity.
+When comparing this part of GenEx with the Expression Atlas (EA) semantic model,  EA represents these conditions
+ in a less structured manner. To better illustrate this, Figure 2 exemplifies the lack of structure 
+ due to heterogeneities at the data level (i.e. RDF instances and literals) in the EA model when describing
+  a liver sample (i.e. “organism part” is equivalent to “ORGANISM_PART”).
+  In GenEx, we explicitly define a relation for each experimental condition such as the <a href="hasAnatomicalEntity">genex:hasAnatomicalEntity</a>
+   property assigned with an <a href="http://uberon.github.io/">Uber-anatomy (UBERON)</a> class as value by
+    <a href="https://www.w3.org/TR/owl2-new-features/#F12:_Punning">punning</a>. 
+    We reuse <a href="https://www.ebi.ac.uk/efo/">Experimental Factor Ontology (EFO)</a> classes instead of
+     defining literals (see <a href="#fig2">Figure 2</a>). 
+</p>
+
+<figure id="fig2">
+<p><img src="images/Picture2.png" class="imagedesc2"/>
+<figcaption><a href="#fig2">Figure 2</a>. Modelling experimental conditions with Expression Atlas and GenEx semantic models.</figcaption>
+</figure>
+ 
+The trade-off between virtualisation and materialisation is addressed by formally defining semantic rules to infer property
+ assertions. These rules are defined with the Semantic Web Rule Language (SWRL) . Code fragment 1 depicts an example of
+  a rule to infer the <a href="isExpressedIn">genex:isExpressedIn</a> property, and consequently, the ro:RO_0002206 property
+   labelled as “expressed in” and  illustrated in <a href="#fig1">Figure 1</a>. This is because of the DL statement
+    genex:isExpressedIn ⊑ ro:RO_0002206 in GenEx. By considering
+an inference engine based on backward-chaining methods, and supporting DL-safe rules such as SWRL, we can avoid the
+  materialisation of billions of triples. This is because these triples are actually inferred by applying the SWRL rules
+  at query execution time. Moreover, these rules facilitate access to the gene expression information thanks to a semantic
+ enrichment. For example, just for Homo sapiens, we can derive from the Bgee database hundreds of millions of
+ expressed in / absent in assertions (i.e. triples). Although the rules in GenEx are defined with SWRL, 
+ they can be translated into other languages (e.g. any DL-safe rule syntax supported by a triple store),
+ including SPARQL subqueries. Due to performance issues when inferring these assertions during query execution,
+  in some use cases such as when only few assertions can be derived, it is recommendable to fully or partially
+   materialise these assertions (e.g. caching).
+<figure id="code1">
+<pre class="example">
+  <a href="#Expression">genex:Expression</a>(?e) ∧ <a href="#hasExpressionCondition">genex:hasExpressionCondition</a>(?e, ?cond) ∧ 
+  <a href="#hasAnatomicalEntity">genex:hasAnatomicalEntity</a>(?cond, ?anat) ∧ <a href="#hasSequenceUnit">genex:hasSequenceUnit</a>(?e, ?seq)
+   ⇒ <a href="#isExpressedIn">genex:isExpressedIn</a>(?seq, ?anat)
+ </pre>
+<figcaption><a href="#code1">Code fragment 1.</a>. Horn-like rule to infer genex:isExpressedIn assertions where variables are prefixed with a question mark (i.e. ?).</figcaption>
+</figure>
+
+As a limitation, GenEx does not at present support differential expression analysis such included in the Expression Atlas
+RDF schema. This is because we mostly focus on describing information that may be extracted from the present state of
+the Bgee database. GenEx can be viewed as a start point towards an ontology to structure gene expression information.
+We consider GenEx a semantic model rather than an ontology. This is because, currently, it is not necessarily
+ a shared conceptualisation among all stakeholders of interest, which include but not only the following gene expression database teams
+Bgee, Expression Atlas, GENEVESTIGATOR, and Tissue, and others (e.g. the Model Organisms Databases). 
+</html>

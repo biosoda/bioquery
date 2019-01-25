@@ -1,0 +1,73 @@
+<html><h2 id="intro" class="list">Introduction <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+
+<p>There is a general lack of a comprehensive ontology to serve as a data schema for describing knowledge
+ in the field of gene expression. This may seem surprising, considering the ubiquity of gene expression analyses
+  in molecular biology and the existence of multiple well-established resources for gene expression, such as 
+  <a href="https://bgee.org">Bgee</a>,
+   <a href="https://www.ebi.ac.uk/gxa/home">Expression Atlas (EA)</a>, 
+  <a href="https://genevestigator.com/gv/">GENEVESTIGATOR</a>,
+  <a href="https://refex.dbcls.jp">RefEx</a> (Reference Expression dataset)
+   or the <a href=" http://tissues.jensenlab.org/">Tissue Expression database</a>. 
+  We note here that different gene expression databases often use distinct criteria to assert expressed in or absent in relations. 
+</p>
+<p>To the best of our knowledge, two semantic models currently exist as initial attempts to structure gene expression
+ related data: the <a href="http://www.obofoundry.org/ontology/ro.html">Relation Ontology (RO)</a> and the <a href="https://www.ebi.ac.uk/rdf/documentation/expressionatlas/">Expression Atlas semantic model</a>.
+  The <a href="http://www.obofoundry.org/ontology/ro.html">Relation Ontology</a>  defines only a few terms within the domain of gene expression and
+   is not uniquely designed for this knowledge domain. Notably, it contains expressed in and expresses relations. 
+   The Expression Atlas defines a semantic model related to gene expression that mainly focuses on modelling 
+   the Expression Atlas data itself and not the domain of gene expression generally. In this EA model, additional 
+   data interpretations (i.e. semantics) are not explicitly represented, such as a given gene is expressed or lowly expressed
+    in some sample relative to others. Although it would be possible to obtain this information through a more complex query
+     on the Expression Atlas SPARQL endpoint, we lack an explicit representation, which would allow us to compare gene
+      expression data from these different databases. 
+</p>
+
+<p>
+To provide a first step toward a general-purpose gene expression ontology, we drafted a new semantic model called GenEx. 
+GenEx is aligned with the Relation Ontology and Expression Atlas models to facilitate interoperability with existing 
+RDF stores. We also included semantic rules to address (i) the representation of additional information related to
+ gene expression, such as developmental stages, as well as absent in and highly expressed relations; and (ii) the 
+ trade-off between virtualisation and materialisation for the sake of query execution time and data storage. Furthermore,
+  we reuse parts of the data schemas of the ORTH and UniProt core ontologies to provide (iii) the capacity to interoperate
+   with other biological databases from different knowledge domains which are still relevant to the gene expression domain.
+    For example, integrating orthology and gene expression data is relevant since we might want to predict gene expression 
+    conservation for orthologous genes.
+</p>
+
+
+<div id="namespacedeclarations">
+<h3 id="ns" class="list">Namespace declarations</h3>
+<div id="ns" align="center">
+<table>
+<caption> <a href="#ns"> Table 1</a>: Namespaces used in the document </caption>
+<tbody>
+<tr><td><b>genex</b></td><td>&lt;http://purl.org/genex&gt;</td></tr>
+<tr><td><b>orth</b></td><td>&lt;http://purl.org/net/orth&gt;</td></tr>
+<tr><td><b>pav</b></td><td>&lt;http://purl.org/pav&gt;</td></tr>
+<tr><td><b>oboInOwl</b></td><td>&lt;http://www.geneontology.org/formats/oboInOwl&gt;</td></tr>
+<tr><td><b>owl</b></td><td>&lt;http://www.w3.org/2002/07/owl&gt;</td></tr>
+<tr><td><b>resource</b></td><td>&lt;http://semanticscience.org/resource&gt;</td></tr>
+<tr><td><b>swrl</b></td><td>&lt;http://www.w3.org/2003/11/swrl&gt;</td></tr>
+<tr><td><b>swrlb</b></td><td>&lt;http://www.w3.org/2003/11/swrlb&gt;</td></tr>
+<tr><td><b>xsd</b></td><td>&lt;http://www.w3.org/2001/XMLSchema&gt;</td></tr>
+<tr><td><b>skos</b></td><td>&lt;http://www.w3.org/2004/02/skos/core&gt;</td></tr>
+<tr><td><b>rdfs</b></td><td>&lt;http://www.w3.org/2000/01/rdf-schema&gt;</td></tr>
+<tr><td><b>efo</b></td><td>&lt;http://www.ebi.ac.uk/efo&gt;</td></tr>
+<tr><td><b>core</b></td><td>&lt;http://purl.uniprot.org/core&gt;</td></tr>
+<tr><td><b>rdf</b></td><td>&lt;http://www.w3.org/1999/02/22-rdf-syntax-ns&gt;</td></tr>
+<tr><td><b>terms</b></td><td>&lt;http://purl.org/dc/terms&gt;</td></tr>
+<tr><td><b>purl-org</b></td><td>&lt;http://purl.org&gt;</td></tr>
+<tr><td><b>obo</b></td><td>&lt;http://purl.obolibrary.org/obo&gt;</td></tr>
+<tr><td><b>uberon</b></td><td>&lt;http://purl.obolibrary.org/obo&gt;</td></tr>
+<tr><td><b>caro</b></td><td>&lt;http://purl.obolibrary.org/obo&gt;</td></tr>
+<tr><td><b>cio</b></td><td>&lt;http://purl.obolibrary.org/obo&gt;</td></tr>
+<tr><td><b>dc</b></td><td>&lt;http://purl.org/dc/elements/1.1&gt;</td></tr>
+<tr><td><b>ex</b></td><td>&lt;http://example.org&gt;</td></tr>
+<tr><td><b>ea</b></td><td>&lt;http://rdf.ebi.ac.uk/terms/expressionatlas/&gt;</td></tr>
+<tr><td><b>snap</b></td><td>&lt;http://www.ifomis.org/bfo/1.1/snap&gt;</td></tr>
+<tr><td><b>span</b></td><td>&lt;http://www.ifomis.org/bfo/1.1/span&gt;</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</html>

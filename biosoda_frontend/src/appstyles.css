@@ -1,0 +1,182 @@
+body {
+	margin: 1em !important;
+}
+.btnmenu {
+	margin: 0.3em;
+}
+.CodeMirror {
+	height: 650px !important;
+	border: 1px black solid;
+}
+.buttonSubmit, .buttonInfo {
+	display: inline-block;
+	width: 1.4em;
+	height: 1.4em;
+	font-size: 0.8em;
+	border: none;
+	margin: 0.2em;
+	line-height: 0.5em !important;
+	font-weight: bold;
+}
+.progress {
+	margin: 2em;
+}
+.progress-bar {
+	width: 75%;
+}
+.rst__node {
+	overflow: visible;
+	white-space: wrap;
+}
+.rstcustom__node {
+	overflow: visible;
+	white-space: wrap;
+}
+
+.rst__rowContents {
+	/* display: block; */
+	background-color: #eee;
+}
+
+.autocomplete {
+	display: inline-block;
+	width: 20em;
+}
+
+.rstcustom__collapseButton, .rstcustom__expandButton{
+	width: inherit;
+	height: inherit;
+	font-family: "Arial";
+}
+#results table thead {
+	position: sticky; top: 0;
+	background-color: white;
+}
+#results table td, #results table th {
+	border: 1px black solid;
+	padding: 0.4em;
+}
+#results table tr:nth-child(2n) {
+	background-color: #eee;
+}
+#results table tr:hover {
+	background-color: #aaa;
+}
+.rst__tree {
+	border: 1px black solid;
+}
+#searchTree {
+	width: 100%;
+}
+
+/* http://www.howtocreate.co.uk/tutorials/jsexamples/listCollapseExample.html */
+#searchTree #whole ul li {
+  border-left: 1px dotted #000;
+  padding-left: 0.2em;
+  background: url(dotted.gif) scroll no-repeat 1px 1em;
+}
+#searchTree #whole ul li:last-child {
+  border-left-width: 0px;
+  padding-left: 0.2em;
+  background: url(dottedangle.gif) scroll no-repeat left top;
+}
+
+#searchTree #tree ul {
+	list-style-type: none;
+	padding: 0;
+	margin: 0;
+}
+
+#searchTree #tree ul ul {
+	width: inherit;
+	margin-left: 1em;
+}
+#searchTree #tree li[data-haschild] ul {
+	display: none;
+}
+#searchTree #tree li[data-haschild].open ul {
+	display: block;
+}
+#searchTree #tree li[data-haschild].closed ul {
+	display: none;
+}
+
+#searchTree #tree li .title:hover {
+	background-color: #ddd;
+	box-shadow: 2px 2px 1px #ccc;
+}
+
+#searchTree #tree li.lastActive .title,
+#searchTree #tree li.lastActive .title:hover {
+	background-color: #99cccc;
+}
+#searchTree #tree li[data-haschild] div.plusminus {
+	display: inline-block;
+	width: 1em;
+	height: 1em;
+	margin-left: 0.3em;
+	margin-right: 0.4em;
+	line-height: 1.3em;
+	background-size: 1em 1em;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+/* https://fontawesome.com/icons/chevron-right?style=solid */
+#searchTree #tree li[data-haschild].open div.plusminus {
+	background-image: url(chevron-down.svg);
+}
+#searchTree #tree li[data-haschild].closed div.plusminus {
+	background-image: url(chevron-right.svg);
+}
+
+#searchTree #tree li div.title {
+	display: inline-block;
+	line-height: 1.4em;
+	padding: 0.4em;
+	margin: 0.4em;
+	margin-bottom: 0;
+	margin-left: 0.5em;
+	border: 1px #999 solid;
+	background-color: #eee;
+	width: 100%;
+	box-shadow: 2px 2px 1px #bbb;
+}
+
+#searchTree #tree .searchstringfound > div.title {
+	border: 1px red solid;
+}
+#searchTree #tree .searchstringnotfound > div.title {
+	display: none;
+}
+#searchTree #tree .searchstringfound .searchstringnotfound > div.title {
+	/* display: block; */ /* do we want to have the siblings of the searched topics visible? i don't think so */
+}
+#searchTree #whole.searchmode ul li {
+	background: none !important;
+}
+
+/* not beautiful enough
+.rst__rowContents {
+	cursor: copy;
+}
+.rst__rowContentsDragDisabled {
+	
+}
+*/
+
+/*
+.rst__node, .rst__row {
+	white-space: normal;
+}
+.rst__rowContents {
+	width: 100%;
+}
+*/
+/* https://github.com/frontend-collective/react-sortable-tree/issues/244 */
+/*.rstcustom__node {
+    height: unset !important;
+    position: relative !important;
+    top: unset !important;
+}
+*/

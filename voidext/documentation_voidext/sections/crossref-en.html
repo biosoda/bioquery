@@ -1,0 +1,1190 @@
+<html><h2 id="crossreference" class="list">Cross reference for VoIDext RDF schema classes and properties<span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+This section provides details for each class and property defined by [Ontology Name].
+<div id="classes">
+   <h3 id="classes-headline" class="list">Classes</h3>
+   <ul class="hlist">
+      <li>
+         <a href="#ComplexLinkSet" title="http://purl.org/query/voidext#ComplexLinkSet">Complex link set</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#DatasetDescription" title="http://rdfs.org/ns/void#DatasetDescription">dataset description</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#Linkset" title="http://rdfs.org/ns/void#Linkset">Link set</a>
+      </li>
+      <li>
+         <a href="#LinkSetIntersection" title="http://purl.org/query/voidext#LinkSetIntersection">Link set intersection</a>
+      </li>
+      <li>
+         <a href="#SharedInstanceSet" title="http://purl.org/query/voidext#SharedInstanceSet">Shared instance set</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#TechnicalFeature" title="http://rdfs.org/ns/void#TechnicalFeature">technical feature</a>
+      </li>
+      <li>
+         <a href="#VirtualLinks" title="http://purl.org/query/voidext#VirtualLinks">Virtual link set</a>
+      </li>
+   </ul>
+   <div class="entity" id="ComplexLinkSet">
+      <h3>Complex link set<sup class="type-c" title="class">c</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://purl.org/query/voidext#ComplexLinkSet</p>
+      <div class="comment">
+         <span class="markdown">It contains exactly two void:LinkSet(s) to compose a complex link set. Two link sets that intersects at some graph node (e.g. the object nodes of link predicates)</span>
+      </div>
+      <dl class="description">
+         <dt>has super-classes</dt>
+         <dd>
+            <a href="#VirtualLinks" title="http://purl.org/query/voidext#VirtualLinks">Virtual link set</a>
+            <sup class="type-c" title="class">c</sup>
+         </dd>
+         <dt>is in domain of</dt>
+         <dd>
+            <a href="#intersectionType" title="http://purl.org/query/voidext#intersectionType">intersection type</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#intersectAt" title="http://purl.org/query/voidext#intersectAt">intersects at</a>
+            <sup class="type-op" title="object property">op</sup>
+         </dd>
+      </dl>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#Dataset">
+      <h3>dataset<sup class="type-c" title="class">c</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#Dataset</p>
+      <div class="comment">
+         <span class="markdown">A set of RDF triples that are published, maintained or aggregated by a single provider.</span>
+      </div>
+      <dl class="description">
+         <dt>has sub-classes</dt>
+         <dd>
+            <a href="#VirtualLinks" title="http://purl.org/query/voidext#VirtualLinks">Virtual link set</a>
+            <sup class="type-c" title="class">c</sup>
+         </dd>
+         <dt>is in domain of</dt>
+         <dd>
+            <a href="#http://rdfs.org/ns/void#uriSpace" title="http://rdfs.org/ns/void#uriSpace">URI space</a>
+            <sup class="type-dp" title="data property">dp</sup>, <a href="#http://rdfs.org/ns/void#class" title="http://rdfs.org/ns/void#class">class</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#classPartition" title="http://rdfs.org/ns/void#classPartition">class partition</a>
+            <sup class="type-op" title="object property">op</sup>, <span class="dotted" title="http://rdfs.org/ns/void#dataDump">data dump</span>, <a href="#http://rdfs.org/ns/void#exampleResource" title="http://rdfs.org/ns/void#exampleResource">example resource of dataset</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#feature" title="http://rdfs.org/ns/void#feature">feature</a>
+            <sup class="type-op" title="object property">op</sup>, <span class="dotted" title="http://rdfs.org/ns/void#uriRegexPattern">has URI regular expression pattern</span>, <span class="dotted" title="http://rdfs.org/ns/void#sparqlEndpoint">has a SPARQL endpoint at</span>, <span class="dotted" title="http://rdfs.org/ns/void#uriLookupEndpoint">has an URI look-up endpoint at</span>, <a href="#http://rdfs.org/ns/void#subset" title="http://rdfs.org/ns/void#subset">has subset</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#distinctObjects" title="http://rdfs.org/ns/void#distinctObjects">number of distinct objects</a>
+            <sup class="type-dp" title="data property">dp</sup>, <a href="#http://rdfs.org/ns/void#distinctSubjects" title="http://rdfs.org/ns/void#distinctSubjects">number of distinct subjects</a>
+            <sup class="type-dp" title="data property">dp</sup>, <a href="#http://rdfs.org/ns/void#documents" title="http://rdfs.org/ns/void#documents">number of documents</a>
+            <sup class="type-dp" title="data property">dp</sup>, <a href="#http://rdfs.org/ns/void#entities" title="http://rdfs.org/ns/void#entities">number of entities</a>
+            <sup class="type-dp" title="data property">dp</sup>, <a href="#http://rdfs.org/ns/void#properties" title="http://rdfs.org/ns/void#properties">number of properties</a>
+            <sup class="type-dp" title="data property">dp</sup>, <a href="#http://rdfs.org/ns/void#triples" title="http://rdfs.org/ns/void#triples">number of triples</a>
+            <sup class="type-dp" title="data property">dp</sup>, <a href="#http://rdfs.org/ns/void#openSearchDescription" title="http://rdfs.org/ns/void#openSearchDescription">open search description</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#property" title="http://rdfs.org/ns/void#property">property</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#propertyPartition" title="http://rdfs.org/ns/void#propertyPartition">property partition</a>
+            <sup class="type-op" title="object property">op</sup>, <span class="dotted" title="http://rdfs.org/ns/void#rootResource">root resource</span>, <span class="dotted" title="http://rdfs.org/ns/void#vocabulary">vocabulary</span>
+         </dd>
+         <dt>is in range of</dt>
+         <dd>
+            <a href="#http://rdfs.org/ns/void#classPartition" title="http://rdfs.org/ns/void#classPartition">class partition</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#subset" title="http://rdfs.org/ns/void#subset">has subset</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#inDataset" title="http://rdfs.org/ns/void#inDataset">in dataset</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#objectsTarget" title="http://rdfs.org/ns/void#objectsTarget">objects target</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#propertyPartition" title="http://rdfs.org/ns/void#propertyPartition">property partition</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#subjectsTarget" title="http://rdfs.org/ns/void#subjectsTarget">subjects target</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#target" title="http://rdfs.org/ns/void#target">target</a>
+            <sup class="type-op" title="object property">op</sup>
+         </dd>
+      </dl>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#DatasetDescription">
+      <h3>dataset description<sup class="type-c" title="class">c</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#DatasetDescription</p>
+      <div class="comment">
+         <span class="markdown">A web resource whose foaf:primaryTopic or foaf:topics include void:Datasets.</span>
+      </div>
+      <dl class="description">
+         <dt>has super-classes</dt>
+         <dd>
+            <span class="dotted" title="http://xmlns.com/foaf/0.1/Document">document</span>
+            <sup class="type-c" title="class">c</sup>
+         </dd>
+      </dl>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#Linkset">
+      <h3>Link set<sup class="type-c" title="class">c</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#Linkset</p>
+      <div class="comment">
+         <span class="markdown">A collection of RDF links between two void:Datasets.</span>
+      </div>
+      <dl class="description">
+         <dt>has super-classes</dt>
+         <dd>
+            <a href="#VirtualLinks" title="http://purl.org/query/voidext#VirtualLinks">Virtual link set</a>
+            <sup class="type-c" title="class">c</sup>
+         </dd>
+         <dt>is in domain of</dt>
+         <dd>
+            <a href="#http://rdfs.org/ns/void#linkPredicate" title="http://rdfs.org/ns/void#linkPredicate">a link predicate</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#linkPredicateDomain" title="http://purl.org/query/voidext#linkPredicateDomain">link predicate domain</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#linkPredicateRange" title="http://purl.org/query/voidext#linkPredicateRange">link predicate range</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#objectsTarget" title="http://rdfs.org/ns/void#objectsTarget">objects target</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#subjectsTarget" title="http://rdfs.org/ns/void#subjectsTarget">subjects target</a>
+            <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#target" title="http://rdfs.org/ns/void#target">target</a>
+            <sup class="type-op" title="object property">op</sup>
+         </dd>
+         <dt>is in range of</dt>
+         <dd>
+            <a href="#intersectAt" title="http://purl.org/query/voidext#intersectAt">intersects at</a>
+            <sup class="type-op" title="object property">op</sup>
+         </dd>
+      </dl>
+   </div>
+   <div class="entity" id="LinkSetIntersection">
+      <h3>Link set intersection<sup class="type-c" title="class">c</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://purl.org/query/voidext#LinkSetIntersection</p>
+      <div class="comment">
+         <span class="markdown">The possible intersection types between the graph nodes in different void:Dataset(s) (i.e. either the subject or the object node of a link predicate). The instances of this class are exclusively voidext:OBJECT_OBJECT, voidext:OBJECT_SUBJECT, and voidext:SUBJECT_SUBJECT.</span>
+      </div>
+      <dl class="description">
+         <dt>is in range of</dt>
+         <dd>
+            <a href="#intersectionType" title="http://purl.org/query/voidext#intersectionType">intersection type</a>
+            <sup class="type-op" title="object property">op</sup>
+         </dd>
+         <dt>has members</dt>
+         <dd>
+            <a href="#OBJECT_OBJECT" title="http://purl.org/query/voidext#OBJECT_OBJECT">Object - Object intersection</a>
+            <sup class="type-ni" title="named individual">ni</sup>, <a href="#SUBJECT_OBJECT" title="http://purl.org/query/voidext#SUBJECT_OBJECT">Subject - Object intersection</a>
+            <sup class="type-ni" title="named individual">ni</sup>, <a href="#SUBJECT_SUBJECT" title="http://purl.org/query/voidext#SUBJECT_SUBJECT">Subject - Subject intersection</a>
+            <sup class="type-ni" title="named individual">ni</sup>
+         </dd>
+      </dl>
+   </div>
+   <div class="entity" id="SharedInstanceSet">
+      <h3>Shared instance set<sup class="type-c" title="class">c</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://purl.org/query/voidext#SharedInstanceSet</p>
+      <div class="comment">
+         <span class="markdown">Shared IRI instances usually of the same OWL/RDFS class which are stored in two or more different void:Dataset(s).</span>
+      </div>
+      <dl class="description">
+         <dt>has super-classes</dt>
+         <dd>
+            <a href="#VirtualLinks" title="http://purl.org/query/voidext#VirtualLinks">Virtual link set</a>
+            <sup class="type-c" title="class">c</sup>
+         </dd>
+         <dt>is in domain of</dt>
+         <dd>
+            <a href="#sharedInstanceType" title="http://purl.org/query/voidext#sharedInstanceType">shared instance type</a>
+            <sup class="type-op" title="object property">op</sup>
+         </dd>
+      </dl>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#TechnicalFeature">
+      <h3>technical feature<sup class="type-c" title="class">c</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#TechnicalFeature</p>
+      <div class="comment">
+         <span class="markdown">A technical feature of a void:Dataset, such as a supported RDF serialization format.</span>
+      </div>
+      <dl class="description">
+         <dt>is in range of</dt>
+         <dd>
+            <a href="#http://rdfs.org/ns/void#feature" title="http://rdfs.org/ns/void#feature">feature</a>
+            <sup class="type-op" title="object property">op</sup>
+         </dd>
+      </dl>
+   </div>
+   <div class="entity" id="VirtualLinks">
+      <h3>Virtual link set<sup class="type-c" title="class">c</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#classes">Class ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://purl.org/query/voidext#VirtualLinks</p>
+      <div class="comment">
+         <span class="markdown">A virtual link is an intersection data point between two or more void:Dataset(s) that is not concretely stored. The link is established during the federated or distributed query execution.</span>
+      </div>
+      <dl class="description">
+         <dt>has super-classes</dt>
+         <dd>
+            <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+            <sup class="type-c" title="class">c</sup>
+         </dd>
+         <dt>has sub-classes</dt>
+         <dd>
+            <a href="#ComplexLinkSet" title="http://purl.org/query/voidext#ComplexLinkSet">Complex link set</a>
+            <sup class="type-c" title="class">c</sup>, <a href="#http://rdfs.org/ns/void#Linkset" title="http://rdfs.org/ns/void#Linkset">Link set</a>
+            <sup class="type-c" title="class">c</sup>, <a href="#SharedInstanceSet" title="http://purl.org/query/voidext#SharedInstanceSet">Shared instance set</a>
+            <sup class="type-c" title="class">c</sup>
+         </dd>
+      </dl>
+   </div>
+</div><div id="objectproperties">
+   <h3 id="properties" class="list">Object Properties</h3>
+   <ul class="hlist">
+      <li>
+         <a href="#http://rdfs.org/ns/void#linkPredicate" title="http://rdfs.org/ns/void#linkPredicate">a link predicate</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#class" title="http://rdfs.org/ns/void#class">class</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#classPartition" title="http://rdfs.org/ns/void#classPartition">class partition</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#exampleResource" title="http://rdfs.org/ns/void#exampleResource">example resource of dataset</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#feature" title="http://rdfs.org/ns/void#feature">feature</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#subset" title="http://rdfs.org/ns/void#subset">has subset</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#inDataset" title="http://rdfs.org/ns/void#inDataset">in dataset</a>
+      </li>
+      <li>
+         <a href="#intersectionType" title="http://purl.org/query/voidext#intersectionType">intersection type</a>
+      </li>
+      <li>
+         <a href="#intersectAt" title="http://purl.org/query/voidext#intersectAt">intersects at</a>
+      </li>
+      <li>
+         <a href="#linkPredicateDomain" title="http://purl.org/query/voidext#linkPredicateDomain">link predicate domain</a>
+      </li>
+      <li>
+         <a href="#linkPredicateRange" title="http://purl.org/query/voidext#linkPredicateRange">link predicate range</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#objectsTarget" title="http://rdfs.org/ns/void#objectsTarget">objects target</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#openSearchDescription" title="http://rdfs.org/ns/void#openSearchDescription">open search description</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#property" title="http://rdfs.org/ns/void#property">property</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#propertyPartition" title="http://rdfs.org/ns/void#propertyPartition">property partition</a>
+      </li>
+      <li>
+         <a href="#sharedInstanceType" title="http://purl.org/query/voidext#sharedInstanceType">shared instance type</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#subjectsTarget" title="http://rdfs.org/ns/void#subjectsTarget">subjects target</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#target" title="http://rdfs.org/ns/void#target">target</a>
+      </li>
+   </ul>
+   <div class="entity" id="http://rdfs.org/ns/void#linkPredicate">
+      <h3>a link predicate<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#linkPredicate</p>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Linkset" title="http://rdfs.org/ns/void#Linkset">Link set</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <span class="dotted"
+                     title="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property">property</span>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#class">
+      <h3>class<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#class</p>
+      <div class="comment">
+         <span class="markdown">The rdfs:Class that is the rdf:type of all entities in a class-based partition.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <span class="dotted" title="http://www.w3.org/2000/01/rdf-schema#Class">class</span>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#classPartition">
+      <h3>class partition<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#classPartition</p>
+      <div class="comment">
+         <span class="markdown">A subset of a void:Dataset that contains only the entities of a certain rdfs:Class.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has super-properties</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#subset" title="http://rdfs.org/ns/void#subset">has subset</a>
+               <sup class="type-op" title="object property">op</sup>
+            </dd>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#exampleResource">
+      <h3>example resource of dataset<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#exampleResource</p>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <span class="dotted" title="http://www.w3.org/2000/01/rdf-schema#Resource">resource</span>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#feature">
+      <h3>feature<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#feature</p>
+      <div class="comment">
+         <span class="markdown">A void:TechnicalFeature supported by a void:Datset.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#TechnicalFeature" title="http://rdfs.org/ns/void#TechnicalFeature">technical feature</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#subset">
+      <h3>has subset<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#subset</p>
+      <div class="description">
+         <dl>
+            <dt>has sub-properties</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#classPartition" title="http://rdfs.org/ns/void#classPartition">class partition</a>
+               <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#propertyPartition" title="http://rdfs.org/ns/void#propertyPartition">property partition</a>
+               <sup class="type-op" title="object property">op</sup>
+            </dd>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#inDataset">
+      <h3>in dataset<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#inDataset</p>
+      <div class="comment">
+         <span class="markdown">Points to the void:Dataset that a document is a part of.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <span class="dotted" title="http://xmlns.com/foaf/0.1/Document">document</span>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="intersectionType">
+      <h3>intersection type<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://purl.org/query/voidext#intersectionType</p>
+      <div class="comment">
+         <span class="markdown">This property assings the intersection type of the graph nodes in different void:Dataset(s) (i.e. either the subject or the object node of a link predicate).</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#ComplexLinkSet" title="http://purl.org/query/voidext#ComplexLinkSet">Complex link set</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <a href="#LinkSetIntersection" title="http://purl.org/query/voidext#LinkSetIntersection">Link set intersection</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="intersectAt">
+      <h3>intersects at<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://purl.org/query/voidext#intersectAt</p>
+      <div class="comment">
+         <span class="markdown">This property assings exactly two void:LinkSet(s) to compose a complex link set. For each void:LinkSet, either the subject or the object node of one link predicate intersects the another one. It means that the subject or object of a link predicate is exactly the same as the another link predicate. However, these predicates are stored in different void:datasets.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#ComplexLinkSet" title="http://purl.org/query/voidext#ComplexLinkSet">Complex link set</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Linkset" title="http://rdfs.org/ns/void#Linkset">Link set</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="linkPredicateDomain">
+      <h3>link predicate domain<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://purl.org/query/voidext#linkPredicateDomain</p>
+      <div class="comment">
+         <span class="markdown">the link predicate subject type if specified (i.e. relation domain).</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Linkset" title="http://rdfs.org/ns/void#Linkset">Link set</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <span class="dotted" title="http://www.w3.org/2000/01/rdf-schema#Class">class</span>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="linkPredicateRange">
+      <h3>link predicate range<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://purl.org/query/voidext#linkPredicateRange</p>
+      <div class="comment">
+         <span class="markdown">the link predicate object type if specified (i.e. relation range).</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Linkset" title="http://rdfs.org/ns/void#Linkset">Link set</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <span class="dotted" title="http://www.w3.org/2000/01/rdf-schema#Class">class</span>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#objectsTarget">
+      <h3>objects target<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#objectsTarget</p>
+      <div class="comment">
+         <span class="markdown">The dataset describing the objects of the triples contained in the Linkset.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has super-properties</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#target" title="http://rdfs.org/ns/void#target">target</a>
+               <sup class="type-op" title="object property">op</sup>
+            </dd>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Linkset" title="http://rdfs.org/ns/void#Linkset">Link set</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#openSearchDescription">
+      <h3>open search description<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#openSearchDescription</p>
+      <div class="comment">
+         <span class="markdown">An OpenSearch description document for a free-text search service over a void:Dataset.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <span class="dotted" title="http://xmlns.com/foaf/0.1/Document">document</span>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#property">
+      <h3>property<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#property</p>
+      <div class="comment">
+         <span class="markdown">The rdf:Property that is the predicate of all triples in a property-based partition.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <span class="dotted"
+                     title="http://www.w3.org/1999/02/22-rdf-syntax-ns#Property">property</span>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#propertyPartition">
+      <h3>property partition<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#propertyPartition</p>
+      <div class="comment">
+         <span class="markdown">A subset of a void:Dataset that contains only the triples of a certain rdf:Property.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has super-properties</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#subset" title="http://rdfs.org/ns/void#subset">has subset</a>
+               <sup class="type-op" title="object property">op</sup>
+            </dd>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="sharedInstanceType">
+      <h3>shared instance type<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://purl.org/query/voidext#sharedInstanceType</p>
+      <div class="comment">
+         <span class="markdown">This property assings the type (i.e. a common class) of the shared instances between two different void:Dataset(s). Shared instances implies the same IRI however stored in different data stores.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#SharedInstanceSet" title="http://purl.org/query/voidext#SharedInstanceSet">Shared instance set</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <span class="dotted" title="http://www.w3.org/2000/01/rdf-schema#Class">class</span>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dd>
+               <span class="dotted" title="http://www.w3.org/2002/07/owl#Class">class</span>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#subjectsTarget">
+      <h3>subjects target<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#subjectsTarget</p>
+      <div class="comment">
+         <span class="markdown">The dataset describing the subjects of triples contained in the Linkset.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has super-properties</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#target" title="http://rdfs.org/ns/void#target">target</a>
+               <sup class="type-op" title="object property">op</sup>
+            </dd>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Linkset" title="http://rdfs.org/ns/void#Linkset">Link set</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#target">
+      <h3>target<sup class="type-op" title="object property">op</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#objectproperties">Object Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#target</p>
+      <div class="comment">
+         <span class="markdown">One of the two datasets linked by the Linkset.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has sub-properties</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#objectsTarget" title="http://rdfs.org/ns/void#objectsTarget">objects target</a>
+               <sup class="type-op" title="object property">op</sup>, <a href="#http://rdfs.org/ns/void#subjectsTarget" title="http://rdfs.org/ns/void#subjectsTarget">subjects target</a>
+               <sup class="type-op" title="object property">op</sup>
+            </dd>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Linkset" title="http://rdfs.org/ns/void#Linkset">Link set</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+</div><div id="dataproperties">
+   <h3 id="dataproperties-headline" class="list">Data Properties</h3>
+   <ul class="hlist">
+      <li>
+         <a href="#http://rdfs.org/ns/void#distinctObjects" title="http://rdfs.org/ns/void#distinctObjects">number of distinct objects</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#distinctSubjects" title="http://rdfs.org/ns/void#distinctSubjects">number of distinct subjects</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#documents" title="http://rdfs.org/ns/void#documents">number of documents</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#entities" title="http://rdfs.org/ns/void#entities">number of entities</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#properties" title="http://rdfs.org/ns/void#properties">number of properties</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#triples" title="http://rdfs.org/ns/void#triples">number of triples</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#uriSpace" title="http://rdfs.org/ns/void#uriSpace">URI space</a>
+      </li>
+   </ul>
+   <div class="entity" id="http://rdfs.org/ns/void#distinctObjects">
+      <h3>number of distinct objects<sup class="type-dp" title="data property">dp</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#distinctObjects</p>
+      <div class="comment">
+         <span class="markdown">The total number of distinct subjects in the dataset. In other words, the number of distinct URIs or blank nodes that occur in the subject position of triples in the dataset.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <span class="dotted" title="http://www.w3.org/2001/XMLSchema#integer">integer</span>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#distinctSubjects">
+      <h3>number of distinct subjects<sup class="type-dp" title="data property">dp</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#distinctSubjects</p>
+      <div class="comment">
+         <span class="markdown">The total number of distinct objects in the dataset. In other words, the number of distinct URIs, blank nodes, or literals that occur in the object position of triples in the dataset.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <span class="dotted" title="http://www.w3.org/2001/XMLSchema#integer">integer</span>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#documents">
+      <h3>number of documents<sup class="type-dp" title="data property">dp</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#documents</p>
+      <div class="comment">
+         <span class="markdown">If the dataset is published as a set of individual documents, such as RDF/XML documents or RDFa-annotated web pages, then this property indicates the total number of such documents. Non-RDF documents, such as web pages in HTML or images, are usually not included in this count. This property is intended for datasets where the total number of triples or entities is hard to determine. void:triples or void:entities should be preferred where practical.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <span class="dotted" title="http://www.w3.org/2001/XMLSchema#integer">integer</span>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#entities">
+      <h3>number of entities<sup class="type-dp" title="data property">dp</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#entities</p>
+      <div class="comment">
+         <span class="markdown">The total number of entities that are described in the dataset. To be an entity in a dataset, a resource must have a URI, and the URI must match the dataset's void:uriRegexPattern, if any. Authors of VoID files may impose arbitrary additional requirements, for example, they may consider any foaf:Document resources as not being entities.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <span class="dotted" title="http://www.w3.org/2001/XMLSchema#integer">integer</span>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#properties">
+      <h3>number of properties<sup class="type-dp" title="data property">dp</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#properties</p>
+      <div class="comment">
+         <span class="markdown">The total number of distinct properties in a void:Dataset. In other words, the number of distinct resources that occur in the predicate position of triples in the dataset.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <span class="dotted" title="http://www.w3.org/2001/XMLSchema#integer">integer</span>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#triples">
+      <h3>number of triples<sup class="type-dp" title="data property">dp</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#triples</p>
+      <div class="comment">
+         <span class="markdown">The total number of triples contained in a void:Dataset.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <span class="dotted" title="http://www.w3.org/2001/XMLSchema#integer">integer</span>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#uriSpace">
+      <h3>URI space<sup class="type-dp" title="data property">dp</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#dataproperties">Data Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#uriSpace</p>
+      <div class="comment">
+         <span class="markdown">A URI that is a common string prefix of all the entity URIs in a void:Dataset.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+            <dt>has range</dt>
+            <dd>
+               <span class="dotted" title="http://www.w3.org/2000/01/rdf-schema#Literal">literal</span>
+            </dd>
+         </dl>
+      </div>
+   </div>
+</div><div id="annotationproperties">
+   <h3 id="annotationproperties" class="list">Annotation Properties</h3>
+   <ul class="hlist">
+      <li>
+         <a href="#http://rdfs.org/ns/void#dataDump" title="http://rdfs.org/ns/void#dataDump">data dump</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#sparqlEndpoint" title="http://rdfs.org/ns/void#sparqlEndpoint">has a SPARQL endpoint at</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#uriLookupEndpoint" title="http://rdfs.org/ns/void#uriLookupEndpoint">has an URI look-up endpoint at</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#uriRegexPattern" title="http://rdfs.org/ns/void#uriRegexPattern">has URI regular expression pattern</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#rootResource" title="http://rdfs.org/ns/void#rootResource">root resource</a>
+      </li>
+      <li>
+         <a href="#http://rdfs.org/ns/void#vocabulary" title="http://rdfs.org/ns/void#vocabulary">vocabulary</a>
+      </li>
+   </ul>
+   <div class="entity" id="http://rdfs.org/ns/void#dataDump">
+      <h3>data dump<sup class="type-ap" title="annotation property">ap</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#dataDump</p>
+      <div class="comment">
+         <span class="markdown">An RDF dump, partial or complete, of a void:Dataset.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#sparqlEndpoint">
+      <h3>has a SPARQL endpoint at<sup class="type-ap" title="annotation property">ap</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#sparqlEndpoint</p>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#uriLookupEndpoint">
+      <h3>has an URI look-up endpoint at<sup class="type-ap" title="annotation property">ap</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#uriLookupEndpoint</p>
+      <div class="comment">
+         <span class="markdown">Defines a simple URI look-up protocol for accessing a dataset.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#uriRegexPattern">
+      <h3>has URI regular expression pattern<sup class="type-ap" title="annotation property">ap</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#uriRegexPattern</p>
+      <div class="comment">
+         <span class="markdown">Defines a regular expression pattern matching URIs in the dataset.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#rootResource">
+      <h3>root resource<sup class="type-ap" title="annotation property">ap</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#rootResource</p>
+      <div class="comment">
+         <span class="markdown">A top concept or entry point for a void:Dataset that is structured in a tree-like fashion. All resources in a dataset can be reached by following links from its root resources in a small number of steps.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+   <div class="entity" id="http://rdfs.org/ns/void#vocabulary">
+      <h3>vocabulary<sup class="type-ap" title="annotation property">ap</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#annotationproperties">Annotation Property ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://rdfs.org/ns/void#vocabulary</p>
+      <div class="comment">
+         <span class="markdown">A vocabulary that is used in the dataset.</span>
+      </div>
+      <div class="description">
+         <dl>
+            <dt>has domain</dt>
+            <dd>
+               <a href="#http://rdfs.org/ns/void#Dataset" title="http://rdfs.org/ns/void#Dataset">dataset</a>
+               <sup class="type-c" title="class">c</sup>
+            </dd>
+         </dl>
+      </div>
+   </div>
+</div><div id="namedindividuals">
+   <h3 id="namedindividuals" class="list">Named Individuals</h3>
+   <ul class="hlist">
+      <li>
+         <a href="#OBJECT_OBJECT" title="http://purl.org/query/voidext#OBJECT_OBJECT">Object - Object intersection</a>
+      </li>
+      <li>
+         <a href="#SUBJECT_OBJECT" title="http://purl.org/query/voidext#SUBJECT_OBJECT">Subject - Object intersection</a>
+      </li>
+      <li>
+         <a href="#SUBJECT_SUBJECT" title="http://purl.org/query/voidext#SUBJECT_SUBJECT">Subject - Subject intersection</a>
+      </li>
+   </ul>
+   <div class="entity" id="OBJECT_OBJECT">
+      <h3>Object - Object intersection<sup class="type-ni" title="named individual">ni</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://purl.org/query/voidext#OBJECT_OBJECT</p>
+      <div class="comment">
+         <span class="markdown">The intersection between two void:Dataset(s) (i.e. knowledge graphs) occurs at the object node in both data sets.</span>
+      </div>
+      <dl class="description">
+         <dt>belongs to</dt>
+         <dd>
+            <a href="#LinkSetIntersection" title="http://purl.org/query/voidext#LinkSetIntersection">Link set intersection</a>
+            <sup class="type-c" title="class">c</sup>
+         </dd>
+      </dl>
+   </div>
+   <div class="entity" id="SUBJECT_OBJECT">
+      <h3>Subject - Object intersection<sup class="type-ni" title="named individual">ni</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://purl.org/query/voidext#SUBJECT_OBJECT</p>
+      <div class="comment">
+         <span class="markdown">The intersection between two void:Dataset(s) (i.e. knowledge graphs) occurs at the object node of one data set (graph) and the subject node of another data set (graph).</span>
+      </div>
+      <dl class="description">
+         <dt>belongs to</dt>
+         <dd>
+            <a href="#LinkSetIntersection" title="http://purl.org/query/voidext#LinkSetIntersection">Link set intersection</a>
+            <sup class="type-c" title="class">c</sup>
+         </dd>
+      </dl>
+   </div>
+   <div class="entity" id="SUBJECT_SUBJECT">
+      <h3>Subject - Subject intersection<sup class="type-ni" title="named individual">ni</sup>
+         <span class="backlink"> back to <a href="#toc">ToC</a> or <a href="#namedindividuals">Named Individual ToC</a>
+         </span>
+      </h3>
+      <p>
+         <strong>IRI:</strong> http://purl.org/query/voidext#SUBJECT_SUBJECT</p>
+      <div class="comment">
+         <span class="markdown">The intersection between two void:Dataset(s) (i.e. knowledge graphs) occurs at the subject node in both data sets.</span>
+      </div>
+      <dl class="description">
+         <dt>belongs to</dt>
+         <dd>
+            <a href="#LinkSetIntersection" title="http://purl.org/query/voidext#LinkSetIntersection">Link set intersection</a>
+            <sup class="type-c" title="class">c</sup>
+         </dd>
+      </dl>
+   </div>
+</div><div id="legend">
+<h2>Legend <span class="backlink"> back to <a href="#toc">ToC</a></span></h2>
+<div   class="entity">
+<sup class="type-c" title="Classes">c</sup>: Classes <br/>
+<sup class="type-op" title="Object Properties">op</sup>: Object Properties <br/>
+<sup class="type-dp" title="Data Properties">dp</sup>: Data Properties <br/>
+<sup class="type-ni" title="Named Individuals">ni</sup>: Named Individuals
+</div>
+</div>
+</html>

@@ -1,0 +1,2028 @@
+{
+  "_comment" : "Created with OWL2VOWL (version 0.3.4), http://vowl.visualdataweb.org",
+  "header" : {
+    "languages" : [ "en", "undefined" ],
+    "baseIris" : [ "http://www.w3.org/1999/02/22-rdf-syntax-ns", "http://purl.org/pav", "http://purl.uniprot.org/core", "http://purl.obolibrary.org/obo", "http://purl.org/net/orth", "http://www.w3.org/2001/XMLSchema", "http://semanticscience.org/resource", "http://www.w3.org/2000/01/rdf-schema", "http://www.ifomis.org/bfo/1.1/snap", "http://www.ifomis.org/bfo/1.1/span", "http://www.geneontology.org/formats/oboInOwl", "http://purl.org/dc/terms", "http://purl.org/genex", "http://www.ebi.ac.uk/efo" ],
+    "iri" : "http://purl.org/genex",
+    "version" : "Gene expression (GenEx) ontology 0.1 version. Author: Tarcisio Mendes de Farias (tarcisio.mendesdefarias@unil.ch). Contributors: Frédéric Bastian, Julien Wollbrett, Christophe Dessimoz and Marc Robinson-Rechavi.",
+    "other" : {
+      "versionInfo" : [ {
+        "identifier" : "versionInfo",
+        "language" : "en",
+        "value" : "Gene expression (GenEx) ontology 0.1 version. Author: Tarcisio Mendes de Farias (tarcisio.mendesdefarias@unil.ch). Contributors: Frédéric Bastian, Julien Wollbrett, Christophe Dessimoz and Marc Robinson-Rechavi.",
+        "type" : "label"
+      } ]
+    }
+  },
+  "namespace" : [ ],
+  "metrics" : {
+    "classCount" : 32,
+    "objectPropertyCount" : 23,
+    "datatypePropertyCount" : 9,
+    "individualCount" : 10
+  },
+  "class" : [ {
+    "id" : "3",
+    "type" : "owl:Class"
+  }, {
+    "id" : "7",
+    "type" : "owl:Class"
+  }, {
+    "id" : "8",
+    "type" : "owl:Class"
+  }, {
+    "id" : "9",
+    "type" : "owl:Class"
+  }, {
+    "id" : "16",
+    "type" : "owl:Thing"
+  }, {
+    "id" : "17",
+    "type" : "rdfs:Datatype"
+  }, {
+    "id" : "18",
+    "type" : "rdfs:Literal"
+  }, {
+    "id" : "19",
+    "type" : "rdfs:Literal"
+  }, {
+    "id" : "20",
+    "type" : "rdfs:Datatype"
+  }, {
+    "id" : "21",
+    "type" : "owl:Class"
+  }, {
+    "id" : "22",
+    "type" : "rdfs:Datatype"
+  }, {
+    "id" : "23",
+    "type" : "rdfs:Datatype"
+  }, {
+    "id" : "24",
+    "type" : "rdfs:Datatype"
+  }, {
+    "id" : "15",
+    "type" : "owl:Class"
+  }, {
+    "id" : "28",
+    "type" : "rdfs:Datatype"
+  }, {
+    "id" : "29",
+    "type" : "owl:unionOf"
+  }, {
+    "id" : "32",
+    "type" : "rdfs:Datatype"
+  }, {
+    "id" : "33",
+    "type" : "owl:unionOf"
+  }, {
+    "id" : "35",
+    "type" : "owl:Class"
+  }, {
+    "id" : "36",
+    "type" : "owl:unionOf"
+  }, {
+    "id" : "38",
+    "type" : "owl:unionOf"
+  }, {
+    "id" : "42",
+    "type" : "owl:Class"
+  }, {
+    "id" : "43",
+    "type" : "owl:unionOf"
+  }, {
+    "id" : "12",
+    "type" : "owl:Class"
+  }, {
+    "id" : "2",
+    "type" : "owl:Class"
+  }, {
+    "id" : "46",
+    "type" : "owl:Class"
+  }, {
+    "id" : "49",
+    "type" : "owl:equivalentClass"
+  }, {
+    "id" : "51",
+    "type" : "owl:equivalentClass"
+  }, {
+    "id" : "55",
+    "type" : "owl:Class"
+  }, {
+    "id" : "26",
+    "type" : "owl:Class"
+  }, {
+    "id" : "1",
+    "type" : "owl:Class"
+  }, {
+    "id" : "11",
+    "type" : "owl:Class"
+  }, {
+    "id" : "50",
+    "type" : "owl:equivalentClass"
+  }, {
+    "id" : "63",
+    "type" : "owl:Class"
+  }, {
+    "id" : "30",
+    "type" : "owl:Class"
+  }, {
+    "id" : "65",
+    "type" : "owl:Class"
+  }, {
+    "id" : "6",
+    "type" : "owl:equivalentClass"
+  }, {
+    "id" : "40",
+    "type" : "owl:Class"
+  }, {
+    "id" : "73",
+    "type" : "owl:Class"
+  }, {
+    "id" : "45",
+    "type" : "owl:Class"
+  }, {
+    "id" : "14",
+    "type" : "owl:Class"
+  }, {
+    "id" : "34",
+    "type" : "owl:complementOf"
+  }, {
+    "id" : "31",
+    "type" : "owl:Class"
+  }, {
+    "id" : "67",
+    "type" : "owl:Class"
+  }, {
+    "id" : "5",
+    "type" : "owl:Class"
+  }, {
+    "id" : "92",
+    "type" : "owl:Class"
+  }, {
+    "id" : "74",
+    "type" : "owl:equivalentClass"
+  }, {
+    "id" : "57",
+    "type" : "owl:Class"
+  }, {
+    "id" : "102",
+    "type" : "rdfs:Datatype"
+  }, {
+    "id" : "52",
+    "type" : "owl:equivalentClass"
+  } ],
+  "classAttribute" : [ {
+    "iri" : "http://purl.org/genex#ExpressionCondition",
+    "baseIri" : "http://purl.org/genex",
+    "instances" : 0,
+    "annotations" : {
+      "altLabel" : [ {
+        "identifier" : "altLabel",
+        "language" : "en",
+        "value" : "sequence unit expression condition",
+        "type" : "label"
+      }, {
+        "identifier" : "altLabel",
+        "language" : "en",
+        "value" : "expression condition",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "ExpressionCondition",
+      "en" : "gene expression experiment condition"
+    },
+    "comment" : {
+      "en" : "A sequence unit (e.g. Gene) is expressed in some expression condition (e.g. anatomical entity and/or developmental stage)."
+    },
+    "id" : "3"
+  }, {
+    "iri" : "http://purl.org/genex#Expression",
+    "baseIri" : "http://purl.org/genex",
+    "instances" : 0,
+    "annotations" : {
+      "altLabel" : [ {
+        "identifier" : "altLabel",
+        "language" : "en",
+        "value" : "expression",
+        "type" : "label"
+      }, {
+        "identifier" : "altLabel",
+        "language" : "en",
+        "value" : "sequence unit expression",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "Expression",
+      "en" : "gene expression"
+    },
+    "comment" : {
+      "en" : "All sequence units (e.g. Gene) that are expressed in some condition (e.g. organ and/or adult stage)."
+    },
+    "id" : "7"
+  }, {
+    "iri" : "http://purl.org/net/orth#Subgene",
+    "baseIri" : "http://purl.org/net/orth",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Subgene",
+      "en" : "gene region"
+    },
+    "comment" : {
+      "en" : "A region of the sequence of the gene"
+    },
+    "attributes" : [ "external" ],
+    "id" : "8",
+    "superClasses" : [ "5" ]
+  }, {
+    "iri" : "http://purl.uniprot.org/core/Taxon",
+    "baseIri" : "http://purl.uniprot.org/core",
+    "instances" : 0,
+    "annotations" : {
+      "seeAlso" : [ {
+        "identifier" : "seeAlso",
+        "language" : "undefined",
+        "value" : "http://www.ncbi.nlm.nih.gov/books/NBK54428/",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "Taxon",
+      "undefined" : "Taxon"
+    },
+    "comment" : {
+      "undefined" : "An element of a taxonomy for classifying life forms."
+    },
+    "attributes" : [ "external" ],
+    "id" : "9"
+  }, {
+    "iri" : "http://www.w3.org/2002/07/owl#Thing",
+    "baseIri" : "http://owl2vowl.de",
+    "id" : "16",
+    "label" : {
+      "undefined" : "Thing"
+    }
+  }, {
+    "iri" : "http://www.w3.org/2001/XMLSchema#string",
+    "baseIri" : "http://www.w3.org/2001/XMLSchema",
+    "id" : "17",
+    "label" : {
+      "IRI-based" : "string"
+    }
+  }, {
+    "iri" : "http://www.w3.org/2000/01/rdf-schema#Literal",
+    "id" : "18",
+    "label" : {
+      "IRI-based" : "Literal",
+      "undefined" : "Literal"
+    }
+  }, {
+    "iri" : "http://www.w3.org/2000/01/rdf-schema#Literal",
+    "id" : "19",
+    "label" : {
+      "IRI-based" : "Literal",
+      "undefined" : "Literal"
+    }
+  }, {
+    "iri" : "http://www.w3.org/2001/XMLSchema#integer",
+    "baseIri" : "http://www.w3.org/2001/XMLSchema",
+    "id" : "20",
+    "label" : {
+      "IRI-based" : "integer"
+    }
+  }, {
+    "iri" : "http://www.geneontology.org/formats/oboInOwl#ObsoleteClass",
+    "baseIri" : "http://www.geneontology.org/formats/oboInOwl",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "ObsoleteClass"
+    },
+    "attributes" : [ "external" ],
+    "id" : "21"
+  }, {
+    "iri" : "http://www.w3.org/2001/XMLSchema#string",
+    "baseIri" : "http://www.w3.org/2001/XMLSchema",
+    "id" : "22",
+    "label" : {
+      "IRI-based" : "string"
+    }
+  }, {
+    "iri" : "http://www.w3.org/2001/XMLSchema#string",
+    "baseIri" : "http://www.w3.org/2001/XMLSchema",
+    "id" : "23",
+    "label" : {
+      "IRI-based" : "string"
+    }
+  }, {
+    "iri" : "http://www.w3.org/2001/XMLSchema#string",
+    "baseIri" : "http://www.w3.org/2001/XMLSchema",
+    "id" : "24",
+    "label" : {
+      "IRI-based" : "string"
+    }
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/CARO_0030000",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "instances" : 0,
+    "annotations" : {
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "Entity that is, is part of, or derived from an organism, virus, or viroid or a collection of them.",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "CARO_0030000",
+      "undefined" : "biological entity"
+    },
+    "subClasses" : [ "14" ],
+    "comment" : {
+      "undefined" : "Important for alignment with Darwin Core class \"Organism\"."
+    },
+    "attributes" : [ "external" ],
+    "id" : "15",
+    "superClasses" : [ "1" ]
+  }, {
+    "iri" : "http://www.w3.org/2001/XMLSchema#string",
+    "baseIri" : "http://www.w3.org/2001/XMLSchema",
+    "id" : "28",
+    "label" : {
+      "IRI-based" : "string"
+    }
+  }, {
+    "instances" : 0,
+    "union" : [ "30", "3", "14", "31" ],
+    "attributes" : [ "anonymous", "union" ],
+    "id" : "29"
+  }, {
+    "iri" : "http://www.w3.org/2001/XMLSchema#double",
+    "baseIri" : "http://www.w3.org/2001/XMLSchema",
+    "id" : "32",
+    "label" : {
+      "IRI-based" : "double"
+    }
+  }, {
+    "instances" : 0,
+    "union" : [ "34", "7" ],
+    "attributes" : [ "anonymous", "union" ],
+    "id" : "33"
+  }, {
+    "instances" : 0,
+    "individuals" : [ {
+      "iri" : "http://purl.org/genex#AVERAGE_EXPRESSED",
+      "baseIri" : "http://purl.org/genex",
+      "labels" : {
+        "IRI-based" : "AVERAGE_EXPRESSED",
+        "en" : "average expressed"
+      }
+    }, {
+      "iri" : "http://purl.org/genex#LOW_EXPRESSED",
+      "baseIri" : "http://purl.org/genex",
+      "labels" : {
+        "IRI-based" : "LOW_EXPRESSED",
+        "en" : "low expressed"
+      }
+    }, {
+      "iri" : "http://purl.org/genex#HIGH_EXPRESSED",
+      "baseIri" : "http://purl.org/genex",
+      "labels" : {
+        "IRI-based" : "HIGH_EXPRESSED",
+        "en" : "high expressed"
+      }
+    }, {
+      "iri" : "http://purl.org/genex#UBIQUITOUSLY_EXPRESSED",
+      "baseIri" : "http://purl.org/genex",
+      "comment" : {
+        "en" : "x is ubiquitously expressed in y if and only if x is expressed in y, and the majority of cells in y express x."
+      },
+      "labels" : {
+        "IRI-based" : "UBIQUITOUSLY_EXPRESSED",
+        "en" : "ubiquitously expressed"
+      }
+    }, {
+      "iri" : "http://purl.org/genex#HIGHLY_EXPRESSED",
+      "baseIri" : "http://purl.org/genex",
+      "annotations" : {
+        "altLabel" : [ {
+          "identifier" : "altLabel",
+          "language" : "en",
+          "value" : "over expressed",
+          "type" : "label"
+        } ]
+      },
+      "comment" : {
+        "en" : "g is highly expressed in t iff g is expressed in t, and the expression level of g is increased relative to some background i.e all gene expressions taking into account a given gene expression condition."
+      },
+      "labels" : {
+        "IRI-based" : "HIGHLY_EXPRESSED",
+        "en" : "highly expressed"
+      }
+    }, {
+      "iri" : "http://purl.org/genex#LOWLY_EXPRESSED",
+      "baseIri" : "http://purl.org/genex",
+      "annotations" : {
+        "altLabel" : [ {
+          "identifier" : "altLabel",
+          "language" : "en",
+          "value" : "under expressed",
+          "type" : "label"
+        } ]
+      },
+      "comment" : {
+        "en" : "g is lowly expressed in t iff g is expressed in t, and the expression level of g is decreased relative to some background."
+      },
+      "labels" : {
+        "IRI-based" : "LOWLY_EXPRESSED",
+        "en" : "lowly expressed"
+      }
+    } ],
+    "attributes" : [ "anonymous" ],
+    "id" : "35"
+  }, {
+    "instances" : 0,
+    "union" : [ "30", "3", "14", "31" ],
+    "attributes" : [ "anonymous", "union" ],
+    "id" : "36"
+  }, {
+    "instances" : 0,
+    "union" : [ "34", "7" ],
+    "attributes" : [ "anonymous", "union" ],
+    "id" : "38"
+  }, {
+    "instances" : 0,
+    "individuals" : [ {
+      "iri" : "http://purl.obolibrary.org/obo/CIO_0000031",
+      "baseIri" : "http://purl.obolibrary.org/obo",
+      "annotations" : {
+        "isDefinedBy" : [ {
+          "identifier" : "isDefinedBy",
+          "language" : "undefined",
+          "value" : "http://purl.obolibrary.org/obo/cio.owl",
+          "type" : "label"
+        } ],
+        "IAO_0000115" : [ {
+          "identifier" : "IAO_0000115",
+          "language" : "undefined",
+          "value" : "A confidence level representing an absence of trust in an evidence.",
+          "type" : "label"
+        } ],
+        "id" : [ {
+          "identifier" : "id",
+          "language" : "undefined",
+          "value" : "CIO:0000031",
+          "type" : "label"
+        } ]
+      },
+      "labels" : {
+        "IRI-based" : "CIO_0000031",
+        "undefined" : "low confidence level"
+      }
+    }, {
+      "iri" : "http://purl.obolibrary.org/obo/CIO_0000029",
+      "baseIri" : "http://purl.obolibrary.org/obo",
+      "annotations" : {
+        "isDefinedBy" : [ {
+          "identifier" : "isDefinedBy",
+          "language" : "undefined",
+          "value" : "http://purl.obolibrary.org/obo/cio.owl",
+          "type" : "label"
+        } ],
+        "IAO_0000115" : [ {
+          "identifier" : "IAO_0000115",
+          "language" : "undefined",
+          "value" : "A confidence level representing a high trust in an evidence.",
+          "type" : "label"
+        } ],
+        "id" : [ {
+          "identifier" : "id",
+          "language" : "undefined",
+          "value" : "CIO:0000029",
+          "type" : "label"
+        } ]
+      },
+      "labels" : {
+        "IRI-based" : "CIO_0000029",
+        "undefined" : "high confidence level"
+      }
+    }, {
+      "iri" : "http://purl.obolibrary.org/obo/CIO_0000030",
+      "baseIri" : "http://purl.obolibrary.org/obo",
+      "annotations" : {
+        "isDefinedBy" : [ {
+          "identifier" : "isDefinedBy",
+          "language" : "undefined",
+          "value" : "http://purl.obolibrary.org/obo/cio.owl",
+          "type" : "label"
+        } ],
+        "IAO_0000115" : [ {
+          "identifier" : "IAO_0000115",
+          "language" : "undefined",
+          "value" : "A confidence level representing a moderate trust in an evidence.",
+          "type" : "label"
+        } ],
+        "id" : [ {
+          "identifier" : "id",
+          "language" : "undefined",
+          "value" : "CIO:0000030",
+          "type" : "label"
+        } ]
+      },
+      "labels" : {
+        "IRI-based" : "CIO_0000030",
+        "undefined" : "medium confidence level"
+      }
+    } ],
+    "attributes" : [ "anonymous" ],
+    "id" : "42"
+  }, {
+    "instances" : 0,
+    "union" : [ "34", "7" ],
+    "attributes" : [ "anonymous", "union" ],
+    "id" : "43"
+  }, {
+    "iri" : "http://www.ifomis.org/bfo/1.1/snap#MaterialEntity",
+    "baseIri" : "http://www.ifomis.org/bfo/1.1/snap",
+    "instances" : 0,
+    "annotations" : {
+      "IAO_0000112" : [ {
+        "identifier" : "IAO_0000112",
+        "language" : "undefined",
+        "value" : "A heart, a human, a fly, a microarray.",
+        "type" : "label"
+      } ],
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "A material entity is an entity that exists in full during the length of time of its existence, persists through this time while maintaining its identity and has no temporal parts. For example a heart, a human, a fly, a microarray.",
+        "type" : "label"
+      } ],
+      "source_definition" : [ {
+        "identifier" : "source_definition",
+        "language" : "undefined",
+        "value" : "An independent continuant [snap:IndependentContinuant] that is spatially extended whose identity is independent of that of other entities and can be maintained through time. Note: Material entity [snap:MaterialEntity] subsumes object [snap:Object], fiat object part [snap:FiatObjectPart], and object aggregate [snap:ObjectAggregate], which assume a three level theory of granularity, which is inadequate for some domains, such as biology.",
+        "type" : "label"
+      } ],
+      "alternative_term" : [ {
+        "identifier" : "alternative_term",
+        "language" : "undefined",
+        "value" : "material type",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "MaterialEntity",
+      "undefined" : "material entity"
+    },
+    "subClasses" : [ "11" ],
+    "attributes" : [ "external" ],
+    "id" : "12",
+    "superClasses" : [ "40" ]
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/BFO_0000002",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "instances" : 0,
+    "annotations" : {
+      "isDefinedBy" : [ {
+        "identifier" : "isDefinedBy",
+        "language" : "undefined",
+        "value" : "http://purl.obolibrary.org/obo/bfo.owl",
+        "type" : "iri"
+      } ],
+      "IAO_0000116" : [ {
+        "identifier" : "IAO_0000116",
+        "language" : "en",
+        "value" : "BFO 2 Reference: Continuant entities are entities which can be sliced to yield parts only along the spatial dimension, yielding for example the parts of your table which we call its legs, its top, its nails. ‘My desk stretches from the window to the door. It has spatial parts, and can be sliced (in space) in two. With respect to time, however, a thing is a continuant.’ [60, p. 240",
+        "type" : "label"
+      }, {
+        "identifier" : "IAO_0000116",
+        "language" : "en",
+        "value" : "Continuant doesn't have a closure axiom because the subclasses don't necessarily exhaust all possibilites. For example, in an expansion involving bringing in some of Ceuster's other portions of reality, questions are raised as to whether universals are continuants",
+        "type" : "label"
+      } ],
+      "IAO_0000600" : [ {
+        "identifier" : "IAO_0000600",
+        "language" : "en",
+        "value" : "A continuant is an entity that persists, endures, or continues to exist through time while maintaining its identity. (axiom label in BFO2 Reference: [008-002])",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "BFO_0000002",
+      "en" : "continuant"
+    },
+    "subClasses" : [ "1" ],
+    "attributes" : [ "external" ],
+    "id" : "2",
+    "superClasses" : [ "46" ]
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/BFO_0000001",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "instances" : 0,
+    "annotations" : {
+      "isDefinedBy" : [ {
+        "identifier" : "isDefinedBy",
+        "language" : "undefined",
+        "value" : "http://purl.obolibrary.org/obo/bfo.owl",
+        "type" : "iri"
+      } ],
+      "IAO_0000600" : [ {
+        "identifier" : "IAO_0000600",
+        "language" : "en",
+        "value" : "An entity is anything that exists or has existed or will exist. (axiom label in BFO2 Reference: [001-001])",
+        "type" : "label"
+      } ],
+      "IAO_0000116" : [ {
+        "identifier" : "IAO_0000116",
+        "language" : "en",
+        "value" : "BFO 2 Reference: In all areas of empirical inquiry we encounter general terms of two sorts. First are general terms which refer to universals or types:animaltuberculosissurgical procedurediseaseSecond, are general terms used to refer to groups of entities which instantiate a given universal but do not correspond to the extension of any subuniversal of that universal because there is nothing intrinsic to the entities in question by virtue of which they – and only they – are counted as belonging to the given group. Examples are: animal purchased by the Emperortuberculosis diagnosed on a Wednesdaysurgical procedure performed on a patient from Stockholmperson identified as candidate for clinical trial #2056-555person who is signatory of Form 656-PPVpainting by Leonardo da VinciSuch terms, which represent what are called ‘specializations’ in [81",
+        "type" : "label"
+      }, {
+        "identifier" : "IAO_0000116",
+        "language" : "en",
+        "value" : "Entity doesn't have a closure axiom because the subclasses don't necessarily exhaust all possibilites. For example Werner Ceusters 'portions of reality' include 4 sorts, entities (as BFO construes them), universals, configurations, and relations. It is an open question as to whether entities as construed in BFO will at some point also include these other portions of reality. See, for example, 'How to track absolutely everything' at http://www.referent-tracking.com/_RTU/papers/CeustersICbookRevised.pdf",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "BFO_0000001",
+      "en" : "entity"
+    },
+    "subClasses" : [ "2" ],
+    "attributes" : [ "external" ],
+    "id" : "46"
+  }, {
+    "iri" : "http://purl.org/net/orth#Gene",
+    "equivalent" : [ "50" ],
+    "baseIri" : "http://purl.org/net/orth",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Gene",
+      "en" : "Gene"
+    },
+    "attributes" : [ "external", "equivalent" ],
+    "id" : "49",
+    "superClasses" : [ "5" ]
+  }, {
+    "iri" : "http://purl.org/net/orth#Protein",
+    "equivalent" : [ "52" ],
+    "baseIri" : "http://purl.org/net/orth",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Protein",
+      "en" : "Protein"
+    },
+    "attributes" : [ "external", "equivalent" ],
+    "id" : "51",
+    "superClasses" : [ "5" ]
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/CDAO_0000138",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "instances" : 0,
+    "description" : {
+      "undefined" : "A unit of analysis that may be tied to a node in a tree and to a row in a character matrix.  It subsumes the traditional concepts of 'OTU' and 'HTU'."
+    },
+    "label" : {
+      "IRI-based" : "CDAO_0000138",
+      "undefined" : "TU"
+    },
+    "attributes" : [ "external" ],
+    "id" : "55"
+  }, {
+    "iri" : "http://purl.uniprot.org/core/Rank",
+    "baseIri" : "http://purl.uniprot.org/core",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "Rank",
+      "undefined" : "Taxon rank"
+    },
+    "individuals" : [ {
+      "iri" : "http://purl.uniprot.org/core/Species",
+      "baseIri" : "http://purl.uniprot.org/core",
+      "labels" : {
+        "IRI-based" : "Species",
+        "undefined" : "Taxonomic rank Species"
+      }
+    } ],
+    "comment" : {
+      "undefined" : "A rank of a taxon."
+    },
+    "attributes" : [ "external" ],
+    "id" : "26"
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/BFO_0000004",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "instances" : 0,
+    "annotations" : {
+      "IAO_0000112" : [ {
+        "identifier" : "IAO_0000112",
+        "language" : "en",
+        "value" : "a heart",
+        "type" : "label"
+      }, {
+        "identifier" : "IAO_0000112",
+        "language" : "en",
+        "value" : "an organism",
+        "type" : "label"
+      }, {
+        "identifier" : "IAO_0000112",
+        "language" : "en",
+        "value" : "an orchestra.",
+        "type" : "label"
+      }, {
+        "identifier" : "IAO_0000112",
+        "language" : "en",
+        "value" : "the bottom right portion of a human torso",
+        "type" : "label"
+      }, {
+        "identifier" : "IAO_0000112",
+        "language" : "en",
+        "value" : "a molecule",
+        "type" : "label"
+      }, {
+        "identifier" : "IAO_0000112",
+        "language" : "en",
+        "value" : "an atom",
+        "type" : "label"
+      }, {
+        "identifier" : "IAO_0000112",
+        "language" : "en",
+        "value" : "a chair",
+        "type" : "label"
+      }, {
+        "identifier" : "IAO_0000112",
+        "language" : "en",
+        "value" : "the interior of your mouth",
+        "type" : "label"
+      }, {
+        "identifier" : "IAO_0000112",
+        "language" : "en",
+        "value" : "a leg",
+        "type" : "label"
+      }, {
+        "identifier" : "IAO_0000112",
+        "language" : "en",
+        "value" : "a spatial region",
+        "type" : "label"
+      } ],
+      "isDefinedBy" : [ {
+        "identifier" : "isDefinedBy",
+        "language" : "undefined",
+        "value" : "http://purl.obolibrary.org/obo/bfo.owl",
+        "type" : "iri"
+      } ],
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "en",
+        "value" : "b is an independent continuant = Def. b is a continuant which is such that there is no c and no t such that b s-depends_on c at t. (axiom label in BFO2 Reference: [017-002])",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "BFO_0000004",
+      "en" : "independent continuant"
+    },
+    "subClasses" : [ "15" ],
+    "attributes" : [ "external" ],
+    "id" : "1",
+    "superClasses" : [ "2" ]
+  }, {
+    "iri" : "http://www.ebi.ac.uk/efo/EFO_0000635",
+    "baseIri" : "http://www.ebi.ac.uk/efo",
+    "instances" : 0,
+    "annotations" : {
+      "IAO_0000112" : [ {
+        "identifier" : "IAO_0000112",
+        "language" : "undefined",
+        "value" : "tissue, organ, system, sperm, blood or body location (arm).",
+        "type" : "label"
+      } ],
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "The part of organism's anatomy or substance arising from an organism from which the biomaterial was derived, excludes cells. E.g. tissue, organ, system, sperm, blood or body location (arm).",
+        "type" : "label"
+      } ],
+      "NCI_Thesaurus_definition_citation" : [ {
+        "identifier" : "NCI_Thesaurus_definition_citation",
+        "language" : "undefined",
+        "value" : "NCIt:C103199",
+        "type" : "label"
+      } ],
+      "alternative_term" : [ {
+        "identifier" : "alternative_term",
+        "language" : "undefined",
+        "value" : "organism_part",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "EFO_0000635",
+      "undefined" : "organism part"
+    },
+    "attributes" : [ "external" ],
+    "id" : "11",
+    "superClasses" : [ "12", "14" ]
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/SO_0000704",
+    "equivalent" : [ "49" ],
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "SO_0000704",
+      "undefined" : "gene"
+    },
+    "attributes" : [ "external", "equivalent" ],
+    "id" : "50"
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/CDAO_0000140",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "CDAO_0000140",
+      "undefined" : "Node"
+    },
+    "subClasses" : [ "57" ],
+    "comment" : {
+      "en" : "Basic unit of graphs and trees"
+    },
+    "attributes" : [ "external" ],
+    "id" : "63"
+  }, {
+    "iri" : "http://www.ebi.ac.uk/efo/EFO_0005135",
+    "baseIri" : "http://www.ebi.ac.uk/efo",
+    "instances" : 0,
+    "annotations" : {
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "A population of organisms that is geneticaly different from others of the same species and possessing a set of defined characteristics.",
+        "type" : "label"
+      } ],
+      "NCI_Thesaurus_definition_citation" : [ {
+        "identifier" : "NCI_Thesaurus_definition_citation",
+        "language" : "undefined",
+        "value" : "NCIt:C95501",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "EFO_0005135",
+      "en" : "strain"
+    },
+    "attributes" : [ "external" ],
+    "id" : "30",
+    "superClasses" : [ "65" ]
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/OBI_0000181",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "instances" : 0,
+    "annotations" : {
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "A population is a group of material entities consisting of individuals which share a particular characteristic such as inhabiting a particular region or area or ability to interbreed.",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "OBI_0000181",
+      "undefined" : "population"
+    },
+    "subClasses" : [ "30" ],
+    "attributes" : [ "external" ],
+    "id" : "65"
+  }, {
+    "iri" : "http://purl.org/net/orth#Organism",
+    "equivalent" : [ "74" ],
+    "baseIri" : "http://purl.org/net/orth",
+    "instances" : 0,
+    "annotations" : {
+      "altLabel" : [ {
+        "identifier" : "altLabel",
+        "language" : "en",
+        "value" : "Living being",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "Organism",
+      "en" : "Organism"
+    },
+    "comment" : {
+      "en" : "A living being, such as an animal, a plant, a bacterium, or a fungus., Any individual living (or previously living) being. Example: animal, human being. An organim can be associated to a taxon such as \"Homo Sapiens\", NCBI taxonomy identifier: 9606."
+    },
+    "attributes" : [ "external", "equivalent" ],
+    "id" : "6"
+  }, {
+    "iri" : "http://www.ebi.ac.uk/efo/EFO_0000001",
+    "baseIri" : "http://www.ebi.ac.uk/efo",
+    "instances" : 0,
+    "annotations" : {
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "An experimental factor in Array Express which are essentially the variable aspects of an experiment design which can be used to describe an experiment, or set of experiments, in an increasingly detailed manner. This upper level class is really used to give a root class from which applications can rely on and not be tied to upper ontology classses which do change.",
+        "type" : "label"
+      } ],
+      "alternative_term" : [ {
+        "identifier" : "alternative_term",
+        "language" : "undefined",
+        "value" : "ExperimentalFactor",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "EFO_0000001",
+      "undefined" : "experimental factor"
+    },
+    "subClasses" : [ "12", "73" ],
+    "comment" : {
+      "undefined" : "Concept naming convention is lower case natural naming with spaces, when necessary captials should be used, for example disease factor, HIV, breast carcinoma, Ewing's sarcoma"
+    },
+    "attributes" : [ "external" ],
+    "id" : "40"
+  }, {
+    "iri" : "http://www.ifomis.org/bfo/1.1/span#ProcessualEntity",
+    "baseIri" : "http://www.ifomis.org/bfo/1.1/span",
+    "instances" : 0,
+    "annotations" : {
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "A process is an entity that exists in time by occurring or happening, has temporal parts and always involves and depends on some entity during the time it occurs.",
+        "type" : "label"
+      } ],
+      "NCI_Thesaurus_definition_citation" : [ {
+        "identifier" : "NCI_Thesaurus_definition_citation",
+        "language" : "undefined",
+        "value" : "NCIt:C29862",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "ProcessualEntity",
+      "undefined" : "process"
+    },
+    "subClasses" : [ "31" ],
+    "attributes" : [ "external" ],
+    "id" : "73",
+    "superClasses" : [ "40" ]
+  }, {
+    "iri" : "http://purl.org/net/orth#TaxonomicRange",
+    "baseIri" : "http://purl.org/net/orth",
+    "instances" : 0,
+    "annotations" : {
+      "altLabel" : [ {
+        "identifier" : "altLabel",
+        "language" : "en",
+        "value" : "Taxonomic range",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "TaxonomicRange",
+      "en" : "Taxonomic level"
+    },
+    "comment" : {
+      "en" : "The taxonomic level represents the taxon at which a group of sequences are considered members of the same cluster of orthologs/paralogs"
+    },
+    "attributes" : [ "external" ],
+    "id" : "45"
+  }, {
+    "iri" : "http://purl.org/genex#AnatomicalEntity",
+    "baseIri" : "http://purl.org/genex",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "AnatomicalEntity",
+      "en" : "Anatomical entity"
+    },
+    "subClasses" : [ "11", "67" ],
+    "comment" : {
+      "undefined" : "An anatomical entity can be an organism part (e.g. brain, blood, liver and so on) or a material anatomical entity such as a cell."
+    },
+    "id" : "14",
+    "superClasses" : [ "15" ]
+  }, {
+    "iri" : "http://purl.org/genex#AbsenceExpression",
+    "baseIri" : "http://purl.org/genex",
+    "instances" : 0,
+    "annotations" : {
+      "altLabel" : [ {
+        "identifier" : "altLabel",
+        "language" : "en",
+        "value" : "Not expressed gene",
+        "type" : "label"
+      }, {
+        "identifier" : "altLabel",
+        "language" : "en",
+        "value" : "Not expressed sequence unit",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "AbsenceExpression",
+      "en" : "absence of gene expression"
+    },
+    "attributes" : [ "complement" ],
+    "id" : "34",
+    "complement" : [ "7" ]
+  }, {
+    "iri" : "http://www.ebi.ac.uk/efo/EFO_0000399",
+    "baseIri" : "http://www.ebi.ac.uk/efo",
+    "instances" : 0,
+    "annotations" : {
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "A developmental stage is spatiotemporal region encompassing some part of the life cycle of an organism, e.g. blastula stage",
+        "type" : "label"
+      } ],
+      "NCI_Thesaurus_definition_citation" : [ {
+        "identifier" : "NCI_Thesaurus_definition_citation",
+        "language" : "undefined",
+        "value" : "NCIt:C43531",
+        "type" : "label"
+      } ],
+      "alternative_term" : [ {
+        "identifier" : "alternative_term",
+        "language" : "undefined",
+        "value" : "life cycle stage",
+        "type" : "label"
+      }, {
+        "identifier" : "alternative_term",
+        "language" : "undefined",
+        "value" : "development stage",
+        "type" : "label"
+      }, {
+        "identifier" : "alternative_term",
+        "language" : "undefined",
+        "value" : "developmental_stage",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "EFO_0000399",
+      "undefined" : "developmental stage"
+    },
+    "comment" : {
+      "undefined" : "This branch will be replaced by, and if necessary merged with an Uberon import in future."
+    },
+    "attributes" : [ "external" ],
+    "id" : "31",
+    "superClasses" : [ "73" ]
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/CARO_0000000",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "instances" : 0,
+    "annotations" : {
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "A part of a multicellular organism that is either an immaterial entity or a material entity with granularity above the level of a protein complex.  Or, a substance produced by a multicellular organism with granularity above the level of a protein complex.",
+        "type" : "label"
+      } ],
+      "id" : [ {
+        "identifier" : "id",
+        "language" : "undefined",
+        "value" : "CARO:0000000",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "CARO_0000000",
+      "undefined" : "anatomical entity"
+    },
+    "comment" : {
+      "undefined" : "Following BFO, material anatomical entities may have immaterial parts (the lumen of your stomach is part of your stomach).  The granularity limit follows the limits set by the Gene Ontology on the granularity limit for GO:cellular_component. Note that substances produced by an organism (sweat, feaces, urine) do not need to be part of an organism to qualify as an anatomical structure."
+    },
+    "attributes" : [ "external" ],
+    "id" : "67",
+    "superClasses" : [ "14" ]
+  }, {
+    "iri" : "http://purl.org/net/orth#SequenceUnit",
+    "baseIri" : "http://purl.org/net/orth",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "SequenceUnit",
+      "en" : "Sequence unit"
+    },
+    "subClasses" : [ "49", "8", "51" ],
+    "comment" : {
+      "en" : "protein or DNA sequence as a unit of comparison"
+    },
+    "attributes" : [ "external" ],
+    "id" : "5",
+    "superClasses" : [ "57" ]
+  }, {
+    "iri" : "http://semanticscience.org/resource/SIO_000750",
+    "baseIri" : "http://semanticscience.org/resource",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "SIO_000750",
+      "en" : "database"
+    },
+    "comment" : {
+      "en" : "A database is a data store such as relational, hierarchical and graph databases."
+    },
+    "attributes" : [ "external" ],
+    "id" : "92"
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/NCIT_C14250",
+    "equivalent" : [ "6" ],
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "NCIT_C14250",
+      "undefined" : "Organism"
+    },
+    "attributes" : [ "external", "equivalent" ],
+    "id" : "74"
+  }, {
+    "iri" : "http://purl.org/net/orth#GeneTreeNode",
+    "baseIri" : "http://purl.org/net/orth",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "GeneTreeNode",
+      "en" : "Gene tree node"
+    },
+    "subClasses" : [ "5" ],
+    "comment" : {
+      "en" : "A node of a tree whose leaf nodes are sequence units and whose internal nodes are clusters of homologs"
+    },
+    "attributes" : [ "external" ],
+    "id" : "57",
+    "superClasses" : [ "63" ]
+  }, {
+    "iri" : "http://www.w3.org/2001/XMLSchema#double",
+    "baseIri" : "http://www.w3.org/2001/XMLSchema",
+    "id" : "102",
+    "label" : {
+      "IRI-based" : "double"
+    }
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/SO_0000104",
+    "equivalent" : [ "51" ],
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "instances" : 0,
+    "label" : {
+      "IRI-based" : "SO_0000104",
+      "undefined" : "polypeptide"
+    },
+    "attributes" : [ "external", "equivalent" ],
+    "id" : "52"
+  } ],
+  "property" : [ {
+    "id" : "0",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "4",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "10",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "13",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "25",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "27",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "37",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "39",
+    "type" : "owl:disjointWith"
+  }, {
+    "id" : "41",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "44",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "47",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "53",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "54",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "56",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "58",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "59",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "60",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "61",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "62",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "64",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "66",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "48",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "71",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "72",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "70",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "75",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "76",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "77",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "78",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "79",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "80",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "81",
+    "type" : "rdfs:SubClassOf"
+  }, {
+    "id" : "82",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "83",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "84",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "85",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "87",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "88",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "68",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "90",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "91",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "93",
+    "type" : "owl:someValuesFrom"
+  }, {
+    "id" : "94",
+    "type" : "owl:datatypeProperty"
+  }, {
+    "id" : "95",
+    "type" : "owl:someValuesFrom"
+  }, {
+    "id" : "96",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "97",
+    "type" : "owl:someValuesFrom"
+  }, {
+    "id" : "98",
+    "type" : "owl:someValuesFrom"
+  }, {
+    "id" : "99",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "69",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "89",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "101",
+    "type" : "owl:allValuesFrom"
+  }, {
+    "id" : "86",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "100",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "103",
+    "type" : "owl:objectProperty"
+  }, {
+    "id" : "104",
+    "type" : "owl:datatypeProperty"
+  } ],
+  "propertyAttribute" : [ {
+    "range" : "2",
+    "domain" : "1",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "0"
+  }, {
+    "iri" : "http://purl.org/net/orth#organism",
+    "baseIri" : "http://purl.org/net/orth",
+    "range" : "6",
+    "label" : {
+      "IRI-based" : "organism"
+    },
+    "domain" : "5",
+    "attributes" : [ "external", "object" ],
+    "id" : "4"
+  }, {
+    "range" : "12",
+    "domain" : "11",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "10"
+  }, {
+    "range" : "15",
+    "domain" : "14",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "13"
+  }, {
+    "iri" : "http://purl.uniprot.org/core/rank",
+    "baseIri" : "http://purl.uniprot.org/core",
+    "range" : "26",
+    "label" : {
+      "IRI-based" : "rank"
+    },
+    "domain" : "9",
+    "comment" : {
+      "undefined" : "The rank of a taxon."
+    },
+    "attributes" : [ "external", "object", "functional" ],
+    "id" : "25"
+  }, {
+    "iri" : "http://purl.org/pav/version",
+    "baseIri" : "http://purl.org/pav",
+    "range" : "18",
+    "label" : {
+      "IRI-based" : "version",
+      "en" : "Version"
+    },
+    "domain" : "16",
+    "attributes" : [ "external", "datatype" ],
+    "id" : "27"
+  }, {
+    "iri" : "http://purl.org/genex#hasExpressionCondition",
+    "baseIri" : "http://purl.org/genex",
+    "range" : "3",
+    "annotations" : {
+      "altLabel" : [ {
+        "identifier" : "altLabel",
+        "language" : "en",
+        "value" : "has an experimental condition",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "hasExpressionCondition",
+      "en" : "has an expression condition"
+    },
+    "domain" : "33",
+    "attributes" : [ "object" ],
+    "id" : "37"
+  }, {
+    "range" : "21",
+    "domain" : "40",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "39"
+  }, {
+    "iri" : "http://purl.org/genex#hasExpressionLevel",
+    "baseIri" : "http://purl.org/genex",
+    "range" : "32",
+    "annotations" : {
+      "altLabel" : [ {
+        "identifier" : "altLabel",
+        "language" : "en",
+        "value" : "expression score",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "hasExpressionLevel",
+      "en" : "has expression level score"
+    },
+    "domain" : "7",
+    "attributes" : [ "datatype" ],
+    "id" : "41"
+  }, {
+    "iri" : "http://purl.org/net/orth#taxRange",
+    "baseIri" : "http://purl.org/net/orth",
+    "range" : "22",
+    "label" : {
+      "IRI-based" : "taxRange",
+      "en" : "tax range"
+    },
+    "domain" : "45",
+    "comment" : {
+      "en" : "Property that stores the name of the taxonomic range at which a given cluster of homologs has been calculated"
+    },
+    "attributes" : [ "external", "datatype" ],
+    "id" : "44"
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/RO_0002246",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "range" : "16",
+    "annotations" : {
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "g is under-expressed in t iff g is expressed in t, and the expression level of g is decreased relative to some background.",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "RO_0002246",
+      "undefined" : "under-expressed in"
+    },
+    "superproperty" : [ "48" ],
+    "domain" : "16",
+    "attributes" : [ "external", "object" ],
+    "id" : "47"
+  }, {
+    "iri" : "http://purl.org/genex#hasSequenceUnit",
+    "baseIri" : "http://purl.org/genex",
+    "range" : "5",
+    "label" : {
+      "IRI-based" : "hasSequenceUnit",
+      "en" : "has sequence unit"
+    },
+    "domain" : "38",
+    "attributes" : [ "object" ],
+    "id" : "53"
+  }, {
+    "iri" : "http://purl.uniprot.org/core/commonName",
+    "baseIri" : "http://purl.uniprot.org/core",
+    "range" : "24",
+    "annotations" : {
+      "isDefinedBy" : [ {
+        "identifier" : "isDefinedBy",
+        "language" : "undefined",
+        "value" : "http://purl.uniprot.org/core/",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "commonName",
+      "undefined" : "common name"
+    },
+    "domain" : "16",
+    "attributes" : [ "external", "datatype", "functional" ],
+    "id" : "54"
+  }, {
+    "range" : "57",
+    "domain" : "5",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "56"
+  }, {
+    "range" : "5",
+    "domain" : "51",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "58"
+  }, {
+    "range" : "5",
+    "domain" : "8",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "59"
+  }, {
+    "range" : "5",
+    "domain" : "49",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "60"
+  }, {
+    "iri" : "http://purl.uniprot.org/core/replaces",
+    "baseIri" : "http://purl.uniprot.org/core",
+    "range" : "9",
+    "label" : {
+      "IRI-based" : "replaces"
+    },
+    "domain" : "9",
+    "comment" : {
+      "undefined" : "A resource that is replaced by this resource."
+    },
+    "attributes" : [ "external", "object" ],
+    "id" : "61"
+  }, {
+    "iri" : "http://purl.org/net/orth#taxRangeId",
+    "baseIri" : "http://purl.org/net/orth",
+    "range" : "20",
+    "label" : {
+      "IRI-based" : "taxRangeId",
+      "en" : "tax range id"
+    },
+    "domain" : "16",
+    "comment" : {
+      "en" : "This property links a cluster of homologs with its taxonomic range."
+    },
+    "attributes" : [ "external", "datatype" ],
+    "id" : "62"
+  }, {
+    "iri" : "http://purl.org/genex#hasExpressionCharacteristic",
+    "baseIri" : "http://purl.org/genex",
+    "range" : "35",
+    "label" : {
+      "IRI-based" : "hasExpressionCharacteristic",
+      "en" : "has expression level characteristic"
+    },
+    "domain" : "7",
+    "attributes" : [ "object", "functional" ],
+    "id" : "64"
+  }, {
+    "range" : "14",
+    "domain" : "67",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "66"
+  }, {
+    "iri" : "http://purl.org/genex#isExpressedIn",
+    "baseIri" : "http://purl.org/genex",
+    "range" : "29",
+    "label" : {
+      "IRI-based" : "isExpressedIn",
+      "en" : "is expressed in"
+    },
+    "superproperty" : [ "68" ],
+    "domain" : "5",
+    "subproperty" : [ "69", "47", "70" ],
+    "comment" : {
+      "en" : "A sequence unit (e.g. gene) is present (expressed) in some expression condition (e.g. anatomical entity and/or developmental stage). Examples how to assign this property (at a high level of abstraction): GeneA \"is expressed in\" Brain; GeneA \"is expressed in\" adult stage."
+    },
+    "attributes" : [ "object" ],
+    "id" : "48"
+  }, {
+    "iri" : "http://purl.org/genex#hasStrain",
+    "baseIri" : "http://purl.org/genex",
+    "range" : "30",
+    "label" : {
+      "IRI-based" : "hasStrain",
+      "en" : "has strain"
+    },
+    "domain" : "3",
+    "attributes" : [ "object", "functional" ],
+    "id" : "71"
+  }, {
+    "range" : "40",
+    "domain" : "73",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "72"
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/RO_0002245",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "range" : "16",
+    "annotations" : {
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "g is over-expressed in t iff g is expressed in t, and the expression level of g is increased relative to some background.",
+        "type" : "label"
+      } ],
+      "altLabel" : [ {
+        "identifier" : "altLabel",
+        "language" : "en",
+        "value" : "highly expressed in",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "RO_0002245",
+      "undefined" : "over-expressed in"
+    },
+    "superproperty" : [ "48" ],
+    "domain" : "16",
+    "attributes" : [ "external", "object" ],
+    "id" : "70"
+  }, {
+    "range" : "40",
+    "domain" : "12",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "75"
+  }, {
+    "range" : "14",
+    "domain" : "11",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "76"
+  }, {
+    "range" : "73",
+    "domain" : "31",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "77"
+  }, {
+    "range" : "1",
+    "domain" : "15",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "78"
+  }, {
+    "range" : "46",
+    "domain" : "2",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "79"
+  }, {
+    "range" : "65",
+    "domain" : "30",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "80"
+  }, {
+    "range" : "63",
+    "domain" : "57",
+    "attributes" : [ "object", "anonymous" ],
+    "id" : "81"
+  }, {
+    "iri" : "http://purl.org/genex#hasDevelopmentalStage",
+    "baseIri" : "http://purl.org/genex",
+    "range" : "31",
+    "label" : {
+      "IRI-based" : "hasDevelopmentalStage",
+      "en" : "has a developmental stage"
+    },
+    "domain" : "3",
+    "attributes" : [ "object", "functional" ],
+    "id" : "82"
+  }, {
+    "iri" : "http://purl.org/genex#hasSex",
+    "baseIri" : "http://purl.org/genex",
+    "range" : "19",
+    "label" : {
+      "IRI-based" : "hasSex"
+    },
+    "domain" : "3",
+    "attributes" : [ "datatype", "functional" ],
+    "id" : "83"
+  }, {
+    "iri" : "http://purl.org/dc/terms/identifier",
+    "baseIri" : "http://purl.org/dc/terms",
+    "range" : "28",
+    "label" : {
+      "IRI-based" : "identifier",
+      "en" : "identifier"
+    },
+    "domain" : "16",
+    "attributes" : [ "external", "datatype" ],
+    "id" : "84"
+  }, {
+    "iri" : "http://purl.org/genex#isAbsentIn",
+    "baseIri" : "http://purl.org/genex",
+    "range" : "36",
+    "annotations" : {
+      "altLabel" : [ {
+        "identifier" : "altLabel",
+        "language" : "en",
+        "value" : "is not expressed in",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "isAbsentIn",
+      "en" : "is absent in"
+    },
+    "superproperty" : [ "86" ],
+    "domain" : "5",
+    "comment" : {
+      "en" : "A sequence unit is absent (not expressed) in some expression condition (e.g. anatomical entity and/or developmental stage). Examples how to assign this property (at a high level of abstraction): GeneA \"is absent in\" Brain; GeneA \"is abent in\" adult stage."
+    },
+    "attributes" : [ "object" ],
+    "id" : "85"
+  }, {
+    "iri" : "http://purl.org/genex#hasAnatomicalEntity",
+    "baseIri" : "http://purl.org/genex",
+    "range" : "14",
+    "label" : {
+      "IRI-based" : "hasAnatomicalEntity",
+      "en" : "has anatomical entity"
+    },
+    "domain" : "3",
+    "attributes" : [ "object", "functional" ],
+    "id" : "87"
+  }, {
+    "iri" : "http://semanticscience.org/resource/SIO_010078",
+    "baseIri" : "http://semanticscience.org/resource",
+    "range" : "16",
+    "label" : {
+      "IRI-based" : "SIO_010078",
+      "en" : "encodes"
+    },
+    "domain" : "16",
+    "attributes" : [ "external", "object" ],
+    "id" : "88"
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/RO_0002206",
+    "inverse" : "89",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "range" : "1",
+    "annotations" : {
+      "IAO_0000112" : [ {
+        "identifier" : "IAO_0000112",
+        "language" : "undefined",
+        "value" : "'neural crest cell'  SubClassOf expresses some 'Wnt1 gene'",
+        "type" : "label"
+      } ],
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "x expressed in y if and only if there is a gene expression process (GO:0010467) that occurs in y, and one of the following holds: (i) x is a gene, and x is transcribed into a transcript as part of the gene expression process (ii) x is a transcript, and the transcription of x is part of the gene expression process (iii) x is a mature gene product such as a protein, and x was translated or otherwise processes from a transcript that was transcribed as part of this gene expression process",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "RO_0002206",
+      "en" : "expressed in"
+    },
+    "superproperty" : [ "86" ],
+    "domain" : "2",
+    "subproperty" : [ "48" ],
+    "attributes" : [ "external", "object" ],
+    "id" : "68"
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/RO_0002162",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "range" : "9",
+    "label" : {
+      "IRI-based" : "RO_0002162",
+      "en" : "in taxon"
+    },
+    "domain" : "3",
+    "comment" : {
+      "en" : "Connects a biological entity to its taxon of origin."
+    },
+    "attributes" : [ "external", "object", "allValues" ],
+    "id" : "90"
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/RO_0001018",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "range" : "92",
+    "label" : {
+      "IRI-based" : "RO_0001018",
+      "en" : "contained in"
+    },
+    "domain" : "49",
+    "attributes" : [ "external", "object", "allValues" ],
+    "id" : "91"
+  }, {
+    "iri" : "http://purl.org/net/orth#organism",
+    "baseIri" : "http://purl.org/net/orth",
+    "range" : "6",
+    "label" : {
+      "IRI-based" : "organism"
+    },
+    "domain" : "49",
+    "attributes" : [ "external", "object", "someValues" ],
+    "id" : "93"
+  }, {
+    "iri" : "http://purl.uniprot.org/core/scientificName",
+    "baseIri" : "http://purl.uniprot.org/core",
+    "range" : "17",
+    "annotations" : {
+      "isDefinedBy" : [ {
+        "identifier" : "isDefinedBy",
+        "language" : "undefined",
+        "value" : "http://purl.uniprot.org/core/",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "scientificName",
+      "undefined" : "scientific name"
+    },
+    "domain" : "16",
+    "attributes" : [ "external", "datatype", "functional" ],
+    "id" : "94"
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/RO_0002162",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "range" : "9",
+    "label" : {
+      "IRI-based" : "RO_0002162",
+      "en" : "in taxon"
+    },
+    "domain" : "6",
+    "comment" : {
+      "en" : "Connects a biological entity to its taxon of origin."
+    },
+    "attributes" : [ "external", "object", "someValues" ],
+    "id" : "95"
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/RO_0001018",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "range" : "92",
+    "label" : {
+      "IRI-based" : "RO_0001018",
+      "en" : "contained in"
+    },
+    "domain" : "51",
+    "attributes" : [ "external", "object", "allValues" ],
+    "id" : "96"
+  }, {
+    "iri" : "http://purl.org/net/orth#organism",
+    "baseIri" : "http://purl.org/net/orth",
+    "range" : "6",
+    "label" : {
+      "IRI-based" : "organism"
+    },
+    "domain" : "51",
+    "attributes" : [ "external", "object", "someValues" ],
+    "id" : "97"
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/CDAO_0000194",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "range" : "49",
+    "label" : {
+      "IRI-based" : "CDAO_0000194",
+      "undefined" : "part_of"
+    },
+    "domain" : "8",
+    "attributes" : [ "external", "object", "someValues" ],
+    "id" : "98"
+  }, {
+    "iri" : "http://purl.uniprot.org/core/replaces",
+    "baseIri" : "http://purl.uniprot.org/core",
+    "range" : "9",
+    "label" : {
+      "IRI-based" : "replaces"
+    },
+    "domain" : "9",
+    "comment" : {
+      "undefined" : "A resource that is replaced by this resource."
+    },
+    "attributes" : [ "external", "object", "allValues" ],
+    "id" : "99"
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/RO_0002291",
+    "inverse" : "100",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "range" : "16",
+    "annotations" : {
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "x is ubiquitously expressed in y if and only if x is expressed in y, and the majority of cells in y express x",
+        "type" : "label"
+      } ],
+      "IAO_0000116" : [ {
+        "identifier" : "IAO_0000116",
+        "language" : "undefined",
+        "value" : "Revisit this term after coordinating with SO/SOM. The domain of this relation should be a sequence, as an instance of a DNA molecule is only expressed in the cell of which it is a part.",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "RO_0002291",
+      "en" : "ubiquitously expressed in"
+    },
+    "superproperty" : [ "48" ],
+    "domain" : "16",
+    "attributes" : [ "external", "object" ],
+    "id" : "69"
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/RO_0002292",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "range" : "16",
+    "annotations" : {
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "Inverse of 'expressed in'",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "RO_0002292",
+      "en" : "expresses"
+    },
+    "superproperty" : [ "86" ],
+    "domain" : "16",
+    "subproperty" : [ "100" ],
+    "attributes" : [ "external", "object" ],
+    "id" : "89"
+  }, {
+    "iri" : "http://purl.org/genex#hasExpressionLevel",
+    "baseIri" : "http://purl.org/genex",
+    "range" : "102",
+    "annotations" : {
+      "altLabel" : [ {
+        "identifier" : "altLabel",
+        "language" : "en",
+        "value" : "expression score",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "hasExpressionLevel",
+      "en" : "has expression level score"
+    },
+    "domain" : "7",
+    "attributes" : [ "datatype", "allValues" ],
+    "id" : "101"
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/RO_0002330",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "range" : "2",
+    "annotations" : {
+      "IAO_0000232" : [ {
+        "identifier" : "IAO_0000232",
+        "language" : "undefined",
+        "value" : "Do not use this relation directly. It is intended as a grouping for a diverse set of relations, all involving the genome of an organism",
+        "type" : "label"
+      } ],
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "holds between two entities when some genome-level process such as gene expression is involved. This includes transcriptional, spliceosomal events. These relations can be used between either macromolecule entities (such as regions of nucleic acid) or between their abstract informational counterparts.",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "RO_0002330",
+      "en" : "genomically related to"
+    },
+    "domain" : "2",
+    "subproperty" : [ "89", "68", "85" ],
+    "attributes" : [ "external", "object" ],
+    "id" : "86"
+  }, {
+    "iri" : "http://purl.obolibrary.org/obo/RO_0002293",
+    "baseIri" : "http://purl.obolibrary.org/obo",
+    "range" : "16",
+    "annotations" : {
+      "IAO_0000115" : [ {
+        "identifier" : "IAO_0000115",
+        "language" : "undefined",
+        "value" : "inverse of ubiquiotously expressed in",
+        "type" : "label"
+      } ],
+      "inSubset" : [ {
+        "identifier" : "inSubset",
+        "language" : "undefined",
+        "value" : "http://purl.obolibrary.org/obo/RO_0002259",
+        "type" : "iri"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "RO_0002293",
+      "en" : "ubiquitously expresses"
+    },
+    "superproperty" : [ "89" ],
+    "domain" : "16",
+    "attributes" : [ "external", "object" ],
+    "id" : "100"
+  }, {
+    "iri" : "http://purl.org/genex#hasConfidenceLevel",
+    "baseIri" : "http://purl.org/genex",
+    "range" : "42",
+    "label" : {
+      "IRI-based" : "hasConfidenceLevel",
+      "en" : "has expression or absence confidence level"
+    },
+    "domain" : "43",
+    "attributes" : [ "object", "functional" ],
+    "id" : "103"
+  }, {
+    "iri" : "http://purl.uniprot.org/core/mnemonic",
+    "baseIri" : "http://purl.uniprot.org/core",
+    "range" : "23",
+    "annotations" : {
+      "seeAlso" : [ {
+        "identifier" : "seeAlso",
+        "language" : "undefined",
+        "value" : "http://www.uniprot.org/manual/entry_name",
+        "type" : "label"
+      } ]
+    },
+    "label" : {
+      "IRI-based" : "mnemonic",
+      "undefined" : "Mnemonic"
+    },
+    "maxCardinality" : "1",
+    "domain" : "16",
+    "comment" : {
+      "en" : "A easy to remember identifier for a UniProtKB entry, but it is not a stable identifier and should not be used by programs to identify entries.",
+      "undefined" : "A rememberable string that can be used to find entries, not a stable identifier!"
+    },
+    "attributes" : [ "external", "datatype" ],
+    "id" : "104"
+  } ]
+}
