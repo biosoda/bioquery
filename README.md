@@ -17,7 +17,7 @@ The Excel spreadsheet containing the 12 federated queries used to evaluate our s
 
 ## GenEx documentation
 
-The documentation for the GenEx semantic model, used to expose gene expression data from Bgee as a virtual RDF graph, is available at[GenEx documentation draft](https://biosoda.github.io/genex/) and the raw files in the [genex](https://github.com/biosoda/genex) repository.
+The documentation for the GenEx semantic model, used to expose gene expression data from Bgee as a virtual RDF graph, is available at [GenEx documentation draft](https://biosoda.github.io/genex/) and the raw files in the [genex](https://github.com/biosoda/genex) repository.
 
 ## VoiD extension documentation
 
