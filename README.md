@@ -9,23 +9,23 @@ please review the Creative Commons FAQ or contact us.
 
 ## Relational-to-RDF (OBDA) mappings
 
-The full set of Ontop mappings used to expose relational Bgee data as a virtual RDF graph is available in the [Bgee_OBDA_mappings](Bgee_OBDA_mappings) folder.
+The full set of Ontop mappings used to expose relational Bgee data as a virtual RDF graph is available in the [Bgee_OBDA_mappings](https://github.com/biosoda/bioquery/tree/master/Bgee_OBDA_mappings) folder.
 
 ## Federated Queries Catalog
 
-The Excel spreadsheet containing the 12 federated queries used to evaluate our system are available in the [Queries](Queries) folder. They can also be modified and executed in our template-based search interface at http://biosoda.expasy.org:8080/build_biosodafrontend/ .
+The Excel spreadsheet containing the 12 federated queries used to evaluate our system are available in the [Queries](https://github.com/biosoda/bioquery/tree/master/Queries) folder. They can also be modified and executed in our template-based search interface at http://biosoda.expasy.org:8080/build_biosodafrontend/ .
 
 ## GenEx documentation
 
-The documentation for the GenEx semantic model, used to expose gene expression data from Bgee as a virtual RDF graph, is available in the [GenEx](GenEx) folder.
+The documentation for the GenEx semantic model, used to expose gene expression data from Bgee as a virtual RDF graph, is available at[GenEx documentation draft](https://biosoda.github.io/genex/) and the raw files in the [genex](https://github.com/biosoda/genex) repository.
 
 ## VoiD extension documentation
 
-The documentation of the VoID extension describing the virtual links between the datasets considered in our work is available in the [voidext](voidext) folder.
+The documentation of the VoID extension describing the virtual links between the datasets considered in our work is available at[VoIDext documentation draft](https://biosoda.github.io/bioquery/) and the Turtle files in the [voidext](https://github.com/biosoda/bioquery/tree/master/voidext) folder by also including the metadata used in this project (i.e. voidext_bioquery.ttl file).
 
 ## Supplementary material
 
-All supplementary material for the submission is available in the document in [Supplementary](Supplementary).
+All supplementary material for the submission is available in the document in [Supplementary](https://github.com/biosoda/bioquery/tree/master/Supplementary).
 
 ## Source code for template-based search interface
 
