@@ -29,4 +29,4 @@ All supplementary material for the submission is available in the document in [S
 
 ## Source code for template-based search interface
 
-The source code for the template-based search interface running on http://biosoda.expasy.org/build_biosodafrontend/ is available for reference in the [biosoda_frontend](biosoda_frontend) folder.
+The source code for the template-based search interface running on http://biosoda.expasy.org:8080/build_biosodafrontend/ is available for reference in the [biosoda_frontend](biosoda_frontend) folder.
