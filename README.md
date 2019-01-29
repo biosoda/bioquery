@@ -13,7 +13,7 @@ The full set of Ontop mappings used to expose relational Bgee data as a virtual 
 
 ## Federated Queries Catalog
 
-The Excel spreadsheet containing the 12 federated queries used to evaluate our system are available in the [Queries](Queries) folder. They can also be modified and executed in our template-based search interface at http://biosoda.expasy.org/build_biosodafrontend/ .
+The Excel spreadsheet containing the 12 federated queries used to evaluate our system are available in the [Queries](Queries) folder. They can also be modified and executed in our template-based search interface at http://biosoda.expasy.org:8080/build_biosodafrontend/ .
 
 ## GenEx documentation
 
