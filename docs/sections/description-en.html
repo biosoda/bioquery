@@ -50,10 +50,10 @@ In this example, OMA and Bgee datasets share the same instance Internationalized
 </figure>
 
 The example below defines with the <a href="https://www.w3.org/TR/turtle/">Turtle RDF syntax</a> some of the instances shown in <a href="#fig2">Figure 2</a>.
-This example illustrates how to instantiate virtual links of type <a href="#SharedInstanceSet">voidext:ComplexLinkset</a> with the VoIDext RDF schema.
+This example illustrates how to instantiate virtual links of type <a href="#ComplexLinkset">voidext:ComplexLinkset</a> with the VoIDext RDF schema.
 
 <pre class="example">
-bioquery:UNIPROT_OMA_2 a <a href="#SharedInstanceSet">voidext:ComplexLinkset</a>; ### The filled gray circle in <a href="#fig2">Figure 2</a>
+bioquery:UNIPROT_OMA_2 a <a href="#ComplexLinkset">voidext:ComplexLinkset</a>; ### The filled gray circle in <a href="#fig2">Figure 2</a>
 			<a href="#http://rdfs.org/ns/void#target">void:target</a> bioquery:OMA;
 			<a href="#http://rdfs.org/ns/void#target">void:target</a> bioquery:UNIPROT;
 			<a href="#intersectAt">voidext:intersectAt</a> bioquery:UNIPROT_EBI-ENSEMBL ;
