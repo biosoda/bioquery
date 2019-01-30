@@ -19,7 +19,7 @@ The Excel spreadsheet containing the 12 federated queries used to evaluate our s
 
 The documentation for the GenEx semantic model, used to expose gene expression data from Bgee as a virtual RDF graph, is available at [GenEx documentation draft](https://biosoda.github.io/genex/) and the raw files in the [genex](https://github.com/biosoda/genex) repository.
 
-## VoiD extension documentation
+## VoID extension documentation
 
 The documentation of the VoID extension describing the virtual links between the datasets considered in our work is available at [VoIDext documentation draft](https://biosoda.github.io/bioquery/) and the Turtle files in the [voidext](https://github.com/biosoda/bioquery/tree/master/voidext) folder by also including the metadata used in this project (i.e. voidext_bioquery.ttl file).
 
