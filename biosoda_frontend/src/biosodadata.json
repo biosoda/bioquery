@@ -527,7 +527,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT ?gene ?geneName {\n\t?gene a orth:Gene .\n\t?gene rdfs:label ?geneName .\n\t# ?gene obo:RO_0002162 ?taxon . #in taxon property .\n\t?taxon up:commonName '$$fruitfly$$' .\n}",
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT distinct ?gene ?geneName {\n\t?gene a orth:Gene .\n\t?gene rdfs:label ?geneName .\n\t?gene orth:organism ?taxon .\n\t?taxon obo:RO_0002162 ?species . #in taxon property .\n\t?species up:commonName '$$fruitfly$$' .\n}",
 			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$&format=JSON&limit=$$limit$$&offset=$$offset$$&inference=false",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
