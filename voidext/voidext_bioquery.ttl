@@ -90,7 +90,7 @@ bioquery:BGEE_OMA_1 a void:Linkset;
              voidext:linkPredicateDomain orth:Gene;
              voidext:linkPredicateRange rdfs:Literal.
 
-bioquery:BGEE_OMA_2 a voidext:ComplexLinkset;
+bioquery:BGEE_OMA_2 a voidext:ComplexLinkSet;
 			void:target bioquery:OMA;
             void:target bioquery:BGEE;
 			voidext:intersectAt bioquery:BGEE_OMA_1 ;
@@ -104,7 +104,7 @@ bioquery:BGEE_UNIPROT_3 a void:Linkset;
              voidext:linkPredicateDomain orth:Gene;
              voidext:linkPredicateRange rdfs:Literal.			
 
-bioquery:BGEE_UNIPROT_4 a voidext:ComplexLinkset;
+bioquery:BGEE_UNIPROT_4 a voidext:ComplexLinkSet;
 			void:target bioquery:UNIPROT;
             void:target bioquery:BGEE;
 			voidext:intersectAt bioquery:BGEE_UNIPROT_3 ;
@@ -118,7 +118,7 @@ bioquery:UNIPROT_EBI-ENSEMBL a void:Linkset;
              voidext:linkPredicateDomain up:Transcript_Resource;
              voidext:linkPredicateRange obo:SO_0000704.
 
-bioquery:UNIPROT_OMA_2 a voidext:ComplexLinkset;
+bioquery:UNIPROT_OMA_2 a voidext:ComplexLinkSet;
 			void:target bioquery:OMA;
             void:target bioquery:UNIPROT;
 			voidext:intersectAt bioquery:UNIPROT_EBI-ENSEMBL ;
@@ -141,7 +141,7 @@ bioquery:OMA_UNIPROT_4 a void:Linkset;
              voidext:linkPredicateDomain orth:Protein;
              voidext:linkPredicateRange rdfs:Literal.   
 
-bioquery:UNIPROT_OMA_3 a voidext:ComplexLinkset;
+bioquery:UNIPROT_OMA_3 a voidext:ComplexLinkSet;
 			void:target bioquery:OMA;
             void:target bioquery:UNIPROT;
 			voidext:intersectAt bioquery:OMA_UNIPROT_2 ;
@@ -162,7 +162,7 @@ bioquery:UNIPROT_BGEE_6 a void:Linkset;
              voidext:linkPredicateDomain up:Gene;
              voidext:linkPredicateRange rdfs:Literal.
 
-bioquery:UNIPROT_OMA_5 a voidext:ComplexLinkset;
+bioquery:UNIPROT_OMA_5 a voidext:ComplexLinkSet;
 			void:target bioquery:OMA;
             void:target bioquery:UNIPROT;
 			voidext:intersectAt bioquery:UNIPROT_OMA_6 ;
@@ -188,7 +188,7 @@ bioquery:UNIPROT_OMA_4 a void:Linkset;
              voidext:linkPredicateDomain up:Protein;
              voidext:linkPredicateRange rdfs:Literal.  
              
-bioquery:BGEE_UNIPROT_1 a voidext:ComplexLinkset;
+bioquery:BGEE_UNIPROT_1 a voidext:ComplexLinkSet;
 			void:target bioquery:BGEE;
             void:target bioquery:UNIPROT;
 			voidext:intersectAt bioquery:BGEE_EBI-ENSEMBL ;
@@ -207,7 +207,7 @@ bioquery:BGEE_EBI-ENSEMBL a void:Linkset;
              voidext:linkPredicateDomain <http://purl.org/net/orth#Gene>;
              voidext:linkPredicateRange <http://purl.obolibrary.org/obo/SO_0000704>.
 
- bioquery:BGEE_OMA_3 a voidext:ComplexLinkset;
+ bioquery:BGEE_OMA_3 a voidext:ComplexLinkSet;
 			void:target bioquery:BGEE;
             void:target bioquery:UNIPROT;
 			voidext:intersectAt bioquery:BGEE_EBI-ENSEMBL ;
