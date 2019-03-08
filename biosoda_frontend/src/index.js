@@ -208,7 +208,8 @@ class App extends Component {
 		lookupLimit: 10, // limits the results on var sparql lookups
 		lookupOffset: 0, // probably never changes but who knows ;-)
 		query: '', // SPARQL query to display in the SPARQL query editor
-		queryHuman: '', // human understandable query aka question
+		queryHuman: 'none of our prepared queries', // human understandable query aka question
+		estimatedRuntime: 'not known - hold on', // where applicable
 		queryTarget: '', // where to send the SPARQL query
 		queryHeaders: {},
 		asyncWaiter : '',
@@ -278,6 +279,7 @@ class App extends Component {
 			this['updateQuery_'+el.id] = (event) => {
 				var newsparql = el.SPARQL;
 				var humanReadable = el.question;
+				var estimatedRuntime = el.estimatedseconds;
 				if (typeof(el.vars) !== "undefined") {
 					for (let onevar of el.vars) {
 						var tmptype = onevar.type;
@@ -296,7 +298,7 @@ class App extends Component {
 						}
 					}
 				}
-				this.setState({ query: newsparql, queryTarget: el.fetchUrl, queryHeaders: el.queryHeaders, queryHuman: humanReadable });
+				this.setState({ query: newsparql, queryTarget: el.fetchUrl, queryHeaders: el.queryHeaders, queryHuman: humanReadable, estimatedRuntime: estimatedRuntime });
 				// console.log(humanReadable);
 				if(typeof(this.refs.sparqy) !== 'undefined') {
 					// console.log('sparqy found');
@@ -602,6 +604,7 @@ class App extends Component {
 					<div>Next page (OFFSET - if available): <span className="badge btn-primary">PREV</span> <span className="badge btn-primary">NEXT</span></div>
 				</div>
 				<div id="askedQuery" style={{padding: '1em'}}><span>Your Question: </span><span id="question">{this.state.queryHuman}</span></div>
+				<div id="estimatedRuntume" style={{padding: '1em'}}><span>Estimated Runtime: </span><span id="estimatedRuntime">{this.state.estimatedRuntime}</span></div>
 				<div id="results" ref="results"></div>
 			</Col>
 	   </Row>
