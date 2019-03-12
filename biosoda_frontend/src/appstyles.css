@@ -38,7 +38,7 @@ body {
 	background-color: #eee;
 }
 
-.autocomplete {
+.autocomplete, .reactSelect {
 	display: inline-block;
 	width: 20em;
 }
@@ -180,3 +180,7 @@ body {
     top: unset !important;
 }
 */
+
+#uniprotQ9_subclasses {
+	width: 80px;
+}

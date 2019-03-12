@@ -5,7 +5,7 @@ import { toggleExpandedForAll } from "react-sortable-tree"; // SortableTree,
 import 'react-sortable-tree/style.css';
 import { find, addNodeUnderParent } from "react-sortable-tree";
 // import FileExplorerTheme from 'react-sortable-tree-theme-minimal';
-// import Select from 'react-select';
+import Select from 'react-select';
 import { Async } from 'react-select'; // https://react-select.com/async
 import fetch from 'isomorphic-fetch';
 // import { getTreeFromFlatData } from './utils/tree-data-utils.js'; // https://github.com/frontend-collective/react-sortable-tree/blob/master/src/utils/tree-data-utils.js
@@ -20,7 +20,7 @@ require('codemirror/mode/sparql/sparql');
 // var reactSortableTreeThemeBms = require("react-sortable-tree-theme-bms")
 const varmasker = "$$"; // our vars are marked like $$genes$$
 
-const defaultSparqlMessage = "Enter SPARQL query here or select one of the templates on the left"
+const defaultSparqlMessage = "" // Enter SPARQL query here or select one of the templates on the left - we should use "placeholder"
 const reactStringReplace = require('react-string-replace');
 // const query = "?query=";
 
@@ -36,7 +36,9 @@ class SparqlInputField extends Component {
 	render() {
 		var options = {
 			lineNumbers: true,
-			mode: 'sparql'
+			mode: 'sparql',
+			// plaeholder does not work today in this version ... 
+			placeholder: "Enter SPARQL query here or select one of the templates on the left"
 		};
 
 		var currentSPARQLmessage = defaultSparqlMessage;
@@ -51,7 +53,8 @@ class SparqlInputField extends Component {
 				<Codemirror
 					ref="cm"
 					value={currentSPARQLmessage}
-					onChange={this.props.updateCode}
+					onChange={this.props.updateCode.bind(this)}
+					onKeyPress={this.props.updateCode.bind(this)}
 					options={options}
 				/>
 				</div>
@@ -61,6 +64,42 @@ class SparqlInputField extends Component {
 	}
 }
 
+String.prototype.toHHMMSS = function () {
+		var sec_num = parseInt(this, 10); // don't forget the second param
+		var hours   = Math.floor(sec_num / 3600);
+		var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+		var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+		if (hours   < 10) {hours   = "0"+hours;}
+		if (minutes < 10) {minutes = "0"+minutes;}
+		if (seconds < 10) {seconds = "0"+seconds;}
+		return hours+':'+minutes+':'+seconds;
+	}
+
+class Progressbar extends Component {
+	constructor(props){
+		super(props);
+		this.state = {prog: 10}
+	}
+	componentDidMount() {
+		setInterval(this.randomWidth.bind(this), 100);
+	}
+	randomWidth() {
+		this.setState({ prog: Math.floor(Math.random()*100) });
+	}
+	render() {
+		
+		return (
+			<div
+				className="progress-bar progress-bar-striped progress-bar-animated"
+				role="progressbar"
+				style={{ width: this.state.prog + '%' }}
+				aria-valuemin="0"
+				aria-valuemax="100">
+			</div>
+		);
+	}
+}
 
 class App extends Component {
 
@@ -81,7 +120,8 @@ class App extends Component {
   body: form
 });
   */
-  
+
+
   node_logger(goal, name, query, timetaken) {
 	var logbody = JSON.stringify({
 		goal: goal,
@@ -101,13 +141,24 @@ class App extends Component {
 }
 
   
-	updateCode(code = '') {
+	updateCode(code = '', triggerFrom = '') {
+		/*console.log('code: ');
+		console.log(code);
+		console.log('triggy: ');
+		console.log(triggerFrom);
+		console.log(typeof(triggerFrom));*/
 		if (typeof(this.refs.sparqy) !== "undefined") {
 			var newCode = this.refs.sparqy.refs.cm.getCodeMirror().doc.getValue();
 			this.setState({
 				query: newCode,
-				mode: 'sparql'
+				mode: 'sparql',
 			});
+			if (typeof(triggerFrom) == 'object') {
+				this.setState({
+					queryHuman: 'manually altered SPARQL query',
+					estimatedRuntime: 'not known - <a href="https://www.forbes.com/sites/gilpress/2015/07/29/turing-award-winner-stonebraker-on-the-future-of-taming-big-data/#54c0a84134e5" target="_blank">not calculateable</a> - hold on',
+				});
+			}
 		}
 		return true; // is needed to break the asynchronity
 	};
@@ -133,8 +184,13 @@ class App extends Component {
 	handleSubmit() {
 		var query = this.state.query;
 		var queryUrl = this.state.queryTarget.replace(varmasker + 'query' + varmasker, encodeURIComponent(biosodadata.prefixes) + '\n' +  encodeURIComponent(query))
-			.replace(varmasker + 'limit' + varmasker, this.state.lookupLimit)
-			.replace(varmasker + 'offset' + varmasker, this.state.lookupOffset);
+			.replace(varmasker + 'offset' + varmasker, this.state.lookupOffset)
+		if (this.state.useInnerLimits === true) {
+			queryUrl = queryUrl.replace(varmasker + '&limit=limit' + varmasker, '&limit=' + this.state.lookupLimit)
+		} else {
+			queryUrl = queryUrl.replace(varmasker + '&limit=limit' + varmasker, '')
+		}
+
 		var queryHeaders = this.state.queryHeaders;
 		// empty results from last fetch?
 		// show spinner to the user
@@ -152,6 +208,7 @@ class App extends Component {
 				this.displayResults(result, microtaken);
 			},
 			(error) => {
+				this.setState({ hasResults: false, showSpinner: false })
 				alert("Error! "+ error);
 			}
 		)
@@ -171,7 +228,7 @@ class App extends Component {
 	this.setState({ expanded: false });
     this.expand(false);
   }
-
+  
   expandAll() {
 	this.setState({ expanded: true });
     this.expand(true);
@@ -204,13 +261,15 @@ class App extends Component {
 		dynamicvals: [],
 		treeData: [],
 		resultOffset: 0,
-		resultLimit: 25,
-		lookupLimit: 10, // limits the results on var sparql lookups
+		resultLimit: 10,
+		lookupLimit: 100, // limits the results on var sparql lookups
+		useInnerLimits: true, // the inner limits may produce at least some data before timeout
 		lookupOffset: 0, // probably never changes but who knows ;-)
 		query: '', // SPARQL query to display in the SPARQL query editor
 		queryHuman: 'none of our prepared queries', // human understandable query aka question
-		estimatedRuntime: 'not known - hold on', // where applicable
-		queryTarget: '', // where to send the SPARQL query
+		estimatedRuntime: 'unknown', // where applicable
+		queryTarget: 'http://biosoda.expasy.org:8890/sparql?query=$$query$$&format=JSON&limit=$$limit$$&offset=$$offset$$&inference=false', // where to send the SPARQL query
+		queryTargetShort: 'http://biosoda.expasy.org:8890/sparql',
 		queryHeaders: {},
 		asyncWaiter : '',
 		expanded: false,
@@ -235,7 +294,7 @@ class App extends Component {
 			for (let onevar of _variables) {
 				var eltd = document.createElement('td');
 				// row[onevar].type holds the type of the element uri, int, bool, ...
-				if (row[onevar].type === 'uri') {
+				if (typeof(row[onevar]) !== "undefined" && row[onevar].type === 'uri') {
 					var link = document.createElement('a');
 					var text = document.createTextNode(row[onevar].value);
 					link.appendChild(text);
@@ -280,10 +339,15 @@ class App extends Component {
 				var newsparql = el.SPARQL;
 				var humanReadable = el.question;
 				var estimatedRuntime = el.estimatedseconds;
+				if (typeof(estimatedRuntime) == 'undefined') {
+					estimatedRuntime = 'unknown';
+				} else {
+					estimatedRuntime = estimatedRuntime.toHHMMSS();
+				}
 				if (typeof(el.vars) !== "undefined") {
 					for (let onevar of el.vars) {
 						var tmptype = onevar.type;
-						if (tmptype === 'string' || tmptype === 'list') {
+						if (tmptype === 'string' || tmptype === 'list' || tmptype == 'simplelist') {
 							var originalval = varmasker + onevar.name + varmasker;
 							var replaceval;
 							if (typeof(this.state.dynamicvals[el.id]) === 'undefined' || typeof(this.state.dynamicvals[el.id][onevar.name]) === 'undefined') {
@@ -294,11 +358,16 @@ class App extends Component {
 							}
 							// console.log(onevar.name +'('+originalval+'): '+replaceval);
 							newsparql = newsparql.split(originalval).join(replaceval.split("'").join("\\'")); // better than .replace because it replaces all of the occurences
+							if (this.state.useInnerLimits === true) {
+								newsparql = newsparql.replace(varmasker + 'innerlimit' + varmasker, 'LIMIT ' + this.state.resultLimit);
+							} else {
+								newsparql = newsparql.replace(varmasker + 'innerlimit' + varmasker, '');
+							}
 							humanReadable = humanReadable.split(originalval).join(replaceval); // better than .replace because it replaces all of the occurences
 						}
 					}
 				}
-				this.setState({ query: newsparql, queryTarget: el.fetchUrl, queryHeaders: el.queryHeaders, queryHuman: humanReadable, estimatedRuntime: estimatedRuntime });
+				this.setState({ query: newsparql, queryTarget: el.fetchUrl, queryTargetShort: el.fetchUrlShort, queryHeaders: el.queryHeaders, queryHuman: humanReadable, estimatedRuntime: estimatedRuntime });
 				// console.log(humanReadable);
 				if(typeof(this.refs.sparqy) !== 'undefined') {
 					// console.log('sparqy found');
@@ -311,15 +380,30 @@ class App extends Component {
 					if (onevar.type ==='string') {
 						functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<input key={onevar.name} name={onevar.name} id={el.id + "_" + onevar.name} defaultValue={onevar.default} onChange={(evt) => this.handleChange(evt.value, el.id, onevar.name, evt)} />));
 					}
+					if (onevar.type === 'simplelist') {
+						var tmpoptions = onevar.listvalues;
+						/*for (let onevalue of onevar.listvalues) {
+							 tmpoptions.push({value: onevalue, label: onevalue});
+						}*/
+						// if is defined listlabels, we can add them also
+						
+						functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<Select
+							key={onevar.name}
+							name={onevar.name} id={el.id + "_" + onevar.name}
+							default={onevar.default}
+							classNamePrefix="my-select"
+							options = {tmpoptions}
+							className="reactSelect"
+							defaultValue={onevar.default}
+							onChange={(evt) => this.handleChangeSelect(el.id, onevar.name, evt)}
+						/>));
+					}
 					if (onevar.type === 'list') {
-						if (onevar.flavour === 'simpleelist') {
-							// functionalQuestion = functionalQuestion.replace(varmasker + onevar.name + varmasker, 'dragon');
-						}
 						if (onevar.flavour === 'autocomplete') {
-						this['fetchAutocomplete_'+onevar.name] = function(searchKey) {
-							if (typeof(onevar.fullList) !== "undefined" && onevar.fullList === true) {
-								searchKey = '';
-							}
+							this['fetchAutocomplete_'+onevar.name] = function(searchKey) {
+								if (typeof(onevar.fullList) !== "undefined" && onevar.fullList === true) {
+									searchKey = '';
+								}
 							return this.fetchAutocompleteBiosoda(onevar.datasource, searchKey, el.id, onevar.name);
 						};
 						functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<Async key={onevar.name} name={onevar.name} id={el.id + "_" + onevar.name} classNamePrefix="my-select" className="autocomplete" defaultValue={{label: onevar.default}} noOptionsMessage={({ inputValue }) => !inputValue && 'Type keyword above to perform search. Found options will be listed here ...'} onChange={(evt) => this.handleChange(evt.value, el.id, onevar.name, evt)} cacheOptions loadOptions={this['fetchAutocomplete_'+onevar.name].bind(this)}  />));
@@ -330,6 +414,9 @@ class App extends Component {
 
 			functionalQuestion.push(<button key={'showSPARQL_' + el.id} className="btn btn-primary buttonInfo" title="show query in SPARQL query editor" onClick={() => this.handleShow(el.id)}>i</button>);
 			functionalQuestion.push(<button key={'submitquery_' + el.id} className="btn btn-success buttonSubmit" title="directly run this query" onClick={() => this.handleRun(el.id)}>&gt;</button>);
+			if (typeof(el.estimatedseconds) != 'undefined') {
+				functionalQuestion.push(<button className="btn btn-warning btn-sm" title="estimated runtime" style={{ fontSize: "0.666em"}} disabled>{el.estimatedseconds.toHHMMSS()}</button>);
+			}
 
 			if (typeof(el.fullHTML) !== "undefined") {
 				// console.log('fully');
@@ -358,7 +445,7 @@ class App extends Component {
 		this.node_logger('async_'+questionid+"_"+varname, datasource, searchString, 0);
 		var query = biosodadata.datasources[datasource].fetchQuery.split(varmasker + 'searchString' + varmasker).join(searchString.toLowerCase())
 		var queryURL = biosodadata.datasources[datasource].fetchUrl.replace(varmasker + 'query' + varmasker, encodeURIComponent(query))
-			.replace(varmasker + 'limit' + varmasker, this.state.lookupLimit)
+			.replace(varmasker + '&limit=limit' + varmasker, '&limit=' + this.state.lookupLimit)
 			.replace(varmasker + 'offset' + varmasker, this.state.lookupOffset);
 		var queryHeaders = biosodadata.datasources[datasource].queryHeaders;
 		return fetch(queryURL, {headers: queryHeaders})
@@ -432,10 +519,18 @@ class App extends Component {
 		this['updateQuery_'+elid](); // to show the new query in the SPARQL field
 	}
 
+	handleChangeSelect (elid, varname, evt) {
+		var dynvals = this.state.dynamicvals;
+		if (typeof(dynvals[elid]) == 'undefined') dynvals[elid] = [];
+		dynvals[elid][varname] = evt.value;
+		this.setState({dynamicvals: dynvals});
+		this['updateQuery_'+elid](); // to show the new query in the SPARQL field
+	}
+
 	displayResults (result, microtaken) {
 		if (result !== '') {
 			this.setState({ hasResults: true, showSpinner: false })
-			console.log(result);
+			// console.log(result);
 			document.getElementById('results').appendChild(document.createTextNode('Time taken: ' + microtaken/1000 + ' s, result count: ' + result.results.bindings.length));
 			// links should link where they belong to or explain + link
 			if (result.results.bindings.length > 0) {
@@ -525,7 +620,7 @@ class App extends Component {
 			  <input
 				id="find-box"
 				type="text"
-				placeholder="Search..."
+				placeholder="Search our queries..."
 				value={searchString}
 				onChange={(event) => {
 					this.setState({ searchString: event.target.value });
@@ -561,6 +656,27 @@ class App extends Component {
              </button>
             }
 
+			{
+              this.state.useInnerLimits ?
+              <button
+                className="btn btnmenu"
+                style={{ backgroundColor: "#00FFFF"}}
+                onClick={() => this.setState({ useInnerLimits: false })}
+				title="if you use inner limits, you can reduce the time to load the results. you probably won't get all of the rows but you can see if your query works as expected"
+              >
+              Inner limits are on
+            </button>
+               :
+               <button
+                 className="btn btnmenu"
+                 style={{backgroundColor: "#00FFFF"}}
+                 onClick={() => this.setState({ useInnerLimits: true })}
+				 title="if you don't use inner limits, you can run into a timeout if your query asks for too much data"
+               >
+              Inner limits are off
+             </button>
+            }
+
 			<button className="btn btn-success btnmenu" onClick={() => window.location.reload()}>
 				Reset / Reload
 			</button>
@@ -583,7 +699,7 @@ class App extends Component {
 						displayResults={this.displayResults}
 						handleSubmit={this.handleSubmit}
 						superState={this.state}
-						updateCode={this.updateCode}
+						updateCode={this.updateCode.bind(this)}
 					/>
 				</Col>
 				: null }
@@ -592,7 +708,7 @@ class App extends Component {
 			<Row id="spinnerwheel">
 				<Col>
 					<div className="progress">
-						<div className="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"> </div>
+						<Progressbar />
 					</div>
 				</Col>
 			</Row>
@@ -604,7 +720,8 @@ class App extends Component {
 					<div>Next page (OFFSET - if available): <span className="badge btn-primary">PREV</span> <span className="badge btn-primary">NEXT</span></div>
 				</div>
 				<div id="askedQuery" style={{padding: '1em'}}><span>Your Question: </span><span id="question">{this.state.queryHuman}</span></div>
-				<div id="estimatedRuntume" style={{padding: '1em'}}><span>Estimated Runtime: </span><span id="estimatedRuntime">{this.state.estimatedRuntime}</span></div>
+				<div id="fetchTargetDiv" style={{padding: '1em'}}><span>Query will be sent to: </span><span id="fetchTarget"><a href={this.state.queryTargetShort} target="_blank">{this.state.queryTargetShort}</a></span></div>
+				<div id="estimatedRuntume" style={{padding: '1em'}}><span>Estimated Runtime: </span><span id="estimatedRuntime" dangerouslySetInnerHTML={ {__html: this.state.estimatedRuntime} }></span></div>
 				<div id="results" ref="results"></div>
 			</Col>
 	   </Row>
