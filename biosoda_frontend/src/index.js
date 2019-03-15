@@ -350,23 +350,32 @@ class App extends Component {
 						if (tmptype === 'string' || tmptype === 'list' || tmptype == 'simplelist') {
 							var originalval = varmasker + onevar.name + varmasker;
 							var replaceval;
-							if (typeof(this.state.dynamicvals[el.id]) === 'undefined' || typeof(this.state.dynamicvals[el.id][onevar.name]) === 'undefined') {
-								if (typeof(onevar.defaultvalue) !== "undefined") onevar.default = onevar.defaultvalue;
-								replaceval = onevar.default;
+							var replacevalhuman;
+							if (typeof(this.state.dynamicvals[el.id]) === 'undefined' || typeof(this.state.dynamicvals[el.id][onevar.name]) === 'undefined' || typeof(this.state.dynamicvals[el.id][onevar.name]['label']) === 'undefined') {
+								if (typeof(onevar.defaultvalue) === "undefined") onevar.defaultvalue = onevar.default;
+								replaceval = onevar.defaultvalue;
+								replacevalhuman = onevar.default;
 							} else {
-								replaceval = this.state.dynamicvals[el.id][onevar.name];
+								replaceval = this.state.dynamicvals[el.id][onevar.name]['value'];
+								if (typeof (this.state.dynamicvals[el.id][onevar.name]['label']) !== "undefined") {
+									replacevalhuman = this.state.dynamicvals[el.id][onevar.name]['label'];
+								} else {
+									replacevalhuman = this.state.dynamicvals[el.id][onevar.name]['value'];
+								}
 							}
 							// console.log(onevar.name +'('+originalval+'): '+replaceval);
 							newsparql = newsparql.split(originalval).join(replaceval.split("'").join("\\'")); // better than .replace because it replaces all of the occurences
-							if (this.state.useInnerLimits === true) {
-								newsparql = newsparql.replace(varmasker + 'innerlimit' + varmasker, 'LIMIT ' + this.state.resultLimit);
-							} else {
-								newsparql = newsparql.replace(varmasker + 'innerlimit' + varmasker, '');
-							}
-							humanReadable = humanReadable.split(originalval).join(replaceval); // better than .replace because it replaces all of the occurences
+							humanReadable = humanReadable.split(originalval).join(replacevalhuman); // better than .replace because it replaces all of the occurences
 						}
 					}
 				}
+
+				if (this.state.useInnerLimits === true) {
+					newsparql = newsparql.split(varmasker + 'innerlimit' + varmasker).join('LIMIT ' + this.state.resultLimit);
+				} else {
+					newsparql = newsparql.split(varmasker + 'innerlimit' + varmasker).join('');
+				}
+
 				this.setState({ query: newsparql, queryTarget: el.fetchUrl, queryTargetShort: el.fetchUrlShort, queryHeaders: el.queryHeaders, queryHuman: humanReadable, estimatedRuntime: estimatedRuntime });
 				// console.log(humanReadable);
 				if(typeof(this.refs.sparqy) !== 'undefined') {
@@ -378,7 +387,13 @@ class App extends Component {
 			if (typeof(el.vars) !== "undefined") {
 				for (let onevar of el.vars) {
 					if (onevar.type ==='string') {
-						functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<input key={onevar.name} name={onevar.name} id={el.id + "_" + onevar.name} defaultValue={onevar.default} onChange={(evt) => this.handleChange(evt.value, el.id, onevar.name, evt)} />));
+						functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<input
+							key={onevar.name}
+							name={onevar.name}
+							id={el.id + "_" + onevar.name}
+							defaultValue={onevar.default}
+							onChange={(evt) => this.handleChange(evt.value, el.id, onevar.name, evt)}
+						/>));
 					}
 					if (onevar.type === 'simplelist') {
 						var tmpoptions = onevar.listvalues;
@@ -389,12 +404,12 @@ class App extends Component {
 						
 						functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<Select
 							key={onevar.name}
-							name={onevar.name} id={el.id + "_" + onevar.name}
-							default={onevar.default}
+							name={onevar.name}
+							id={el.id + "_" + onevar.name}
+							defaultValue={{value: onevar.defaultvalue, label: onevar.default}}
 							classNamePrefix="my-select"
 							options = {tmpoptions}
 							className="reactSelect"
-							defaultValue={onevar.default}
 							onChange={(evt) => this.handleChangeSelect(el.id, onevar.name, evt)}
 						/>));
 					}
@@ -406,7 +421,17 @@ class App extends Component {
 								}
 							return this.fetchAutocompleteBiosoda(onevar.datasource, searchKey, el.id, onevar.name);
 						};
-						functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<Async key={onevar.name} name={onevar.name} id={el.id + "_" + onevar.name} classNamePrefix="my-select" className="autocomplete" defaultValue={{label: onevar.default}} noOptionsMessage={({ inputValue }) => !inputValue && 'Type keyword above to perform search. Found options will be listed here ...'} onChange={(evt) => this.handleChange(evt.value, el.id, onevar.name, evt)} cacheOptions loadOptions={this['fetchAutocomplete_'+onevar.name].bind(this)}  />));
+						functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<Async
+							key={onevar.name}
+							name={onevar.name}
+							id={el.id + "_" + onevar.name}
+							classNamePrefix="my-select"
+							className="autocomplete"
+							defaultValue={{label: onevar.default}}
+							noOptionsMessage={({ inputValue }) => !inputValue && 'Type keyword above to perform search. Found options will be listed here ...'}
+							onChange={(evt) => this.handleChange(evt.value, el.id, onevar.name, evt)}
+							cacheOptions loadOptions={this['fetchAutocomplete_'+onevar.name].bind(this)}
+						/>));
 						}
 					}
 				}
@@ -513,16 +538,32 @@ class App extends Component {
 			value = evt.target.value;
 		}
 		var dynvals = this.state.dynamicvals;
-		if (typeof(dynvals[elid]) == 'undefined') dynvals[elid] = [];
-		dynvals[elid][varname] = value;
+		if (typeof(dynvals[elid]) == 'undefined') {
+			dynvals[elid] = [];
+		}
+		if (typeof(dynvals[elid][varname]) == 'undefined') {
+			dynvals[elid][varname] = [];
+		}
+		dynvals[elid][varname]['value'] = value;
+		if (typeof(evt.label) !== "undefined") {
+			dynvals[elid][varname]['label'] = evt.label;
+		} else {
+			dynvals[elid][varname]['label'] = value;
+		}
 		this.setState({dynamicvals: dynvals});
 		this['updateQuery_'+elid](); // to show the new query in the SPARQL field
 	}
 
 	handleChangeSelect (elid, varname, evt) {
 		var dynvals = this.state.dynamicvals;
-		if (typeof(dynvals[elid]) == 'undefined') dynvals[elid] = [];
-		dynvals[elid][varname] = evt.value;
+		if (typeof(dynvals[elid]) == 'undefined') {
+			dynvals[elid] = [];
+		}
+		if (typeof(dynvals[elid][varname]) == 'undefined') {
+			dynvals[elid][varname] = [];
+		}
+		dynvals[elid][varname]['value'] = evt.value;
+		dynvals[elid][varname]['label'] = evt.label;
 		this.setState({dynamicvals: dynvals});
 		this['updateQuery_'+elid](); // to show the new query in the SPARQL field
 	}
@@ -661,7 +702,11 @@ class App extends Component {
               <button
                 className="btn btnmenu"
                 style={{ backgroundColor: "#00FFFF"}}
-                onClick={() => this.setState({ useInnerLimits: false })}
+                onClick={() => {
+					this.setState({ useInnerLimits: false});
+					this.refs.sparqy.refs.cm.getCodeMirror().doc.setValue('');
+				}
+				}
 				title="if you use inner limits, you can reduce the time to load the results. you probably won't get all of the rows but you can see if your query works as expected"
               >
               Inner limits are on
@@ -670,7 +715,11 @@ class App extends Component {
                <button
                  className="btn btnmenu"
                  style={{backgroundColor: "#00FFFF"}}
-                 onClick={() => this.setState({ useInnerLimits: true })}
+                 onClick={() => {
+					this.setState({ useInnerLimits: true });
+					this.refs.sparqy.refs.cm.getCodeMirror().doc.setValue('')
+				}
+				}
 				 title="if you don't use inner limits, you can run into a timeout if your query asks for too much data"
                >
               Inner limits are off

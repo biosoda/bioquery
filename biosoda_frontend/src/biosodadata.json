@@ -202,7 +202,7 @@
 			"id": "federatedOmaBgeeUniprotQ4",
 			"runcheck": "2019-01-23, 4.519s, 15results",
 			"parentIds": ["federatedOmaBgeeUniprot_proteins"],
-			"question": "What are the proteins associated with $$glioblastoma$$ and the orthologs expressed in the rat’s $$brain$$. ",
+			"question": "What are the proteins associated with '$$glioblastoma$$' and the orthologs expressed in the rat’s $$brain$$. ",
 			"vars": [
 				{
 					"name": "glioblastoma",
@@ -494,8 +494,21 @@
 			"id": "bgeeQ1",
 			"runcheck": "2019-01-23, 0.183s, 10results",
 			"parentIds": ["bgee_anatomicEntity"],
-			"question": "Scientific name of species in bgee with their uniprot taxon",
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT * {\n\t?species a up:Taxon .\n\t?species up:scientificName ?name .\n\t?species up:rank up:Species .\n}\n$$innerlimit$$",
+			"question": "$$scientificname$$ of species in bgee with their uniprot taxon",
+			"vars": [
+				{
+					"name": "scientificname",
+					"default": "Scientific name",
+					"defaultvalue": "up:scientificName",
+					"type": "simplelist",
+					"listvalues": [
+						{"value": "up:scientificName", "label": "Scientific name"},
+						{"value": "up:otherName", "label": "Other name"}
+						
+					]
+				}
+			],
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT * {\n\t?species a up:Taxon .\n\t?species $$scientificname$$ ?name .\n\t?species up:rank up:Species .\n}\n$$innerlimit$$",
 			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "http://biosoda.expasy.org:8890/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -701,8 +714,21 @@
 			"id": "omaQ1",
 			"runcheck": "2019-01-23, 0.189s, 10results",
 			"parentIds": ["oma_species"],
-			"question": "Which species are available on OMA database and their scientific names?",
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT * WHERE {\n\t?s a up:Taxon .\n\t?s up:scientificName ?v .\n\t?s up:rank up:Species .\n} ",
+			"question": "Which species are available on OMA database and their $$scientificname$$?",
+			"vars": [
+				{
+					"name": "scientificname",
+					"default": "scientific name",
+					"defaultvalue": "up:scientificName",
+					"type": "simplelist",
+					"listvalues": [
+						{"value": "up:scientificName", "label": "scientific name"},
+						{"value": "up:mnemonic", "label": "mnemonic"}
+						
+					]
+				}
+			],
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT * WHERE {\n\t?s a up:Taxon .\n\t?s $$scientificname$$ ?v .\n\t?s up:rank up:Species .\n} ",
 			"fetchUrl": "https://sparql.omabrowser.org/lode/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://sparql.omabrowser.org/lode/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -730,8 +756,21 @@
 			"id": "omaQ3",
 			"runcheck": "2019-01-23, 1.284s, 10results",
 			"parentIds": ["oma_proteins"],
-			"question": "How many proteins (and their labels) per species are present in OMA database?",
-			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nSELECT ?taxon ?name (COUNT(?protein) as ?Protein_count) WHERE {\n\t?protein a orth:Protein .\n\t?protein orth:organism ?organism .\n\t?inTaxon rdfs:label 'in taxon'@en .\n\t?organism ?inTaxon ?taxon .\n\t?taxon up:scientificName ?name .\n}\nGROUP BY ?taxon ?name",
+			"question": "How many proteins (and their $$scientificname$$) per species are present in OMA database?",
+			"vars": [
+				{
+					"name": "scientificname",
+					"default": "scientific name",
+					"defaultvalue": "up:scientificName",
+					"type": "simplelist",
+					"listvalues": [
+						{"value": "up:scientificName", "label": "scientific name"},
+						{"value": "up:mnemonic", "label": "mnemonic"}
+						
+					]
+				}
+			],
+			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nSELECT ?taxon ?target (COUNT(?protein) as ?Protein_count) WHERE {\n\t?protein a orth:Protein .\n\t?protein orth:organism ?organism .\n\t?inTaxon rdfs:label 'in taxon'@en .\n\t?organism ?inTaxon ?taxon .\n\t?taxon $$scientificname$$ ?target .\n}\nGROUP BY ?taxon ?target",
 			"fetchUrl": "https://sparql.omabrowser.org/lode/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://sparql.omabrowser.org/lode/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -930,8 +969,21 @@
 			"id": "uniprotQ3",
 			"runcheck": "2019-01-23, 0.158s, 10results",
 			"parentIds": ["uniprot_proteins"],
-			"question": "Select all taxa from the UniProt taxonomy",
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT ?taxon WHERE {\n\t?taxon a up:Taxon .\n}\n$$innerlimit$$",
+			"question": "Select all $$taxa$$ from the UniProt taxonomy",
+			"vars": [
+				{
+					"name": "taxa",
+					"default": "taxa",
+					"type": "simplelist",
+					"listvalues": [
+						{"value": "up:Taxon", "label": "taxa"},
+						{"value": "up:Cluster", "label": "clusters"},
+						{"value": "up:Strain", "label": "strains"},
+						{"value": "up:Tissue", "label": "tissues"}
+					]
+				}
+			],
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT * WHERE {\n\t?target a $$taxa$$ .\n}\n$$innerlimit$$",
 			"fetchUrl": "https://sparql.uniprot.org/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://sparql.uniprot.org/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -940,8 +992,20 @@
 			"id": "uniprotQ4",
 			"runcheck": "2019-01-23, 0.181s, 10results",
 			"parentIds": ["uniprot_proteins"],
-			"question": "Select all bacterial taxa, and their scientific name, from the UniProt taxonomy",
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX taxon: <http://purl.uniprot.org/taxonomy/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nSELECT ?taxon ?name WHERE {\n\t?taxon a up:Taxon .\n\t?taxon up:scientificName ?name .\n\t?taxon rdfs:subClassOf taxon:2 .\n}\n$$innerlimit$$",
+			"question": "Select all bacterial taxa, and their $$scientificname$$, from the UniProt taxonomy",
+			"vars": [
+				{
+					"name": "scientificname",
+					"default": "scientific name",
+					"type": "simplelist",
+					"listvalues": [
+						{"value": "up:scientificName", "label": "scientific name"},
+						{"value": "up:otherName", "label": "other name"}
+						
+					]
+				}
+			],
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX taxon: <http://purl.uniprot.org/taxonomy/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nSELECT ?taxon ?target WHERE {\n\t?taxon a up:Taxon .\n\t?taxon $$scientificname$$ ?target .\n\t?taxon rdfs:subClassOf taxon:2 .\n}\n$$innerlimit$$",
 			"fetchUrl": "https://sparql.uniprot.org/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://sparql.uniprot.org/sparql",
 			"queryHeaders": {"Accept": "application/ -results+json"}
@@ -950,7 +1014,7 @@
 			"id": "uniprotQ5",
 			"runcheck": "2019-01-23, 0.158s, 6results",
 			"parentIds": ["uniprot_proteins"],
-			"question": "which are the Ensembl transcript and genes for the A4_HUMAN protein ",
+			"question": "which are the Ensembl transcript and genes for the $$A4HUMAN$$ protein ",
 			"vars": [
 				{
 					"name": "A4HUMAN",
@@ -988,8 +1052,20 @@
 			"id": "uniprotQ7",
 			"runcheck": "2019-01-23, 6.264s, 6535results",
 			"parentIds": ["uniprot_proteins"],
-			"question": "Select the preferred gene name and disease annotation of all human UniProt proteins that are known to be involved in a disease",
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX taxon: <http://purl.uniprot.org/taxonomy/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nSELECT ?name ?text WHERE {\n\t?protein a up:Protein .\n\t?protein up:organism taxon:9606 .\n\t?protein up:encodedBy ?gene .\n\t?gene skos:prefLabel ?name .\n\t?protein up:annotation ?annotation .\n\t?annotation a up:Disease_Annotation .\n\t?annotation rdfs:comment ?text .\n}",
+			"question": "Select the preferred gene name and disease annotation of all $$human$$ UniProt proteins that are known to be involved in a disease",
+			"vars": [
+				{
+					"name": "human",
+					"default": "human",
+					"defaultvalue": "taxon:9606",
+					"type": "simplelist",
+					"listvalues": [
+						{"value": "taxon:9606", "label": "human"},
+						{"value": "taxon:10116", "label": "rat"}
+					]
+				}
+			],
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX taxon: <http://purl.uniprot.org/taxonomy/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>\nSELECT ?name ?text WHERE {\n\t?protein a up:Protein .\n\t?protein up:organism $$human$$ .\n\t?protein up:encodedBy ?gene .\n\t?gene skos:prefLabel ?name .\n\t?protein up:annotation ?annotation .\n\t?annotation a up:Disease_Annotation .\n\t?annotation rdfs:comment ?text .\n}",
 			"fetchUrl": "https://sparql.uniprot.org/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://sparql.uniprot.org/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
