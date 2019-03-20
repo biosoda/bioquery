@@ -113,12 +113,13 @@ export class NestedNodes extends Component {
 			// this.state.searchString
 			// console.log(child);
 			// console.log(this.props);
+			var btnestsec = '';
 			if (typeof(child.estimatedSeconds) != 'undefined' && this.props.useInnerLimits === true) {
-				var btnestsec = <button className="btn btn-warning btn-sm" title="estimated runtime of original query" style={{ fontSize: "0.666em"}} disabled>{(child.estimatedSeconds*2).toString().toHHMMSS()}</button>
+				btnestsec = <button className="btn btn-warning btn-sm" title="estimated runtime of original query" style={{ fontSize: "0.666em"}} disabled>{(child.estimatedSeconds*2).toString().toHHMMSS()}</button>
 			} else if (typeof(child.estimatedSeconds) != 'undefined') {
-				var btnestsec = <button className="btn btn-secondary btn-sm" title="estimated runtime of original query with limited results" style={{ fontSize: "0.666em"}} disabled>{(child.estimatedSeconds*2).toString().toHHMMSS()}</button>
+				btnestsec = <button className="btn btn-secondary btn-sm" title="estimated runtime of original query with limited results" style={{ fontSize: "0.666em"}} disabled>{(child.estimatedSeconds*2).toString().toHHMMSS()}</button>
 			} else {
-				var btnestsec = '';
+				btnestsec = '';
 			}
 			return(
 				<li key={child.id} className={actualclassnames}><div className="title">{child.title} {btnestsec}</div></li>
@@ -126,7 +127,7 @@ export class NestedNodes extends Component {
 		} else {
 			return (
 				<li key={child.id} data-haschild="true" className={actualclassnames}><div className="title"><div className="plusminus" onClick={this.handleClick} ></div>{child.title}</div>
-					<ul>
+					<ul key={child.id}>
 						{child.children.map(child => {
 							return <NestedNodes
 								treedata={child} key={child.id}

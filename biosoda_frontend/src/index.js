@@ -1,14 +1,11 @@
-// https://frontend-collective.github.io/react-sortable-tree/?selectedKind=Basics&selectedStory=Minimal%20implementation&full=0&addons=0&stories=1&panelRight=0
 import React, { Component } from "react";
 import { render } from "react-dom";
 import { toggleExpandedForAll } from "react-sortable-tree"; // SortableTree, 
 import 'react-sortable-tree/style.css';
-import { find, addNodeUnderParent } from "react-sortable-tree";
-// import FileExplorerTheme from 'react-sortable-tree-theme-minimal';
+import { addNodeUnderParent } from "react-sortable-tree"; // find
 import Select from 'react-select';
 import { Async } from 'react-select'; // https://react-select.com/async
 import fetch from 'isomorphic-fetch';
-// import { getTreeFromFlatData } from './utils/tree-data-utils.js'; // https://github.com/frontend-collective/react-sortable-tree/blob/master/src/utils/tree-data-utils.js
 import './appstyles.css';
 import biosodadata from './biosodadata.json'; // https://stackoverflow.com/questions/29452822/how-to-fetch-data-from-local-json-file-on-react-native/37781882#37781882
 import { Row, Col } from  'reactstrap';
@@ -17,20 +14,10 @@ import 'codemirror/lib/codemirror.css';
 import TreeSearch from './treeSearchReact.js';
 var Codemirror = require('react-codemirror');
 require('codemirror/mode/sparql/sparql');
-// var reactSortableTreeThemeBms = require("react-sortable-tree-theme-bms")
 const varmasker = "$$"; // our vars are marked like $$genes$$
 
 const defaultSparqlMessage = "" // Enter SPARQL query here or select one of the templates on the left - we should use "placeholder"
 const reactStringReplace = require('react-string-replace');
-// const query = "?query=";
-
-var lodestarResultsPerPage = 20;
-
-class Fullhtml extends Component {
-	render() {
-		return this.props.code;
-	}
-}
 
 class SparqlInputField extends Component {
 	render() {
@@ -65,17 +52,18 @@ class SparqlInputField extends Component {
 	}
 }
 
+/*eslint no-extend-native: ["error", { "exceptions": ["String"] }]*/
 String.prototype.toHHMMSS = function () {
-		var sec_num = parseInt(this, 10); // don't forget the second param
-		var hours   = Math.floor(sec_num / 3600);
-		var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
-		var seconds = sec_num - (hours * 3600) - (minutes * 60);
+	var sec_num = parseInt(this, 10); // don't forget the second param
+	var hours   = Math.floor(sec_num / 3600);
+	var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+	var seconds = sec_num - (hours * 3600) - (minutes * 60);
 
-		if (hours   < 10) {hours   = "0"+hours;}
-		if (minutes < 10) {minutes = "0"+minutes;}
-		if (seconds < 10) {seconds = "0"+seconds;}
-		return hours+':'+minutes+':'+seconds;
-	}
+	if (hours   < 10) {hours   = "0"+hours;}
+	if (minutes < 10) {minutes = "0"+minutes;}
+	if (seconds < 10) {seconds = "0"+seconds;}
+	return hours+':'+minutes+':'+seconds;
+}
 
 class ExtraTarget extends Component {
 	constructor(props){
@@ -94,7 +82,7 @@ class ExtraTarget extends Component {
 			setTimeout(reject, 1000, 'Request timed out');
 		});
 		var request = fetch(targetURL);
-		var result = 'server state unknown';
+		// var result = 'server state unknown';
 		Promise
 			.race([timeout, request])
 			.then(response => {this.result = 'server is online';})
@@ -142,44 +130,29 @@ class Progressbar extends Component {
 
 class App extends Component {
 
-  _handleKeyPress (e) {
-      if (e.key === 'Enter') {
-        this.handleSubmit();
-      }
-  }
+	_handleKeyPress (e) {
+	  if (e.key === 'Enter') {
+		this.handleSubmit();
+	  }
+	}
 
-  /*
-  fetch(url, {
-  credentials: 'include', //pass cookies, for authentication
-  method: 'post',
-  headers: {
-  'Accept': 'application/json, application/xml, text/plain, text/html, *.*',
-  'Content-Type': 'application/x-www-form-urlencoded; charset=utf-8'
-  },
-  body: form
-});
-  */
+	node_logger(goal, name, query, timetaken) {
+		var logbody = JSON.stringify({
+			goal: goal,
+			name: name,
+			query: query,
+			timetaken: timetaken
+		});
+		fetch('http://biosoda.expasy.org:3002/', {
+			method: 'POST',
+			headers: {
+				'Accept': 'application/json',
+				'Content-Type': 'application/json',
+			},
+			body: logbody
+		});
+	}
 
-
-  node_logger(goal, name, query, timetaken) {
-	var logbody = JSON.stringify({
-		goal: goal,
-		name: name,
-		query: query,
-		timetaken: timetaken
-	});
-	// console.log(logbody);
-	fetch('http://biosoda.expasy.org:3002/', {
-		method: 'POST',
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json',
-		},
-		body: logbody
-	});
-}
-
-  
 	updateCode(code = '', triggerFrom = '') {
 		/*console.log('code: ');
 		console.log(code);
@@ -241,7 +214,6 @@ class App extends Component {
 		// empty results from last fetch?
 		// show spinner to the user
 		this.displayResults('');
-		// window.renderSparqlResultJsonAsTable(null, "results");
 		this.node_logger('SPARQL', query, 'before', 0);
 		var microstart = Date.now();
 		return fetch(queryUrl, {headers: queryHeaders})
@@ -261,7 +233,6 @@ class App extends Component {
 	}
 
   expand(expanded) {
-	// console.log('ex called');
 	var toggleData = toggleExpandedForAll({
             treeData: this.state.treeData,
             expanded,
@@ -297,8 +268,6 @@ class App extends Component {
 
 	this.state = {
 		searchString: '',
-		searchFocusIndex: 0,
-		searchFoundCount: null,
 		showSparql: false,
 		showSpinner: false,
 		sparqlEndpointURL: '',
@@ -323,9 +292,7 @@ class App extends Component {
 
 	// functionalities taken from lodestar/lode.js
 	this['renderedTableFromJSON'] = (json) => {
-		// console.log(json);
 		var eltable = document.createElement('table');
-		var headrow = json.head.vars;
 		var _results = json.results.bindings;
 		var _variables = json.head.vars;
 		var elthead = document.createElement('thead');
@@ -338,7 +305,6 @@ class App extends Component {
 		eltable.appendChild(elthead);
 		for (let row of _results) {
 			var elrow = document.createElement('tr');
-			// console.log(_variables);
 			for (let onevar of _variables) {
 				console.log(onevar);
 				if (!onevar.endsWith('_noshow')) {
@@ -397,7 +363,7 @@ class App extends Component {
 				if (typeof(el.vars) !== "undefined") {
 					for (let onevar of el.vars) {
 						var tmptype = onevar.type;
-						if (tmptype === 'string' || tmptype === 'list' || tmptype == 'simplelist') {
+						if (tmptype === 'string' || tmptype === 'list' || tmptype === 'simplelist') {
 							var originalval = varmasker + onevar.name + varmasker;
 							var replaceval;
 							var replacevalhuman;
@@ -413,7 +379,6 @@ class App extends Component {
 									replacevalhuman = this.state.dynamicvals[el.id][onevar.name]['value'];
 								}
 							}
-							// console.log(onevar.name +'('+originalval+'): '+replaceval);
 							newsparql = newsparql.split(originalval).join(replaceval.split("'").join("\\'")); // better than .replace because it replaces all of the occurences
 							humanReadable = humanReadable.split(originalval).join(replacevalhuman); // better than .replace because it replaces all of the occurences
 						}
@@ -427,10 +392,8 @@ class App extends Component {
 				}
 
 				this.setState({ query: newsparql, queryTarget: el.fetchUrl, queryTargetShort: el.fetchUrlShort, queryHeaders: el.queryHeaders, queryHuman: humanReadable, estimatedRuntime: estimatedRuntime });
-				// console.log(humanReadable);
 				if(typeof(this.refs.sparqy) !== 'undefined') {
-					// console.log('sparqy found');
-					this.refs.sparqy.refs.cm.getCodeMirror().doc.setValue(newsparql); // .split("'").join("\\'")
+					this.refs.sparqy.refs.cm.getCodeMirror().doc.setValue(newsparql);
 				}
 				return true; // is needed to break the asynchronity - is it?
 			};
@@ -447,9 +410,6 @@ class App extends Component {
 					}
 					if (onevar.type === 'simplelist') {
 						var tmpoptions = onevar.listvalues;
-						/*for (let onevalue of onevar.listvalues) {
-							 tmpoptions.push({value: onevalue, label: onevalue});
-						}*/
 						// if is defined listlabels, we can add them also
 						
 						functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<Select
@@ -491,9 +451,8 @@ class App extends Component {
 			functionalQuestion.push(<button key={'submitquery_' + el.id} className="btn btn-success buttonSubmit" title="directly run this query" onClick={() => this.handleRun(el.id)}>&gt;</button>);
 
 			if (typeof(el.fullHTML) !== "undefined") {
-				// console.log('fully');
 				functionalQuestion = [];
-				functionalQuestion.push(<div dangerouslySetInnerHTML={{__html: el.question}} code={el.question} />);
+				functionalQuestion.push(<div key={el.id} dangerouslySetInnerHTML={{__html: el.question}} code={el.question} />);
 			}
 
 			let NEW_NODE  = {
@@ -527,11 +486,9 @@ class App extends Component {
 			.then((res) => res.json())
 			.then((json) => {
 				// we want to sort the results like this: exact match, startswith, endswith, contains
-				// console.log(json.results);
 				json.results.bindings.sort( (a,b) => {
 					// same strings
 					if (a.value.value === b.value.value) return 0;
-
 					// if everything else is sorted, we go after the alphabet
 					if (
 						(
@@ -549,23 +506,18 @@ class App extends Component {
 						if (a.value.value.toLowerCase() > b.value.value.toLowerCase()) return 1;
 						if (a.value.value.toLowerCase() < b.value.value.toLowerCase()) return- 1;
 					}
-
 					// full match a
 					if (a.value.value.toLowerCase() === searchString.toLowerCase()) return -1;
 					// full match b
 					if (b.value.value.toLowerCase() === searchString.toLowerCase()) return 1;
-
 					// left position a
 					if (a.value.value.toLowerCase().substring(0, searchString.length) === searchString.toLowerCase()) return -1;
 					// left position b
 					if (b.value.value.toLowerCase().substring(0, searchString.length) === searchString.toLowerCase()) return 1;
-
 					// right position a
 					if (a.value.value.toLowerCase().substring(a.length- searchString.length) === searchString.toLowerCase()) return -1;
 					// right position b
 					if (b.value.value.toLowerCase().substring(b.length- searchString.length) === searchString.toLowerCase()) return 1;
-
-
 					return 0;
 				});
 
@@ -621,85 +573,27 @@ class App extends Component {
 	displayResults (result, microtaken) {
 		if (result !== '') {
 			this.setState({ hasResults: true, showSpinner: false })
-			// console.log(result);
 			document.getElementById('results').appendChild(document.createTextNode('Time taken: ' + microtaken/1000 + ' s, result count: ' + result.results.bindings.length));
-			// links should link where they belong to or explain + link
 			if (result.results.bindings.length > 0) {
 				document.getElementById('results').appendChild(this.renderedTableFromJSON(result));
 			}
-			// works but we don't have a lode to explain over several thirdparty endpoints
-			// window.renderSparqlResultJsonAsTable(result, "results"); // this is a lodestar function
 		} else {
 			this.setState({ showSpinner: true });
 		}
 	}
 
   render() {
-	  
-	  const { searchString, searchFocusIndex, searchFoundCount } = this.state;
-	  
-	const customSearchMethod = ({ node, searchQuery }) => {
-		var found = searchQuery && JSON.stringify(node.title).toLowerCase().indexOf(searchQuery.toLowerCase()) > -1;
-      return found;
-	}
-
-    const selectPrevMatch = () =>
-      this.setState({
-        searchFocusIndex:
-          searchFocusIndex !== null
-            ? (searchFoundCount + searchFocusIndex - 1) % searchFoundCount
-            : searchFoundCount - 1,
-      });
-
-    const selectNextMatch = () =>
-      this.setState({
-        searchFocusIndex:
-          searchFocusIndex !== null
-            ? (searchFocusIndex + 1) % searchFoundCount
-            : 0,
-      });
-
-	  /*
-	  
-			  <button
-				type="button"
-				disabled={!searchFoundCount}
-				onClick={selectPrevMatch}
-			  >
-				&lt;
-			  </button>
-
-			  <button
-				type="submit"
-				disabled={!searchFoundCount}
-				onClick={selectNextMatch}
-			  >
-				&gt;
-			  </button>
-
-			  <span>
-				&nbsp;
-				{searchFoundCount > 0 ? searchFocusIndex + 1 : 0}
-				&nbsp;/&nbsp;
-				{searchFoundCount || 0}
-			  </span>
-
-	  */
-	  
-    return (
-	  
-      <div style={{ height: 700 }}>
-  <h3><strong>Bio</strong>-Query<span style={{ fontSize: "0.6em", position: 'relative', bottom: '0.6em', color: 'red', fontFamily: 'monospace' }} title="BETA-Version - Working prototype with limited functionality">β</span>: Federated template <strong>s</strong>earch <strong>o</strong>ver biological <strong>da</strong>tabases </h3>
+	const { searchString } = this.state;
+	return (
+		<div style={{ height: 700 }}>
+			<h3>
+				<strong>Bio</strong>-Query
+				<span style={{ fontSize: "0.6em", position: 'relative', bottom: '0.6em', color: 'red', fontFamily: 'monospace' }} title="BETA-Version - Working prototype with limited functionality">β</span>:
+				Federated template <strong>s</strong>earch <strong>o</strong>ver biological <strong>da</strong>tabases 
+			</h3>
 	  
 	  <div style = {{marginTop:"20px", marginBottom:"10px"}}>
-            
-
-
-            
-      </div>
-
-	  
-
+</div>
 		<Row>
 			<Col sm={this.state.showSparql? "7": "12"}>
 			<form
@@ -780,11 +674,11 @@ class App extends Component {
              </button>
             }
 
-			<button className="btn btn-success btnmenu" onClick={() => window.location.reload()}>
+			<button className="btn btn-success btnmenu" onClick={() => window.location.reload()}  rel="noopener noreferrer">
 				Reset / Reload
 			</button>
 
-			<a className="btn btn-light btnmenu" href="https://github.com/biosoda/bioquery" target="_blank">
+			<a className="btn btn-light btnmenu" href="https://github.com/biosoda/bioquery" target="_blank"  rel="noopener noreferrer">
 				About
 			</a>
 
@@ -831,7 +725,7 @@ class App extends Component {
 					<div>Next page (OFFSET - if available): <span className="badge btn-primary">PREV</span> <span className="badge btn-primary">NEXT</span></div>
 				</div>
 				<div id="askedQuery" style={{padding: '1em'}}><span>Your Question: </span><span id="question">{this.state.queryHuman}</span></div>
-				<div id="fetchTargetDiv" style={{padding: '1em'}}><span>Query will be sent to: </span><span id="fetchTarget"><a href={this.state.queryTargetShort} target="_blank">{this.state.queryTargetShort}</a><ExtraTarget superState={this.state} /></span></div>
+				<div id="fetchTargetDiv" style={{padding: '1em'}}><span>Query will be sent to: </span><span id="fetchTarget"><a href={this.state.queryTargetShort} target="_blank" rel="noopener noreferrer">{this.state.queryTargetShort}</a><ExtraTarget superState={this.state} /></span></div>
 				<div id="estimatedRuntume" style={{padding: '1em'}}><span>Estimated Runtime: </span><span id="estimatedRuntime" dangerouslySetInnerHTML={ {__html: this.state.estimatedRuntime} }></span></div>
 				<div id="results" ref="results"></div>
 			</Col>
