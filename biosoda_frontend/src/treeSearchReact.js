@@ -46,6 +46,7 @@ export class TreeSearch  extends Component {
 					searchString={this.props.searchString}
 					fullExpansion={this.props.fullExpansion}
 					lastActiveId={this.props.lastActiveId}
+					useInnerLimits={this.props.useInnerLimits}
 				/>
 			</div>
 		);
@@ -63,6 +64,7 @@ export class NestedTree extends Component {
 				searchString={this.props.searchString}
 				fullExpansion={this.props.fullExpansion}
 				lastActiveId={this.props.lastActiveId}
+				useInnerLimits={this.props.useInnerLimits}
 			/>
 		});
 		return (
@@ -109,8 +111,17 @@ export class NestedNodes extends Component {
 		// console.log(child.title + " --- " + actualclassnames);
 		if (typeof(child.children) === 'undefined') {
 			// this.state.searchString
+			// console.log(child);
+			// console.log(this.props);
+			if (typeof(child.estimatedSeconds) != 'undefined' && this.props.useInnerLimits === true) {
+				var btnestsec = <button className="btn btn-warning btn-sm" title="estimated runtime of original query" style={{ fontSize: "0.666em"}} disabled>{(child.estimatedSeconds*2).toString().toHHMMSS()}</button>
+			} else if (typeof(child.estimatedSeconds) != 'undefined') {
+				var btnestsec = <button className="btn btn-secondary btn-sm" title="estimated runtime of original query with limited results" style={{ fontSize: "0.666em"}} disabled>{(child.estimatedSeconds*2).toString().toHHMMSS()}</button>
+			} else {
+				var btnestsec = '';
+			}
 			return(
-				<li key={child.id} className={actualclassnames}><div className="title">{child.title}</div></li>
+				<li key={child.id} className={actualclassnames}><div className="title">{child.title} {btnestsec}</div></li>
 			);
 		} else {
 			return (
@@ -122,6 +133,7 @@ export class NestedNodes extends Component {
 								searchString={this.props.searchString}
 								fullExpansion={this.props.fullExpansion}
 								lastActiveId={this.props.lastActiveId}
+								useInnerLimits={this.props.useInnerLimits}
 							/>
 						})}
 					</ul>

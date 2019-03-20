@@ -56,6 +56,7 @@ class SparqlInputField extends Component {
 					onChange={this.props.updateCode.bind(this)}
 					onKeyPress={this.props.updateCode.bind(this)}
 					options={options}
+					defaultValue={this.props.defaultValue}
 				/>
 				</div>
 				<button onClick={this.props.handleSubmit} className="btn btn-success"> &gt; run this query </button>
@@ -75,6 +76,44 @@ String.prototype.toHHMMSS = function () {
 		if (seconds < 10) {seconds = "0"+seconds;}
 		return hours+':'+minutes+':'+seconds;
 	}
+
+class ExtraTarget extends Component {
+	constructor(props){
+		super(props);
+		this.state = { time: 0 };
+		this.result = null;
+	}
+	componentDidMount() {
+		this.interval = setInterval(() => this.setState({ time: Date.now() }), 10000);
+	}
+	componentWillUnmount() {
+		clearInterval(this.interval);
+	}
+	isAvailable = (targetURL) => {
+		var timeout = new Promise((resolve, reject) => {
+			setTimeout(reject, 1000, 'Request timed out');
+		});
+		var request = fetch(targetURL);
+		var result = 'server state unknown';
+		Promise
+			.race([timeout, request])
+			.then(response => {this.result = 'server is online';})
+			.catch(error => {this.result = 'server is offline or slow'})
+		return this.result;
+	}
+	render() {
+		var targetExplanation = 'the query will be answered directly by the source db';
+		if (this.props.superState.queryTargetShort === 'http://biosoda.expasy.org:8890/sparql') {
+			targetExplanation = 'the query will be sent to the federation server to fullfill the federated service calls';
+		}
+
+		var isAvNow = this.isAvailable(this.props.superState.queryTargetShort);
+
+		return(
+			<span> ({ targetExplanation }) - {isAvNow} - last check: { new Date(Date.now()).toLocaleString() }</span>
+		)
+	}
+}
 
 class Progressbar extends Component {
 	constructor(props){
@@ -183,8 +222,15 @@ class App extends Component {
 
 	handleSubmit() {
 		var query = this.state.query;
-		var queryUrl = this.state.queryTarget.replace(varmasker + 'query' + varmasker, encodeURIComponent(biosodadata.prefixes) + '\n' +  encodeURIComponent(query))
+		var queryUrl = this.state.queryTarget.replace(varmasker + 'query' + varmasker, encodeURIComponent(query)) // encodeURIComponent(biosodadata.prefixes)
 			.replace(varmasker + 'offset' + varmasker, this.state.lookupOffset)
+			.split(' ').join('+')
+			// these splinters crash somehow on some endpoints:
+			//.split('%20').join('+') // blank
+			//.split('%0A').join('+') // new line
+			//.split('%0D').join('+') // carriage return
+			//.split('%09').join('+') // tab
+			//.trim('+')
 		if (this.state.useInnerLimits === true) {
 			queryUrl = queryUrl.replace(varmasker + '&limit=limit' + varmasker, '&limit=' + this.state.lookupLimit)
 		} else {
@@ -195,16 +241,16 @@ class App extends Component {
 		// empty results from last fetch?
 		// show spinner to the user
 		this.displayResults('');
-		window.renderSparqlResultJsonAsTable(null, "results");
+		// window.renderSparqlResultJsonAsTable(null, "results");
 		this.node_logger('SPARQL', query, 'before', 0);
 		var microstart = Date.now();
 		return fetch(queryUrl, {headers: queryHeaders})
 		.then(res => res.json())
 		.then(
 			(result) => {
-				this.node_logger('SPARQL', query, 'after.resultcount: ' + result.results.bindings.length, 0);
 				var microend = Date.now();
 				var microtaken = microend - microstart;
+				this.node_logger('SPARQL', query, 'after.resultcount: ' + result.results.bindings.length, microtaken);
 				this.displayResults(result, microtaken);
 			},
 			(error) => {
@@ -284,6 +330,7 @@ class App extends Component {
 		var _variables = json.head.vars;
 		var elthead = document.createElement('thead');
 		for (let onevar of _variables) {
+			if (onevar.endsWith('_noshow')) break;
 			var elth = document.createElement('th');
 			elth.appendChild(document.createTextNode(onevar));
 			elthead.appendChild(elth);
@@ -291,22 +338,25 @@ class App extends Component {
 		eltable.appendChild(elthead);
 		for (let row of _results) {
 			var elrow = document.createElement('tr');
+			// console.log(_variables);
 			for (let onevar of _variables) {
-				var eltd = document.createElement('td');
-				// row[onevar].type holds the type of the element uri, int, bool, ...
-				if (typeof(row[onevar]) !== "undefined" && row[onevar].type === 'uri') {
-					var link = document.createElement('a');
-					var text = document.createTextNode(row[onevar].value);
-					link.appendChild(text);
-					link.title = 'linked resource';
-					link.href = row[onevar].value;
-					link.target = '_blank';
-					eltd.appendChild(link);
-				} else {
-					eltd.appendChild(document.createTextNode(row[onevar].value));
+				console.log(onevar);
+				if (!onevar.endsWith('_noshow')) {
+					var eltd = document.createElement('td');
+					// row[onevar].type holds the type of the element uri, int, bool, ...
+					if (typeof(row[onevar]) !== "undefined" && row[onevar].type === 'uri') {
+						var link = document.createElement('a');
+						var text = document.createTextNode(row[onevar].value);
+						link.appendChild(text);
+						link.title = 'linked resource';
+						link.href = row[onevar].value;
+						link.target = '_blank';
+						eltd.appendChild(link);
+					} else {
+						eltd.appendChild(document.createTextNode(row[onevar].value));
+					}
+					elrow.appendChild(eltd);
 				}
-				
-				elrow.appendChild(eltd);
 			}
 			eltable.append(elrow);
 		}
@@ -338,7 +388,7 @@ class App extends Component {
 			this['updateQuery_'+el.id] = (event) => {
 				var newsparql = el.SPARQL;
 				var humanReadable = el.question;
-				var estimatedRuntime = el.estimatedseconds;
+				var estimatedRuntime = (el.estimatedseconds * 2).toString();
 				if (typeof(estimatedRuntime) == 'undefined') {
 					estimatedRuntime = 'unknown';
 				} else {
@@ -439,9 +489,6 @@ class App extends Component {
 
 			functionalQuestion.push(<button key={'showSPARQL_' + el.id} className="btn btn-primary buttonInfo" title="show query in SPARQL query editor" onClick={() => this.handleShow(el.id)}>i</button>);
 			functionalQuestion.push(<button key={'submitquery_' + el.id} className="btn btn-success buttonSubmit" title="directly run this query" onClick={() => this.handleRun(el.id)}>&gt;</button>);
-			if (typeof(el.estimatedseconds) != 'undefined') {
-				functionalQuestion.push(<button className="btn btn-warning btn-sm" title="estimated runtime" style={{ fontSize: "0.666em"}} disabled>{el.estimatedseconds.toHHMMSS()}</button>);
-			}
 
 			if (typeof(el.fullHTML) !== "undefined") {
 				// console.log('fully');
@@ -452,6 +499,7 @@ class App extends Component {
 			let NEW_NODE  = {
 				id: el.id,
 				title: functionalQuestion,
+				estimatedSeconds: el.estimatedseconds
 			};
 
 			let newTree = addNodeUnderParent({
@@ -471,7 +519,9 @@ class App extends Component {
 		var query = biosodadata.datasources[datasource].fetchQuery.split(varmasker + 'searchString' + varmasker).join(searchString.toLowerCase())
 		var queryURL = biosodadata.datasources[datasource].fetchUrl.replace(varmasker + 'query' + varmasker, encodeURIComponent(query))
 			.replace(varmasker + '&limit=limit' + varmasker, '&limit=' + this.state.lookupLimit)
-			.replace(varmasker + 'offset' + varmasker, this.state.lookupOffset);
+			.replace(varmasker + 'offset' + varmasker, this.state.lookupOffset)
+			.replace(' ', '+');
+
 		var queryHeaders = biosodadata.datasources[datasource].queryHeaders;
 		return fetch(queryURL, {headers: queryHeaders})
 			.then((res) => res.json())
@@ -704,12 +754,14 @@ class App extends Component {
                 style={{ backgroundColor: "#00FFFF"}}
                 onClick={() => {
 					this.setState({ useInnerLimits: false});
-					this.refs.sparqy.refs.cm.getCodeMirror().doc.setValue('');
+					if(typeof(this.refs.sparqy) !== 'undefined') {
+						this.refs.sparqy.refs.cm.getCodeMirror().doc.setValue('');
+					}
 				}
 				}
 				title="if you use inner limits, you can reduce the time to load the results. you probably won't get all of the rows but you can see if your query works as expected"
               >
-              Inner limits are on
+              Limited results are on
             </button>
                :
                <button
@@ -717,12 +769,14 @@ class App extends Component {
                  style={{backgroundColor: "#00FFFF"}}
                  onClick={() => {
 					this.setState({ useInnerLimits: true });
-					this.refs.sparqy.refs.cm.getCodeMirror().doc.setValue('')
+					if(typeof(this.refs.sparqy) !== 'undefined') {
+						this.refs.sparqy.refs.cm.getCodeMirror().doc.setValue('')
+					}
 				}
 				}
 				 title="if you don't use inner limits, you can run into a timeout if your query asks for too much data"
                >
-              Inner limits are off
+              Limited results are off
              </button>
             }
 
@@ -730,6 +784,11 @@ class App extends Component {
 				Reset / Reload
 			</button>
 
+			<a className="btn btn-light btnmenu" href="https://github.com/biosoda/bioquery" target="_blank">
+				About
+			</a>
+
+			
 			</form>
 				<div style={{ height: '700px', overflow: 'hidden', padding: '1em', overflowY: 'auto'}}>
 				<TreeSearch
@@ -737,6 +796,7 @@ class App extends Component {
 					searchString={this.state.searchString}
 					fullExpansion={this.state.expanded}
 					lastActiveId={this.state.lastActiveId}
+					useInnerLimits={this.state.useInnerLimits}
 				/>
 				
 								</div>
@@ -749,6 +809,7 @@ class App extends Component {
 						handleSubmit={this.handleSubmit}
 						superState={this.state}
 						updateCode={this.updateCode.bind(this)}
+						defaultValue="" // doesn't work because it's not like HTML: Enter SPARQL query here or select one of the templates on the left
 					/>
 				</Col>
 				: null }
@@ -762,6 +823,7 @@ class App extends Component {
 				</Col>
 			</Row>
 		: null }
+
         <Row id="resultscol">
 			<Col>
 				<div id="technical" style={{display: 'none'}}>
@@ -769,7 +831,7 @@ class App extends Component {
 					<div>Next page (OFFSET - if available): <span className="badge btn-primary">PREV</span> <span className="badge btn-primary">NEXT</span></div>
 				</div>
 				<div id="askedQuery" style={{padding: '1em'}}><span>Your Question: </span><span id="question">{this.state.queryHuman}</span></div>
-				<div id="fetchTargetDiv" style={{padding: '1em'}}><span>Query will be sent to: </span><span id="fetchTarget"><a href={this.state.queryTargetShort} target="_blank">{this.state.queryTargetShort}</a></span></div>
+				<div id="fetchTargetDiv" style={{padding: '1em'}}><span>Query will be sent to: </span><span id="fetchTarget"><a href={this.state.queryTargetShort} target="_blank">{this.state.queryTargetShort}</a><ExtraTarget superState={this.state} /></span></div>
 				<div id="estimatedRuntume" style={{padding: '1em'}}><span>Estimated Runtime: </span><span id="estimatedRuntime" dangerouslySetInnerHTML={ {__html: this.state.estimatedRuntime} }></span></div>
 				<div id="results" ref="results"></div>
 			</Col>

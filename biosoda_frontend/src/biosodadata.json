@@ -62,6 +62,11 @@
 				"parentId": "federatedOmaBgeeUniprot",
 				"title": "Retrieve proteins"
 			},
+			{
+				"id": "federatedOmaBgeeUniprot_disease",
+				"parentId": "federatedOmaBgeeUniprot",
+				"title": "Homologous Genes + Gene Expression + Disease Association"
+			},
 		{
 			"id": "bgee",
 			"parentId": null,
@@ -114,8 +119,8 @@
 			"id": "federatedOmaBgeeUniprotQ1",
 			"runcheck": "2019-01-23, -s, no results but errors - hangs sometimes, probably due to our bgeelight server which is slow - the queries themself work ok if queried individually",
 			"parentIds": ["federatedOmaBgeeUniprot_genes"],
-			"question": "The orthologs of a gene that is expressed in the $$fruitfly$$’s $$brain$$ and the uniprot annotations of these orthologs.",
-			"estimatedseconds": "360",
+			"question": "The orthologs of a gene that is expressed in the $$fruitfly$$’s $$brain$$ and the UniProt annotations of these orthologs.",
+			"estimatedseconds": "60",
 			"vars": [
 				{
 					"name": "brain",
@@ -132,7 +137,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nSELECT DISTINCT ?anat_label ?GO_CLASS ?GO_LABEL {\n\tSERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight> {\n\t\tSELECT DISTINCT ?gene ?id {\n\t\t\t?gene genex:isExpressedIn ?anat .\n\t\t\t?anat rdfs:label '$$brain$$'^^xsd:string .\n\t\t\t?gene orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t?gene dcterms:identifier ?id .\n\t\t\t?taxon up:commonName '$$fruitfly$$' .\n\t\t}\n\t\t$$innerlimit$$\n\t}\n\tSERVICE <https://sparql.omabrowser.org/lode/sparql> {\n\t\t?cluster a orth:OrthologsCluster .\n\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t?node2 orth:hasHomologousMember* ?protein2 .\n\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t?protein1 dcterms:identifier ?id .\n\t\t?protein2 rdfs:seeAlso ?OMA_LINK .\n\t\t?protein2 lscr:xrefUniprot ?uniprot .\n\t\tFILTER ( ?node1 != ?node2 )\n\t}\n\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t?uniprot up:annotation ?annotation .\n\t\t?annotation rdfs:comment ?annotation_text .\n\t}\n}",
+			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nSELECT distinct ?OMA_LINK ?uniprot ?annotation_text ?gene_id ?gene_noshow WHERE {\n\tSERVICE <http://biosoda.cloudlab.zhaw.ch:8080/rdf4j-server/repositories/bgeelight> {\n\t\tSELECT DISTINCT ?gene_noshow ?gene_id {\n\t\t\t?gene_noshow genex:isExpressedIn ?anat .\n\t\t\t?anat rdfs:label \"$$brain$$\"^^xsd:string .\n\t\t\t?gene_noshow orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t?gene_noshow dcterms:identifier ?gene_id .\n\t\t\t?taxon up:commonName \"$$fruitfly$$\" .\n\t\t}\n\t\t$$innerlimit$$\n\t}\n\n\tSERVICE <https://sparql.omabrowser.org/lode/sparql> {\n\t\t?cluster a orth:OrthologsCluster .\n\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t?node2 orth:hasHomologousMember* ?protein2 .\n\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t?protein1 dcterms:identifier ?gene_id .\n\t\t?protein2 rdfs:seeAlso ?OMA_LINK .\n\t\t?protein2 lscr:xrefUniprot ?uniprot .\n\t\tfilter(?node1 != ?node2)}\n\n\tSERVICE <http://sparql.uniprot.org/sparql>{\n\t\t?uniprot up:annotation ?annotation .\n\t\t?annotation rdfs:comment ?annotation_text .\n\t}\n}",
 			"fetchUrl": "http://biosoda.expasy.org:8890/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "http://biosoda.expasy.org:8890/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -141,7 +146,7 @@
 			"id": "federatedOmaBgeeUniprotQ2",
 			"runcheck": "2019-01-23, 7.666s, 79results",
 			"parentIds": ["federatedOmaBgeeUniprot_genes"],
-			"question": "Which are the genes in $$primates$$ orthologous to a gene that is expressed in the $$fruitfly$$’s $$brain$$ and the uniprot annotations of the genes.",
+			"question": "Which are the genes in $$primates$$ orthologous to a gene that is expressed in the $$fruitfly$$’s $$brain$$ and the UniProt annotations of the genes.",
 			"estimatedseconds": "6",
 			"vars": [
 				{
@@ -175,8 +180,8 @@
 			"id": "federatedOmaBgeeUniprotQ3",
 			"runcheck": "2019-01-23, 39.381s, 32results",
 			"parentIds": ["federatedOmaBgeeUniprot_proteins"],
-			"question": "Which are the proteins in $$human$$ with a disease annotation that are orthologous to a gene expressed in the $$rat$$’s brain.",
-			"estimatedseconds": "5",
+			"question": "Which are the genes in $$human$$ associated to a disease that are orthologous to a gene expressed in the $$rat$$’s brain?",
+			"estimatedseconds": "6",
 			"vars": [
 				{
 					"name": "rat",
@@ -202,7 +207,8 @@
 			"id": "federatedOmaBgeeUniprotQ4",
 			"runcheck": "2019-01-23, 4.519s, 15results",
 			"parentIds": ["federatedOmaBgeeUniprot_proteins"],
-			"question": "What are the proteins associated with '$$glioblastoma$$' and the orthologs expressed in the rat’s $$brain$$. ",
+			"estimatedseconds": "9",
+			"question": "Which are the proteins associated with \"$$glioblastoma$$\" and the orthologs expressed in the rat’s $$brain$$?",
 			"vars": [
 				{
 					"name": "glioblastoma",
@@ -224,10 +230,50 @@
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
+			"id": "federatedOmaBgeeUniprotQ5",
+			"runcheck": "2019-03-19, 20.78s, 63 results",
+			"parentIds": ["federatedOmaBgeeUniprot_disease"],
+			"estimatedseconds": "27",
+			"question": "What are the $$human$$ genes associated with $$cancer$$ and their orthologs expressed in the $$rat$$’s $$brain$$?",
+			"vars": [
+				{
+					"name": "human",
+					"default": "Homo sapiens",
+					"type": "list",
+					"datasource": "species",
+					"flavour": "autocomplete"
+				},
+				{
+					"name": "cancer",
+					"default": "cancer",
+					"type": "string",
+					"flavour": "string"
+				},
+				{
+					"name": "rat",
+					"default": "Rattus norvegicus",
+					"type": "list",
+					"datasource": "species",
+					"flavour": "autocomplete"
+				},
+				{
+					"name": "brain",
+					"default": "brain",
+					"type": "list",
+					"datasource": "anatomicentities",
+					"flavour": "autocomplete"
+				}
+			],
+			"SPARQL": "PREFIX up:<http://purl.uniprot.org/core/>\nPREFIX taxon:<http://purl.uniprot.org/taxonomy/>\nPREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orth:<http://purl.org/net/orth#>\nPREFIX dcterms:<http://purl.org/dc/terms/>\nPREFIX obo:<http://purl.obolibrary.org/obo/>\nPREFIX lscr:<http://purl.org/lscr#>\nPREFIX genex:<http://purl.org/genex#>\nPREFIX sio: <http://semanticscience.org/resource/>\n\nSELECT DISTINCT ?protein1 ?orthologous_protein2 ?id WHERE {\n\tSELECT * {\n\t\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t\tSELECT ?protein1 WHERE {\n\t\t\t?protein1 a up:Protein;\n\t\t\t\tup:organism/up:scientificName '$$human$$' ;\n\t\t\t\tup:annotation ?annotation .\n\t\t\t\t?annotation rdfs:comment ?annotation_text.\n\t\t\t\t?annotation a up:Disease_Annotation .\n\t\t\t\tFILTER CONTAINS (?annotation_text, \"$$cancer$$\")\n\t\t\t}\n\t\t}\n\n\t\tSERVICE <https://sparql.omabrowser.org/sparql> {\n\t\t\tSELECT ?orthologous_protein2 ?protein1 ?id WHERE {\n\t\t\t\t?protein_OMA a orth:Protein .\n\t\t\t\t?orthologous_protein2 a orth:Protein .\n\t\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t\t?node2 orth:hasHomologousMember* ?protein_OMA .\n\t\t\t\t?node1 orth:hasHomologousMember* ?orthologous_protein2 \n\t\t\t\t.?orthologous_protein2 orth:organism/obo:RO_0002162/up:scientificName '$$rat$$' .\n\t\t\t\t?orthologous_protein2 sio:SIO_010079/lscr:xrefEnsemblGene ?id .\n\t\t\t\t?protein_OMA lscr:xrefUniprot ?protein1 .\n\t\t\t\tFILTER(?node1 != ?node2)\n\t\t\t}\n\t\t}\n\n\t\tSERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight> {\n\t\t\t?gene genex:isExpressedIn ?anatEntity .\n\t\t\t?anatEntity rdfs:label '$$brain$$' .\n\t\t\t?gene orth:organism ?org . \n\t\t\t?org obo:RO_0002162 taxon:10116 .\n\t\t\t?gene lscr:xrefEnsemblGene ?id .\n\t\t}\n\t}\n}",
+			"fetchUrl": "http://biosoda.expasy.org:8890/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "http://biosoda.expasy.org:8890/sparql",
+			"queryHeaders": {"Accept": "application/sparql-results+json"}
+		},
+		{
 			"id": "federatedBgeeUniprotQ1",
 			"runcheck": "2019-01-23, 20.628s, 100results",
 			"parentIds": ["federatedBgeeUniprot_anatomicEntity"],
-			"question": "Anatomic entities where the $$ins$$ $$zebrafish$$ gene is expressed and the ins gene GO annotations.",
+			"question": "Anatomic entities where the $$ins$$ $$zebrafish$$ gene is expressed and its gene GO annotations.",
 			"estimatedseconds": "120",
 			"vars": [
 				{
@@ -255,7 +301,7 @@
 			"id": "federatedBgeeUniprotQ2",
 			"runcheck": "2019-01-23, 13.548s, 57results",
 			"parentIds": ["federatedBgeeUniprot_genes"],
-			"question": "Genes expressed in the $$human$$'s $$pancreas$$ and their annotation in uniprot.",
+			"question": "Genes expressed in the $$human$$'s $$pancreas$$ and their annotations in UniProt.",
 			"estimatedseconds": "60",
 			"vars": [
 				{
@@ -273,7 +319,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nSELECT DISTINCT ?geneEns ?uniprot ?annotation_text {\n\tSERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight> {\n\t\tSELECT ?geneEns {\n\t\t\t?geneB genex:isExpressedIn ?anat ;\n\t\t\t\tlscr:xrefEnsemblGene ?geneEns .\n\t\t\t?anat rdfs:label '$$pancreas$$'^^xsd:string .\n\t\t\t?geneB orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon2 .\n\t\t\t?taxon2 up:commonName 'Human' .\n\t\t}\n\t\t$$innerlimit$$\n\t}\n\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t?uniprot rdfs:seeAlso / up:transcribedFrom ?geneEns .\n\t\t?uniprot up:annotation ?annotation .\n\t\t?annotation rdfs:comment ?annotation_text .\n\t}\n}",
+			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nSELECT DISTINCT ?geneEns ?uniprot ?annotation_text {\n\tSERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight> {\n\t\tSELECT ?geneEns {\n\t\t\t?geneB genex:isExpressedIn ?anat ;\n\t\t\t\tlscr:xrefEnsemblGene ?geneEns .\n\t\t\t?anat rdfs:label '$$pancreas$$'^^xsd:string .\n\t\t\t?geneB orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon2 .\n\t\t\t?taxon2 up:commonName '$$human$$' .\n\t\t}\n\t\t$$innerlimit$$\n\t}\n\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t?uniprot rdfs:seeAlso / up:transcribedFrom ?geneEns .\n\t\t?uniprot up:annotation ?annotation .\n\t\t?annotation rdfs:comment ?annotation_text .\n\t}\n}",
 			"fetchUrl": "http://biosoda.expasy.org:8890/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "http://biosoda.expasy.org:8890/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -282,7 +328,8 @@
 			"id": "federatedBgeeUniprotQ3",
 			"runcheck": "2019-01-23, 18.16s, 29results",
 			"parentIds": ["federatedBgeeUniprot_genes"],
-			"question": "Genes expressed in the $$human$$'s $$brain$$ during the $$infantstage$$ stage and their uniprot disease annotation",
+			"estimatedseconds": "10",
+			"question": "Genes expressed in the $$human$$'s $$brain$$ during the $$infantstage$$ and their UniProt disease annotations",
 			"vars": [
 				{
 					"name": "human",
@@ -315,8 +362,8 @@
 			"id": "federatedOmaUniprotQ1",
 			"runcheck": "2019-01-23, 3.469s, 30results",
 			"parentIds": ["federatedOmaUniprot_proteins"],
-			"question": "Proteins in OMA that are encoded by the $$INS$$ gene and their mnemonics and evidence types from UniProt database.",
-			"estimatedseconds": "5",
+			"question": "Proteins in OMA that are encoded by the $$INS$$ gene without considering synonyms and their species identifier and evidence types from UniProt database.",
+			"estimatedseconds": "20",
 			"vars": [
 				{
 					"name": "INS",
@@ -335,6 +382,7 @@
 			"id": "federatedOmaUniprotQ2",
 			"runcheck": "2019-01-23, 0.522s, 3results",
 			"parentIds": ["federatedOmaUniprot_proteins"],
+			"estimatedseconds": "4",
 			"question": "$$mouse$$'s proteins encoded by genes that are orthologous to $$rabbit$$'s $$HBBY$$ gene and their cross reference links to Uniprot",
 			"vars": [
 				{
@@ -368,7 +416,8 @@
 			"id": "federatedOmaUniprotQ3",
 			"runcheck": "2019-01-23, 0.822s, 1result",
 			"parentIds": ["federatedOmaUniprot_proteins"],
-			"question": "$$rattusnorvegicus$$' proteins that are paralogous to its $$Tp53$$ protein and their Uniprot function annotations.",
+			"estimatedseconds": "4",
+			"question": "$$rattusnorvegicus$$' proteins encoded by genes that are paralogous to its $$Tp53$$ gene and their Uniprot function annotations.",
 			"vars": [
 				{
 					"name": "Tp53",
@@ -394,7 +443,8 @@
 			"id": "federatedOmaBgeeQ1",
 			"runcheck": "2019-01-23, 0.403s, 2results",
 			"parentIds": ["federatedOmaBgee_proteins"],
-			"question": "Which are the $$mouse$$'s proteins which are expressed in the $$liver$$ and are orthologous to $$human$$'s $$INS$$ protein?",
+			"estimatedseconds": "10",
+			"question": "Which are the $$mouse$$'s proteins encoded by genes which are expressed in the $$liver$$ and are orthologous to $$human$$'s $$INS$$ gene?",
 			"vars": [
 				{
 					"name": "mouse",
@@ -452,7 +502,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nSELECT DISTINCT ?gene ?OMA_LINK WHERE {\n\tSERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight> {\n\t\tSELECT DISTINCT ?gene ?id {\n\t\t\t?gene genex:isExpressedIn ?anat .\n\t\t\t?anat rdfs:label '$$brain$$'^^xsd:string .\n\t\t\t?gene orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t?gene dcterms:identifier ?id .\n\t\t\t?taxon up:commonName '$$fruitfly$$' .\n\t\t}\n\t\t$$innerlimit$$\n\t}\n\tSERVICE <https://sparql.omabrowser.org/lode/sparql> {\n\t\t?cluster a orth:OrthologsCluster .\n\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t?node2 orth:hasHomologousMember* ?protein2 .\n\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t?protein1 dcterms:identifier ?id .\n\t\t?protein2 rdfs:seeAlso ?OMA_LINK .\n\t\tFILTER ( ?node1 != ?node2 )\n\t}\n}\n$$innerlimit$$",
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nSELECT DISTINCT ?id ?gene_noshow ?OMA_LINK WHERE {\n\tSERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight> {\n\t\tSELECT DISTINCT ?gene_noshow ?id {\n\t\t\t?gene_noshow genex:isExpressedIn ?anat .\n\t\t\t?anat rdfs:label '$$brain$$'^^xsd:string .\n\t\t\t?gene_noshow orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t?gene_noshow dcterms:identifier ?id .\n\t\t\t?taxon up:commonName '$$fruitfly$$' .\n\t\t}\n\t\t$$innerlimit$$\n\t}\n\tSERVICE <https://sparql.omabrowser.org/lode/sparql> {\n\t\t?cluster a orth:OrthologsCluster .\n\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t?node2 orth:hasHomologousMember* ?protein2 .\n\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t?protein1 dcterms:identifier ?id .\n\t\t?protein2 rdfs:seeAlso ?OMA_LINK .\n\t\tFILTER ( ?node1 != ?node2 )\n\t}\n}\n$$innerlimit$$",
 			"fetchUrl": "http://biosoda.expasy.org:8890/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "http://biosoda.expasy.org:8890/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -461,6 +511,7 @@
 			"id": "federatedOmaBgeeQ3",
 			"runcheck": "2019-01-23, 3.367s, 10results",
 			"parentIds": ["federatedOmaBgee_genes"],
+			"estimatedseconds": "6",
 			"question": "Which are the genes in $$primates$$ orthologous to a gene that is expressed in the $$fruitfly$$’s $$brain$$?",
 			"vars": [
 				{
@@ -485,7 +536,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nSELECT DISTINCT ?gene ?OMA_LINK WHERE {\n\tSERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight> {\n\t\tSELECT DISTINCT ?gene ?id {\n\t\t\t?gene genex:isExpressedIn ?anat .\n\t\t\t?anat rdfs:label '$$brain$$'^^xsd:string .\n\t\t\t?gene orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t?gene dcterms:identifier ?id .\n\t\t\t?taxon up:commonName '$$fruitfly$$' .\n\t\t} $$innerlimit$$\n\t}\n\tSERVICE <https://sparql.omabrowser.org/sparql> {\n\t\t?protein2 a orth:Protein .\n\t\t?protein1 a orth:Protein .\n\t\t?clusterPrimates a orth:OrthologsCluster .\n\t\t?cluster a orth:OrthologsCluster .\n\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t?node2 orth:hasHomologousMember* ?clusterPrimates .\n\t\t?clusterPrimates orth:hasHomologousMember* ?protein2 .\n\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t?protein1 dcterms:identifier ?id .\n\t\t?protein2 rdfs:seeAlso ?OMA_LINK .\n\t\t?clusterPrimates orth:hasTaxonomicRange ?taxRange .\n\t\t?taxRange orth:taxRange ?taxLevel .\n\t\tVALUES ?taxLevel { '$$primates$$' }\n\t\tFILTER ( ?node1 != ?node2 )\n\t}\n}\n$$innerlimit$$",
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nSELECT DISTINCT ?id ?gene_noshow ?OMA_LINK WHERE {\n\tSERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight> {\n\t\tSELECT DISTINCT ?gene_noshow ?id {\n\t\t\t?gene_noshow genex:isExpressedIn ?anat .\n\t\t\t?anat rdfs:label '$$brain$$'^^xsd:string .\n\t\t\t?gene_noshow orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t?gene_noshow dcterms:identifier ?id .\n\t\t\t?taxon up:commonName '$$fruitfly$$' .\n\t\t} $$innerlimit$$\n\t}\n\tSERVICE <https://sparql.omabrowser.org/sparql> {\n\t\t?protein2 a orth:Protein .\n\t\t?protein1 a orth:Protein .\n\t\t?clusterPrimates a orth:OrthologsCluster .\n\t\t?cluster a orth:OrthologsCluster .\n\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t?node2 orth:hasHomologousMember* ?clusterPrimates .\n\t\t?clusterPrimates orth:hasHomologousMember* ?protein2 .\n\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t?protein1 dcterms:identifier ?id .\n\t\t?protein2 rdfs:seeAlso ?OMA_LINK .\n\t\t?clusterPrimates orth:hasTaxonomicRange ?taxRange .\n\t\t?taxRange orth:taxRange ?taxLevel .\n\t\tVALUES ?taxLevel { '$$primates$$' }\n\t\tFILTER ( ?node1 != ?node2 )\n\t}\n}\n$$innerlimit$$",
 			"fetchUrl": "http://biosoda.expasy.org:8890/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "http://biosoda.expasy.org:8890/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -494,6 +545,7 @@
 			"id": "bgeeQ1",
 			"runcheck": "2019-01-23, 0.183s, 10results",
 			"parentIds": ["bgee_anatomicEntity"],
+			"estimatedseconds": "1",
 			"question": "$$scientificname$$ of species in bgee with their uniprot taxon",
 			"vars": [
 				{
@@ -503,12 +555,12 @@
 					"type": "simplelist",
 					"listvalues": [
 						{"value": "up:scientificName", "label": "Scientific name"},
-						{"value": "up:otherName", "label": "Other name"}
+						{"value": "up:commonName", "label": "Common name"}
 						
 					]
 				}
 			],
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT * {\n\t?species a up:Taxon .\n\t?species $$scientificname$$ ?name .\n\t?species up:rank up:Species .\n}\n$$innerlimit$$",
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT * {\n\t?species a up:Taxon .\n\t?species $$scientificname$$ ?name .\n\t?species up:rank up:Species .\n}",
 			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "http://biosoda.expasy.org:8890/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -517,6 +569,7 @@
 			"id": "bgeeQ2",
 			"runcheck": "2019-01-23, 1.037s, 10results",
 			"parentIds": ["bgee_genes"],
+			"estimatedseconds": "1",
 			"question": "Genes with $$lung$$ in the description",
 			"vars": [
 				{
@@ -534,7 +587,8 @@
 			"id": "bgeeQ3",
 			"runcheck": "2019-01-23, 10.091s, 10results",
 			"parentIds": ["bgee_genes"],
-			"question": "Which species the $$Mtco1$$ gene is present?",
+			"estimatedseconds": "13",
+			"question": "Which species the $$Mtco1$$ gene is present (without considering synonyms)?",
 			"vars": [
 				{
 					"name": "Mtco1",
@@ -553,6 +607,7 @@
 			"id": "bgeeQ4",
 			"runcheck": "2019-01-23, 7.188s, 10results",
 			"parentIds": ["bgee_genes"],
+			"estimatedseconds": "3",
 			"question": "List the labels and identifiers of $$fruitfly$$ genes in bgee",
 			"vars": [
 				{
@@ -570,8 +625,9 @@
 		},
 		{
 			"id": "bgeeQ5",
-			"runcheck": "2019-01-23, 237.957s, 10results",
+			"runcheck": "2019-03-19, 20s, results",
 			"parentIds": ["bgee_anatomicEntity"],
+			"estimatedseconds": "20",
 			"question": "$$human$$ anatomic entities at $$youngadult$$ developmental stage",
 			"vars": [
 				{
@@ -589,7 +645,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT DISTINCT ?anatName {\n\t?cond genex:hasAnatomicalEntity ?anatEntity .\n\t?anatEntity rdfs:label ?anatName .\n\t?cond genex:hasDevelopmentalStage ?stage .\n\t?stage rdfs:label ?stageName .\n\t?cond obo:RO_0002162 ?taxon . #in taxon property .\n\t?taxon up:commonName '$$human$$' .\n\tFILTER ( CONTAINS(?stageName, '$$youngadult$$') )\n}",
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT DISTINCT ?anatName {\n\t?cond genex:hasAnatomicalEntity ?anatEntity .\n\t?anatEntity rdfs:label ?anatName .\n\t?cond genex:hasDevelopmentalStage ?stage .\n\t?stage rdfs:label ?stageName .\n\t?cond obo:RO_0002162 ?taxon .\n\t?taxon up:commonName \"$$human$$\" .\n\tFILTER ( CONTAINS(?stageName, \"$$youngadult$$\") )\n}",
 			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "http://biosoda.expasy.org:8890/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -598,6 +654,7 @@
 			"id": "bgeeQ6",
 			"runcheck": "2019-01-23, 466.196s, 10results",
 			"parentIds": ["bgee_anatomicEntity"],
+			"estimatedseconds": "631",
 			"question": "Anatomic entities where the $$apoc1$$ gene is expressed ",
 			"vars": [
 				{
@@ -614,28 +671,10 @@
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
-			"id": "bgeeQ7",
-			"runcheck": "GROUP BY not supported by ONTOP - should be SERVICE'd",
-			"parentIds": ["bgee_anatomicEntity"],
-			"question": "Number of anatomic entities per species and expression confidence ordered by species common name where the $$apoc1$$ gene is expressed",
-			"vars": [
-				{
-					"name": "apoc1",
-					"default": "apoc1",
-					"type": "list",
-					"datasource": "genesbgee",
-					"flavour": "autocomplete"
-				}
-			],
-			"SPARQL": "PREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT (COUNT(?anatEntity) as ?c) ?specName ?confidence {\n\t?seq a orth:Gene .\n\t?expr genex:hasSequenceUnit ?seq .\n\t?expr genex:hasConfidenceLevel ?confidence .\n\t?seq rdfs:label ?geneName .\n\t?expr genex:hasExpressionCondition ?cond .\n\t?cond genex:hasAnatomicalEntity ?anatEntity .\n\t?cond obo:RO_0002162 ?taxon . #in taxon property .\n\t?taxon up:commonName ?specName .\n\tFILTER (LCASE(?geneName) = '$$apoc1$$' )\n}\nGROUP BY ?taxon ?confidence ?specName\nORDER by ?specName",
-			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "http://biosoda.expasy.org:8890/sparql",
-			"queryHeaders": {"Accept": "application/sparql-results+json"}
-		},
-		{
 			"id": "bgeeQ8",
 			"runcheck": "2019-01-23, 6.067s, 9results",
 			"parentIds": ["bgee_anatomicEntity"],
+			"estimatedseconds": "10",
 			"question": "Anatomic entities in $$rats$$ where the $$apoc1$$ gene is expressed ",
 			"vars": [
 				{
@@ -659,28 +698,10 @@
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
-			"id": "bgeeQ9",
-			"runcheck": "2019-01-23, 0.093s, 0results - does this make sense?",
-			"parentIds": ["bgee_anatomicEntity"],
-			"question": "Anatomic entities which do not exist $$apoc1$$ gene expression information available",
-			"vars": [
-				{
-					"name": "apoc1",
-					"default": "apoc1",
-					"type": "list",
-					"datasource": "genesbgee",
-					"flavour": "autocomplete"
-				}
-			],
-			"SPARQL": "PREFIX orth: <http://purl.org/net/orth#>\nPREFIX genex: <http://purl.org/genex#>\nSELECT ?anatEntity ?anatName {\n\t?anatEntity a genex:AnatomicalEntity .\n\t?anatEntity rdfs:label ?anatName .\n\tFILTER NOT EXISTS {\n\t\t?seq a orth:Gene .\n\t\t?expr genex:hasSequenceUnit ?seq .\n\t\t?seq rdfs:label ?geneName .\n\t\t?expr genex:hasExpressionCondition ?cond .\n\t\t?cond genex:hasAnatomicalEntity ?anatEntity .\n\t\t?anatEntity a genex:AnatomicalEntity .\n\t\tFILTER ( LCASE(?geneName) = '$$apoc1$$' )\n\t}\n}",
-			"fetchUrl": "http://biosoda.expasy.org:8890/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "http://biosoda.expasy.org:8890/sparql",
-			"queryHeaders": {"Accept": "application/sparql-results+json"}
-		},
-		{
 			"id": "bgeeQ10",
 			"runcheck": "2019-01-23, 0.138s, 0results - does it make sense to keep it?",
 			"parentIds": ["bgee_anatomicEntity"],
+			"estimatedseconds": "1",
 			"question": "Anatomic entities at the $$mouse$$’s $$adult$$ stage where the $$apoc1$$ gene is expressed",
 			"vars": [
 				{
@@ -714,6 +735,7 @@
 			"id": "omaQ1",
 			"runcheck": "2019-01-23, 0.189s, 10results",
 			"parentIds": ["oma_species"],
+			"estimatedseconds": "1",
 			"question": "Which species are available on OMA database and their $$scientificname$$?",
 			"vars": [
 				{
@@ -737,6 +759,7 @@
 			"id": "omaQ2",
 			"runcheck": "2019-01-23, 0.084s, 10results",
 			"parentIds": ["oma_proteins"],
+			"estimatedseconds": "1",
 			"question": "Find $$Rattusnorvegicus$$ proteins present in OMA database",
 			"vars": [
 				{
@@ -756,6 +779,7 @@
 			"id": "omaQ3",
 			"runcheck": "2019-01-23, 1.284s, 10results",
 			"parentIds": ["oma_proteins"],
+			"estimatedseconds": "2",
 			"question": "How many proteins (and their $$scientificname$$) per species are present in OMA database?",
 			"vars": [
 				{
@@ -779,6 +803,7 @@
 			"id": "omaQ4",
 			"runcheck": "2019-01-23, 0.0, 10results",
 			"parentIds": ["oma_proteins"],
+			"estimatedseconds": "1",
 			"question": "All proteins that are orthologous to $$ENSLACG00000002497$$ Ensembl gene (identifier) ",
 			"vars": [
 				{
@@ -798,6 +823,7 @@
 			"id": "omaQ5",
 			"runcheck": "2019-01-23, 0.068s, 10results",
 			"parentIds": ["oma_proteins"],
+			"estimatedseconds": "1",
 			"question": "Proteins that are paralogous to $$ENSLACG00000002497$$ Ensembl gene (identifier)",
 			"vars": [
 				{
@@ -817,6 +843,7 @@
 			"id": "omaQ6",
 			"runcheck": "2019-01-23, 0.087s, 10results",
 			"parentIds": ["oma_proteins"],
+			"estimatedseconds": "1",
 			"question": "Proteins that are paralogous to $$HUMAN22168$$ OMA protein (identifier) and their cross reference links to OMA and Uniprot.",
 			"vars": [
 				{
@@ -836,6 +863,7 @@
 			"id": "omaQ7",
 			"runcheck": "2019-01-23, 0.081s, 10results",
 			"parentIds": ["oma_proteins"],
+			"estimatedseconds": "1",
 			"question": "Proteins that are orthologous to $$HUMAN22168$$ OMA protein (identifier) and their cross reference links to OMA and Uniprot.",
 			"vars": [
 				{
@@ -855,6 +883,7 @@
 			"id": "omaQ8",
 			"runcheck": "2019-01-23, 1.957s, 10results",
 			"parentIds": ["oma_proteins"],
+			"estimatedseconds": "1",
 			"question": "All proteins per species that are orthologous to $$Oryctolaguscuniculus$$ $$APOCI$$ related protein and their cross reference links to OMA and Uniprot including the corresponding Ensembl gene identifier. ",
 			"vars": [
 				{
@@ -881,6 +910,7 @@
 			"id": "omaQ9",
 			"runcheck": "2019-01-23, 0.147s, 10results",
 			"parentIds": ["oma_proteins"],
+			"estimatedseconds": "1",
 			"question": "$$Oryctolaguscuniculus$$ proteins (PROT1) encoded by genes that are orthologous to $$Musmusculus$$ (PROT2) $$HBBY$$ gene and their cross reference links to Uniprot",
 			"vars": [
 				{
@@ -914,6 +944,7 @@
 			"id": "omaQ10",
 			"runcheck": "2019-01-23, 148.583s, 1results",
 			"parentIds": ["oma_proteins"],
+			"estimatedseconds": "140",
 			"question": "The percentage of proteins in $$Drosophilamelanogaster$$ that has at least one paralogous sequence (protein)",
 			"vars": [
 				{
@@ -933,6 +964,7 @@
 			"id": "uniprotQ1",
 			"runcheck": "2019-01-23, 0.243s, 1result",
 			"parentIds": ["uniprot_proteins"],
+			"estimatedseconds": "1",
 			"question": "Select the UniProt protein with the mnemonic '$$A4HUMAN$$'",
 			"vars": [
 				{
@@ -952,6 +984,7 @@
 			"id": "uniprotQ2",
 			"runcheck": "2019-01-23, 2.693s, 10results",
 			"parentIds": ["uniprot_proteins"],
+			"estimatedseconds": "6",
 			"question": "Select all UniProt proteins that were integrated on the $$date$$",
 			"vars": [
 				{
@@ -969,16 +1002,18 @@
 			"id": "uniprotQ3",
 			"runcheck": "2019-01-23, 0.158s, 10results",
 			"parentIds": ["uniprot_proteins"],
+			"estimatedseconds": "1",
 			"question": "Select all $$taxa$$ from the UniProt taxonomy",
 			"vars": [
 				{
 					"name": "taxa",
 					"default": "taxa",
+					"defaultvalue": "up:Taxon",
 					"type": "simplelist",
 					"listvalues": [
 						{"value": "up:Taxon", "label": "taxa"},
-						{"value": "up:Cluster", "label": "clusters"},
 						{"value": "up:Strain", "label": "strains"},
+						{"value": "up:Cluster", "label": "clusters"},
 						{"value": "up:Tissue", "label": "tissues"}
 					]
 				}
@@ -992,15 +1027,16 @@
 			"id": "uniprotQ4",
 			"runcheck": "2019-01-23, 0.181s, 10results",
 			"parentIds": ["uniprot_proteins"],
+			"estimatedseconds": "8",
 			"question": "Select all bacterial taxa, and their $$scientificname$$, from the UniProt taxonomy",
 			"vars": [
 				{
 					"name": "scientificname",
-					"default": "scientific name",
+					"default": "up:scientificName",
 					"type": "simplelist",
 					"listvalues": [
 						{"value": "up:scientificName", "label": "scientific name"},
-						{"value": "up:otherName", "label": "other name"}
+						{"value": "up:commonName", "label": "common name"}
 						
 					]
 				}
@@ -1014,6 +1050,7 @@
 			"id": "uniprotQ5",
 			"runcheck": "2019-01-23, 0.158s, 6results",
 			"parentIds": ["uniprot_proteins"],
+			"estimatedseconds": "8",
 			"question": "which are the Ensembl transcript and genes for the $$A4HUMAN$$ protein ",
 			"vars": [
 				{
@@ -1033,6 +1070,7 @@
 			"id": "uniprotQ6",
 			"runcheck": "2019-01-23, 0.853s, 273results",
 			"parentIds": ["uniprot_proteins"],
+			"estimatedseconds": "8",
 			"question": "Select all human UniProt entries with a sequence variant that leads to a $$lossoffunction$$",
 			"vars": [
 				{
@@ -1052,6 +1090,7 @@
 			"id": "uniprotQ7",
 			"runcheck": "2019-01-23, 6.264s, 6535results",
 			"parentIds": ["uniprot_proteins"],
+			"estimatedseconds": "30",
 			"question": "Select the preferred gene name and disease annotation of all $$human$$ UniProt proteins that are known to be involved in a disease",
 			"vars": [
 				{
@@ -1072,14 +1111,16 @@
 		},
 		{
 			"id": "uniprotQ8",
-			"runcheck": "loads forever but runs in seconds on the uniprot directly",
+			"runcheck": "runs forever using our tool but needs only seconds if we run it there",
 			"parentIds": ["uniprot_proteins"],
+			"estimatedseconds": "1000000",
 			"question": "Select all UniProt proteins with $$TransmembraneAnnotation$$ and the regions' begin and end coordinates on the canonical sequence",
 			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX faldo: <http://biohackathon.org/resource/faldo#>\nSELECT ?protein ?begin ?end WHERE {\n\t?protein a up:Protein .\n\t?protein up:annotation ?annotation .\n\t?annotation a up:$$TransmembraneAnnotation$$ .\n\t?annotation up:range ?range .\n\t?range faldo:begin/faldo:position ?begin .\n\t?range faldo:end/faldo:position ?end .\n}",
 			"vars": [
 				{
 					"name": "TransmembraneAnnotation",
 					"default": "annotated transmembrane regions",
+					"defaultvalue": "Transmembrane_Annotation",
 					"type": "simplelist",
 					"listvalues": [
 						{"value": "Transmembrane_Annotation", "label": "annotated transmembrane regions"},
@@ -1097,6 +1138,7 @@
 			"id": "uniprotQ9",
 			"runcheck": "2019-01-23, 0.602s, 1799results",
 			"parentIds": ["uniprot_proteins"],
+			"estimatedseconds": "1",
 			"question": "Select the number of proteins for each of the subclasses of ec:1.1.$$subclasses$$.- EC (Enzyme Commission) class",
 			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX ec: <http://purl.uniprot.org/enzyme/>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nSELECT ?enzyme (COUNT(?protein) as ?size) WHERE {\n\t?protein up:enzyme ?enzyme .\n\t?enzyme rdfs:subClassOf ec:1.1.$$subclasses$$.- .\n}\nGROUP BY ?enzyme ORDER BY ?enzyme",
 			"vars": [
@@ -1120,6 +1162,7 @@
 			"id": "uniprotQ10",
 			"runcheck": "2019-01-23, 0.604s, 437results",
 			"parentIds": ["uniprot_proteins"],
+			"estimatedseconds": "1",
 			"question": "Select all $$EColiK12$$ (including strains) UniProt proteins and their amino acid sequence",
 			"vars": [
 				{
