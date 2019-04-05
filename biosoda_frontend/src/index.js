@@ -103,10 +103,79 @@ class ExtraTarget extends Component {
 	}
 }
 
+class ServicePoints extends Component {
+	/*state = {
+		lastReload: Date.now()
+	}*/
+	constructor(props) {
+		super(props)
+	}
+	render() {
+		var allpoints = biosodadata.possibleServices.map((onepoint) => {
+			return <ServicePoint
+				key = {onepoint.name}
+				name = {onepoint.name}
+				moreinfo = {onepoint.moreinfo}
+				urlquery = {onepoint.urlquery}
+				lastUpdate = {this.props.lastUpdate}
+			/>
+		});
+		return (
+			<React.Fragment>
+				<div dangerouslySetInnerHTML={{__html: "Status of our service points: "}}></div>
+				{allpoints}
+			</React.Fragment>
+		);
+	}
+}
+
+
+class ServicePoint extends Component {
+	constructor(props){
+		super(props);
+	}
+	state = {
+		isLoading: true,
+		status: [],
+		error: null,
+	}
+	componentDidMount() {
+		this.fetchStatus();
+	}
+	fetchStatus() {
+		fetch(
+			this.props.urlquery,
+			{
+				'Access-Control-Allow-Origin': '*',
+				'mode': 'no-cors',
+			}
+		)
+		// We get the API response and receive data in JSON format...
+		.then(response => response.json())
+		.then(data => {
+			this.setState({
+				status: data,
+				isLoading: false
+			})
+		})
+		.catch(error => this.setState({ error, isLoading: false }));
+	}
+	render() {
+		const { isLoading, status, error } = this.state;
+		var tmpclass = 'danger';
+		!isLoading ? tmpclass = 'success' : tmpclass = 'warning';
+		return (
+			<React.Fragment>
+				 <a href={this.props.moreinfo} target="_blank" rel="noopener noreferrer" key={"service_"+this.props.name} className={"btn btnmenu btn-" + tmpclass }>{"▓ " + this.props.name} {this.props.lastUpdate}</a>
+			</React.Fragment>
+		)
+	}
+}
+
 class Progressbar extends Component {
 	constructor(props){
 		super(props);
-		this.state = {prog: 10}
+		this.state = { prog: 10 }
 	}
 	componentDidMount() {
 		setInterval(this.randomWidth.bind(this), 100);
@@ -115,7 +184,6 @@ class Progressbar extends Component {
 		this.setState({ prog: Math.floor(Math.random()*100) });
 	}
 	render() {
-		
 		return (
 			<div
 				className="progress-bar progress-bar-striped progress-bar-animated"
@@ -211,9 +279,9 @@ class App extends Component {
 		}
 
 		var queryHeaders = this.state.queryHeaders;
-		// empty results from last fetch?
-		// show spinner to the user
 		this.displayResults('');
+		// this.state.servicepointsUpdated = Date.now();
+		this.refs.servicepoints.lastUpdate = Date.now();
 		this.node_logger('SPARQL', query, 'before', 0);
 		var microstart = Date.now();
 		return fetch(queryUrl, {headers: queryHeaders})
@@ -272,6 +340,7 @@ class App extends Component {
 		showSpinner: false,
 		sparqlEndpointURL: '',
 		hasResults: false,
+		servicepointsUpdated: Date.now(),
 		value: '',
 		dynamicvals: [],
 		treeData: [],
@@ -306,7 +375,7 @@ class App extends Component {
 		for (let row of _results) {
 			var elrow = document.createElement('tr');
 			for (let onevar of _variables) {
-				console.log(onevar);
+				// console.log(onevar);
 				if (!onevar.endsWith('_noshow')) {
 					var eltd = document.createElement('td');
 					// row[onevar].type holds the type of the element uri, int, bool, ...
@@ -578,6 +647,7 @@ class App extends Component {
 				document.getElementById('results').appendChild(this.renderedTableFromJSON(result));
 			}
 		} else {
+			document.getElementById('results').innerHTML = "";
 			this.setState({ showSpinner: true });
 		}
 	}
@@ -591,9 +661,9 @@ class App extends Component {
 				<span style={{ fontSize: "0.6em", position: 'relative', bottom: '0.6em', color: 'red', fontFamily: 'monospace' }} title="BETA-Version - Working prototype with limited functionality">β</span>:
 				Federated template <strong>s</strong>earch <strong>o</strong>ver biological <strong>da</strong>tabases 
 			</h3>
-	  
-	  <div style = {{marginTop:"20px", marginBottom:"10px"}}>
-</div>
+		<div id="services" style = {{marginTop:"20px", marginBottom:"10px"}}>
+			<ServicePoints ref="servicepoints" lastUpdate={ this.state.servicepointsUpdated } />
+		</div>
 		<Row>
 			<Col sm={this.state.showSparql? "7": "12"}>
 			<form
