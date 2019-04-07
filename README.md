@@ -21,7 +21,7 @@ The documentation for the GenEx semantic model, used to expose gene expression d
 
 ## VoID extension documentation
 
-The documentation of the VoID extension describing the virtual links between the datasets considered in our work is available at [VoIDext documentation draft](https://biosoda.github.io/bioquery/) and the Turtle files in the [voidext](https://github.com/biosoda/bioquery/tree/master/voidext) folder by also including the metadata used in this project (i.e. voidext_bioquery.ttl file).
+The documentation of the VoID extension describing the virtual links between the datasets considered in our work is available at [VoIDext documentation draft](https://biosoda.github.io/voidext/) and the Turtle files in the [voidext](https://github.com/biosoda/voidext) repository by also including the metadata used in this project (i.e. [voidext_bioquery.ttl](https://github.com/biosoda/voidext/blob/master/ABox_examplar_data/ABox_application.ttl) file).
 
 ## Supplementary material
 
