@@ -17,13 +17,19 @@
 		{
 			"name": "OMA",
 			"moreinfo": "https://omabrowser.org",
-			"urlquery": "https://sparql.omabrowser.org/sparql/?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
+			"urlquery": "https://sparql.omabrowser.org/lode/servlet/query?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
 			"expected": "true"
 		},
 		{
 			"name": "Bgee",
 			"moreinfo": "https://bgee.org",
-			"urlquery": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=SELECT * {<http://biosoda.expasy.org/a> <http://biosoda.expasy.org/a> <http://biosoda.expasy.org/>.}LIMIT 1",
+			"urlquery": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=PREFIX%20up%3A%20%3Chttp%3A%2F%2Fpurl.uniprot.org%2Fcore%2F%3E%0ASELECT%20*%20%7B%0A%09%3Fspecies%20a%20up%3ATaxon%20.%0A%09%3Fspecies%20up%3AscientificName%20%3Fname%20.%0A%09%3Fspecies%20up%3Arank%20up%3ASpecies%20.%0A%7D&format=JSON&limit=100&offset=0&inference=false",
+			"expected": "true"
+		},
+		{
+			"name": "NoCEBO",
+			"popup": "nocebo control group server - negative control - is always in alert state",
+			"urlquery": "https://localhost:9999",
 			"expected": "true"
 		}
 	],

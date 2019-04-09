@@ -72,7 +72,7 @@ class ExtraTarget extends Component {
 		this.result = null;
 	}
 	componentDidMount() {
-		this.interval = setInterval(() => this.setState({ time: Date.now() }), 10000);
+		this.interval = setInterval(() => this.setState({ time: Date.now() }), 60000);
 	}
 	componentWillUnmount() {
 		clearInterval(this.interval);
@@ -104,9 +104,6 @@ class ExtraTarget extends Component {
 }
 
 class ServicePoints extends Component {
-	/*state = {
-		lastReload: Date.now()
-	}*/
 	constructor(props) {
 		super(props)
 	}
@@ -116,13 +113,14 @@ class ServicePoints extends Component {
 				key = {onepoint.name}
 				name = {onepoint.name}
 				moreinfo = {onepoint.moreinfo}
+				popup = {onepoint.popup}
 				urlquery = {onepoint.urlquery}
 				lastUpdate = {this.props.lastUpdate}
 			/>
 		});
 		return (
 			<React.Fragment>
-				<div dangerouslySetInnerHTML={{__html: "Status of our service points: "}}></div>
+				<div dangerouslySetInnerHTML={{__html: "Status of the queried service points: "}}></div>
 				{allpoints}
 			</React.Fragment>
 		);
@@ -133,40 +131,57 @@ class ServicePoints extends Component {
 class ServicePoint extends Component {
 	constructor(props){
 		super(props);
-	}
-	state = {
-		isLoading: true,
-		status: [],
-		error: null,
+		this.state = {
+			isLoading: true,
+			status: [],
+			error: null,
+		}
 	}
 	componentDidMount() {
 		this.fetchStatus();
 	}
+	componentDidUpdate(prevProps, prevStatus) {
+		if (prevProps.lastUpdate !== this.props.lastUpdate) {
+			this.fetchStatus();
+		}
+	}
 	fetchStatus() {
 		fetch(
 			this.props.urlquery,
-			{
-				'Access-Control-Allow-Origin': '*',
-				'mode': 'no-cors',
+			{ 
+				method: 'GET',
+				headers: {
+					//'Access-Control-Allow-Origin': '*',
+					// 'bioSODA': 'YESS',
+					 'Accept': 'application/sparql-results+json, */*;q=0.5',
+					// 'Content-Type': 'multipart/form-data',
+					// 'mode': 'no-cors', // https://stackoverflow.com/questions/43262121/trying-to-use-fetch-and-pass-in-mode-no-cors/43268098#43268098
+				}
 			}
 		)
 		// We get the API response and receive data in JSON format...
-		.then(response => response.json())
-		.then(data => {
+		.then(response => response.json() )
+		.then(data => {// check here to find ok or not
+			console.log(data);
 			this.setState({
 				status: data,
-				isLoading: false
+				isLoading: false,
+				error: null
 			})
 		})
-		.catch(error => this.setState({ error, isLoading: false }));
+		.catch(error => {
+			console.log(error);
+			this.setState({ error: error, isLoading: false })
+		})
 	}
 	render() {
+		// this.fetchStatus();
 		const { isLoading, status, error } = this.state;
 		var tmpclass = 'danger';
-		!isLoading ? tmpclass = 'success' : tmpclass = 'warning';
+		(!isLoading && error === null ) ? tmpclass = 'success' : tmpclass = 'warning';
 		return (
 			<React.Fragment>
-				 <a href={this.props.moreinfo} target="_blank" rel="noopener noreferrer" key={"service_"+this.props.name} className={"btn btnmenu btn-" + tmpclass }>{"▓ " + this.props.name} {this.props.lastUpdate}</a>
+				 <a href={this.props.moreinfo} target="_blank" rel="noopener noreferrer" key={"service_"+this.props.name} className={"btn btnmenu btn-" + tmpclass } title={ this.props.popup }>{" " + this.props.name}</a>
 			</React.Fragment>
 		)
 	}
@@ -280,8 +295,7 @@ class App extends Component {
 
 		var queryHeaders = this.state.queryHeaders;
 		this.displayResults('');
-		// this.state.servicepointsUpdated = Date.now();
-		this.refs.servicepoints.lastUpdate = Date.now();
+		this.state.servicepointsUpdated = Date.now();
 		this.node_logger('SPARQL', query, 'before', 0);
 		var microstart = Date.now();
 		return fetch(queryUrl, {headers: queryHeaders})
@@ -656,18 +670,24 @@ class App extends Component {
 	const { searchString } = this.state;
 	return (
 		<div style={{ height: 700 }}>
-			<h3>
+			<h3 style={{
+				maxWidth: '50%',
+				'backgroundColor': 'white'
+			}}>
 				<strong>Bio</strong>-Query
 				<span style={{ fontSize: "0.6em", position: 'relative', bottom: '0.6em', color: 'red', fontFamily: 'monospace' }} title="BETA-Version - Working prototype with limited functionality">β</span>:
 				Federated template <strong>s</strong>earch <strong>o</strong>ver biological <strong>da</strong>tabases 
 			</h3>
-		<div id="services" style = {{marginTop:"20px", marginBottom:"10px"}}>
+		<div id="services">
 			<ServicePoints ref="servicepoints" lastUpdate={ this.state.servicepointsUpdated } />
 		</div>
 		<Row>
 			<Col sm={this.state.showSparql? "7": "12"}>
 			<form
-			  style={{ display: 'inline-block' }}
+			  style={{
+				  display: 'inline-block',
+				  'backgroundColor': 'white'
+				}}
 			  onSubmit={event => {
 				event.preventDefault();
 			  }}
