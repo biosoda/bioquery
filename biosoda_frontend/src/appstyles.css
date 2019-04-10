@@ -197,25 +197,29 @@ body {
 
 @keyframes changeLetter {
 	0% {
-		content: "░";
-		opacity: "0%";
+		/*content: "░";*/
+		opacity: 0.6;
 	}
-	25% {
+	/*25% {
 		content: "▒";
+		opacity: 0.25;
 	}
 	50% {
 		content: "▓";
+		opacity: 0.5;
 	}
 	75% {
 		content: "▒";
-	}
-	100% {
-		content: "░";
-		opacity: "100%";
+		opacity: 0.75;
+	}*/
+	90% {
+		/*content: "░";*/
+		opacity: 1;
 	}
 }
 
 #services a.btn::before {
-	animation: changeLetter 15s cubic-bezier(.97,-0.17,.05,1.17) infinite alternate;
-	content: "▓";
+	animation: changeLetter 2s cubic-bezier(.97,-0.17,.05,1.17) infinite alternate;
+	content: "▒";
+	opacity: 1;
 }

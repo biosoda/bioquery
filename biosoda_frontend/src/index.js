@@ -190,12 +190,19 @@ class ServicePoint extends Component {
 class Progressbar extends Component {
 	constructor(props){
 		super(props);
-		this.state = { prog: 10 }
+		this.state = {
+			prog: 0,
+			estimate: this.props.estimatedRuntime,
+			startSeconds: Date.now()
+		}
 	}
 	componentDidMount() {
 		setInterval(this.randomWidth.bind(this), 100);
 	}
 	randomWidth() {
+		var thisNow = Date.now();
+		var totalRun = thisNow - this.state.startSeconds;
+		var newProress = 1 - exp(-1.5*totalRun/this.state.estimate)// thanks Christophe
 		this.setState({ prog: Math.floor(Math.random()*100) });
 	}
 	render() {
@@ -437,7 +444,8 @@ class App extends Component {
 			this['updateQuery_'+el.id] = (event) => {
 				var newsparql = el.SPARQL;
 				var humanReadable = el.question;
-				var estimatedRuntime = (el.estimatedseconds * 2).toString();
+				var newEstimatedRuntimeSeconds = el.estimatedseconds * 2;
+				var estimatedRuntime = (newEstimatedRuntimeSeconds).toString();
 				if (typeof(estimatedRuntime) == 'undefined') {
 					estimatedRuntime = 'unknown';
 				} else {
@@ -474,7 +482,7 @@ class App extends Component {
 					newsparql = newsparql.split(varmasker + 'innerlimit' + varmasker).join('');
 				}
 
-				this.setState({ query: newsparql, queryTarget: el.fetchUrl, queryTargetShort: el.fetchUrlShort, queryHeaders: el.queryHeaders, queryHuman: humanReadable, estimatedRuntime: estimatedRuntime });
+				this.setState({ query: newsparql, queryTarget: el.fetchUrl, queryTargetShort: el.fetchUrlShort, queryHeaders: el.queryHeaders, queryHuman: humanReadable, estimatedRuntime: estimatedRuntime, estimatedRuntimeSeconds: newEstimatedRuntimeSeconds });
 				if(typeof(this.refs.sparqy) !== 'undefined') {
 					this.refs.sparqy.refs.cm.getCodeMirror().doc.setValue(newsparql);
 				}
@@ -802,7 +810,7 @@ class App extends Component {
 			<Row id="spinnerwheel">
 				<Col>
 					<div className="progress">
-						<Progressbar />
+						<Progressbar estimatedRuntime={this.state.estimatedRuntimeSeconds} />
 					</div>
 				</Col>
 			</Row>
@@ -816,7 +824,7 @@ class App extends Component {
 				</div>
 				<div id="askedQuery" style={{padding: '1em'}}><span>Your Question: </span><span id="question">{this.state.queryHuman}</span></div>
 				<div id="fetchTargetDiv" style={{padding: '1em'}}><span>Query will be sent to: </span><span id="fetchTarget"><a href={this.state.queryTargetShort} target="_blank" rel="noopener noreferrer">{this.state.queryTargetShort}</a><ExtraTarget superState={this.state} /></span></div>
-				<div id="estimatedRuntume" style={{padding: '1em'}}><span>Estimated Runtime: </span><span id="estimatedRuntime" dangerouslySetInnerHTML={ {__html: this.state.estimatedRuntime} }></span></div>
+				<div id="estimatedRuntime" style={{padding: '1em'}}><span>Estimated Runtime: </span><span id="estimatedRuntime" dangerouslySetInnerHTML={ {__html: this.state.estimatedRuntime} }></span></div>
 				<div id="results" ref="results"></div>
 			</Col>
 	   </Row>
