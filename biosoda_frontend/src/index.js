@@ -197,13 +197,18 @@ class Progressbar extends Component {
 		}
 	}
 	componentDidMount() {
-		setInterval(this.randomWidth.bind(this), 100);
+		this.timerID = setInterval(this.randomWidth.bind(this), 100);
+	}
+	componentWillUnmount() {
+		clearInterval(this.timerID);
 	}
 	randomWidth() {
 		var thisNow = Date.now();
 		var totalRun = thisNow - this.state.startSeconds;
-		var newProress = 1 - exp(-1.5*totalRun/this.state.estimate)// thanks Christophe
-		this.setState({ prog: Math.floor(Math.random()*100) });
+		var newProgress = (1 - Math.exp(-1.5*totalRun/this.state.estimate/1000))*100; // thanks Christophe
+		// var newProgress = totalRun/this.state.estimate/1000;
+		// this.setState({ prog: Math.floor(Math.random()*100) }); // epileptic
+		this.setState({ prog: newProgress });
 	}
 	render() {
 		return (
