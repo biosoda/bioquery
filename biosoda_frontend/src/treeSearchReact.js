@@ -122,7 +122,7 @@ export class NestedNodes extends Component {
 				btnestsec = '';
 			}
 			return(
-				<li key={child.id} className={actualclassnames}><div className="title">{child.title} {btnestsec}</div></li>
+				<li key={child.id} data-haschild="false" className={actualclassnames}><div className="title">{child.title} {btnestsec}</div></li>
 			);
 		} else {
 			return (

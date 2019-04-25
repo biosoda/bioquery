@@ -110,6 +110,12 @@ body {
 #searchTree #tree li.lastActive .title:hover {
 	background-color: #99cccc;
 }
+#searchTree #tree li[data-haschild="true"] div.title {
+	cursor: pointer;
+}
+#searchTree #tree li[data-haschild="false"] div.title {
+	cursor: inherit;
+}
 #searchTree #tree li[data-haschild] div.plusminus {
 	display: inline-block;
 	width: 1em;
