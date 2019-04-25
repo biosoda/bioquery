@@ -686,7 +686,7 @@
 			"id": "bgeeQ6",
 			"runcheck": "2019-01-23, 466.196s, 10results",
 			"parentIds": ["bgee_anatomicEntity"],
-			"estimatedseconds": "631",
+			"estimatedseconds": "6",
 			"question": "Anatomic entities where the $$apoc1$$ gene is expressed ",
 			"vars": [
 				{
