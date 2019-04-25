@@ -697,7 +697,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX orth: <http://purl.org/net/orth#>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT DISTINCT ?anatEntity ?anatName {\n\t?seq a orth:Gene .\n\t?expr genex:hasSequenceUnit ?seq .\n\t?seq rdfs:label ?geneName .\n\t?expr genex:hasExpressionCondition ?cond .\n\t?cond genex:hasAnatomicalEntity ?anatEntity .\n\t?anatEntity rdfs:label ?anatName .\n\tFILTER ( LCASE(?geneName) = '$$apoc1$$' )\n}",
+			"SPARQL": "PREFIX orth: <http://purl.org/net/orth#>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT ?anatEntity ?anatName {\n\t?seq a orth:Gene .\n\t?expr genex:hasSequenceUnit ?seq .\n\t?seq rdfs:label ?geneName .\n\t?expr genex:hasExpressionCondition ?cond .\n\t?cond genex:hasAnatomicalEntity ?anatEntity .\n\t?anatEntity rdfs:label ?anatName .\n\tFILTER ( LCASE(?geneName) = '$$apoc1$$' )\n} $$innerlimit$$",
 			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -1145,9 +1145,9 @@
 			"id": "uniprotQ8",
 			"runcheck": "runs forever using our tool but needs only seconds if we run it there",
 			"parentIds": ["uniprot_proteins"],
-			"estimatedseconds": "1000000",
+			"estimatedseconds": "6",
 			"question": "Select all UniProt proteins with $$TransmembraneAnnotation$$ and the regions' begin and end coordinates on the canonical sequence",
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX faldo: <http://biohackathon.org/resource/faldo#>\nSELECT ?protein ?begin ?end WHERE {\n\t?protein a up:Protein .\n\t?protein up:annotation ?annotation .\n\t?annotation a up:$$TransmembraneAnnotation$$ .\n\t?annotation up:range ?range .\n\t?range faldo:begin/faldo:position ?begin .\n\t?range faldo:end/faldo:position ?end .\n}",
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX faldo: <http://biohackathon.org/resource/faldo#>\nSELECT ?protein ?begin ?end WHERE {\n\t?protein a up:Protein .\n\t?protein up:annotation ?annotation .\n\t?annotation a up:$$TransmembraneAnnotation$$ .\n\t?annotation up:range ?range .\n\t?range faldo:begin/faldo:position ?begin .\n\t?range faldo:end/faldo:position ?end .\n} \n$$innerlimit$$",
 			"vars": [
 				{
 					"name": "TransmembraneAnnotation",
