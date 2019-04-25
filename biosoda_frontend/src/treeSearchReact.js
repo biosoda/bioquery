@@ -126,7 +126,7 @@ export class NestedNodes extends Component {
 			);
 		} else {
 			return (
-				<li key={child.id} data-haschild="true" className={actualclassnames}><div className="title"><div className="plusminus" onClick={this.handleClick} ></div>{child.title}</div>
+				<li key={child.id} data-haschild="true" className={actualclassnames}><div className="title" onClick={this.handleClick} ><div className="plusminus" ></div>{child.title}</div>
 					<ul key={child.id}>
 						{child.children.map(child => {
 							return <NestedNodes
