@@ -102,7 +102,7 @@
 		{
 			"id": "bgee",
 			"parentId": null,
-			"title": "Gene Expression Queries"
+			"title": "Bgee database queries"
 		},
 			{
 				"id": "bgee_anatomicEntity",
