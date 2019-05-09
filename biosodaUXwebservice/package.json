@@ -1,0 +1,16 @@
+{
+  "name": "node_service",
+  "version": "1.0.0",
+  "description": "web service for NLP",
+  "main": "node_logger.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "ip": "^1.1.5",
+    "mysql": "^2.16.0"
+  }
+}

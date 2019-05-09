@@ -602,7 +602,7 @@
 			"runcheck": "2019-01-23, 1.037s, 10results",
 			"parentIds": ["bgee_genes"],
 			"estimatedseconds": "1",
-			"question": "Genes with $$lung$$ in the description",
+			"question": "Genes with the following term in the description: $$lung$$",
 			"vars": [
 				{
 					"name": "lung",
