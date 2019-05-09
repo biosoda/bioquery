@@ -76,7 +76,7 @@
 
 		<div class="row justify-content-md-center" id="topsearch">
 			<div class="col-md-auto">
-				<div class="row pb-0"><input name="topsearch" id="inputtopsearch"><button onclick="$('#datatable').show();">search!</button></div>
+				<div class="row pb-0"><input name="topsearch" id="inputtopsearch"><button onclick="submitQuery();">search!</button></div>
 				<div class="row p-0 m-0 searchexamples"><p>Examples: <a href="#" data-search="gene">gene</a>, <a href="#" data-search="tissue">tissue</a></p></div>
 			</div>
 		</div>
@@ -193,8 +193,13 @@
 
 		function pauseallvideos() {
 			$('#demo video').each(function (vid) {
-					this.pause();
+				this.pause();
 			});
+		}
+
+		function submitQuery() {
+			$('#datatable').show();
+			// send query 'gene exposed in brain' as q to http://biosoda.expasy.org:3003/ and get 'gene' back
 		}
 
 		$(document).ready(function() {
