@@ -83,8 +83,8 @@
 		
 		<div class="row justify-content-md-center" id="interactapi">
 			<div class="col-md-auto">
-				<p>Your query was interpreted in 2 ways, please select one:</p>
-				<div class="col-12 m-1 p-1 border">
+				<p>Your query was interpreted by our NLP engine in 2 ways, please select one:</p>
+				<div class="col-12 m-1 p-1 border twoways">
 					<button type="button" class="btn btn-success">
 						Gene
 					</button>
@@ -101,7 +101,7 @@
 						Disease
 					</button>
 				</div>
-				<div class="col-12 m-1 p-1 border">
+				<div class="col-12 m-1 p-1 border twoways">
 					<button type="button" class="btn btn-success">
 						Anatomic Entity <span class="badge badge-light">Liver</span>
 					</button>
@@ -170,6 +170,11 @@
 					</tbody>
 				</table>
 			</div>
+			<div class="row justify-content-md-center col-12" id="runquery">
+				<button type="button" class="btn btn-success col-3">
+					Run query now and fetch results
+				</button>
+			</div>
 		</div>
 
 
@@ -198,7 +203,9 @@
 		}
 
 		function submitQuery() {
-			$('#datatable').show();
+			$('#demo').hide();
+			$('#interactapi').show();
+			$('#datatable').hide();
 			// send query 'gene exposed in brain' as q to http://biosoda.expasy.org:3003/ and get 'gene' back
 		}
 
@@ -218,6 +225,7 @@
 			table.column(0).visible(1);
 
 			$('#coltoggler button').on( 'click', function (e) {
+				$('#runquery').show();
 				e.preventDefault();
 				// Get the column API object
 				var column = table.column( $(this).attr('data-column') );
@@ -229,6 +237,17 @@
 			$('.searchexamples a').on('click', function(e) {
 				e.preventDefault();
 				$('#inputtopsearch').val($(this).data('search'));
+			});
+
+			$('.twoways').on('click', function(e) {
+				$('#demo').hide();
+				$('#interactapi').hide();
+				$('#datatable').show();
+				$('#runquery').hide();
+			});
+
+			$('#runquery').on('click', function(e) {
+				alert('***MAGIC***');
 			});
 
 		});
