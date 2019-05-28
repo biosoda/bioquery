@@ -75,55 +75,23 @@
 		</div>
 
 		<div class="row justify-content-md-center" id="topsearch">
-			<div class="col-md-auto">
-				<div class="row pb-0"><input name="topsearch" id="inputtopsearch"><button onclick="submitQuery();">search!</button></div>
-				<div class="row p-0 m-0 searchexamples"><p>Examples: <a href="#" data-search="gene">gene</a>, <a href="#" data-search="tissue">tissue</a></p></div>
+			<div class="col-md-8">
+				<div class="row pb-0"><input class="col-10" name="topsearch" id="inputtopsearch"><button onclick="submitQuery();">search!</button></div>
+				<div class="row p-0 m-0 searchexamples"><p>Examples: <a href="#" data-search="gene where apoc1 is present in sequence gene">gene</a>, <a href="#" data-search="tissue">tissue</a></p></div>
 			</div>
 		</div>
 		
 		<div class="row justify-content-md-center" id="interactapi">
 			<div class="col-md-auto">
-				<p>Your query was interpreted by our NLP engine in 2 ways, please select one:</p>
+				<p class="twowaysmessage"></p>
 				<div class="col-12 m-1 p-1 border twoways">
-					<button type="button" class="btn btn-success">
-						Gene
-					</button>
-					<button type="button" class="btn btn-warning">
-						in
-					</button>
-					<button type="button" class="btn btn-success">
-						Anatomic Entity <span class="badge badge-light">Liver</span>
-					</button>
-					<button type="button" class="btn btn-warning">
-						involved in
-					</button>
-					<button type="button" class="btn btn-success">
-						Disease
-					</button>
-				</div>
-				<div class="col-12 m-1 p-1 border twoways">
-					<button type="button" class="btn btn-success">
-						Anatomic Entity <span class="badge badge-light">Liver</span>
-					</button>
-					<button type="button" class="btn btn-warning">
-						has some
-					</button>
-					<button type="button" class="btn btn-success">
-						Annotation <span class="badge badge-light">Disease</span>
-					</button>
-					<button type="button" class="btn btn-warning">
-						transcoded by
-					</button>
-					<button type="button" class="btn btn-success">
-						Gene
-					</button>
 				</div>
 			</div>
 		</div>
 
 		<div class="row" id="datatable">
 			<div class="col-12 alert alert-success pb-0">
-				<p>You are looking for a <strong>gene</strong>. What should your result table look like?</p>
+				<p>You are looking for a <strong id="lookingfor">gene</strong>. What should your result table look like?</p>
 			</div>
 			<div class="col-12">
 				<div id="coltoggler">
@@ -206,10 +174,30 @@
 			$('#demo').hide();
 			$('#interactapi').show();
 			$('#datatable').hide();
-			// send query 'gene exposed in brain' as q to http://biosoda.expasy.org:3003/ and get 'gene' back
+			$.ajax({
+				url: "http://localhost:3003/",
+				data: {q: $('#inputtopsearch').val()},
+				method: 'POST'
+			}).done(function(data) {
+				// clone object and fill with data value
+				$('.twoways').show();
+				if (data.target.length > 0) {
+					$('.twowaysmessage').text('Your query was interpreted by our NLP engine. We\'ve found the following concepts, please chose the approppriate:');
+				} else {
+					$('.twowaysmessage').text('Our NLP found nothing matching your query. Please refine.');
+					$('.twoways').hide();
+				}
+				$('.twoways').empty();
+				$(data.target).each(function(index) {
+					console.log(this);
+					$('.twoways').append('<button type="button" class="btn btn-success mr-1" data-found="' + this + '">' + this + '</button>');
+				});
+				
+			});
 		}
 
 		$(document).ready(function() {
+			$('#inputtopsearch').val('');
 			$('#demo').hide();
 			$('#interactapi').hide();
 			$('#datatable').hide();
@@ -242,6 +230,10 @@
 			$('.twoways').on('click', function(e) {
 				$('#demo').hide();
 				$('#interactapi').hide();
+				console.log(e.target);
+				sibi = e.target;
+				$('#lookingfor').text($(e.target).attr('data-found'));
+				// zber next: get from ajax and fill datatable with possibilities
 				$('#datatable').show();
 				$('#runquery').hide();
 			});
