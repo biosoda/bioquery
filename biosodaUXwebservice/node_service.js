@@ -26,17 +26,46 @@ app.post('/', urlencodedParser, function (req, res) {
 	// console.log(req);
 	// console.log(res);
 	// console.log(req.body.q);
-	possibilities = ['gene', 'proteome', 'protein'];
-	for (i = 0; i < possibilities.length; i++) {
-		if (req.body.q.indexOf(possibilities[i]) >= 0) {
-			console.log()
-			res.send({'target': possibilities[i]});
-			return;
+	possibilities = [
+		{
+			words: 'gene sequence',
+			target: 'gene'
+		},
+		{
+			words: 'proteome',
+			target: 'proteome'
+		},
+		{
+			words: 'protein factor',
+			target: 'protein'
+		}
+	];
+	querywords = req.body.q.split(" ");
+	results = [];
+	for (j = 0; j < querywords.length; j++) {
+		for (i = 0; i < possibilities.length; i++) {
+			if (possibilities[i].words.indexOf(querywords[j]) >= 0) {
+				results.push(possibilities[i].target);
+			}
 		}
 	}
-	res.send({'target': null});
+	console.log(results);
+	results = unique(results);
+	res.send({'target': results});
+	return;
 });
 
 app.listen(3003, function () {
 	console.log('Listening on port 3003');
 });
+
+function unique(arr) {
+	var u = {}, a = [];
+	for(var i = 0, l = arr.length; i < l; ++i){
+		if(!u.hasOwnProperty(arr[i])) {
+			a.push(arr[i]);
+			u[arr[i]] = 1;
+		}
+	}
+	return a;
+}
