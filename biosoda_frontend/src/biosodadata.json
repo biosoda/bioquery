@@ -165,7 +165,7 @@
 					"name": "fruitfly",
 					"default": "Fruit fly",
 					"type": "list",
-					"datasource": "speciescommon",
+					"datasource": "speciesbgeecommon",
 					"flavour": "autocomplete"
 				}
 			],
@@ -199,7 +199,7 @@
 					"name": "fruitfly",
 					"default": "Fruit fly",
 					"type": "list",
-					"datasource": "speciescommon",
+					"datasource": "speciesbgeecommon",
 					"flavour": "autocomplete"
 				}
 			],
@@ -219,14 +219,14 @@
 					"name": "rat",
 					"default": "Rat",
 					"type": "list",
-					"datasource": "speciescommon",
+					"datasource": "speciesbgeecommon",
 					"flavour": "autocomplete"
 				},
 				{
 					"name": "human",
 					"default": "Human",
 					"type": "list",
-					"datasource": "speciescommon",
+					"datasource": "speciesbgeecommon",
 					"flavour": "autocomplete"
 				}
 			],
@@ -278,7 +278,7 @@
 					"name": "rat",
 					"default": "Rattus norvegicus",
 					"type": "list",
-					"datasource": "species",
+					"datasource": "speciesbgee",
 					"flavour": "autocomplete"
 				},
 				{
@@ -333,7 +333,7 @@
 					"name": "human",
 					"default": "Human",
 					"type": "list",
-					"datasource": "speciescommon",
+					"datasource": "speciesbgeecommon",
 					"flavour": "autocomplete"
 				},
 				{
@@ -360,7 +360,7 @@
 					"name": "human",
 					"default": "Human",
 					"type": "list",
-					"datasource": "speciescommon",
+					"datasource": "speciesbgeecommon",
 					"flavour": "autocomplete"
 				},
 				{
@@ -475,7 +475,7 @@
 					"name": "mouse",
 					"default": "Mouse",
 					"type": "list",
-					"datasource": "speciescommon",
+					"datasource": "speciesbgeecommon",
 					"flavour": "autocomplete"
 				},
 				{
@@ -489,7 +489,7 @@
 					"name": "human",
 					"default": "Human",
 					"type": "list",
-					"datasource": "speciescommon",
+					"datasource": "speciesbgeecommon",
 					"flavour": "autocomplete"
 				},
 				{
@@ -516,7 +516,7 @@
 					"name": "fruitfly",
 					"default": "Fruit fly",
 					"type": "list",
-					"datasource": "speciescommon",
+					"datasource": "speciesbgeecommon",
 					"flavour": "autocomplete"
 				},
 				{
@@ -543,7 +543,7 @@
 					"name": "fruitfly",
 					"default": "Fruit fly",
 					"type": "list",
-					"datasource": "speciescommon",
+					"datasource": "speciesbgeecommon",
 					"flavour": "autocomplete"
 				},
 				{
@@ -639,7 +639,7 @@
 					"name": "fruitfly",
 					"default": "Fruit fly",
 					"type": "list",
-					"datasource": "speciescommon",
+					"datasource": "speciesbgeecommon",
 					"flavour": "autocomplete"
 				}
 			],
@@ -659,7 +659,7 @@
 					"name": "human",
 					"default": "Human",
 					"type": "list",
-					"datasource": "speciescommon",
+					"datasource": "speciesbgeecommon",
 					"flavour": "autocomplete"
 				},
 				{
@@ -699,7 +699,7 @@
 			"id": "bgeeQ8",
 			"runcheck": "2019-01-23, 6.067s, 9results",
 			"parentIds": ["bgee_anatomicEntity"],
-			"estimatedseconds": "36",
+			"estimatedseconds": "7",
 			"question": "Anatomic entities in $$rats$$ where the $$apoc1$$ gene is expressed ",
 			"vars": [
 				{
@@ -714,7 +714,7 @@
 					"default": "rat",
 					"defaultvalue": "http://purl.uniprot.org/taxonomy/10116",
 					"type": "list",
-					"datasource": "speciescommonIRI",
+					"datasource": "speciesbgeecommonIRI",
 					"flavour": "autocomplete"
 				}
 			],
@@ -734,7 +734,7 @@
 					"name": "mouse",
 					"default": "Mouse",
 					"type": "list",
-					"datasource": "speciescommon",
+					"datasource": "speciesbgeecommon",
 					"flavour": "autocomplete"
 				},
 				{
@@ -1262,6 +1262,16 @@
 			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$",
 			"queryHeaders": {"Accept": "application/sparql-results+json"},
 			"fetchQuery": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT DISTINCT ?value {\n?species a up:Taxon .\n?species up:scientificName ?value .\n?species up:rank up:Species .\n\nFILTER(CONTAINS(lcase(str(?value)), \"$$searchString$$\"))\n} ORDER BY ?value"
+		},
+		"speciesbgeecommon": {
+			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$",
+			"queryHeaders": {"Accept": "application/sparql-results+json"},
+			"fetchQuery": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT DISTINCT ?value {\n?species a up:Taxon .\n?species up:commonName ?value .\n?species up:rank up:Species .\n\nFILTER(CONTAINS(lcase(str(?value)), \"$$searchString$$\"))\n} ORDER BY ?value"
+		},
+		"speciesbgeecommonIRI": {
+			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$",
+			"queryHeaders": {"Accept": "application/sparql-results+json"},
+			"fetchQuery": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT DISTINCT ?name ?value {\n?value a up:Taxon .\n?value up:commonName ?name .\n?value up:rank up:Species .\n\nFILTER(CONTAINS(lcase(str(?name)), \"$$searchString$$\"))\n} ORDER BY ?value"
 		},
 		"proteinsatoma": {
 			"fetchUrl": "https://sparql.omabrowser.org/lode/servlet/query?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
