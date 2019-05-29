@@ -522,10 +522,14 @@ class App extends Component {
 					if (onevar.type === 'list') {
 						if (onevar.flavour === 'autocomplete') {
 							this['fetchAutocomplete_'+onevar.name] = function(searchKey) {
+								var searchFilter = [];
 								if (typeof(onevar.fullList) !== "undefined" && onevar.fullList === true) {
 									searchKey = '';
 								}
-							return this.fetchAutocompleteBiosoda(onevar.datasource, searchKey, el.id, onevar.name);
+								if (typeof(onevar.extrafilter) !== "undefined") {
+									searchFilter = onevar.extrafilter;
+								}
+							return this.fetchAutocompleteBiosoda(onevar.datasource, searchKey, el.id, onevar.name, searchFilter);
 						};
 						functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<Async
 							key={onevar.name}
@@ -533,6 +537,7 @@ class App extends Component {
 							id={el.id + "_" + onevar.name}
 							classNamePrefix="my-select"
 							className="autocomplete"
+							dataExtrafilter={onevar.extrafilter}
 							defaultValue={{label: onevar.default}}
 							noOptionsMessage={({ inputValue }) => !inputValue && 'Type keyword above to perform search. Found options will be listed here ...'}
 							onChange={(evt) => this.handleChange(evt.value, el.id, onevar.name, evt)}
@@ -569,9 +574,19 @@ class App extends Component {
 	}, this);
 }
 
-	fetchAutocompleteBiosoda(datasource, searchString, questionid, varname){
+	fetchAutocompleteBiosoda(datasource, searchString, questionid, varname, searchFilter){
 		this.node_logger('async_'+questionid+"_"+varname, datasource, searchString, 0);
 		var query = biosodadata.datasources[datasource].fetchQuery.split(varmasker + 'searchString' + varmasker).join(searchString.toLowerCase())
+
+		// searchFilter contains a list of extrafilters which have to be taken into account
+		var extracounter = 0;
+		for (let oneextra of searchFilter) {
+			console.log(extracounter);
+			query = query.split(varmasker + 'extra_' + extracounter + varmasker).join('fruit fly');
+			console.log(queryURL);
+			extracounter++;
+		}
+
 		var queryURL = biosodadata.datasources[datasource].fetchUrl.replace(varmasker + 'query' + varmasker, encodeURIComponent(query))
 			.replace(varmasker + '&limit=limit' + varmasker, '&limit=' + this.state.lookupLimit)
 			.replace(varmasker + 'offset' + varmasker, this.state.lookupOffset)
