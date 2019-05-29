@@ -266,15 +266,8 @@
 			"runcheck": "2019-03-19, 20.78s, 63 results",
 			"parentIds": ["federatedOmaBgeeUniprot_disease"],
 			"estimatedseconds": "27",
-			"question": "What are the $$human$$ genes associated with $$cancer$$ and their orthologs expressed in the $$rat$$’s $$brain$$?",
+			"question": "What are the Homo sapiens’ genes associated with $$cancer$$ and their orthologs expressed in the $$rat$$’s $$brain$$?",
 			"vars": [
-				{
-					"name": "human",
-					"default": "Homo sapiens",
-					"type": "list",
-					"datasource": "species",
-					"flavour": "autocomplete"
-				},
 				{
 					"name": "cancer",
 					"default": "cancer",
@@ -296,7 +289,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX up:<http://purl.uniprot.org/core/>\nPREFIX taxon:<http://purl.uniprot.org/taxonomy/>\nPREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orth:<http://purl.org/net/orth#>\nPREFIX dcterms:<http://purl.org/dc/terms/>\nPREFIX obo:<http://purl.obolibrary.org/obo/>\nPREFIX lscr:<http://purl.org/lscr#>\nPREFIX genex:<http://purl.org/genex#>\nPREFIX sio: <http://semanticscience.org/resource/>\n\nSELECT DISTINCT ?protein1 ?orthologous_protein2 ?id WHERE {\n\tSELECT * {\n\t\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t\tSELECT ?protein1 WHERE {\n\t\t\t?protein1 a up:Protein;\n\t\t\t\tup:organism/up:scientificName '$$human$$' ;\n\t\t\t\tup:annotation ?annotation .\n\t\t\t\t?annotation rdfs:comment ?annotation_text.\n\t\t\t\t?annotation a up:Disease_Annotation .\n\t\t\t\tFILTER CONTAINS (?annotation_text, \"$$cancer$$\")\n\t\t\t}\n\t\t}\n\n\t\tSERVICE <https://sparql.omabrowser.org/sparql> {\n\t\t\tSELECT ?orthologous_protein2 ?protein1 ?id WHERE {\n\t\t\t\t?protein_OMA a orth:Protein .\n\t\t\t\t?orthologous_protein2 a orth:Protein .\n\t\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t\t?node2 orth:hasHomologousMember* ?protein_OMA .\n\t\t\t\t?node1 orth:hasHomologousMember* ?orthologous_protein2 \n\t\t\t\t.?orthologous_protein2 orth:organism/obo:RO_0002162/up:scientificName '$$rat$$' .\n\t\t\t\t?orthologous_protein2 sio:SIO_010079/lscr:xrefEnsemblGene ?id .\n\t\t\t\t?protein_OMA lscr:xrefUniprot ?protein1 .\n\t\t\t\tFILTER(?node1 != ?node2)\n\t\t\t}\n\t\t}\n\n\t\tSERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql> {\n\t\t\t?gene genex:isExpressedIn ?anatEntity .\n\t\t\t?anatEntity rdfs:label '$$brain$$' .\n\t\t\t?gene orth:organism ?org . \n\t\t\t?org obo:RO_0002162 taxon:10116 .\n\t\t\t?gene lscr:xrefEnsemblGene ?id .\n\t\t}\n\t}\n}",
+			"SPARQL": "PREFIX up:<http://purl.uniprot.org/core/>\nPREFIX taxon:<http://purl.uniprot.org/taxonomy/>\nPREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orth:<http://purl.org/net/orth#>\nPREFIX dcterms:<http://purl.org/dc/terms/>\nPREFIX obo:<http://purl.obolibrary.org/obo/>\nPREFIX lscr:<http://purl.org/lscr#>\nPREFIX genex:<http://purl.org/genex#>\nPREFIX sio: <http://semanticscience.org/resource/>\n\nSELECT DISTINCT ?protein1 ?orthologous_protein2 ?id WHERE {\n\tSELECT * {\n\t\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t\tSELECT ?protein1 WHERE {\n\t\t\t?protein1 a up:Protein;\n\t\t\t\tup:organism/up:scientificName 'Homo sapiens' ;\n\t\t\t\tup:annotation ?annotation .\n\t\t\t\t?annotation rdfs:comment ?annotation_text.\n\t\t\t\t?annotation a up:Disease_Annotation .\n\t\t\t\tFILTER CONTAINS (?annotation_text, \"$$cancer$$\")\n\t\t\t}\n\t\t}\n\n\t\tSERVICE <https://sparql.omabrowser.org/sparql> {\n\t\t\tSELECT ?orthologous_protein2 ?protein1 ?id WHERE {\n\t\t\t\t?protein_OMA a orth:Protein .\n\t\t\t\t?orthologous_protein2 a orth:Protein .\n\t\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t\t?node2 orth:hasHomologousMember* ?protein_OMA .\n\t\t\t\t?node1 orth:hasHomologousMember* ?orthologous_protein2 \n\t\t\t\t.?orthologous_protein2 orth:organism/obo:RO_0002162/up:scientificName '$$rat$$' .\n\t\t\t\t?orthologous_protein2 sio:SIO_010079/lscr:xrefEnsemblGene ?id .\n\t\t\t\t?protein_OMA lscr:xrefUniprot ?protein1 .\n\t\t\t\tFILTER(?node1 != ?node2)\n\t\t\t}\n\t\t}\n\n\t\tSERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql> {\n\t\t\t?gene genex:isExpressedIn ?anatEntity .\n\t\t\t?anatEntity rdfs:label '$$brain$$' .\n\t\t\t?gene orth:organism ?org . \n\t\t\t?org obo:RO_0002162 taxon:10116 .\n\t\t\t?gene lscr:xrefEnsemblGene ?id .\n\t\t}\n\t}\n}",
 			"fetchUrl": "http://biosoda.expasy.org:8890/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "http://biosoda.expasy.org:8890/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
