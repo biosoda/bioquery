@@ -151,14 +151,14 @@
 			"id": "federatedOmaBgeeUniprotQ1",
 			"runcheck": "2019-01-23, -s, no results but errors - hangs sometimes, probably due to our bgeelight server which is slow - the queries themself work ok if queried individually",
 			"parentIds": ["federatedOmaBgeeUniprot_genes"],
-			"question": "The orthologs of a gene that is expressed in the $$fruitfly$$’s $$brain$$ and the UniProt annotations of these orthologs.",
+			"question": "The orthologs of a gene that is expressed in the [[ $$fruitfly$$’s $$brain$$ ]] and the UniProt annotations of these orthologs.",
 			"estimatedseconds": "60",
 			"vars": [
 				{
 					"name": "brain",
 					"default": "brain",
 					"type": "list",
-					"datasource": "anatomicentities",
+					"datasource": "anatomicentities_extraspecies",
 					"flavour": "autocomplete",
 					"extrafilter": ["fruitfly"]
 				},
@@ -167,6 +167,7 @@
 					"default": "Fruit fly",
 					"type": "list",
 					"datasource": "speciesbgeecommon",
+					"extraempties": ["brain"],
 					"flavour": "autocomplete"
 				}
 			],
@@ -587,8 +588,8 @@
 				}
 			],
 			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT * {\n\t?species a up:Taxon .\n\t?species $$scientificname$$ ?name .\n\t?species up:rank up:Species .\n}",
-			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight",
+			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -605,8 +606,8 @@
 				}
 			],
 			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nSELECT ?geneName ?geneId {\n\t?gene a orth:Gene .\n\t?gene rdfs:label ?geneName .\n\t?gene dcterms:identifier ?geneId .\n\t?gene dcterms:description ?desc .\n\tFILTER CONTAINS ( ?desc, '$$lung$$' )\n}",
-			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight",
+			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -625,8 +626,8 @@
 				}
 			],
 			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT ?name {\n\t?gene a orth:Gene .\n\t?gene rdfs:label ?geneName .\n\t?gene orth:organism ?organism . #orth v2\n\t?organism obo:RO_0002162 ?taxon . #label: in taxon .\n\t?taxon up:scientificName ?name .\n\tFILTER ( UCASE(?geneName) = UCASE('$$Mtco1$$') )\n}",
-			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight",
+			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -645,8 +646,8 @@
 				}
 			],
 			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT distinct ?gene ?geneName {\n\t?gene a orth:Gene .\n\t?gene rdfs:label ?geneName .\n\t?gene orth:organism ?taxon .\n\t?taxon obo:RO_0002162 ?species . #in taxon property .\n\t?species up:commonName ?commonName .\n\tFILTER ( lcase(str(?commonName)) = lcase(\"$$fruitfly$$\") ) .\n}",
-			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight",
+			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -672,8 +673,8 @@
 				}
 			],
 			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT DISTINCT ?anatName {\n\t?cond genex:hasAnatomicalEntity ?anatEntity .\n\t?anatEntity rdfs:label ?anatName .\n\t?cond genex:hasDevelopmentalStage ?stage .\n\t?stage rdfs:label ?stageName .\n\t?cond obo:RO_0002162 ?taxon .\n\t?taxon up:commonName ?commonName .\n\tFILTER ( lcase(str(?commonName)) = lcase(\"$$human$$\") ).\n\tFILTER ( CONTAINS(?stageName, \"$$youngadult$$\") )\n}",
-			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight",
+			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -692,8 +693,8 @@
 				}
 			],
 			"SPARQL": "PREFIX orth: <http://purl.org/net/orth#>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT ?anatEntity ?anatName {\n\t?seq a orth:Gene .\n\t?expr genex:hasSequenceUnit ?seq .\n\t?seq rdfs:label ?geneName .\n\t?expr genex:hasExpressionCondition ?cond .\n\t?cond genex:hasAnatomicalEntity ?anatEntity .\n\t?anatEntity rdfs:label ?anatName .\n\tFILTER ( LCASE(?geneName) = LCASE('$$apoc1$$') )\n} $$innerlimit$$",
-			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight",
+			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -720,8 +721,8 @@
 				}
 			],
 			"SPARQL": "PREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT DISTINCT ?anatEntity ?anatName {\n\t?seq a orth:Gene .\n\t?expr genex:hasSequenceUnit ?seq .\n\t?seq rdfs:label ?geneName .\n\t?expr genex:hasExpressionCondition ?cond .\n\t?cond genex:hasAnatomicalEntity ?anatEntity .\n\t?anatEntity rdfs:label ?anatName .\n\t?cond obo:RO_0002162 <$$rats$$> . \n\tFILTER (LCASE(?geneName) = LCASE('$$apoc1$$') )\n}",
-			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight",
+			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -754,8 +755,8 @@
 				}
 			],
 			"SPARQL": "PREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT DISTINCT ?anatEntity ?anatName {\n\t?seq a orth:Gene .\n\t?expr genex:hasSequenceUnit ?seq .\n\t?seq rdfs:label ?geneName .\n\t?expr genex:hasExpressionCondition ?cond .\n\t?cond genex:hasAnatomicalEntity ?anatEntity .\n\t?anatEntity rdfs:label ?anatName .\n\t?cond genex:hasDevelopmentalStage ?stage .\n\t?stage rdfs:label\n\t?stageName .\n\t?cond obo:RO_0002162 ?taxon . #in taxon property .\n\t?taxon up:commonName ?commonName .\n\tFILTER ( lcase(str(?commonName)) = lcase(\"$$mouse$$\") ) .\n\tFILTER ( CONTAINS(?stageName,'$$adult$$') && LCASE(?geneName) = LCASE('$$apoc1$$') )\n}",
-			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight",
+			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -1252,7 +1253,7 @@
 		"anatomicentities_extraspecies": {
 			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$",
 			"queryHeaders": {"Accept": "application/sparql-results+json"},
-			"fetchQuery": "PREFIX genex: <http://purl.org/genex#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT DISTINCT ?value {\n?gene genex:isExpressedIn ?anat .\n?anat rdfs:label ?value .\n?gene orth:organism ?o .\n?o obo:RO_0002162 ?taxon .\n?taxon up:commonName \"$$extra_0$$\" .\n?anatEntity a genex:AnatomicalEntity .\nFILTER(CONTAINS(lcase(str(?value)), \"$$searchString$$\"))\n}"
+			"fetchQuery": "PREFIX genex: <http://purl.org/genex#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT DISTINCT ?value {\n?gene genex:isExpressedIn ?anat .\n?anat rdfs:label ?value .\n?gene orth:organism ?o .\n?o obo:RO_0002162 ?taxon .\n?taxon up:commonName \"$$extra_0$$\" .\n?anat a genex:AnatomicalEntity .\nFILTER(CONTAINS(lcase(str(?value)), \"$$searchString$$\"))\n}"
 		},
 		"stages": {
 			"fetchUrl": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=$$query$$",
