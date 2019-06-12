@@ -164,7 +164,7 @@
 				},
 				{
 					"name": "fruitfly",
-					"default": "Fruit fly",
+					"default": "fruit fly",
 					"type": "list",
 					"datasource": "speciesbgeecommon",
 					"extraempties": ["brain"],
