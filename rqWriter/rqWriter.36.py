@@ -9,7 +9,7 @@ import os
 from os import listdir
 
 sourcefile = '../biosoda_frontend/src/biosodadata.json'
-destinationpath = './'
+destinationpath = './rq'
 
 # remove all query files
 allfiles = os.listdir(destinationpath)
@@ -21,7 +21,7 @@ with open(sourcefile) as json_file:
     data = json.load(json_file)
     for q in data['questions']:
         if 'SPARQL' in q: # todo: only create file when question has a target file name
-            f = open(destinationpath + q['id'] + ".rq", "w") # todo: add target filename to json according to paper
+            f = open(destinationpath + '/' + q['id'] + ".rq", "w") # todo: add target filename to json according to paper
             print('==')
             content = '';
             content = content + "\n" + '### id: ' + q['id']
