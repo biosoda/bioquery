@@ -1,6 +1,6 @@
 ### id: bgeeQ3
 ### handled by endpoint: http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres
-### question: Which species the $$Mtco1$$ gene is present (without considering synonyms)?
+### question: Which species the Mt-co1 gene is present (without considering synonyms)?
 PREFIX up: <http://purl.uniprot.org/core/>
 PREFIX orth: <http://purl.org/net/orth#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
@@ -10,6 +10,6 @@ SELECT ?name {
 	?gene orth:organism ?organism . #orth v2
 	?organism obo:RO_0002162 ?taxon . #label: in taxon .
 	?taxon up:scientificName ?name .
-	FILTER ( UCASE(?geneName) = UCASE('$$Mtco1$$') )
+	FILTER ( UCASE(?geneName) = UCASE('Mt-co1') )
 }
 ### this .rq file ist created by bioSODA rqWriter

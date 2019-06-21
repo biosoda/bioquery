@@ -1,14 +1,14 @@
 ### id: federatedOmaUniprotQ2
 ### handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### question: $$mouse$$'s proteins encoded by genes that are orthologous to $$rabbit$$'s $$HBBY$$ gene and their cross reference links to Uniprot
+### question: Mouse's proteins encoded by genes that are orthologous to Rabbit's HBB-Y gene and their cross reference links to Uniprot
 PREFIX lscr: <http://purl.org/lscr#>
 PREFIX orth: <http://purl.org/net/orth#>
 PREFIX up: <http://purl.uniprot.org/core/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 SELECT DISTINCT ?PROTEIN_1 ?PROTEIN_2 ?UNIPROT_XREF_1 ?UNIPROT_XREF_2 WHERE {
 	SERVICE <http://sparql.uniprot.org/sparql> {
-		?taxon_1 up:commonName '$$mouse$$' .
-		?taxon_2 up:commonName '$$rabbit$$' .
+		?taxon_1 up:commonName 'Mouse' .
+		?taxon_2 up:commonName 'Rabbit' .
 	}
 	SERVICE <https://sparql.omabrowser.org/sparql> {
 		?cluster a orth:OrthologsCluster .
@@ -18,7 +18,7 @@ SELECT DISTINCT ?PROTEIN_1 ?PROTEIN_2 ?UNIPROT_XREF_1 ?UNIPROT_XREF_2 WHERE {
 		?node1 orth:hasHomologousMember* ?PROTEIN_1 .
 		?PROTEIN_1 a orth:Protein .
 		?PROTEIN_1 orth:organism/obo:RO_0002162 ?taxon_1 ;
-			rdfs:label '$$HBBY$$' ;
+			rdfs:label 'HBB-Y' ;
 			lscr:xrefUniprot ?UNIPROT_XREF_1 .
 		?PROTEIN_2 a orth:Protein .
 		?PROTEIN_2 orth:organism/obo:RO_0002162 ?taxon_2 .

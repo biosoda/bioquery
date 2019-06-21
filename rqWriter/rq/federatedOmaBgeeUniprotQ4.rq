@@ -1,6 +1,6 @@
 ### id: federatedOmaBgeeUniprotQ4
 ### handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### question: Which are the proteins associated with "$$glioblastoma$$" and the orthologs expressed in the rat’s $$brain$$?
+### question: Which are the proteins associated with "glioblastoma" and the orthologs expressed in the rat’s brain?
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX orth: <http://purl.org/net/orth#>
@@ -18,7 +18,7 @@ SELECT DISTINCT ?protein ?orthologous_protein_rat ?id ?annotation_text WHERE {
 				up:annotation ?annotation .
 				?annotation rdfs:comment ?annotation_text .
 				?annotation a up:Disease_Annotation .
-				FILTER CONTAINS (?annotation_text, "$$glioblastoma$$")
+				FILTER CONTAINS (?annotation_text, "glioblastoma")
 			}
 		}
 		SERVICE <https://sparql.omabrowser.org/sparql> {
@@ -39,7 +39,7 @@ SELECT DISTINCT ?protein ?orthologous_protein_rat ?id ?annotation_text WHERE {
 		}
 		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres> {
 			?gene genex:isExpressedIn ?a .
-			?a rdfs:label "$$brain$$" .
+			?a rdfs:label "brain" .
 			?gene orth:organism ?s . 
 			?s obo:RO_0002162 taxon:10116. 
 			?gene lscr:xrefEnsemblGene ?id .

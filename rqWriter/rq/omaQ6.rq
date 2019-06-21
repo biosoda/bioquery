@@ -1,6 +1,6 @@
 ### id: omaQ6
 ### handled by endpoint: https://sparql.omabrowser.org/lode/sparql
-### question: Proteins that are paralogous to $$HUMAN22168$$ OMA protein (identifier) and their cross reference links to OMA and Uniprot.
+### question: Proteins that are paralogous to HUMAN04027 OMA protein (identifier) and their cross reference links to OMA and Uniprot.
 PREFIX orth: <http://purl.org/net/orth#>
 PREFIX lscr: <http://purl.org/lscr#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -12,7 +12,7 @@ SELECT ?protein2 ?Oma_link ?Uniprot_link WHERE {
 	?node2 orth:hasHomologousMember* ?protein2 .
 	?node1 orth:hasHomologousMember* ?protein1 .
 	?protein1 a orth:Protein .
-	?protein1 dct:identifier '$$HUMAN22168$$' .
+	?protein1 dct:identifier 'HUMAN04027' .
 	?protein2 a orth:Protein .
 	?protein2 lscr:xrefUniprot ?Uniprot_link .
 	?protein2 rdfs:seeAlso ?Oma_link .

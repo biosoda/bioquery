@@ -1,10 +1,10 @@
 ### id: uniprotQ2
 ### handled by endpoint: https://sparql.uniprot.org/sparql
-### question: Select all UniProt proteins that were integrated on the $$date$$
+### question: Select all UniProt proteins that were integrated on the 2010-11-30
 PREFIX up: <http://purl.uniprot.org/core/>
 SELECT ?protein WHERE {
 	?protein a up:Protein .
-	?protein up:created '$$date$$'^^xsd:date
+	?protein up:created '2010-11-30'^^xsd:date
 }
 $$innerlimit$$
 ### this .rq file ist created by bioSODA rqWriter

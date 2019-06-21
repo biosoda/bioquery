@@ -1,6 +1,6 @@
 ### id: uniprotQ10
 ### handled by endpoint: https://sparql.uniprot.org/sparql
-### question: Select all $$EColiK12$$ (including strains) UniProt proteins and their amino acid sequence
+### question: Select all E-Coli K12 (including strains) UniProt proteins and their amino acid sequence
 PREFIX up: <http://purl.uniprot.org/core/>
 PREFIX taxon: <http://purl.uniprot.org/taxonomy/>
 PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -9,12 +9,12 @@ SELECT ?protein ?aa WHERE {
 	?protein a up:Protein .
 	?protein up:organism ?organism .
 	{
-		?protein up:organism $$EColiK12$$ .
+		?protein up:organism E-Coli K12 .
 	}
 	UNION
 	{
 		?protein up:organism ?organism .
-		?organism rdfs:subClassOf $$EColiK12$$ .
+		?organism rdfs:subClassOf E-Coli K12 .
 	}
 	?protein up:sequence ?s .
 	?s rdf:value ?aa

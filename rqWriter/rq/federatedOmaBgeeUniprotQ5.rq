@@ -1,6 +1,6 @@
 ### id: federatedOmaBgeeUniprotQ5
 ### handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### question: What are the Homo sapiens’ genes associated with $$cancer$$ and their orthologs expressed in the $$rat$$’s $$brain$$?
+### question: What are the Homo sapiens’ genes associated with cancer and their orthologs expressed in the Rattus norvegicus’s brain?
 PREFIX up:<http://purl.uniprot.org/core/>
 PREFIX taxon:<http://purl.uniprot.org/taxonomy/>
 PREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>
@@ -20,7 +20,7 @@ SELECT DISTINCT ?protein1 ?orthologous_protein2 ?id WHERE {
 				up:annotation ?annotation .
 				?annotation rdfs:comment ?annotation_text.
 				?annotation a up:Disease_Annotation .
-				FILTER CONTAINS (?annotation_text, "$$cancer$$")
+				FILTER CONTAINS (?annotation_text, "cancer")
 			}
 		}
 
@@ -33,7 +33,7 @@ SELECT DISTINCT ?protein1 ?orthologous_protein2 ?id WHERE {
 				?cluster orth:hasHomologousMember ?node2 .
 				?node2 orth:hasHomologousMember* ?protein_OMA .
 				?node1 orth:hasHomologousMember* ?orthologous_protein2 
-				.?orthologous_protein2 orth:organism/obo:RO_0002162/up:scientificName '$$rat$$' .
+				.?orthologous_protein2 orth:organism/obo:RO_0002162/up:scientificName 'Rattus norvegicus' .
 				?orthologous_protein2 sio:SIO_010079/lscr:xrefEnsemblGene ?id .
 				?protein_OMA lscr:xrefUniprot ?protein1 .
 				FILTER(?node1 != ?node2)
@@ -42,7 +42,7 @@ SELECT DISTINCT ?protein1 ?orthologous_protein2 ?id WHERE {
 
 		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres> {
 			?gene genex:isExpressedIn ?anatEntity .
-			?anatEntity rdfs:label '$$brain$$' .
+			?anatEntity rdfs:label 'brain' .
 			?gene orth:organism ?org . 
 			?org obo:RO_0002162 taxon:10116 .
 			?gene lscr:xrefEnsemblGene ?id .

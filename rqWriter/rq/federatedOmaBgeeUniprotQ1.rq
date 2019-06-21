@@ -1,6 +1,6 @@
 ### id: federatedOmaBgeeUniprotQ1
 ### handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### question: The orthologs of a gene that is expressed in the [[ $$fruitfly$$’s $$brain$$ ]] and the UniProt annotations of these orthologs.
+### question: The orthologs of a gene that is expressed in the [[ fruit fly’s brain ]] and the UniProt annotations of these orthologs.
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -13,10 +13,10 @@ SELECT distinct ?gene_id (?protein2 as ?orthologousTo) ?uniprot ?annotation_text
 		SELECT DISTINCT ?gene ?gene_id {
 			?gene genex:isExpressedIn ?anat .
 			?gene dcterms:identifier ?gene_id .
-			?anat rdfs:label "$$brain$$"^^xsd:string .
+			?anat rdfs:label "brain"^^xsd:string .
 			?gene orth:organism ?o .
 			?o obo:RO_0002162 ?taxon .
-			?taxon up:commonName "$$fruitfly$$" .
+			?taxon up:commonName "fruit fly" .
 		}
 		$$innerlimit$$
 	}

@@ -1,6 +1,6 @@
 ### id: federatedOmaBgeeUniprotQ2
 ### handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### question: Which are the genes in $$primates$$ orthologous to a gene that is expressed in the $$fruitfly$$’s $$brain$$ and the UniProt annotations of the genes.
+### question: Which are the genes in Primates orthologous to a gene that is expressed in the fruit fly’s brain and the UniProt annotations of the genes.
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
@@ -13,11 +13,11 @@ SELECT DISTINCT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {
 		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres> {
 			SELECT DISTINCT ?gene ?id {
 				?gene genex:isExpressedIn ?anat .
-				?anat rdfs:label '$$brain$$'^^xsd:string .
+				?anat rdfs:label 'brain'^^xsd:string .
 				?gene orth:organism ?o .
 				?o obo:RO_0002162 ?taxon .
 				?gene dcterms:identifier ?id .
-				?taxon up:commonName '$$fruitfly$$' .
+				?taxon up:commonName 'fruit fly' .
 			}
 			$$innerlimit$$
 		}
@@ -37,7 +37,7 @@ SELECT DISTINCT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {
 				?clusterPrimates orth:hasTaxonomicRange ?taxRange .
 				?taxRange orth:taxRange ?taxLevel .
 				?protein2 lscr:xrefUniprot ?uniprot .
-				VALUES ?taxLevel { '$$primates$$' }
+				VALUES ?taxLevel { 'Primates' }
 				FILTER ( ?node1 != ?node2 )
 			}
 		}

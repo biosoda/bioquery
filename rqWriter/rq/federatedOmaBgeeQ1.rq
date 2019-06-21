@@ -1,6 +1,6 @@
 ### id: federatedOmaBgeeQ1
 ### handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### question: Which are the $$mouse$$'s proteins encoded by genes which are expressed in the $$liver$$ and are orthologous to $$human$$'s $$INS$$ gene?
+### question: Which are the Mouse's proteins encoded by genes which are expressed in the liver and are orthologous to Human's INS gene?
 PREFIX up: <http://purl.uniprot.org/core/>
 PREFIX genex: <http://purl.org/genex#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
@@ -10,8 +10,8 @@ PREFIX lscr: <http://purl.org/lscr#>
 SELECT ?Oma_link {
 	SELECT DISTINCT * {
 		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql> {
-			?taxon up:commonName '$$human$$' .
-			?taxon2 up:commonName '$$mouse$$' .
+			?taxon up:commonName 'Human' .
+			?taxon2 up:commonName 'Mouse' .
 		}
 		SERVICE <https://sparql.omabrowser.org/sparql> {
 			?cluster a orth:OrthologsCluster .
@@ -20,7 +20,7 @@ SELECT ?Oma_link {
 			?node2 orth:hasHomologousMember* ?protein2 .
 			?node1 orth:hasHomologousMember* ?protein1 .
 			?protein1 a orth:Protein .
-			?protein1 rdfs:label '$$INS$$' ;
+			?protein1 rdfs:label 'INS' ;
 				orth:organism/obo:RO_0002162 ?taxon .
 			?protein2 a orth:Protein ;
 				sio:SIO_010079 ?gene ; #is encoded by
@@ -32,7 +32,7 @@ SELECT ?Oma_link {
 		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql> {
 			?geneB genex:isExpressedIn ?anat ;
 				lscr:xrefEnsemblGene ?geneEns .
-			?anat rdfs:label '$$liver$$'^^xsd:string .
+			?anat rdfs:label 'liver'^^xsd:string .
 			?geneB orth:organism ?o .
 			?o obo:RO_0002162 ?taxon2 .
 		}

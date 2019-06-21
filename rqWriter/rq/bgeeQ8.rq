@@ -1,6 +1,6 @@
 ### id: bgeeQ8
 ### handled by endpoint: http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres
-### question: Anatomic entities in $$rats$$ where the $$apoc1$$ gene is expressed 
+### question: Anatomic entities in rat where the apoc1 gene is expressed 
 PREFIX orth: <http://purl.org/net/orth#>
 PREFIX up: <http://purl.uniprot.org/core/>
 PREFIX genex: <http://purl.org/genex#>
@@ -12,7 +12,7 @@ SELECT DISTINCT ?anatEntity ?anatName {
 	?expr genex:hasExpressionCondition ?cond .
 	?cond genex:hasAnatomicalEntity ?anatEntity .
 	?anatEntity rdfs:label ?anatName .
-	?cond obo:RO_0002162 <$$rats$$> . 
-	FILTER (LCASE(?geneName) = LCASE('$$apoc1$$') )
+	?cond obo:RO_0002162 <rat> . 
+	FILTER (LCASE(?geneName) = LCASE('apoc1') )
 }
 ### this .rq file ist created by bioSODA rqWriter

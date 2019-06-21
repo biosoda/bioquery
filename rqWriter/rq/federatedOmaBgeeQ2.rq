@@ -1,6 +1,6 @@
 ### id: federatedOmaBgeeQ2
 ### handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### question: Which are the orthologs of a gene that is expressed in the $$fruitfly$$’s $$brain$$?
+### question: Which are the orthologs of a gene that is expressed in the Fruit fly’s brain?
 PREFIX up: <http://purl.uniprot.org/core/>
 PREFIX genex: <http://purl.org/genex#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
@@ -11,11 +11,11 @@ SELECT DISTINCT ?id ?OMA_LINK WHERE {
 		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql> {
 			SELECT DISTINCT ?gene ?id {
 				?gene genex:isExpressedIn ?anat .
-				?anat rdfs:label '$$brain$$'^^xsd:string .
+				?anat rdfs:label 'brain'^^xsd:string .
 				?gene orth:organism ?o .
 				?o obo:RO_0002162 ?taxon .
 				?gene dcterms:identifier ?id .
-				?taxon up:commonName '$$fruitfly$$' .
+				?taxon up:commonName 'Fruit fly' .
 			}
 			$$innerlimit$$
 		}

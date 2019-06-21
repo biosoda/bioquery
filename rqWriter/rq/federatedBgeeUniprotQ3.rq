@@ -1,6 +1,6 @@
 ### id: federatedBgeeUniprotQ3
 ### handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### question: Genes expressed in the $$human$$'s $$brain$$ during the $$infantstage$$ and their UniProt disease annotations
+### question: Genes expressed in the Human's brain during the infant stage and their UniProt disease annotations
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX up: <http://purl.uniprot.org/core/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
@@ -15,11 +15,11 @@ SELECT DISTINCT ?geneEns ?uniprot ?annotation_text {
 				lscr:xrefEnsemblGene ?geneEns .
 			?cond genex:hasDevelopmentalStage ?st .
 			?cond genex:hasAnatomicalEntity ?anat .
-			?st rdfs:label '$$infantstage$$'^^xsd:string .
-			?anat rdfs:label '$$brain$$'^^xsd:string .
+			?st rdfs:label 'infant stage'^^xsd:string .
+			?anat rdfs:label 'brain'^^xsd:string .
 			?geneB orth:organism ?o .
 			?o obo:RO_0002162 ?taxon2 .
-			?taxon2 up:commonName '$$human$$' .
+			?taxon2 up:commonName 'Human' .
 		}
 		$$innerlimit$$
 	}

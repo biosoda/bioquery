@@ -1,6 +1,6 @@
 ### id: bgeeQ10
 ### handled by endpoint: http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres
-### question: Anatomic entities at the $$mouse$$’s $$adult$$ stage where the $$apoc1$$ gene is expressed
+### question: Anatomic entities at the Mouse’s adult stage where the apoc1 gene is expressed
 PREFIX orth: <http://purl.org/net/orth#>
 PREFIX up: <http://purl.uniprot.org/core/>
 PREFIX genex: <http://purl.org/genex#>
@@ -17,7 +17,7 @@ SELECT DISTINCT ?anatEntity ?anatName {
 	?stageName .
 	?cond obo:RO_0002162 ?taxon . #in taxon property .
 	?taxon up:commonName ?commonName .
-	FILTER ( lcase(str(?commonName)) = lcase("$$mouse$$") ) .
-	FILTER ( CONTAINS(?stageName,'$$adult$$') && LCASE(?geneName) = LCASE('$$apoc1$$') )
+	FILTER ( lcase(str(?commonName)) = lcase("Mouse") ) .
+	FILTER ( CONTAINS(?stageName,'adult') && LCASE(?geneName) = LCASE('apoc1') )
 }
 ### this .rq file ist created by bioSODA rqWriter

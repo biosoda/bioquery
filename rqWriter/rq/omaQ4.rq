@@ -1,6 +1,6 @@
 ### id: omaQ4
 ### handled by endpoint: https://sparql.omabrowser.org/lode/sparql
-### question: All proteins that are orthologous to $$ENSLACG00000002497$$ Ensembl gene (identifier) 
+### question: All proteins that are orthologous to ENSLACG00000002497 Ensembl gene (identifier) 
 PREFIX ensembl: <http://rdf.ebi.ac.uk/resource/ensembl/>
 PREFIX sio: <http://semanticscience.org/resource/>
 PREFIX orth: <http://purl.org/net/orth#>
@@ -17,7 +17,7 @@ SELECT ?OMA_LINK WHERE {
 	########
 	#Specify the protein to look for its orthologs
 	?protein1 sio:SIO_010079 ?gene .
-	?gene lscr:xrefEnsemblGene ensembl:$$ENSLACG00000002497$$ .
+	?gene lscr:xrefEnsemblGene ensembl:ENSLACG00000002497 .
 	########
 	#The OMA link to the second protein
 	?protein2 rdfs:seeAlso ?OMA_LINK .

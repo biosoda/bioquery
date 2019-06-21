@@ -1,6 +1,6 @@
 ### id: federatedOmaBgeeUniprotQ3
 ### handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### question: Which are the genes in $$human$$ associated to a disease that are orthologous to a gene expressed in the $$rat$$’s brain?
+### question: Which are the genes in Human associated to a disease that are orthologous to a gene expressed in the rat’s brain?
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
@@ -16,12 +16,12 @@ SELECT DISTINCT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {
 			?gene orth:organism ?o .
 			?o obo:RO_0002162 ?taxon .
 			?gene dcterms:identifier ?id .
-			?taxon up:commonName '$$rat$$' .
+			?taxon up:commonName 'rat' .
 		}
 		$$innerlimit$$
 	}
 	SERVICE <http://sparql.uniprot.org/sparql> {
-		?taxon2 up:commonName '$$human$$' .
+		?taxon2 up:commonName 'Human' .
 	}
 	SERVICE <https://sparql.omabrowser.org/lode/sparql> {
 		?protein2 a orth:Protein .

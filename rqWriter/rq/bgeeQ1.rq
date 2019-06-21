@@ -1,10 +1,10 @@
 ### id: bgeeQ1
 ### handled by endpoint: http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres
-### question: $$scientificname$$ of species in bgee with their uniprot taxon
+### question: Scientific name of species in bgee with their uniprot taxon
 PREFIX up: <http://purl.uniprot.org/core/>
 SELECT * {
 	?species a up:Taxon .
-	?species $$scientificname$$ ?name .
+	?species Scientific name ?name .
 	?species up:rank up:Species .
 }
 ### this .rq file ist created by bioSODA rqWriter

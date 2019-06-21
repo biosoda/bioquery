@@ -1,6 +1,6 @@
 ### id: uniprotQ6
 ### handled by endpoint: https://sparql.uniprot.org/sparql
-### question: Select all human UniProt entries with a sequence variant that leads to a $$lossoffunction$$
+### question: Select all human UniProt entries with a sequence variant that leads to a loss of function
 PREFIX up: <http://purl.uniprot.org/core/>
 PREFIX taxon: <http://purl.uniprot.org/taxonomy/>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -10,6 +10,6 @@ SELECT ?protein ?annotation WHERE {
 	?protein up:annotation ?annotation .
 	?annotation a up:Natural_Variant_Annotation .
 	?annotation rdfs:comment ?annotation .
-	FILTER ( CONTAINS(?annotation,'$$lossoffunction$$') )
+	FILTER ( CONTAINS(?annotation,'loss of function') )
 }
 ### this .rq file ist created by bioSODA rqWriter
