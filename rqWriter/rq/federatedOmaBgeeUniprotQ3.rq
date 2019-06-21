@@ -18,7 +18,7 @@ SELECT DISTINCT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {
 			?gene dcterms:identifier ?id .
 			?taxon up:commonName 'rat' .
 		}
-		$$innerlimit$$
+		LIMIT 10
 	}
 	SERVICE <http://sparql.uniprot.org/sparql> {
 		?taxon2 up:commonName 'Human' .

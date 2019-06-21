@@ -19,7 +19,7 @@ SELECT DISTINCT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {
 				?gene dcterms:identifier ?id .
 				?taxon up:commonName 'fruit fly' .
 			}
-			$$innerlimit$$
+			LIMIT 10
 		}
 		SERVICE <https://sparql.omabrowser.org/sparql> {
 			SELECT ?id ?OMA_LINK ?uniprot{

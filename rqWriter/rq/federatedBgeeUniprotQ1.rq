@@ -25,5 +25,5 @@ SELECT DISTINCT ?anat_label ?GO_CLASS ?GO_LABEL {
 		?GO_CLASS rdfs:label ?GO_LABEL .
 	}
 }
-$$innerlimit$$
+LIMIT 10
 ### this .rq file ist created by bioSODA rqWriter

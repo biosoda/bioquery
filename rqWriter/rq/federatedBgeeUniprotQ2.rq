@@ -18,7 +18,7 @@ SELECT DISTINCT ?geneEns ?uniprot ?annotation_text {
 			?o obo:RO_0002162 ?taxon2 .
 			?taxon2 up:commonName 'Human' .
 		}
-		$$innerlimit$$
+		LIMIT 10
 	}
 	SERVICE <http://sparql.uniprot.org/sparql> {
 		?uniprot rdfs:seeAlso / up:transcribedFrom ?geneEns .

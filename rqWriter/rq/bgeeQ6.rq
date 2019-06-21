@@ -12,5 +12,5 @@ SELECT ?anatEntity ?anatName {
 	?cond genex:hasAnatomicalEntity ?anatEntity .
 	?anatEntity rdfs:label ?anatName .
 	FILTER ( LCASE(?geneName) = LCASE('apoc1') )
-} $$innerlimit$$
+} LIMIT 10
 ### this .rq file ist created by bioSODA rqWriter

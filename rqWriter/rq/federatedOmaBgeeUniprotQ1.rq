@@ -18,7 +18,7 @@ SELECT distinct ?gene_id (?protein2 as ?orthologousTo) ?uniprot ?annotation_text
 			?o obo:RO_0002162 ?taxon .
 			?taxon up:commonName "fruit fly" .
 		}
-		$$innerlimit$$
+		LIMIT 10
 	}
 
 	SERVICE <https://sparql.omabrowser.org/sparql> {

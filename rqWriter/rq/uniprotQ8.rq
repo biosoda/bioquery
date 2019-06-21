@@ -11,5 +11,5 @@ SELECT ?protein ?begin ?end WHERE {
 	?range faldo:begin/faldo:position ?begin .
 	?range faldo:end/faldo:position ?end .
 } 
-$$innerlimit$$
+LIMIT 10
 ### this .rq file ist created by bioSODA rqWriter

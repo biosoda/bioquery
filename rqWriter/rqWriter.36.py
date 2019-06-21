@@ -28,9 +28,9 @@ with open(sourcefile) as json_file:
             tmpQuestion = q['question']
             for onevariable in q['vars']:
                 tmptoken = separator + onevariable['name'] + separator
-                print(tmptoken)
                 tmpSPARQL = tmpSPARQL.replace(tmptoken, onevariable['default'])
                 tmpQuestion = tmpQuestion.replace(tmptoken, onevariable['default'])
+            tmpSPARQL = tmpSPARQL.replace(separator + 'innerlimit' + separator, 'LIMIT 10')
             print('==')
             content = '';
             content = content + "\n" + '### id: ' + q['id']

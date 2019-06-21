@@ -6,5 +6,5 @@ SELECT ?protein WHERE {
 	?protein a up:Protein .
 	?protein up:created '2010-11-30'^^xsd:date
 }
-$$innerlimit$$
+LIMIT 10
 ### this .rq file ist created by bioSODA rqWriter

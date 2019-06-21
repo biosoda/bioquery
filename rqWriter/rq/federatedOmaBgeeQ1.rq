@@ -37,7 +37,7 @@ SELECT ?Oma_link {
 			?o obo:RO_0002162 ?taxon2 .
 		}
 	}
-	$$innerlimit$$
+	LIMIT 10
 }
-$$innerlimit$$
+LIMIT 10
 ### this .rq file ist created by bioSODA rqWriter

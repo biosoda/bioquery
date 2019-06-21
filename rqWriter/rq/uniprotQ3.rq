@@ -5,5 +5,5 @@ PREFIX up: <http://purl.uniprot.org/core/>
 SELECT * WHERE {
 	?target a taxa .
 }
-$$innerlimit$$
+LIMIT 10
 ### this .rq file ist created by bioSODA rqWriter

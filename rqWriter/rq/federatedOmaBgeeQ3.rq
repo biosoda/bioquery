@@ -16,7 +16,7 @@ SELECT DISTINCT ?id ?gene ?OMA_LINK WHERE {
 				?o obo:RO_0002162 ?taxon .
 				?gene dcterms:identifier ?id .
 				?taxon up:commonName 'Fruit fly' .
-			} $$innerlimit$$
+			} LIMIT 10
 		}
 		SERVICE <https://sparql.omabrowser.org/sparql> {
 			?protein2 a orth:Protein .
@@ -37,5 +37,5 @@ SELECT DISTINCT ?id ?gene ?OMA_LINK WHERE {
 		}
 	}
 }
-$$innerlimit$$
+LIMIT 10
 ### this .rq file ist created by bioSODA rqWriter

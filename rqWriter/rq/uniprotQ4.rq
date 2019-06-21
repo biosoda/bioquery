@@ -9,5 +9,5 @@ SELECT ?taxon ?target WHERE {
 	?taxon up:scientificName ?target .
 	?taxon rdfs:subClassOf taxon:2 .
 }
-$$innerlimit$$
+LIMIT 10
 ### this .rq file ist created by bioSODA rqWriter

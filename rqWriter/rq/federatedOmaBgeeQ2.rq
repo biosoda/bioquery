@@ -17,7 +17,7 @@ SELECT DISTINCT ?id ?OMA_LINK WHERE {
 				?gene dcterms:identifier ?id .
 				?taxon up:commonName 'Fruit fly' .
 			}
-			$$innerlimit$$
+			LIMIT 10
 		}
 		SERVICE <https://sparql.omabrowser.org/lode/sparql> {
 			?cluster a orth:OrthologsCluster .
@@ -31,5 +31,5 @@ SELECT DISTINCT ?id ?OMA_LINK WHERE {
 		}
 	}
 }
-$$innerlimit$$
+LIMIT 10
 ### this .rq file ist created by bioSODA rqWriter
