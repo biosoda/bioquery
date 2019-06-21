@@ -1,0 +1,17 @@
+### id: bgeeQ5
+### handled by endpoint: http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres
+### question: $$human$$ anatomic entities at $$youngadult$$ developmental stage
+PREFIX up: <http://purl.uniprot.org/core/>
+PREFIX genex: <http://purl.org/genex#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT DISTINCT ?anatName {
+	?cond genex:hasAnatomicalEntity ?anatEntity .
+	?anatEntity rdfs:label ?anatName .
+	?cond genex:hasDevelopmentalStage ?stage .
+	?stage rdfs:label ?stageName .
+	?cond obo:RO_0002162 ?taxon .
+	?taxon up:commonName ?commonName .
+	FILTER ( lcase(str(?commonName)) = lcase("$$human$$") ).
+	FILTER ( CONTAINS(?stageName, "$$youngadult$$") )
+}
+### this .rq file ist created by bioSODA rqWriter

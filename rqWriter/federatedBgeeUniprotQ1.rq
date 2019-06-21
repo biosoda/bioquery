@@ -1,0 +1,29 @@
+### id: federatedBgeeUniprotQ1
+### handled by endpoint: http://biosoda.expasy.org:8890/sparql
+### question: Anatomic entities where the $$ins$$ $$zebrafish$$ gene is expressed and its gene GO annotations.
+PREFIX genex: <http://purl.org/genex#>
+PREFIX lscr: <http://purl.org/lscr#>
+PREFIX orth: <http://purl.org/net/orth#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX up: <http://purl.uniprot.org/core/>
+SELECT DISTINCT ?anat_label ?GO_CLASS ?GO_LABEL {
+	SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql> {
+		SELECT ?geneEns ?anat_label {
+			?geneB genex:isExpressedIn ?anat;
+			rdfs:label '$$ins$$' ;
+				lscr:xrefEnsemblGene ?geneEns .
+			?anat rdfs:label ?anat_label .
+			?geneB orth:organism ?o .
+			?o obo:RO_0002162 ?taxon2 .
+			?taxon2 up:commonName '$$zebrafish$$' .
+		}
+	}
+	SERVICE <http://sparql.uniprot.org/sparql> {
+		?uniprot rdfs:seeAlso / up:transcribedFrom ?geneEns .
+		?uniprot a up:Protein .
+		?uniprot up:classifiedWith ?GO_CLASS .
+		?GO_CLASS rdfs:label ?GO_LABEL .
+	}
+}
+$$innerlimit$$
+### this .rq file ist created by bioSODA rqWriter

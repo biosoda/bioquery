@@ -1,0 +1,15 @@
+### id: uniprotQ8
+### handled by endpoint: https://sparql.uniprot.org/sparql
+### question: Select all UniProt proteins with $$TransmembraneAnnotation$$ and the regions' begin and end coordinates on the canonical sequence
+PREFIX up: <http://purl.uniprot.org/core/>
+PREFIX faldo: <http://biohackathon.org/resource/faldo#>
+SELECT ?protein ?begin ?end WHERE {
+	?protein a up:Protein .
+	?protein up:annotation ?annotation .
+	?annotation a up:$$TransmembraneAnnotation$$ .
+	?annotation up:range ?range .
+	?range faldo:begin/faldo:position ?begin .
+	?range faldo:end/faldo:position ?end .
+} 
+$$innerlimit$$
+### this .rq file ist created by bioSODA rqWriter

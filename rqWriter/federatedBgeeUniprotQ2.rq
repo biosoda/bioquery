@@ -1,0 +1,29 @@
+### id: federatedBgeeUniprotQ2
+### handled by endpoint: http://biosoda.expasy.org:8890/sparql
+### question: Genes expressed in the $$human$$'s $$pancreas$$ and their annotations in UniProt.
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX up: <http://purl.uniprot.org/core/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX genex: <http://purl.org/genex#>
+PREFIX lscr: <http://purl.org/lscr#>
+PREFIX orth: <http://purl.org/net/orth#>
+PREFIX up: <http://purl.uniprot.org/core/>
+SELECT DISTINCT ?geneEns ?uniprot ?annotation_text {
+	SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql> {
+		SELECT ?geneEns {
+			?geneB genex:isExpressedIn ?anat ;
+				lscr:xrefEnsemblGene ?geneEns .
+			?anat rdfs:label '$$pancreas$$'^^xsd:string .
+			?geneB orth:organism ?o .
+			?o obo:RO_0002162 ?taxon2 .
+			?taxon2 up:commonName '$$human$$' .
+		}
+		$$innerlimit$$
+	}
+	SERVICE <http://sparql.uniprot.org/sparql> {
+		?uniprot rdfs:seeAlso / up:transcribedFrom ?geneEns .
+		?uniprot up:annotation ?annotation .
+		?annotation rdfs:comment ?annotation_text .
+	}
+}
+### this .rq file ist created by bioSODA rqWriter

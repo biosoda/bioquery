@@ -1,0 +1,15 @@
+### id: omaQ2
+### handled by endpoint: https://sparql.omabrowser.org/lode/sparql
+### question: Find $$Rattusnorvegicus$$ proteins present in OMA database
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orth: <http://purl.org/net/orth#>
+PREFIX up: <http://purl.uniprot.org/core/>
+SELECT ?protein ?OMA_link WHERE {
+	?protein a orth:Protein .
+	?protein orth:organism ?organism .
+	?inTaxon rdfs:label 'in taxon'@en .
+	?organism ?inTaxon ?taxon .
+	?taxon up:scientificName '$$Rattusnorvegicus$$' .
+	?protein rdfs:seeAlso ?OMA_link .
+}
+### this .rq file ist created by bioSODA rqWriter

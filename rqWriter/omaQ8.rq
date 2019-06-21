@@ -1,0 +1,28 @@
+### id: omaQ8
+### handled by endpoint: https://sparql.omabrowser.org/lode/sparql
+### question: All proteins per species that are orthologous to $$Oryctolaguscuniculus$$ $$APOCI$$ related protein and their cross reference links to OMA and Uniprot including the corresponding Ensembl gene identifier. 
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX orth: <http://purl.org/net/orth#>
+PREFIX up: <http://purl.uniprot.org/core/>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX lscr: <http://purl.org/lscr#>
+SELECT ?protein1 ?protein2 ?geneName2 ?species2 ?OMA_LINK2 ?Prot2_uniprot ?prot2_ensemblGeneId WHERE {
+	?cluster a orth:OrthologsCluster .
+	?cluster orth:hasHomologousMember ?node1 .
+	?cluster orth:hasHomologousMember ?node2 .
+	?node2 orth:hasHomologousMember* ?protein2 .
+	?node1 orth:hasHomologousMember* ?protein1 .
+	?protein1 a orth:Protein ;
+		orth:organism/obo:RO_0002162/up:scientificName '$$Oryctolaguscuniculus$$' ;
+		rdfs:label '$$APOCI$$' .
+	?protein2 a orth:Protein ;
+		rdfs:seeAlso ?OMA_LINK2 ;
+		lscr:xrefUniprot ?Prot2_uniprot ;
+		sio:SIO_010079/lscr:xrefEnsemblGene/dct:identifier ?prot2_ensemblGeneId ;
+		rdfs:label ?geneName2 ;
+		orth:organism/obo:RO_0002162/up:scientificName ?species2 .
+	FILTER(?node1 != ?node2)
+}
+### this .rq file ist created by bioSODA rqWriter

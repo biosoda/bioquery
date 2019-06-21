@@ -1,0 +1,12 @@
+### id: uniprotQ9
+### handled by endpoint: https://sparql.uniprot.org/sparql
+### question: Select the number of proteins for each of the subclasses of ec:1.1.$$subclasses$$.- EC (Enzyme Commission) class
+PREFIX up: <http://purl.uniprot.org/core/>
+PREFIX ec: <http://purl.uniprot.org/enzyme/>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?enzyme (COUNT(?protein) as ?number) WHERE {
+	?protein up:enzyme ?enzyme .
+	?enzyme rdfs:subClassOf ec:1.1.$$subclasses$$.- .
+}
+GROUP BY ?enzyme ORDER BY ?enzyme
+### this .rq file ist created by bioSODA rqWriter

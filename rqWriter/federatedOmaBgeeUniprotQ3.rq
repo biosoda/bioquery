@@ -1,0 +1,46 @@
+### id: federatedOmaBgeeUniprotQ3
+### handled by endpoint: http://biosoda.expasy.org:8890/sparql
+### question: Which are the genes in $$human$$ associated to a disease that are orthologous to a gene expressed in the $$rat$$’s brain?
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX genex: <http://purl.org/genex#>
+PREFIX lscr: <http://purl.org/lscr#>
+PREFIX orth: <http://purl.org/net/orth#>
+PREFIX up: <http://purl.uniprot.org/core/>
+SELECT DISTINCT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {
+	SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres> {
+		SELECT DISTINCT ?gene ?id {
+			?gene genex:isExpressedIn ?anat .
+			?anat rdfs:label 'brain'^^xsd:string .
+			?gene orth:organism ?o .
+			?o obo:RO_0002162 ?taxon .
+			?gene dcterms:identifier ?id .
+			?taxon up:commonName '$$rat$$' .
+		}
+		$$innerlimit$$
+	}
+	SERVICE <http://sparql.uniprot.org/sparql> {
+		?taxon2 up:commonName '$$human$$' .
+	}
+	SERVICE <https://sparql.omabrowser.org/lode/sparql> {
+		?protein2 a orth:Protein .
+		?protein1 a orth:Protein .
+		?cluster a orth:OrthologsCluster .
+		?cluster orth:hasHomologousMember ?node1 .
+		?cluster orth:hasHomologousMember ?node2 .
+		?node2 orth:hasHomologousMember* ?protein2 .
+		?node1 orth:hasHomologousMember* ?protein1 .
+		?protein1 dcterms:identifier ?id .
+		?protein2 rdfs:seeAlso ?OMA_LINK .
+		?protein2 orth:organism/obo:RO_0002162 ?taxon2 .
+		?protein2 lscr:xrefUniprot ?uniprot .
+		FILTER ( ?node1 != ?node2 )
+	}
+	SERVICE <http://sparql.uniprot.org/sparql> {
+		?uniprot up:annotation ?annotation .
+		?annotation rdfs:comment ?annotation_text .
+		?annotation a up:Disease_Annotation .
+	}
+}
+### this .rq file ist created by bioSODA rqWriter

@@ -1,0 +1,20 @@
+### id: federatedOmaUniprotQ1
+### handled by endpoint: http://biosoda.expasy.org:8890/sparql
+### question: Proteins in OMA that are encoded by the $$INS$$ gene without considering synonyms and their species identifier and evidence types from UniProt database.
+PREFIX lscr: <http://purl.org/lscr#>
+PREFIX orth: <http://purl.org/net/orth#>
+PREFIX up: <http://purl.uniprot.org/core/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT DISTINCT ?proteinOMA ?species ?mnemonic ?evidenceType ?UniProt_URI WHERE {
+	SERVICE <https://sparql.omabrowser.org/sparql> {
+		?proteinOMA a orth:Protein ;
+			orth:organism/obo:RO_0002162/up:scientificName ?species ;
+			rdfs:label '$$INS$$' .
+		?proteinOMA lscr:xrefUniprot ?UniProt_URI .
+	}
+	SERVICE <http://sparql.uniprot.org/sparql> {
+		?UniProt_URI up:mnemonic ?mnemonic ;
+			up:existence/rdfs:label ?evidenceType .
+	}
+}
+### this .rq file ist created by bioSODA rqWriter

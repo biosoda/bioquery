@@ -1,0 +1,10 @@
+### id: omaQ1
+### handled by endpoint: https://sparql.omabrowser.org/lode/sparql
+### question: Which species are available on OMA database and their $$scientificname$$?
+PREFIX up: <http://purl.uniprot.org/core/>
+SELECT * WHERE {
+	?s a up:Taxon .
+	?s $$scientificname$$ ?v .
+	?s up:rank up:Species .
+} 
+### this .rq file ist created by bioSODA rqWriter

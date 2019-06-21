@@ -1,0 +1,27 @@
+### id: omaQ5
+### handled by endpoint: https://sparql.omabrowser.org/lode/sparql
+### question: Proteins that are paralogous to $$ENSLACG00000002497$$ Ensembl gene (identifier)
+PREFIX ensembl: <http://rdf.ebi.ac.uk/resource/ensembl/>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX orth: <http://purl.org/net/orth#>
+PREFIX lscr: <http://purl.org/lscr#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+SELECT ?OMA_LINK WHERE {
+	#The three that contains paralogs. The leafs are proteins .
+	#This graph pattern defines the relationship protein1 is paralogous to protein2
+	?cluster a orth:ParalogsCluster .
+	?cluster orth:hasHomologousMember ?node1 .
+	?cluster orth:hasHomologousMember ?node2 .
+	?node2 orth:hasHomologousMember* ?protein2 .
+	?node1 orth:hasHomologousMember* ?protein1 .
+	########
+	#Specify the protein to look for its paralogs
+	?protein1 sio:SIO_010079 ?gene .
+	?gene lscr:xrefEnsemblGene ensembl:$$ENSLACG00000002497$$ .
+	########
+	#The OMA link to the second protein
+	?protein2 rdfs:seeAlso ?OMA_LINK .
+	########
+	FILTER(?node1 != ?node2)
+}
+### this .rq file ist created by bioSODA rqWriter
