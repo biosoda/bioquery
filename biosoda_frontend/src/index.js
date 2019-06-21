@@ -583,7 +583,8 @@ class App extends Component {
 		for (let oneextra of searchFilter) {
 			console.log(extracounter);
 			query = query.split(varmasker + 'extra_' + extracounter + varmasker).join('fruit fly');
-			console.log(queryURL);
+			console.log('replace species @585');
+			console.log(oneextra);
 			extracounter++;
 		}
 
