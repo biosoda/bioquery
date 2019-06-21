@@ -4,14 +4,24 @@
 # after: https://stackabuse.com/reading-and-writing-json-to-a-file-in-python/
 
 import json
+import sys
+import os
+from os import listdir
 
 sourcefile = '../biosoda_frontend/src/biosodadata.json'
 destinationpath = './'
+
+# remove all query files
+allfiles = os.listdir(destinationpath)
+for onefile in allfiles:
+    if onefile.endswith(".rq"):
+        os.remove(os.path.join(destinationpath, onefile))
+
 with open(sourcefile) as json_file:
     data = json.load(json_file)
     for q in data['questions']:
         if 'SPARQL' in q: # todo: only create file when question has a target file name
-            f = open(q['id'] + ".rq", "w") # todo: add target filename to json according to paper
+            f = open(destinationpath + q['id'] + ".rq", "w") # todo: add target filename to json according to paper
             print('==')
             content = '';
             content = content + "\n" + '### id: ' + q['id']
