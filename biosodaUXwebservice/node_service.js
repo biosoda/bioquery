@@ -26,33 +26,43 @@ app.post('/', urlencodedParser, function (req, res) {
 	// console.log(req);
 	// console.log(res);
 	// console.log(req.body.q);
-	possibilities = [
-		{
-			words: 'gene sequence',
-			target: 'gene'
-		},
-		{
-			words: 'proteome',
-			target: 'proteome'
-		},
-		{
-			words: 'protein factor',
-			target: 'protein'
-		}
-	];
-	querywords = req.body.q.split(" ");
-	results = [];
-	for (j = 0; j < querywords.length; j++) {
-		for (i = 0; i < possibilities.length; i++) {
-			if (possibilities[i].words.indexOf(querywords[j]) >= 0) {
-				results.push(possibilities[i].target);
+
+	if (typeof(req.body.q) !== 'undefined') {
+		possibilities = [
+			{
+				words: 'gene sequence',
+				target: 'gene'
+			},
+			{
+				words: 'proteome',
+				target: 'proteome'
+			},
+			{
+				words: 'protein factor',
+				target: 'protein'
+			}
+		];
+		querywords = req.body.q.split(" ");
+		results = [];
+		for (j = 0; j < querywords.length; j++) {
+			for (i = 0; i < possibilities.length; i++) {
+				if (possibilities[i].words.indexOf(querywords[j]) >= 0) {
+					results.push(possibilities[i].target);
+				}
 			}
 		}
+		console.log(results);
+		results = unique(results);
+		res.send({'target': results});
+		return;
 	}
-	console.log(results);
-	results = unique(results);
-	res.send({'target': results});
-	return;
+
+	if (typeof(req.body.a) !== 'undefined') {
+		// a is a concept or a chain of concept.attribute.node.edge...
+		// OR can we do a full text search of all available tags?
+		// can we allready use our SPARQL for this kind of thing? http://jowl.ontologyonline.org/SPARQL-DL.html
+	}
+
 });
 
 app.listen(3003, function () {
