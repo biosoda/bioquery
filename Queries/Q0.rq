@@ -37,7 +37,7 @@ SELECT DISTINCT ?protein ?orthologous_protein_rat ?id ?annotation_text WHERE {
 				FILTER(?node1 != ?node2)
 			}
 		}
-		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres> {
+		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql> {
 			?gene genex:isExpressedIn ?a .
 			?a rdfs:label "brain" .
 			?gene orth:organism ?s . 
