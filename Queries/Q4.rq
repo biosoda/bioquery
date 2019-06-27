@@ -1,0 +1,46 @@
+### id: Q4
+### handled by endpoint: http://biosoda.expasy.org:8890/sparql
+### question: Which are the Mouse's proteins encoded by genes which are expressed in the liver and are orthologous to Human's INS gene?
+### Query Characteristics (BGP, basic graph pattern): 3 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 2, #BGP_2 ≥ 13 and #BGP_3 = 5. BGP_2  has  2 property paths of length = 2, and 2 property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function. 
+### Number of results: 2
+### Result example: http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=MOUSE22529
+PREFIX up: <http://purl.uniprot.org/core/>
+PREFIX genex: <http://purl.org/genex#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX orth: <http://purl.org/net/orth#>
+PREFIX sio: <http://semanticscience.org/resource/>
+PREFIX lscr: <http://purl.org/lscr#>
+SELECT ?Oma_link {
+	SELECT DISTINCT * {
+		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql> {
+			?taxon up:commonName 'Human' .
+			?taxon2 up:commonName 'Mouse' .
+		}
+		SERVICE <https://sparql.omabrowser.org/sparql> {
+			?cluster a orth:OrthologsCluster .
+			?cluster orth:hasHomologousMember ?node1 .
+			?cluster orth:hasHomologousMember ?node2 .
+			?node2 orth:hasHomologousMember* ?protein2 .
+			?node1 orth:hasHomologousMember* ?protein1 .
+			?protein1 a orth:Protein .
+			?protein1 rdfs:label 'INS' ;
+				orth:organism/obo:RO_0002162 ?taxon .
+			?protein2 a orth:Protein ;
+				sio:SIO_010079 ?gene ; #is encoded by
+				orth:organism/obo:RO_0002162 ?taxon2 .
+			?gene lscr:xrefEnsemblGene ?geneEns .
+			?protein2 rdfs:seeAlso ?Oma_link .
+			FILTER ( ?node1 != ?node2 )
+		}
+		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql> {
+			?geneB genex:isExpressedIn ?anat ;
+				lscr:xrefEnsemblGene ?geneEns .
+			?anat rdfs:label 'liver'^^xsd:string .
+			?geneB orth:organism ?o .
+			?o obo:RO_0002162 ?taxon2 .
+		}
+	}
+	LIMIT 10
+}
+LIMIT 10
+### this .rq file ist created by bioSODA rqWriter

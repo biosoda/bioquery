@@ -1,0 +1,23 @@
+### id: Q1
+### handled by endpoint: http://biosoda.expasy.org:8890/sparql
+### question: Proteins in OMA that are encoded by the INS gene without considering synonyms and their species identifier and evidence types from UniProt database.
+### Query Characteristics (BGP, basic graph pattern): 2 BGPs where both is to be matched in a remote SPARQL endpoint (i.e. SERVICE). #BGP_1 = 6 with one property path of length = 3, and #BGP_2 = 3 with one property path of length = 2. 5
+### Number of results: 27
+### Result example: "Myotis lucifugus" "G1P146_MYOLU" "Inferred from homology"^^<http://www.w3.org/2001/XMLSchema#string> http://purl.uniprot.org/uniprot/G1P146 http://omabrowser.org/ontology/oma#PROTEIN_CAVPO07501 
+PREFIX lscr: <http://purl.org/lscr#>
+PREFIX orth: <http://purl.org/net/orth#>
+PREFIX up: <http://purl.uniprot.org/core/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT DISTINCT ?proteinOMA ?species ?mnemonic ?evidenceType ?UniProt_URI WHERE {
+	SERVICE <https://sparql.omabrowser.org/sparql> {
+		?proteinOMA a orth:Protein ;
+			orth:organism/obo:RO_0002162/up:scientificName ?species ;
+			rdfs:label 'INS' .
+		?proteinOMA lscr:xrefUniprot ?UniProt_URI .
+	}
+	SERVICE <http://sparql.uniprot.org/sparql> {
+		?UniProt_URI up:mnemonic ?mnemonic ;
+			up:existence/rdfs:label ?evidenceType .
+	}
+}
+### this .rq file ist created by bioSODA rqWriter
