@@ -1,6 +1,9 @@
-### id: federatedOmaBgeeQ2
-### handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### question: Which are the orthologs of a gene that is expressed in the Fruit fly’s brain?
+### Id: Q5
+### Handled by endpoint: http://biosoda.expasy.org:8890/sparql
+### Question: Which are the orthologs of a gene that is expressed in the Fruit fly’s brain?
+### Query characteristics (BGP, basic graph pattern): 2 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 6, and #BGP_2 ≥ 5. BGP_2  has 2 property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.
+### Number of results: 5322
+### Result example: http://omabrowser.org/ontology/oma#GENE_FBgn0000008	http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=ZOONE01884
 PREFIX up: <http://purl.uniprot.org/core/>
 PREFIX genex: <http://purl.org/genex#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
@@ -32,4 +35,4 @@ SELECT DISTINCT ?id ?OMA_LINK WHERE {
 	}
 }
 LIMIT 10
-### this .rq file ist created by bioSODA rqWriter
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-07-11 14:38:13

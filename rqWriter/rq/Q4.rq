@@ -1,6 +1,9 @@
-### id: federatedOmaBgeeQ1
-### handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### question: Which are the Mouse's proteins encoded by genes which are expressed in the liver and are orthologous to Human's INS gene?
+### Id: Q4
+### Handled by endpoint: http://biosoda.expasy.org:8890/sparql
+### Question: Which are the Mouse's proteins encoded by genes which are expressed in the liver and are orthologous to Human's INS gene?
+### Query characteristics (BGP, basic graph pattern): 3 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 2, #BGP_2 ≥ 13 and #BGP_3 = 5. BGP_2  has  2 property paths of length = 2, and 2 property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.
+### Number of results: 2
+### Result example: http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=MOUSE22529
 PREFIX up: <http://purl.uniprot.org/core/>
 PREFIX genex: <http://purl.org/genex#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
@@ -40,4 +43,4 @@ SELECT ?Oma_link {
 	LIMIT 10
 }
 LIMIT 10
-### this .rq file ist created by bioSODA rqWriter
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-07-11 14:38:13

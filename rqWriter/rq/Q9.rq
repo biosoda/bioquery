@@ -1,0 +1,36 @@
+### Id: Q9
+### Handled by endpoint: http://biosoda.expasy.org:8890/sparql
+### Question: Genes expressed in the Human's brain during the infant stage and their UniProt disease annotations
+### Query characteristics (BGP, basic graph pattern): 2 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 9, and #BGP_2 = 5. BGP_2  has 1 property path of length = 2.
+### Number of results: 6
+### Result example: ensembl:ENSG00000000971	<http://purl.uniprot.org/uniprot/P08603>	"The gene represented in this entry is involved in disease pathogenesis."
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX up: <http://purl.uniprot.org/core/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX genex: <http://purl.org/genex#>
+PREFIX lscr: <http://purl.org/lscr#>
+PREFIX orth: <http://purl.org/net/orth#>
+PREFIX up: <http://purl.uniprot.org/core/>
+SELECT DISTINCT ?geneEns ?uniprot ?annotation_text {
+	SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql> {
+		SELECT ?geneEns {
+			?geneB genex:isExpressedIn ?cond ;
+				lscr:xrefEnsemblGene ?geneEns .
+			?cond genex:hasDevelopmentalStage ?st .
+			?cond genex:hasAnatomicalEntity ?anat .
+			?st rdfs:label 'infant stage'^^xsd:string .
+			?anat rdfs:label 'brain'^^xsd:string .
+			?geneB orth:organism ?o .
+			?o obo:RO_0002162 ?taxon2 .
+			?taxon2 up:commonName 'Human' .
+		}
+		LIMIT 10
+	}
+	SERVICE <http://sparql.uniprot.org/sparql> {
+		?uniprot rdfs:seeAlso / up:transcribedFrom ?geneEns .
+		?uniprot up:annotation ?annotation .
+		?annotation a up:Disease_Annotation .
+		?annotation rdfs:comment ?annotation_text .
+	}
+}
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-07-11 14:38:13

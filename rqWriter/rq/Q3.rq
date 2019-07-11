@@ -1,0 +1,33 @@
+### Id: Q3
+### Handled by endpoint: http://biosoda.expasy.org:8890/sparql
+### Question: Rattus norvegicus' proteins encoded by genes that are paralogous to its TP53 gene and their Uniprot function annotations.
+### Query characteristics (BGP, basic graph pattern): 2 BGPs where both must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 ≥ 14 and #BGP_2 = 3. The BGPs have 8 variables including 2 property paths of length = 3, and 2 property path of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.
+### Number of results: 1
+### Result example: http://omabrowser.org/ontology/oma#PROTEIN_RATNO03710	http://omabrowser.org/ontology/oma#PROTEIN_RATNO10594	http://purl.uniprot.org/uniprot/P10361	http://purl.uniprot.org/uniprot/M0R497	"Acts as a tumor suppressor in many tumor types; induces growth arrest or apoptosis depending on the physiological circumstances and cell type. Involved in cell cycle regulation as a trans-activator that acts to negatively regulate cell division by controlling a set of genes required for this process. One of the activated genes is an inhibitor of cyclin-dependent kinases. Apoptosis induction seems to be mediated either by stimulation of BAX and FAS antigen expression, or by repression of Bcl-2 expression."
+PREFIX up: <http://purl.uniprot.org/core/>
+PREFIX orth: <http://purl.org/net/orth#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX lscr: <http://purl.org/lscr#>
+SELECT DISTINCT ?PROTEIN ?IS_PARALOGOUS_TO_PROTEIN ?UNIPROT_XREF ?PARALOG_UNIPROT_XREF ?annotation_text WHERE {
+	SERVICE <https://sparql.omabrowser.org/sparql> {
+		?cluster a orth:ParalogsCluster .
+		?cluster orth:hasHomologousMember ?node1 .
+		?cluster orth:hasHomologousMember ?node2 .
+		?node2 orth:hasHomologousMember* ?PROTEIN .
+		?node1 orth:hasHomologousMember* ?IS_PARALOGOUS_TO_PROTEIN .
+		?PROTEIN a orth:Protein .
+		?PROTEIN orth:organism/obo:RO_0002162/up:scientificName 'Rattus norvegicus' ;
+			rdfs:label 'TP53' ;
+			lscr:xrefUniprot ?UNIPROT_XREF .
+		?IS_PARALOGOUS_TO_PROTEIN a orth:Protein .
+		?IS_PARALOGOUS_TO_PROTEIN orth:organism/obo:RO_0002162/up:scientificName 'Rattus norvegicus' .
+		?IS_PARALOGOUS_TO_PROTEIN lscr:xrefUniprot ?PARALOG_UNIPROT_XREF .
+	}
+	SERVICE <http://sparql.uniprot.org/sparql> {
+		?PARALOG_UNIPROT_XREF up:annotation ?annotation .
+		?annotation a up:Function_Annotation .
+		?annotation rdfs:comment ?annotation_text .
+	}
+	FILTER ( ?node1 != ?node2 )
+}
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-07-11 14:38:13

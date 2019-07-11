@@ -1,6 +1,9 @@
-### id: federatedOmaBgeeUniprotQ2
-### handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### question: Which are the genes in Primates orthologous to a gene that is expressed in the fruit fly’s brain and the UniProt annotations of the genes.
+### Id: Q11
+### Handled by endpoint: http://biosoda.expasy.org:8890/sparql
+### Question: Which are the genes in Primates orthologous to a gene that is expressed in the fruit fly’s brain and the UniProt annotations of the genes.
+### Query characteristics (BGP, basic graph pattern): 3 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 6, #BGP_2 ≥ 11 and #BGP_3 = 2. BGP_2  has  3 property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.
+### Number of results: 81
+### Result example: oma:GENE_FBgn0000032	<http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PONAB01175>	<http://purl.uniprot.org/uniprot/Q5NVF6>	Nucleophile
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
@@ -49,4 +52,4 @@ SELECT DISTINCT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {
 		}
 	}
 }
-### this .rq file ist created by bioSODA rqWriter
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-07-11 14:38:13

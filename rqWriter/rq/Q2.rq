@@ -1,0 +1,32 @@
+### Id: Q2
+### Handled by endpoint: http://biosoda.expasy.org:8890/sparql
+### Question: Rabbit's proteins encoded by genes that are orthologous to Mouse's HBB-Y gene and their cross reference links to Uniprot
+### Query characteristics (BGP, basic graph pattern): 2 BGPs where both is to be matched in a remote SPARQL endpoint (i.e. SERVICE).  #BGP_2 = 2 and #BGP_1 ≥ 12  . The BGPs have 9 variables including 2 property paths of length = 2, and 2 property path of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.
+### Number of results: 3
+### Result example: http://omabrowser.org/ontology/oma#PROTEIN_MOUSE21768	http://omabrowser.org/ontology/oma#PROTEIN_RABIT00933	http://purl.uniprot.org/uniprot/Q9CR49	http://purl.uniprot.org/uniprot/P02099
+PREFIX lscr: <http://purl.org/lscr#>
+PREFIX orth: <http://purl.org/net/orth#>
+PREFIX up: <http://purl.uniprot.org/core/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+SELECT DISTINCT ?PROTEIN_1 ?PROTEIN_2 ?UNIPROT_XREF_1 ?UNIPROT_XREF_2 WHERE {
+	SERVICE <http://sparql.uniprot.org/sparql> {
+		?taxon_1 up:commonName 'Rabbit' .
+		?taxon_2 up:commonName 'Mouse' .
+	}
+	SERVICE <https://sparql.omabrowser.org/sparql> {
+		?cluster a orth:OrthologsCluster .
+		?cluster orth:hasHomologousMember ?node1 .
+		?cluster orth:hasHomologousMember ?node2 .
+		?node2 orth:hasHomologousMember* ?PROTEIN_2 .
+		?node1 orth:hasHomologousMember* ?PROTEIN_1 .
+		?PROTEIN_1 a orth:Protein .
+		?PROTEIN_1 orth:organism/obo:RO_0002162 ?taxon_1 ;
+			rdfs:label 'HBB-Y' ;
+			lscr:xrefUniprot ?UNIPROT_XREF_1 .
+		?PROTEIN_2 a orth:Protein .
+		?PROTEIN_2 orth:organism/obo:RO_0002162 ?taxon_2 .
+		?PROTEIN_2 lscr:xrefUniprot ?UNIPROT_XREF_2 .
+		FILTER ( ?node1 != ?node2 )
+	}
+}
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-07-11 14:38:13

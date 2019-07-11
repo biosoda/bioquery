@@ -1,6 +1,9 @@
-### id: federatedOmaBgeeUniprotQ4
-### handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### question: Which are the proteins associated with "glioblastoma" and the orthologs expressed in the rat’s brain?
+### Id: Q0
+### Handled by endpoint: http://biosoda.expasy.org:8890/sparql
+### Question: Which are the proteins associated with "glioblastoma" and the orthologs expressed in the rat’s brain?
+### Query characteristics (BGP, basic graph pattern): 
+### Number of results: 
+### Result example: 
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX orth: <http://purl.org/net/orth#>
@@ -46,4 +49,4 @@ SELECT DISTINCT ?protein ?orthologous_protein_rat ?id ?annotation_text WHERE {
 		}
 	}
 }
-### this .rq file ist created by bioSODA rqWriter
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-07-11 14:38:13

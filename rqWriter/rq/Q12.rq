@@ -1,6 +1,9 @@
-### id: federatedOmaBgeeUniprotQ3
-### handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### question: Which are the genes in Human associated to a disease that are orthologous to a gene expressed in the rat’s brain?
+### Id: Q12
+### Handled by endpoint: http://biosoda.expasy.org:8890/sparql
+### Question: Which are the genes in Human associated to a disease that are orthologous to a gene expressed in the rat’s brain?
+### Query characteristics (BGP, basic graph pattern): 4 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 6, #BGP_2 = 1, #BGP_3 ≥ 10, and #BGP_4 = 3. BGP_3  has  1 property path of length = 2 and 3 property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.
+### Number of results: 3
+### Result example: http://omabrowser.org/ontology/oma#GENE_ENSRNOG00000000007	http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=HUMAN17852	http://purl.uniprot.org/uniprot/Q99259	The disease is caused by mutations affecting the gene represented in this entry.
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
@@ -43,4 +46,4 @@ SELECT DISTINCT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {
 		?annotation a up:Disease_Annotation .
 	}
 }
-### this .rq file ist created by bioSODA rqWriter
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-07-11 14:38:13

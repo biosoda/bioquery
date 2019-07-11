@@ -1,6 +1,9 @@
-### id: federatedOmaBgeeUniprotQ1
-### handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### question: The orthologs of a gene that is expressed in the [[ fruit fly’s brain ]] and the UniProt annotations of these orthologs.
+### Id: Q10
+### Handled by endpoint: http://biosoda.expasy.org:8890/sparql
+### Question: The orthologs of a gene that is expressed in the [[ fruit fly’s brain ]] and the UniProt annotations of these orthologs.
+### Query characteristics (BGP, basic graph pattern): 3 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 6, #BGP_2 ≥ 6 and #BGP_3 = 2. BGP_2  has  2  property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.
+### Number of results: 2269
+### Result example: oma:GENE_FBgn0000008	<http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=ATTCE14837>	<http://purl.uniprot.org/uniprot/A0A158NZZ1>	PDZ
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX dcterms: <http://purl.org/dc/terms/>
@@ -36,4 +39,4 @@ SELECT distinct ?gene_id (?protein2 as ?orthologousTo) ?uniprot ?annotation_text
 		?annotation rdfs:comment ?annotation_text .
 	}
 }
-### this .rq file ist created by bioSODA rqWriter
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-07-11 14:38:13

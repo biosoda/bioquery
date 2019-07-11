@@ -1,9 +1,0 @@
-### id: uniprotQ3
-### handled by endpoint: https://sparql.uniprot.org/sparql
-### question: Select all taxa from the UniProt taxonomy
-PREFIX up: <http://purl.uniprot.org/core/>
-SELECT * WHERE {
-	?target a taxa .
-}
-LIMIT 10
-### this .rq file ist created by bioSODA rqWriter
