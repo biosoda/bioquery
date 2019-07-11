@@ -7,6 +7,7 @@ import json
 import sys
 import os
 from os import listdir
+from datetime import datetime
 
 sourcefile = '../biosoda_frontend/src/biosodadata.json'
 destinationpath = './rq'
@@ -21,9 +22,10 @@ for onefile in allfiles:
 
 with open(sourcefile) as json_file:
     data = json.load(json_file)
+    now = datetime.now()
     for q in data['questions']:
-        if 'SPARQL' in q: # todo: only create file when question has a target file name
-            f = open(destinationpath + '/' + q['id'] + ".rq", "w") # todo: add target filename to json according to paper
+        if 'rqid' in q: # todo: only create file when question has a target file name
+            f = open(destinationpath + '/' + q['rqid'] + ".rq", "w") # todo: add target filename to json according to paper
             tmpSPARQL = q['SPARQL']
             tmpQuestion = q['question']
             for onevariable in q['vars']:
@@ -33,12 +35,15 @@ with open(sourcefile) as json_file:
             tmpSPARQL = tmpSPARQL.replace(separator + 'innerlimit' + separator, 'LIMIT 10')
             print('==')
             content = '';
-            content = content + "\n" + '### id: ' + q['id']
-            content = content + "\n" + '### handled by endpoint: ' + q['fetchUrlShort']
+            content = content + "\n" + '### Id: ' + q['rqid']
+            content = content + "\n" + '### Handled by endpoint: ' + q['fetchUrlShort']
             # toto: add metrics and data from spread sheet
-            content = content + "\n" + '### question: ' + tmpQuestion
-            content = content + "\n" + tmpSPARQL # todo: has to be filled with appropriate default variable values
-            content = content + "\n" + '### this .rq file ist created by bioSODA rqWriter'
+            content = content + "\n" + '### Question: ' + tmpQuestion
+            content = content + "\n" + '### Query characteristics (BGP, basic graph pattern): ' + q['characteristics']
+            content = content + "\n" + '### Number of results: ' + q['numberresults']
+            content = content + "\n" + '### Result example: ' + q['resultsexample']
+            content = content + "\n" + tmpSPARQL
+            content = content + "\n" + '### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at ' + now.strftime("%Y-%m-%d %H:%M:%S")
             # print(content)        
             f.write(content.strip())
             f.close()
