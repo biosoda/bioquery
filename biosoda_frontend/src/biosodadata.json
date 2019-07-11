@@ -150,6 +150,10 @@
 		{
 			"id": "federatedOmaBgeeUniprotQ1",
 			"runcheck": "2019-01-23, -s, no results but errors - hangs sometimes, probably due to our bgeelight server which is slow - the queries themself work ok if queried individually",
+			"rqid": "Q10",
+			"characteristics": "3 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 6, #BGP_2 ≥ 6 and #BGP_3 = 2. BGP_2  has  2  property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.",
+			"numberresults": "2269",
+			"resultsexample": "oma:GENE_FBgn0000008\t<http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=ATTCE14837>\t<http://purl.uniprot.org/uniprot/A0A158NZZ1>\tPDZ",
 			"parentIds": ["federatedOmaBgeeUniprot_genes"],
 			"question": "The orthologs of a gene that is expressed in the [[ $$fruitfly$$’s $$brain$$ ]] and the UniProt annotations of these orthologs.",
 			"estimatedseconds": "60",
@@ -179,6 +183,10 @@
 		{
 			"id": "federatedOmaBgeeUniprotQ2",
 			"runcheck": "2019-01-23, 7.666s, 79results",
+			"rqid": "Q11",
+			"characteristics": "3 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 6, #BGP_2 ≥ 11 and #BGP_3 = 2. BGP_2  has  3 property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.",
+			"numberresults": "81",
+			"resultsexample": "oma:GENE_FBgn0000032\t<http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PONAB01175>\t<http://purl.uniprot.org/uniprot/Q5NVF6>\tNucleophile",
 			"parentIds": ["federatedOmaBgeeUniprot_genes"],
 			"question": "Which are the genes in $$primates$$ orthologous to a gene that is expressed in the $$fruitfly$$’s $$brain$$ and the UniProt annotations of the genes.",
 			"estimatedseconds": "6",
@@ -213,6 +221,10 @@
 		{
 			"id": "federatedOmaBgeeUniprotQ3",
 			"runcheck": "2019-01-23, 39.381s, 32results",
+			"rqid": "Q12",
+			"characteristics": "4 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 6, #BGP_2 = 1, #BGP_3 ≥ 10, and #BGP_4 = 3. BGP_3  has  1 property path of length = 2 and 3 property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.",
+			"numberresults": "3",
+			"resultsexample": "http://omabrowser.org/ontology/oma#GENE_ENSRNOG00000000007\thttp://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=HUMAN17852\thttp://purl.uniprot.org/uniprot/Q99259\tThe disease is caused by mutations affecting the gene represented in this entry.",
 			"parentIds": ["federatedOmaBgeeUniprot_proteins"],
 			"question": "Which are the genes in $$human$$ associated to a disease that are orthologous to a gene expressed in the $$rat$$’s brain?",
 			"estimatedseconds": "6",
@@ -242,6 +254,10 @@
 			"runcheck": "2019-01-23, 4.519s, 15results",
 			"parentIds": ["federatedOmaBgeeUniprot_proteins"],
 			"estimatedseconds": "9",
+			"rqid": "Q0",
+			"characteristics": "",
+			"numberresults": "",
+			"resultsexample": "",
 			"question": "Which are the proteins associated with \"$$glioblastoma$$\" and the orthologs expressed in the rat’s $$brain$$?",
 			"vars": [
 				{
@@ -299,6 +315,10 @@
 		{
 			"id": "federatedBgeeUniprotQ1",
 			"runcheck": "2019-01-23, 20.628s, 100results",
+			"rqid": "Q7",
+			"characteristics": "2 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 7, and #BGP_2 = 5. BGP_2  has 1 property path of length = 2.",
+			"numberresults": "16",
+			"resultsexample": "\"endocrine cell\"\thttp://purl.obolibrary.org/obo/GO_0003309\t\"type B pancreatic cell differentiation\"",
 			"parentIds": ["federatedBgeeUniprot_anatomicEntity"],
 			"question": "Anatomic entities where the $$ins$$ $$zebrafish$$ gene is expressed and its gene GO annotations.",
 			"estimatedseconds": "120",
@@ -327,6 +347,10 @@
 		{
 			"id": "federatedBgeeUniprotQ2",
 			"runcheck": "2019-01-23, 13.548s, 57results",
+			"rqid": "Q8",
+			"characteristics": "2 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 6, and #BGP_2 = 4. BGP_2  has 1 property path of length = 2.",
+			"numberresults": "58",
+			"resultsexample": "http://rdf.ebi.ac.uk/resource/ensembl/ENSG00000000003\thttp://purl.uniprot.org/uniprot/O43657\t\"N-linked (GlcNAc...) asparagine\"",
 			"parentIds": ["federatedBgeeUniprot_genes"],
 			"question": "Genes expressed in the $$human$$'s $$pancreas$$ and their annotations in UniProt.",
 			"estimatedseconds": "60",
@@ -354,6 +378,10 @@
 		{
 			"id": "federatedBgeeUniprotQ3",
 			"runcheck": "2019-01-23, 18.16s, 29results",
+			"rqid": "Q9",
+			"characteristics": "2 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 9, and #BGP_2 = 5. BGP_2  has 1 property path of length = 2.",
+			"numberresults": "6",
+			"resultsexample": "ensembl:ENSG00000000971\t<http://purl.uniprot.org/uniprot/P08603>\t\"The gene represented in this entry is involved in disease pathogenesis.\"",
 			"parentIds": ["federatedBgeeUniprot_genes"],
 			"estimatedseconds": "10",
 			"question": "Genes expressed in the $$human$$'s $$brain$$ during the $$infantstage$$ and their UniProt disease annotations",
@@ -387,6 +415,10 @@
 		},
 		{
 			"id": "federatedOmaUniprotQ1",
+			"rqid": "Q1",
+			"characteristics": "2 BGPs where both is to be matched in a remote SPARQL endpoint (i.e. SERVICE). #BGP_1 = 6 with one property path of length = 3, and #BGP_2 = 3 with one property path of length = 2. 5",
+			"numberresults": "27",
+			"resultsexample": "\"Myotis lucifugus\"\t\"G1P146_MYOLU\"\t\"Inferred from homology\"^^<http://www.w3.org/2001/XMLSchema#string>\thttp://purl.uniprot.org/uniprot/G1P146\thttp://omabrowser.org/ontology/oma#PROTEIN_CAVPO07501",
 			"runcheck": "2019-01-23, 3.469s, 30results",
 			"parentIds": ["federatedOmaUniprot_proteins"],
 			"question": "Proteins in OMA that are encoded by the $$INS$$ gene without considering synonyms and their species identifier and evidence types from UniProt database.",
@@ -408,9 +440,13 @@
 		{
 			"id": "federatedOmaUniprotQ2",
 			"runcheck": "2019-01-23, 0.522s, 3results",
+			"rqid": "Q2",
+			"characteristics": "2 BGPs where both is to be matched in a remote SPARQL endpoint (i.e. SERVICE).  #BGP_2 = 2 and #BGP_1 ≥ 12  . The BGPs have 9 variables including 2 property paths of length = 2, and 2 property path of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.",
+			"numberresults": "3",
+			"resultsexample": "http://omabrowser.org/ontology/oma#PROTEIN_MOUSE21768\thttp://omabrowser.org/ontology/oma#PROTEIN_RABIT00933\thttp://purl.uniprot.org/uniprot/Q9CR49\thttp://purl.uniprot.org/uniprot/P02099",
 			"parentIds": ["federatedOmaUniprot_proteins"],
 			"estimatedseconds": "4",
-			"question": "$$mouse$$'s proteins encoded by genes that are orthologous to $$rabbit$$'s $$HBBY$$ gene and their cross reference links to Uniprot",
+			"question": "$$rabbit$$'s proteins encoded by genes that are orthologous to $$mouse$$'s $$HBBY$$ gene and their cross reference links to Uniprot",
 			"vars": [
 				{
 					"name": "HBBY",
@@ -420,21 +456,21 @@
 					"flavour": "autocomplete"
 				},
 				{
-					"name": "mouse",
-					"default": "Mouse",
-					"type": "list",
-					"datasource": "speciescommon",
-					"flavour": "autocomplete"
-				},
-				{
 					"name": "rabbit",
 					"default": "Rabbit",
 					"type": "list",
 					"datasource": "speciescommon",
 					"flavour": "autocomplete"
+				},
+				{
+					"name": "mouse",
+					"default": "Mouse",
+					"type": "list",
+					"datasource": "speciescommon",
+					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT DISTINCT ?PROTEIN_1 ?PROTEIN_2 ?UNIPROT_XREF_1 ?UNIPROT_XREF_2 WHERE {\n\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t?taxon_1 up:commonName '$$mouse$$' .\n\t\t?taxon_2 up:commonName '$$rabbit$$' .\n\t}\n\tSERVICE <https://sparql.omabrowser.org/sparql> {\n\t\t?cluster a orth:OrthologsCluster .\n\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t?node2 orth:hasHomologousMember* ?PROTEIN_2 .\n\t\t?node1 orth:hasHomologousMember* ?PROTEIN_1 .\n\t\t?PROTEIN_1 a orth:Protein .\n\t\t?PROTEIN_1 orth:organism/obo:RO_0002162 ?taxon_1 ;\n\t\t\trdfs:label '$$HBBY$$' ;\n\t\t\tlscr:xrefUniprot ?UNIPROT_XREF_1 .\n\t\t?PROTEIN_2 a orth:Protein .\n\t\t?PROTEIN_2 orth:organism/obo:RO_0002162 ?taxon_2 .\n\t\t?PROTEIN_2 lscr:xrefUniprot ?UNIPROT_XREF_2 .\n\t\tFILTER ( ?node1 != ?node2 )\n\t}\n}",
+			"SPARQL": "PREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT DISTINCT ?PROTEIN_1 ?PROTEIN_2 ?UNIPROT_XREF_1 ?UNIPROT_XREF_2 WHERE {\n\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t?taxon_1 up:commonName '$$rabbit$$' .\n\t\t?taxon_2 up:commonName '$$mouse$$' .\n\t}\n\tSERVICE <https://sparql.omabrowser.org/sparql> {\n\t\t?cluster a orth:OrthologsCluster .\n\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t?node2 orth:hasHomologousMember* ?PROTEIN_2 .\n\t\t?node1 orth:hasHomologousMember* ?PROTEIN_1 .\n\t\t?PROTEIN_1 a orth:Protein .\n\t\t?PROTEIN_1 orth:organism/obo:RO_0002162 ?taxon_1 ;\n\t\t\trdfs:label '$$HBBY$$' ;\n\t\t\tlscr:xrefUniprot ?UNIPROT_XREF_1 .\n\t\t?PROTEIN_2 a orth:Protein .\n\t\t?PROTEIN_2 orth:organism/obo:RO_0002162 ?taxon_2 .\n\t\t?PROTEIN_2 lscr:xrefUniprot ?UNIPROT_XREF_2 .\n\t\tFILTER ( ?node1 != ?node2 )\n\t}\n}",
 			"fetchUrl": "http://biosoda.expasy.org:8890/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "http://biosoda.expasy.org:8890/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -442,6 +478,10 @@
 		{
 			"id": "federatedOmaUniprotQ3",
 			"runcheck": "2019-01-23, 0.822s, 1result",
+			"rqid": "Q3",
+			"characteristics": "2 BGPs where both must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 ≥ 14 and #BGP_2 = 3. The BGPs have 8 variables including 2 property paths of length = 3, and 2 property path of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.",
+			"numberresults": "1",
+			"resultsexample": "http://omabrowser.org/ontology/oma#PROTEIN_RATNO03710\thttp://omabrowser.org/ontology/oma#PROTEIN_RATNO10594\thttp://purl.uniprot.org/uniprot/P10361\thttp://purl.uniprot.org/uniprot/M0R497\t\"Acts as a tumor suppressor in many tumor types; induces growth arrest or apoptosis depending on the physiological circumstances and cell type. Involved in cell cycle regulation as a trans-activator that acts to negatively regulate cell division by controlling a set of genes required for this process. One of the activated genes is an inhibitor of cyclin-dependent kinases. Apoptosis induction seems to be mediated either by stimulation of BAX and FAS antigen expression, or by repression of Bcl-2 expression.\"",
 			"parentIds": ["federatedOmaUniprot_proteins"],
 			"estimatedseconds": "4",
 			"question": "$$rattusnorvegicus$$' proteins encoded by genes that are paralogous to its $$Tp53$$ gene and their Uniprot function annotations.",
@@ -469,6 +509,10 @@
 		{
 			"id": "federatedOmaBgeeQ1",
 			"runcheck": "2019-01-23, 0.403s, 2results",
+			"rqid": "Q4",
+			"characteristics": "3 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 2, #BGP_2 ≥ 13 and #BGP_3 = 5. BGP_2  has  2 property paths of length = 2, and 2 property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.",
+			"numberresults": "2",
+			"resultsexample": "http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=MOUSE22529",
 			"parentIds": ["federatedOmaBgee_proteins"],
 			"estimatedseconds": "10",
 			"question": "Which are the $$mouse$$'s proteins encoded by genes which are expressed in the $$liver$$ and are orthologous to $$human$$'s $$INS$$ gene?",
@@ -510,6 +554,10 @@
 		{
 			"id": "federatedOmaBgeeQ2",
 			"runcheck": "2019-01-23, 2.334s, 10results",
+			"rqid": "Q5",
+			"characteristics": "2 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 6, and #BGP_2 ≥ 5. BGP_2  has 2 property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.",
+			"numberresults": "5322",
+			"resultsexample": "http://omabrowser.org/ontology/oma#GENE_FBgn0000008\thttp://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=ZOONE01884",
 			"parentIds": ["federatedOmaBgee_genes"],
 			"question": "Which are the orthologs of a gene that is expressed in the $$fruitfly$$’s $$brain$$?",
 			"estimatedseconds": "15",
@@ -537,6 +585,10 @@
 		{
 			"id": "federatedOmaBgeeQ3",
 			"runcheck": "2019-01-23, 3.367s, 10results",
+			"rqid": "Q6",
+			"characteristics": "2 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 6, and #BGP_2 ≥ 10 . BGP_2  has 3 property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.",
+			"numberresults": "38",
+			"resultsexample": "http://omabrowser.org/ontology/oma#GENE_FBgn0000017\thttp://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PONAB00390",
 			"parentIds": ["federatedOmaBgee_genes"],
 			"estimatedseconds": "6",
 			"question": "Which are the genes in $$primates$$ orthologous to a gene that is expressed in the $$fruitfly$$’s $$brain$$?",
