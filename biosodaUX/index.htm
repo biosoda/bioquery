@@ -2,19 +2,42 @@
 <html class="no-js" lang="">
 
 <head>
-  <meta charset="utf-8">
-  <title>BioSODA UX</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	<title>BioSODA UX</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="manifest" href="site.webmanifest">
-  <link rel="stylesheet" type="text/css" href="js/vendor/DataTables/dataTables.bootstrap4.min.css"/>
+	<link rel="manifest" href="site.webmanifest">
+	<link rel="stylesheet" type="text/css" href="js/vendor/DataTables/dataTables.bootstrap4.min.css"/>
 	<link rel="icon" href="favicon.ico">
-  <link rel="stylesheet" href="css/normalize.css">
-<link rel="stylesheet" href="css/bootstrap.css">
-  <link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/main.css">
 
-  <meta name="theme-color" content="#fafafa">
+	<meta name="theme-color" content="#fafafa">
+	<style>
+		.coladd {
+			position: relative;
+			display: inline-block;
+			top: 0;
+			right: 0;
+		}
+		.coladd .cols {
+			display: none;
+			z-index: 666;
+			background-color: white;
+			width: 40em;
+		}
+		.coladd .cols li {
+			list-style-type: none;
+			cursor: pointer;
+		}
+		.coladd.open .cols {
+			position: absolute;
+			display: block;
+		}
+	</style>
+	
 </head>
 
 <body>
@@ -93,7 +116,7 @@
 			</div>
 			<div class="col-12">
 				<div id="coltoggler">
-					Add column:
+					Add commonly used columns (based on your query):
 					<button class="btn btn-primary bg-white text-primary" data-column="1">Entry name</button>
 					<button class="btn btn-primary bg-white text-primary" data-column="2">Protein names</button>
 					<button class="btn btn-primary bg-white text-primary" data-column="3">Gene names</button>
@@ -106,7 +129,7 @@
 			</div>
 			<div class="col-12">
 				<table id="example" class="table table-striped table-bordered" style="width:100%;">
-					<thead>
+					<thead class="realhead">
 						<tr>
 							<th>Entry</th>
 							<th>Entry name name</th>
@@ -153,6 +176,9 @@
 	<script type="text/javascript" src="js/vendor/DataTables/datatables.min.js"></script>
 	<script src="js/main.js"></script>
 
+	<script src="js/d3sparql/d3.v3.min.js"></script>
+	<script src="js/d3sparql/d3sparql.js"></script>
+
 	<script>
 		// https://getbootstrap.com/docs/4.0/components/carousel/
 		// https://datatables.net/reference/option/
@@ -173,7 +199,8 @@
 			$('#interactapi').show();
 			$('#datatable').hide();
 			$.ajax({
-				url: "http://localhost:3003/",
+				// url: "http://localhost:3003/",
+				url: "http://biosoda.expasy.org:3003/",
 				data: {q: $('#inputtopsearch').val()},
 				method: 'POST'
 			}).done(function(data) {
@@ -194,10 +221,35 @@
 			});
 		}
 
+		function exec() {
+			var endpoint = 'http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight'; // d3.select("#endpoint").property("value")
+			var sparql = 'PREFIX orth: <http://purl.org/net/orth#> PREFIX up: <http://purl.uniprot.org/core/> PREFIX genex: <http://purl.org/genex#> PREFIX obo: <http://purl.obolibrary.org/obo/> SELECT DISTINCT ?anatEntity ?anatName {     ?seq a orth:Gene .     ?expr genex:hasSequenceUnit ?seq .     ?seq rdfs:label ?geneName .     ?expr genex:hasExpressionCondition ?cond .     ?cond genex:hasAnatomicalEntity ?anatEntity .     ?anatEntity rdfs:label ?anatName .     ?cond obo:RO_0002162 <http://purl.uniprot.org/taxonomy/10116> .      FILTER (LCASE(?geneName) = LCASE(\'APOC1\'))}'; // d3.select("#sparql").property("value")
+			d3sparql.query(endpoint, sparql, render)
+		}
+		function render(json) {
+			var config = {
+				"charge": -500,
+				"distance": 50,
+				"width": 1000,
+				"height": 750,
+				"selector": "#result"
+			}
+			d3sparql.forcegraph(json, config)
+		}
+
 		$(document).ready(function() {
 			$('#inputtopsearch').val('');
 			$('#demo').hide();
 			$('#interactapi').hide();
+
+			$('thead.realhead th').each(function() {
+				$(this).append('<div class="coladd"><label>&nbsp;[&gt;]</label><div class="cols"><ul><li>col1</li><li>col2</li><li>col3</li></ul></div></div>');
+			});
+
+			$('.coladd label').on( 'click', function (e) {
+				// $(this).parent().toggleClass('open');
+			});
+
 			$('#datatable').hide();
 			table = $('#example').DataTable( {
 				"scrollY": "200px",
@@ -233,7 +285,7 @@
 				$('#lookingfor').text($(e.target).attr('data-found'));
 				// zber next: get from ajax and fill datatable with possibilities
 				$('#datatable').show();
-				$('#runquery').hide();
+				// $('#runquery').hide();
 			});
 
 			$('#runquery').on('click', function(e) {
