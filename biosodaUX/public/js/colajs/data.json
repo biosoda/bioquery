@@ -1,0 +1,68 @@
+﻿{
+	"groups":[
+		{"name":"Biological process"},
+		{"name":"Molecular function"},
+		{"name":"Gene"},
+		{"name":"Organism"},
+		{"name":"Anatomical entity"},
+		{"name":"Stage"}
+	],
+	"nodes":[
+		{"name":"Biological process","group":0, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Name","group":0, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Description","group":0, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Molecular function","group":1, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Name","group":1, "dataexample": [ "me demo", "me also", "also me" ]},
+		
+		{"name":"Description","group":1, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Gene","group":2, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Name","group":2, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Description","group":2, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Ensembl ID","group":2, "dataexample": [ "me demo", "me also", "also me" ]},
+		
+		{"name":"Organism","group":3, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Name","group":3, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Description","group":3, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Tax ID","group":3, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Anatomical entity","group":4, "dataexample": [ "me demo", "me also", "also me" ]},
+		
+		{"name":"Name","group":4, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Description","group":4, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Tax ID","group":4, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Stage","group":5, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Name","group":5, "dataexample": [ "me demo", "me also", "also me" ]},
+		
+		{"name":"Description","group":5, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"Uberon ID","group":5, "dataexample": [ "me demo", "me also", "also me" ]},
+		{"name":"HsapDv ID","group":5, "dataexample": [ "me demo", "me also", "also me" ]}
+	],
+	"links":[
+		{"source":0,"target":1,"value":1},
+		{"source":0,"target":2,"value":1},
+		{"source":0,"target":3,"value":10},
+
+		{"source":3,"target":4,"value":1},
+		{"source":3,"target":5,"value":1},
+		{"source":3,"target":6,"value":10},
+
+		{"source":6,"target":7,"value":1},
+		{"source":6,"target":8,"value":1},
+		{"source":6,"target":9,"value":1},
+		{"source":6,"target":10,"value":10},
+
+		{"source":10,"target":11,"value":1},
+		{"source":10,"target":12,"value":1},
+		{"source":10,"target":13,"value":1},
+		{"source":10,"target":14,"value":10},
+
+		{"source":14,"target":15,"value":1},
+		{"source":14,"target":16,"value":1},
+		{"source":14,"target":17,"value":1},
+		{"source":14,"target":18,"value":10},
+
+		{"source":18,"target":19,"value":1},
+		{"source":18,"target":20,"value":1},
+		{"source":18,"target":21,"value":1},
+		{"source":18,"target":22,"value":1}
+	]
+}
