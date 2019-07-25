@@ -2,11 +2,9 @@ hljs.initHighlightingOnLoad();
 var width = 1000,
 	height = 500;
 
+
+var color = d3.scaleOrdinal(d3.schemeCategory20);
 // 26348b - bf5e22 - f1c1a4 - 987651
-biosodacolor = d3.scale.linear().domain([1,100])
-	.interpolate(d3.interpolateHcl)
-	.range([d3.rgb("#26348b"), d3.rgb('#bf5e22'), d3.rgb('#f1c1a4'), d3.rgb('#987651')]);
-var color = d3.scaleOrdinal(biosodacolor);
 
 var cola = cola.d3adaptor(d3)
 	.size([width, height]);

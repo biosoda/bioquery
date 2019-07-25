@@ -236,7 +236,6 @@
 				var thisindex = $(this).attr('data-column');
 				var column = demodata[thisindex];
 				pushDatatable(demodata[thisindex]);
-				// $(this).toggleClass('bg-white text-primary');
 				fillData();
 			});
 
@@ -251,10 +250,7 @@
 				console.log(e.target);
 				sibi = e.target;
 				$('#lookingfor').text($(e.target).attr('data-found'));
-				exec();
-				// zber next: get from ajax and fill datatable with possibilities
 				$('#datatable').show();
-				// $('#runquery').hide();
 			});
 
 			$('#runquery').on('click', function(e) {
