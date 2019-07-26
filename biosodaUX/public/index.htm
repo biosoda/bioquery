@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="css/normalize.css">
 	<link rel="stylesheet" href="css/bootstrap.css">
 	<link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/fontawesome/css/all.css">
 
 	<!-- https://ialab.it.monash.edu/webcola/examples/smallworldwithgroups.html -->
 	<link rel="stylesheet" href="js/colajs/github.css">
@@ -62,25 +63,27 @@
 			<div class="col-6 offset-3">
 				<div id="carouselExampleIndicators" class="carousel slide row " data-ride="carousel">
 					<div class="carousel-inner col-12 row">
-						<a class="carousel-control-prev col-1" href="#carouselExampleIndicators" role="button" data-slide="prev">
+						<a class="carousel-control-prev col-4" href="#carouselExampleIndicators" role="button" data-slide="prev">
 							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
 							<span class="sr-only">Previous</span>
 						</a>
 						<div class="carousel-item active col-auto">
 							<div class="carousel-caption d-none d-md-block">
+								Demo of bioSODA UX<br>search for simple gene
 							</div>
 							<video controls class="embed-responsive-item col-12">
-								<source src="video/v1.mp4" type="video/mp4">
+								<source src="video/demo.mp4" type="video/mp4">
 							</video>
 						</div>
 						<div class="carousel-item col-auto">
 							<div class="carousel-caption d-none d-md-block">
+								How to watch a video
 							</div>
 							<video controls class="embed-responsive-item col-12">
-								<source src="video/v2.mp4" type="video/mp4">
+								<source src="video/demo_video.mp4" type="video/mp4">
 							</video>
 						</div>
-						<a class="carousel-control-next col-1" href="#carouselExampleIndicators" role="button" data-slide="next">
+						<a class="carousel-control-next col-4" href="#carouselExampleIndicators" role="button" data-slide="next">
 							<span class="carousel-control-next-icon" aria-hidden="true"></span>
 							<span class="sr-only">Next</span>
 						</a>
@@ -150,9 +153,9 @@
 	<script src="js/colajs/d3v4.js"></script>
 	<script src="js/colajs/cola.min.js"></script>
 	<script src="js/colajs/highlight.pack.js"></script>
-	<script src="js/colajs/main.js"></script>
 
 	<script src="js/main.js"></script>
+	<script src="js/colajs/main.js"></script>
 
 	<script>
 		// https://getbootstrap.com/docs/4.0/components/carousel/
@@ -173,6 +176,8 @@
 			$('#demo').hide();
 			$('#interactapi').show();
 			$('#datatable').hide();
+			tabledata = tmptabledata;
+			fillData();
 			$.ajax({
 				// url: "http://localhost:3003/",
 				url: "http://biosoda.expasy.org:3003/",
@@ -189,7 +194,6 @@
 				}
 				$('.twoways').empty();
 				$(data.target).each(function(index) {
-					console.log(this);
 					$('.twoways').append('<button type="button" class="btn btn-success mr-1" data-found="' + this + '">' + this + '</button>');
 				});
 				
@@ -222,10 +226,10 @@
 				{ 'column': 'Taxonomy', 'values': [ 'Mammalia', 'Aves', 'Reptilia' ] },
 			];
 			tabledata = tmptabledata;
+
 			fillData();
 
 			$.each(demodata, function(onecol) {
-				// <button class="btn btn-primary bg-white text-primary" data-column="1">Entry name</button>
 				$('#coltoggler').append('<button class="btn btn-primary bg-white text-primary" data-column="' + onecol + '">' + demodata[onecol].column + '</button>');
 			})
 
@@ -247,7 +251,6 @@
 			$('.twoways').on('click', function(e) {
 				$('#demo').hide();
 				$('#interactapi').hide();
-				console.log(e.target);
 				sibi = e.target;
 				$('#lookingfor').text($(e.target).attr('data-found'));
 				$('#datatable').show();

@@ -1,10 +1,6 @@
 hljs.initHighlightingOnLoad();
-var width = 1000,
+var width = 840,
 	height = 500;
-
-
-var color = d3.scaleOrdinal(d3.schemeCategory20);
-// 26348b - bf5e22 - f1c1a4 - 987651
 
 var cola = cola.d3adaptor(d3)
 	.size([width, height]);
@@ -14,6 +10,10 @@ var svg = d3.select("#colajs").append("svg")
 	.attr("height", height);
 
 d3.json("js/colajs/data.json", function (error, graph) {
+
+	var biosodacolor = ['#26348b', '#bf5e22', '#f1c1a4', '#987651'];
+	var color = d3.scaleOrdinal(biosodacolor).domain(graph.nodes);
+
 	var groupMap = {};
 	graph.nodes.forEach(function (v, i) {
 		var g = v.group;
@@ -33,9 +33,9 @@ d3.json("js/colajs/data.json", function (error, graph) {
 		.nodes(graph.nodes)
 		.links(graph.links)
 		.groups(groups)
-		.jaccardLinkLengths(80, 0.7)
+		.jaccardLinkLengths(80, 40)
 		.avoidOverlaps(true)
-		.start(100, 0, 100);
+		.start(20, 0, 40);
 
 	var link = svg.selectAll(".link")
 		.data(graph.links)
@@ -48,7 +48,7 @@ d3.json("js/colajs/data.json", function (error, graph) {
 		.enter().append('g')
 		.attr('class', 'group')
 		.attr("data-groupid", function (d) { return d.id; })
-		.call(cola.drag);
+		// .call(cola.drag);
 
 		var grouprect = group.append("rect")
 			.attr('rx',2)
@@ -65,7 +65,7 @@ d3.json("js/colajs/data.json", function (error, graph) {
 				return graph.groups[d.id]['name'];
 			})
 			.attr('x', 20)
-			.call(cola.drag);
+			// .call(cola.drag);
 
 	// http://bl.ocks.org/MoritzStefaner/1377729
 	var node = svg.selectAll(".node")
@@ -103,8 +103,12 @@ d3.json("js/colajs/data.json", function (error, graph) {
 				.text(function(d,i) {
 					return d.name;
 				})
+				.attr('class', function(d,i) {
+					if (d.name == graph.groups[d.group]['name']) return 'groupname';
+					return 'attributename';
+				})
 				.attr('onclick', function(d,i) {
-					console.log(d);
+					if (d.name == graph.groups[d.group]['name']) return false;
 					return 'pushDatatableJSON("' + d.name + '", ' + d.group + ')';
 				})
 				.call(cola.drag);
@@ -115,22 +119,65 @@ d3.json("js/colajs/data.json", function (error, graph) {
 			.attr("x2", function (d) { return d.target.x; })
 			.attr("y2", function (d) { return d.target.y; });
 
-		node.attr("cx", function (d) { return d.x; })
-			.attr("cy", function (d) { return d.y; });
+		node
+			.attr("cx", function (d) {
+				var newx = d.x;
+				var newxcorr = Math.max(d.width, Math.min(newx, width-d.width));
+				return newxcorr;
+			})
+			.attr("cy", function (d) {
+				var newy = d.y;
+				var newycorr = Math.max(d.height, Math.min(newy, width-d.height));
+				return newycorr;
+			});
 
-		nodecircle.attr("cx", function(d) { return d.x; })
-			.attr("cy", function(d) { return d.y; });
+		nodecircle
+			.attr("cx", function (d) {
+				var newx = d.x;
+				var newxcorr = Math.max(d.width, Math.min(newx, width-d.width));
+				return newxcorr;
+			})
+			.attr("cy", function (d) {
+				var newy = d.y;
+				var newycorr = Math.max(d.height, Math.min(newy, width-d.height));
+				return newycorr;
+			});
 
-		nodetext.attr("x", function(d) { return d.x; })
-			.attr("y", function(d) { return d.y; });
+		nodetext
+			.attr("x", function (d) {
+				var newx = d.x;
+				var newxcorr = Math.max(d.width, Math.min(newx, width-d.width));
+				return newxcorr;
+			})
+			.attr("y", function (d) {
+				var newy = d.y;
+				var newycorr = Math.max(d.height, Math.min(newy, width-d.height));
+				return newycorr;
+			});
 
 		recttext.attr("x", function(d) { return d.bounds.x; })
 			.attr("y", function(d) { return d.bounds.y; });
 
+		// not thinking outside of the box
+		// https://bl.ocks.org/puzzler10/2531c035e8d514f125c4d15433f79d74
 		grouprect
-			.attr('x', function (d) { return d.bounds.x - 20 })
-			.attr('y', function (d) { return d.bounds.y - 20 })
-			.attr('width', function (d) { return d.bounds.width() + 40 })
-			.attr('height', function(d) { return d.bounds.height() + 40 });
+			.attr('x', function (d) {
+				var newx = d.bounds.x - 20;
+				var newxcorr = Math.max(0, Math.min(newx, width-d.bounds.width()));
+				return newxcorr;
+			})
+			.attr('y', function (d) {
+				var newy = d.bounds.y - 20;
+				var newycorr = Math.max(0, Math.min(newy, height-d.bounds.height()));
+				return newycorr;
+			})
+			.attr('width', function (d) {
+				var neww = d.bounds.width() + 40;
+				return neww;
+			})
+			.attr('height', function(d) {
+				var newy = d.bounds.height() + 40;
+				return newy;
+			});
 	});
 });

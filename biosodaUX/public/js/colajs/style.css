@@ -182,6 +182,14 @@ blockquote:after {
 	fill: #000;
 }
 
+#colajs .node {
+	cursor: move;
+}
+
+#colajs .node text.attributename {
+	cursor: crosshair;
+}
+
 #colajs .group text {
 	fill: #fff;
 	font-size: 1.3em;
@@ -198,3 +206,4 @@ blockquote:after {
 	stroke: #fff;
 	stroke-width: 1.5px;
 	opacity: 0.2;
+

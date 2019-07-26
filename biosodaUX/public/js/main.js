@@ -3,15 +3,29 @@ var d3table = d3.select('#example');
 function fillData(remove = false) {
 	if (typeof(d3tablehead) !== 'undefined') {
 		d3tablehead.remove();
+		d3tablehead2nd.remove();
 		d3tablebody.remove();
 	}
 	d3tablehead = d3table.append('thead').append('tr');
+	d3tablehead2nd = d3table.append('thead').append('tr');
 	d3tablebody = d3table.append('tbody');
+	
 	d3tablehead.selectAll('th')
 		.data(tabledata).enter()
 		.append('th')
 			.text(function (d) {
 				return d.column;
+			})
+
+	d3tablehead2nd.selectAll('th')
+		.data(tabledata).enter()
+		.append('th')
+			.html(function (d) {
+				thisfilter = '*';
+				if (typeof(filterrules[d.column]) != 'undefined') {
+					thisfilter = filterrules[d.column];
+				}
+				return '<input class="filter" value="' + thisfilter.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;') + '" onchange="saveFilter(\'' + d.column + '\', this.value)">';
 			})
 
 	var d3tr = d3tablebody.selectAll('tr')
@@ -40,11 +54,33 @@ function fillData(remove = false) {
 			if (d.original) return false;
 			return true;
 		})
-		.append('button')
-		.attr('class', 'close')
-		.html('&times;')
-		.attr('onclick', 'pushDatatable(this.__data__)')
+		.classed('notoriginal', true)
+		.append('div')
+			.attr('class', 'fas fa-times leftright closetimes')
+			.html('')
+			.attr('onclick', 'pushDatatable(this.__data__)')
 
+	d3tablehead.selectAll('th')
+		.filter(function(d, i) {
+			if (d.original) return false;
+			return true;
+		})
+		.append('div')
+			.attr('class', 'fas fa-arrow-left leftright left')
+			.html('')
+			.attr('onclick', 'moveDatatable(this.__data__, "left")')
+	d3tablehead.selectAll('thead .notoriginal:first-of-type .leftright.left').remove();
+
+	d3tablehead.selectAll('th')
+		.filter(function(d) {
+			if (d.original) return false;
+			return true;
+		})
+		.append('div')
+			.attr('class', 'fas fa-arrow-right leftright right')
+			.html('')
+			.attr('onclick', 'moveDatatable(this.__data__, "right")')
+	d3tablehead.selectAll('th:last-child .leftright.right').remove();
 }
 
 function pushDatatable(data) {
@@ -70,4 +106,30 @@ function pushDatatableJSON(colname, groupid) {
 			}
 		});
 	});
+}
+
+function moveDatatable(data, direction) {
+	var found = false;
+	tabledata.forEach(function (single, i) {
+		if (single == data && found === false) {
+			if (direction === 'left') {
+				tmpleft = tabledata[i-1];
+				tmpthis = tabledata[i];
+				tabledata[i] = tmpleft;
+				tabledata[i-1] = tmpthis;
+			} else {
+				tmpright = tabledata[i+1];
+				tmpthis = tabledata[i];
+				tabledata[i] = tmpright;
+				tabledata[i+1] = tmpthis;
+			}
+			found = true
+			return false;
+		}
+	});
+	fillData();
+}
+filterrules = [];
+function saveFilter(columnname, filter) {
+	filterrules[columnname] = filter;
 }

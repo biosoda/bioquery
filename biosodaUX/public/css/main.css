@@ -322,5 +322,23 @@ body{
 table#example {
 	display: block;
 	overflow-x: auto;
+}
+
+table#example thead th {
 	white-space: nowrap;
+}
+
+.leftright {
+	font-size: 0.666em;
+	margin: 0.2em;
+	float: right;
+	cursor: pointer;
+	display: inline-block;
+}
+
+.carousel-caption {
+	position: relative;
+	left: inherit;
+	right: inherit;
+	color: black;
 }
