@@ -23,7 +23,7 @@
 		{
 			"name": "Bgee",
 			"moreinfo": "https://bgee.org",
-			"urlquery": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=PREFIX%20up%3A%20%3Chttp%3A%2F%2Fpurl.uniprot.org%2Fcore%2F%3E%0ASELECT%20*%20%7B%0A%09%3Fspecies%20a%20up%3ATaxon%20.%0A%09%3Fspecies%20up%3AscientificName%20%3Fname%20.%0A%09%3Fspecies%20up%3Arank%20up%3ASpecies%20.%0A%7D&format=JSON&limit=100&offset=0&inference=false",
+			"urlquery": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres?query=PREFIX%20up%3A%20%3Chttp%3A%2F%2Fpurl.uniprot.org%2Fcore%2F%3E%0ASELECT%20*%20%7B%0A%09%3Fspecies%20a%20up%3ATaxon%20.%0A%09%3Fspecies%20up%3AscientificName%20%3Fname%20.%0A%09%3Fspecies%20up%3Arank%20up%3ASpecies%20.%0A%7D&format=JSON&limit=100&offset=0&inference=false",
 			"expected": "true"
 		},
 		{
