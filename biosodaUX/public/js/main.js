@@ -16,6 +16,9 @@ function fillData(remove = false) {
 			.text(function (d) {
 				return d.column;
 			})
+			.attr('data-hovertarget', function(d, i) {
+				return createHovertarget(d.group, d.column);
+			})
 
 	d3tablehead2nd.selectAll('th')
 		.data(tabledata).enter()
@@ -43,7 +46,7 @@ function fillData(remove = false) {
 			})
 	
 	d3tablebody.selectAll('td')
-		.text(function (d, i, j) {
+		.text(function () {
 			var thisrow = this.parentNode.getAttribute('data-rownum');
 			var thiscol = this.getAttribute('data-colnum');
 			return tabledata[thiscol].values[thisrow];
@@ -81,6 +84,35 @@ function fillData(remove = false) {
 			.html('')
 			.attr('onclick', 'moveDatatable(this.__data__, "right")')
 	d3tablehead.selectAll('th:last-child .leftright.right').remove();
+
+	$('[data-hovertarget]')
+		.on( 'mouseover', function (e) {
+			$('[data-hovertarget="' + $(this).attr('data-hovertarget') + '"]').each(function(index, value) {
+				var tmpobj = d3.select(value);
+				if (typeof(tmpobj.classed) != 'undefined') {
+					tmpobj.classed('isHovered', true);
+					tmpobj.attr('fill', 'red');
+					tmpobj.style('fill', 'red')
+				} else {
+					$(this).addClass('isHovered');
+				}
+			});
+		})
+		.on( 'mouseout', function (e) {
+			$('[data-hovertarget="' + $(this).attr('data-hovertarget') + '"]').each(function(index, value) {
+				var tmpobj = d3.select(value)
+				if (typeof(tmpobj.classed) != 'undefined') {
+					tmpobj.classed('isHovered', false);
+					tmpobj.attr('fill', 'black');
+					if (typeof(tmpobj.attr('data-fill')) != 'undefined') {
+						tmpobj.style('fill', tmpobj.attr('data-fill'))
+					}
+				} else {
+					$(this).removeClass('isHovered');
+				}
+			});
+		})
+
 }
 
 function pushDatatable(data) {
@@ -102,10 +134,14 @@ function pushDatatableJSON(colname, groupid) {
 	d3.json("js/colajs/data.json", function (error, graph) {
 		graph.nodes.forEach(function (v, i) {
 			if (v.name == colname && v.group == groupid) {
-				pushDatatable({ 'column': graph.groups[groupid].name + '.' + colname, 'values': v.dataexample });
+				pushDatatable({ 'column': graph.groups[groupid].name + '.' + colname, 'values': v.dataexample, 'group': groupid });
 			}
 		});
 	});
+}
+
+function createHovertarget(group, name) {
+	return group + ' ' + name;
 }
 
 function moveDatatable(data, direction) {

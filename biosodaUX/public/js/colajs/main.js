@@ -95,6 +95,13 @@ d3.json("js/colajs/data.json", function (error, graph) {
 				var tmpcol = color(d.group);
 				return tmpcol;
 			})
+			.attr("data-fill", function (d) {
+				var tmpcol = color(d.group);
+				return tmpcol;
+			})
+			.attr("data-hovertarget", function(d) {
+				return createHovertarget(d.group, graph.groups[d.group]['name'] + '.' + d.name);
+			})
 
 			var nodetitle = node.append("title")
 				.text(function (d) { return d.name; });
@@ -106,6 +113,9 @@ d3.json("js/colajs/data.json", function (error, graph) {
 				.attr('class', function(d,i) {
 					if (d.name == graph.groups[d.group]['name']) return 'groupname';
 					return 'attributename';
+				})
+				.attr('data-hovertarget', function(d, i) {
+					return createHovertarget(d.group, graph.groups[d.group]['name'] + '.' + d.name);
 				})
 				.attr('onclick', function(d,i) {
 					if (d.name == graph.groups[d.group]['name']) return false;

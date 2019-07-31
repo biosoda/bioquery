@@ -217,20 +217,20 @@
 
 			tabledata = [];
 			tmptabledata = [
-				{ 'column': 'Gene ID', values: [ 'ENSG00000131055', 'ENSCAFG00000003022', 'ENSRNOG00000007827' ], original: true },
-				{ 'column': 'Gene Name', 'values': [ 'COX4I2', 'MYCL', 'Cox4i2' ], original: true },
+				{ 'column': 'Gene ID', values: [ 'ENSG00000131055', 'ENSCAFG00000003022', 'ENSRNOG00000007827' ], group: 0, original: true },
+				{ 'column': 'Gene Name', 'values': [ 'COX4I2', 'MYCL', 'Cox4i2' ], group: 0, original: true },
 			];
 			demodata = [
-				{ 'column': 'Protein names', 'values': [ 'Cytochrome c oxidase subunit 4 isoform 2, mitochondrial', 'Class E Basic Helix-Loop-Helix Protein 38', 'cytochrome c oxidase subunit 4I2' ] },
-				{ 'column': 'Organism', 'values': [ 'Mus musculus', 'Gallus gallus', 'Anolis carolinensis' ] },
-				{ 'column': 'Taxonomy', 'values': [ 'Mammalia', 'Aves', 'Reptilia' ] },
+				{ 'column': 'Protein names', 'values': [ 'Cytochrome c oxidase subunit 4 isoform 2, mitochondrial', 'Class E Basic Helix-Loop-Helix Protein 38', 'cytochrome c oxidase subunit 4I2' ], group: 0 },
+				{ 'column': 'Organism', 'values': [ 'Mus musculus', 'Gallus gallus', 'Anolis carolinensis' ], group: 0 },
+				{ 'column': 'Taxonomy', 'values': [ 'Mammalia', 'Aves', 'Reptilia' ], group: 0 },
 			];
 			tabledata = tmptabledata;
 
 			fillData();
 
 			$.each(demodata, function(onecol) {
-				$('#coltoggler').append('<button class="btn btn-primary bg-white text-primary" data-column="' + onecol + '">' + demodata[onecol].column + '</button>');
+				$('#coltoggler').append('<button class="btn btn-primary bg-white text-primary" data-column="' + onecol + '" data-hovertarget="' + createHovertarget(demodata[onecol].group, demodata[onecol].column) + '">' + demodata[onecol].column + '</button>');
 			})
 
 			$('#coltoggler button').on( 'click', function (e) {

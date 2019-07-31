@@ -133,7 +133,7 @@ textarea {
 }
 
 svg {
-  font: 10px sans-serif;
+  font: 12px sans-serif;
 }
 
 .axis path, .axis line {
@@ -177,11 +177,21 @@ blockquote:after {
 
 #colajs .node text,
 #colajs .group text {
-	stroke: #000;
-	stroke-width: 0;
+	stroke: #fff;
+	stroke-width: 2;
+	paint-order: stroke;
 	fill: #000;
 }
 
+table#example th.isHovered,
+#coltoggler button.text-primary.isHovered,
+#colajs .node text.isHovered {
+	color: red !important;
+	fill: red;
+}
+#colajs .node circle.isHovered {
+		fill: red;
+}
 #colajs .node {
 	cursor: move;
 }
