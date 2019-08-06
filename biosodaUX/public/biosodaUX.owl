@@ -1,0 +1,62 @@
+Prefix(:=<http://biosoda.expasy.org/biosodaUX_owl#>)
+Prefix(owl:=<http://www.w3.org/2002/07/owl#>)
+Prefix(rdf:=<http://www.w3.org/1999/02/22-rdf-syntax-ns#>)
+Prefix(xml:=<http://www.w3.org/XML/1998/namespace>)
+Prefix(xsd:=<http://www.w3.org/2001/XMLSchema#>)
+Prefix(rdfs:=<http://www.w3.org/2000/01/rdf-schema#>)
+
+
+Ontology(<http://biosoda.expasy.org/biosodaUX_owl#>
+
+Declaration(Class(:column))
+Declaration(Class(:concept))
+Declaration(ObjectProperty(:class))
+Declaration(ObjectProperty(:partOf))
+Declaration(ObjectProperty(:property))
+Declaration(DataProperty(:exampleData))
+
+############################
+#   Object Properties
+############################
+
+# Object Property: :class (biosodaUX:class)
+
+AnnotationAssertion(rdfs:label :class "biosodaUX:class")
+ObjectPropertyDomain(:class :concept)
+
+# Object Property: :partOf (biosodaUX:partOf)
+
+AnnotationAssertion(rdfs:label :partOf "biosodaUX:partOf")
+ObjectPropertyDomain(:partOf :column)
+ObjectPropertyRange(:partOf :concept)
+
+# Object Property: :property (biosodaUX:property)
+
+AnnotationAssertion(rdfs:label :property "biosodaUX:property")
+ObjectPropertyDomain(:property :concept)
+
+
+############################
+#   Data Properties
+############################
+
+# Data Property: :exampleData (biosodaUX:exampleData)
+
+AnnotationAssertion(rdfs:label :exampleData "biosodaUX:exampleData")
+
+
+
+############################
+#   Classes
+############################
+
+# Class: :column (biosodaUX:column)
+
+AnnotationAssertion(rdfs:label :column "biosodaUX:column")
+
+# Class: :concept (biosodaUX:concept)
+
+AnnotationAssertion(rdfs:label :concept "biosodaUX:concept")
+
+
+)
