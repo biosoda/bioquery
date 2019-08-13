@@ -1,34 +1,347 @@
 ===============
-http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=PREFIX%20orth%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fnet%2Forth%23%3E%0APREFIX%20genex%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fgenex%23%3E%0APREFIX%20obo%3A%20%3Chttp%3A%2F%2Fpurl.obolibrary.org%2Fobo%2F%3E%0ASELECT%20%3FanatEntity%20%3FanatName%20%7B%0A%09%3Fseq%20a%20orth%3AGene%20.%0A%09%3Fexpr%20genex%3AhasSequenceUnit%20%3Fseq%20.%0A%09%3Fseq%20rdfs%3Alabel%20%3FgeneName%20.%0A%09%3Fexpr%20genex%3AhasExpressionCondition%20%3Fcond%20.%0A%09%3Fcond%20genex%3AhasAnatomicalEntity%20%3FanatEntity%20.%0A%09%3FanatEntity%20rdfs%3Alabel%20%3FanatName%20.%0A%09FILTER%20(%20LCASE(%3FgeneName)%20%3D%20LCASE(%27apoc1%27)%20)%0A%7D%20LIMIT%2010&format=JSON&limit=100&offset=0&inference=false
-Query evaluation error: it.unibz.inf.ontop.exception.OntopQueryEvaluationException: com.mysql.jdbc.exceptions.jdbc4.CommunicationsException: Communications link failure
-
-The last packet successfully received from the server was 62,462 milliseconds ago.  The last packet sent successfully to the server was 62,443 milliseconds ago.
-mySQL: 62.50425
+Q0.rq
 ===============
-
-
+mySQL: 13.687629
 ===============
-http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres?query=PREFIX%20orth%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fnet%2Forth%23%3E%0APREFIX%20genex%3A%20%3Chttp%3A%2F%2Fpurl.org%2Fgenex%23%3E%0APREFIX%20obo%3A%20%3Chttp%3A%2F%2Fpurl.obolibrary.org%2Fobo%2F%3E%0ASELECT%20%3FanatEntity%20%3FanatName%20%7B%0A%09%3Fseq%20a%20orth%3AGene%20.%0A%09%3Fexpr%20genex%3AhasSequenceUnit%20%3Fseq%20.%0A%09%3Fseq%20rdfs%3Alabel%20%3FgeneName%20.%0A%09%3Fexpr%20genex%3AhasExpressionCondition%20%3Fcond%20.%0A%09%3Fcond%20genex%3AhasAnatomicalEntity%20%3FanatEntity%20.%0A%09%3FanatEntity%20rdfs%3Alabel%20%3FanatName%20.%0A%09FILTER%20(%20LCASE(%3FgeneName)%20%3D%20LCASE(%27apoc1%27)%20)%0A%7D%20LIMIT%2010&format=JSON&limit=100&offset=0&inference=false
-anatEntity,anatName
-http://purl.obolibrary.org/obo/UBERON_0000082,adult mammalian kidney
-http://purl.obolibrary.org/obo/UBERON_0001052,rectum
-http://purl.obolibrary.org/obo/UBERON_0001134,skeletal muscle tissue
-http://purl.obolibrary.org/obo/UBERON_0000948,heart
-http://purl.obolibrary.org/obo/UBERON_0000473,testis
-http://purl.obolibrary.org/obo/UBERON_0000451,prefrontal cortex
-http://purl.obolibrary.org/obo/UBERON_0002037,cerebellum
-http://purl.obolibrary.org/obo/UBERON_0001155,colon
-http://purl.obolibrary.org/obo/UBERON_0002048,lung
-http://purl.obolibrary.org/obo/CL_2000001,peripheral blood mononuclear cell
-
-postgreSQL: 0.139443
+postgreSQL: 12.446916
 ===============
-
-
+mySQL: 12.663169
+===============
+postgreSQL: 12.751315
+===============
+mySQL: 12.783997
+===============
+postgreSQL: 13.341167
+===============
+mySQL: 12.818842
+===============
+postgreSQL: 12.93075
+===============
+mySQL: 13.061704
+===============
+postgreSQL: 12.701742
 ===============
 ===============
 statistics
 ===============
-1 tries
-mySQL: 62.50425
-postgreSQL: 0.139443
+5 tries
+mySQL: 13.003068200000001
+postgreSQL: 12.834377999999997
+===============
+Q1.rq
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+statistics
+===============
+5 tries
+mySQL: 13.003068200000001
+postgreSQL: 12.834377999999997
+===============
+Q10.rq
+===============
+mySQL: 12.665873
+===============
+postgreSQL: 12.725535
+===============
+mySQL: 12.179478
+===============
+postgreSQL: 12.836789
+===============
+mySQL: 12.896227
+===============
+postgreSQL: 11.686532
+===============
+mySQL: 11.897658
+===============
+postgreSQL: 11.896753
+===============
+mySQL: 12.198363
+===============
+postgreSQL: 11.780093
+===============
+===============
+statistics
+===============
+5 tries
+mySQL: 25.370588000000005
+postgreSQL: 25.0195184
+===============
+Q11.rq
+===============
+mySQL: 12.16387
+===============
+postgreSQL: 12.08398
+===============
+mySQL: 11.70105
+===============
+postgreSQL: 12.093353
+===============
+mySQL: 11.648094
+===============
+postgreSQL: 11.958059
+===============
+mySQL: 11.652829
+===============
+postgreSQL: 12.292017
+===============
+mySQL: 12.436709
+===============
+postgreSQL: 12.431765
+===============
+===============
+statistics
+===============
+5 tries
+mySQL: 37.29109840000001
+postgreSQL: 37.191353199999995
+===============
+Q12.rq
+===============
+mySQL: 12.507216
+===============
+postgreSQL: 12.599563
+===============
+mySQL: 12.630244
+===============
+postgreSQL: 12.509591
+===============
+mySQL: 12.17467
+===============
+postgreSQL: 13.256402
+===============
+mySQL: 12.808699
+===============
+postgreSQL: 12.445171
+===============
+mySQL: 12.62546
+===============
+postgreSQL: 13.106402
+===============
+===============
+statistics
+===============
+5 tries
+mySQL: 49.84035620000001
+postgreSQL: 49.974779
+===============
+Q2.rq
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+statistics
+===============
+5 tries
+mySQL: 49.84035620000001
+postgreSQL: 49.974779
+===============
+Q3.rq
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+===============
+statistics
+===============
+5 tries
+mySQL: 49.84035620000001
+postgreSQL: 49.974779
+===============
+Q4.rq
+===============
+mySQL: 0.031146
+===============
+postgreSQL: 0.023568
+===============
+mySQL: 0.018145
+===============
+postgreSQL: 0.019996
+===============
+mySQL: 0.023441
+===============
+postgreSQL: 0.016397
+===============
+mySQL: 0.017733
+===============
+postgreSQL: 0.01517
+===============
+mySQL: 0.020247
+===============
+postgreSQL: 0.017643
+===============
+===============
+statistics
+===============
+5 tries
+mySQL: 49.86249860000001
+postgreSQL: 49.9933338
+===============
+Q5.rq
+===============
+mySQL: 0.044981
+===============
+postgreSQL: 0.028577
+===============
+mySQL: 0.031174
+===============
+postgreSQL: 0.033702
+===============
+mySQL: 0.037229
+===============
+postgreSQL: 0.031802
+===============
+mySQL: 0.032557
+===============
+postgreSQL: 0.036106
+===============
+mySQL: 0.030343
+===============
+postgreSQL: 0.031134
+===============
+===============
+statistics
+===============
+5 tries
+mySQL: 49.89775540000001
+postgreSQL: 50.025598
+===============
+Q6.rq
+===============
+mySQL: 0.04845
+===============
+postgreSQL: 0.030897
+===============
+mySQL: 0.039229
+===============
+postgreSQL: 0.029788
+===============
+mySQL: 0.035699
+===============
+postgreSQL: 0.051758
+===============
+mySQL: 0.045452
+===============
+postgreSQL: 0.031388
+===============
+mySQL: 0.036822
+===============
+postgreSQL: 0.045346
+===============
+===============
+statistics
+===============
+5 tries
+mySQL: 49.93888580000001
+postgreSQL: 50.0634334
+===============
+Q7.rq
+===============
+mySQL: 0.066218
+===============
+postgreSQL: 0.050532
+===============
+mySQL: 0.046418
+===============
+postgreSQL: 0.037398
+===============
+mySQL: 0.026769
+===============
+postgreSQL: 0.041551
+===============
+mySQL: 0.046576
+===============
+postgreSQL: 0.042222
+===============
+mySQL: 0.038429
+===============
+postgreSQL: 0.03685
+===============
+===============
+statistics
+===============
+5 tries
+mySQL: 49.9837678
+postgreSQL: 50.105144
+===============
+Q8.rq
+===============
+mySQL: 0.047618
+===============
+postgreSQL: 0.042379
+===============
+mySQL: 0.047842
+===============
+postgreSQL: 0.03382
+===============
+mySQL: 0.039563
+===============
+postgreSQL: 0.031465
+===============
+mySQL: 0.027919
+===============
+postgreSQL: 0.043923
+===============
+mySQL: 0.030237
+===============
+postgreSQL: 0.028047
+===============
+===============
+statistics
+===============
+5 tries
+mySQL: 50.022403600000004
+postgreSQL: 50.1410708
+===============
+Q9.rq
+===============
+mySQL: 0.038119
+===============
+postgreSQL: 0.052062
+===============
+mySQL: 0.038758
+===============
+postgreSQL: 0.039682
+===============
+mySQL: 0.032719
+===============
+postgreSQL: 0.036206
+===============
+mySQL: 0.041996
+===============
+postgreSQL: 0.035515
+===============
+mySQL: 0.036611
+===============
+postgreSQL: 0.035952
+===============
+===============
+statistics
+===============
+5 tries
+mySQL: 50.0600442
+postgreSQL: 50.1809542
