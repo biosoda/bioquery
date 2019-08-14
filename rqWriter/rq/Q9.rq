@@ -10,7 +10,6 @@ PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX genex: <http://purl.org/genex#>
 PREFIX lscr: <http://purl.org/lscr#>
 PREFIX orth: <http://purl.org/net/orth#>
-PREFIX up: <http://purl.uniprot.org/core/>
 SELECT DISTINCT ?geneEns ?uniprot ?annotation_text {
 	SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql> {
 		SELECT ?geneEns {
@@ -33,4 +32,4 @@ SELECT DISTINCT ?geneEns ?uniprot ?annotation_text {
 		?annotation rdfs:comment ?annotation_text .
 	}
 }
-### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-07-11 14:38:13
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-13 13:42:01

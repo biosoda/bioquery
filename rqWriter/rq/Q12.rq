@@ -46,4 +46,4 @@ SELECT DISTINCT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {
 		?annotation a up:Disease_Annotation .
 	}
 }
-### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-07-11 14:38:13
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-13 13:42:01
