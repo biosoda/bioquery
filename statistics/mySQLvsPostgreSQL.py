@@ -8,6 +8,9 @@ url1 = "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight"
 url2_title = "postgreSQL"
 url2 = "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres"
 
+header_title = "header"
+header = "header"
+
 intermed = "?query="
 restofurl = "&format=JSON&limit=100&offset=0&inference=false"
 
@@ -56,7 +59,9 @@ for file in os.listdir(directory):
         sums[filename]['header']['total'] = 'total'
         sums[filename]['header']['avg'] = 'avg'
         sums[filename]['url1']['total'] = 0
+        sums[filename]['url1']['avg'] = 0
         sums[filename]['url2']['total'] = 0
+        sums[filename]['url2']['avg'] = 0
 
         printwrite("===============")
         tmpfile = open(targetdir + filename, 'r')
@@ -107,14 +112,14 @@ for file in os.listdir(directory):
                 printwrite(tmpres.text, verbose)
                 tmptime = tmpres.elapsed.total_seconds()
                 sums[filename][oneurl]['total'] = sums[filename][oneurl]['total'] + tmptime
-                sums[filename]['header'][x] = x
-                sums[filename][oneurl][x] = str(tmptime)
+                sums[filename]['header']['p' + str(x)] = x
+                sums[filename][oneurl]['p' + str(x)] = str(tmptime)
 
                 printwrite("===============", verbose)
                 printwrite("\n", verbose)
 
-        # calculate average
-        sums[filename][oneurl]['avg'] = sums[filename][oneurl]['total']/loops
+                # calculate average
+                sums[filename][oneurl]['avg'] = sums[filename][oneurl]['total']/loops
 
         # write single statistic to console
         printwrite("===============", 0, "\n", "\n")
@@ -124,17 +129,23 @@ for file in os.listdir(directory):
         printwrite(str(loops) + " tries")
         for qnum, qnumdata in sums[filename].items():
             printwrite("", 1)
+            printwrite(eval(qnum + '_title'), 1, ",")
             for point, pointdata in qnumdata.items():
                 printwrite(pointdata, 1, ",")
+        printwrite("", 1)
     # break # used for debugging
 
 # full statistic at the end
+printwrite("===============")
 printwrite("fullstat")
+printwrite("===============")
 
 for filename, filedata in sums.items():
     printwrite(filename)
     for qnum, qnumdata in sums[filename].items():
+        printwrite(eval(qnum + '_title'), 1, ",")
         for point, pointdata in qnumdata.items():
             printwrite(pointdata, 1, ",")
         printwrite("", 1)
 
+printwrite('### this statistics file ist created by bioSODA mySQLvsPostgreSQL.py (https://github.com/biosoda/bioquery/tree/master/statistics) - created at ' + now.strftime("%Y-%m-%d %H:%M:%S"))
