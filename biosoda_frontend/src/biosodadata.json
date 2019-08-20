@@ -156,7 +156,7 @@
 			"resultsexample": "oma:GENE_FBgn0000008\t<http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=ATTCE14837>\t<http://purl.uniprot.org/uniprot/A0A158NZZ1>\tPDZ",
 			"parentIds": ["federatedOmaBgeeUniprot_genes"],
 			"question": "The orthologs of a gene that is expressed in the [[ $$fruitfly$$’s $$brain$$ ]] and the UniProt annotations of these orthologs.",
-			"estimatedseconds": "60",
+			"estimatedseconds": "158",
 			"vars": [
 				{
 					"name": "brain",
@@ -189,7 +189,7 @@
 			"resultsexample": "oma:GENE_FBgn0000032\t<http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PONAB01175>\t<http://purl.uniprot.org/uniprot/Q5NVF6>\tNucleophile",
 			"parentIds": ["federatedOmaBgeeUniprot_genes"],
 			"question": "Which are the genes in $$primates$$ orthologous to a gene that is expressed in the $$fruitfly$$’s $$brain$$ and the UniProt annotations of the genes.",
-			"estimatedseconds": "6",
+			"estimatedseconds": "23",
 			"vars": [
 				{
 					"name": "primates",
@@ -227,7 +227,7 @@
 			"resultsexample": "http://omabrowser.org/ontology/oma#GENE_ENSRNOG00000000007\thttp://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=HUMAN17852\thttp://purl.uniprot.org/uniprot/Q99259\tThe disease is caused by mutations affecting the gene represented in this entry.",
 			"parentIds": ["federatedOmaBgeeUniprot_proteins"],
 			"question": "Which are the genes in $$human$$ associated to a disease that are orthologous to a gene expressed in the $$rat$$’s brain?",
-			"estimatedseconds": "6",
+			"estimatedseconds": "118",
 			"vars": [
 				{
 					"name": "rat",
@@ -283,7 +283,7 @@
 			"id": "federatedOmaBgeeUniprotQ5",
 			"runcheck": "2019-08-20, 13.958s, 64 results",
 			"parentIds": ["federatedOmaBgeeUniprot_disease"],
-			"estimatedseconds": "20",
+			"estimatedseconds": "14",
 			"question": "What are the Homo sapiens’ genes associated with $$cancer$$ and their orthologs expressed in the $$rat$$’s $$brain$$?",
 			"vars": [
 				{
@@ -422,7 +422,7 @@
 			"runcheck": "2019-08-20, 5.151s, 45results",
 			"parentIds": ["federatedOmaUniprot_proteins"],
 			"question": "Proteins in OMA that are encoded by the $$INS$$ gene without considering synonyms and their species identifier and evidence types from UniProt database.",
-			"estimatedseconds": "20",
+			"estimatedseconds": "6",
 			"vars": [
 				{
 					"name": "INS",
@@ -445,7 +445,7 @@
 			"numberresults": "3",
 			"resultsexample": "http://omabrowser.org/ontology/oma#PROTEIN_MOUSE21768\thttp://omabrowser.org/ontology/oma#PROTEIN_RABIT00933\thttp://purl.uniprot.org/uniprot/Q9CR49\thttp://purl.uniprot.org/uniprot/P02099",
 			"parentIds": ["federatedOmaUniprot_proteins"],
-			"estimatedseconds": "4",
+			"estimatedseconds": "1",
 			"question": "$$rabbit$$'s proteins encoded by genes that are orthologous to $$mouse$$'s $$HBBY$$ gene and their cross reference links to Uniprot",
 			"vars": [
 				{
@@ -483,7 +483,7 @@
 			"numberresults": "1",
 			"resultsexample": "http://omabrowser.org/ontology/oma#PROTEIN_RATNO03710\thttp://omabrowser.org/ontology/oma#PROTEIN_RATNO10594\thttp://purl.uniprot.org/uniprot/P10361\thttp://purl.uniprot.org/uniprot/M0R497\t\"Acts as a tumor suppressor in many tumor types; induces growth arrest or apoptosis depending on the physiological circumstances and cell type. Involved in cell cycle regulation as a trans-activator that acts to negatively regulate cell division by controlling a set of genes required for this process. One of the activated genes is an inhibitor of cyclin-dependent kinases. Apoptosis induction seems to be mediated either by stimulation of BAX and FAS antigen expression, or by repression of Bcl-2 expression.\"",
 			"parentIds": ["federatedOmaUniprot_proteins"],
-			"estimatedseconds": "4",
+			"estimatedseconds": "1",
 			"question": "$$rattusnorvegicus$$' proteins encoded by genes that are paralogous to its $$Tp53$$ gene and their Uniprot function annotations.",
 			"vars": [
 				{
@@ -514,7 +514,7 @@
 			"numberresults": "2",
 			"resultsexample": "http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=MOUSE22529",
 			"parentIds": ["federatedOmaBgee_proteins"],
-			"estimatedseconds": "10",
+			"estimatedseconds": "1",
 			"question": "Which are the $$mouse$$'s proteins encoded by genes which are expressed in the $$liver$$ and are orthologous to $$human$$'s $$INS$$ gene?",
 			"vars": [
 				{
@@ -560,7 +560,7 @@
 			"resultsexample": "http://omabrowser.org/ontology/oma#GENE_FBgn0000008\thttp://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=ZOONE01884",
 			"parentIds": ["federatedOmaBgee_genes"],
 			"question": "Which are the orthologs of a gene that is expressed in the $$fruitfly$$’s $$brain$$?",
-			"estimatedseconds": "15",
+			"estimatedseconds": "14",
 			"vars": [
 				{
 					"name": "fruitfly",
@@ -590,7 +590,7 @@
 			"numberresults": "38",
 			"resultsexample": "http://omabrowser.org/ontology/oma#GENE_FBgn0000017\thttp://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PONAB00390",
 			"parentIds": ["federatedOmaBgee_genes"],
-			"estimatedseconds": "6",
+			"estimatedseconds": "13",
 			"question": "Which are the genes in $$primates$$ orthologous to a gene that is expressed in the $$fruitfly$$’s $$brain$$?",
 			"vars": [
 				{
@@ -666,7 +666,7 @@
 			"id": "bgeeQ3",
 			"runcheck": "2019-08-20, 0.386s, 15results",
 			"parentIds": ["bgee_genes"],
-			"estimatedseconds": "13",
+			"estimatedseconds": "1",
 			"question": "Which species the $$Mtco1$$ gene is present (without considering synonyms)?",
 			"vars": [
 				{
@@ -686,7 +686,7 @@
 			"id": "bgeeQ4",
 			"runcheck": "2019-08-20, 0.433s, 100results",
 			"parentIds": ["bgee_genes"],
-			"estimatedseconds": "3",
+			"estimatedseconds": "1",
 			"question": "List the labels and identifiers of $$fruitfly$$ genes in bgee",
 			"vars": [
 				{
@@ -753,7 +753,7 @@
 			"id": "bgeeQ8",
 			"runcheck": "2019-08-20, 0.498s, 9results",
 			"parentIds": ["bgee_anatomicEntity"],
-			"estimatedseconds": "7",
+			"estimatedseconds": "1",
 			"question": "Anatomic entities in $$rats$$ where the $$apoc1$$ gene is expressed ",
 			"vars": [
 				{
@@ -781,7 +781,7 @@
 			"id": "bgeeQ10",
 			"runcheck": "2019-08-20, 76.879s, 71results",
 			"parentIds": ["bgee_anatomicEntity"],
-			"estimatedseconds": "70",
+			"estimatedseconds": "77",
 			"question": "Anatomic entities at the $$mouse$$’s $$adult$$ stage where the $$apoc1$$ gene is expressed",
 			"vars": [
 				{
@@ -859,7 +859,7 @@
 			"id": "omaQ3",
 			"runcheck": "2019-08-20, 2.258s, 100results",
 			"parentIds": ["oma_proteins"],
-			"estimatedseconds": "2",
+			"estimatedseconds": "3",
 			"question": "How many proteins (and their $$scientificname$$) per species are present in OMA database?",
 			"vars": [
 				{
@@ -963,7 +963,7 @@
 			"id": "omaQ8",
 			"runcheck": "2019-08-20, 1.928s, 26results",
 			"parentIds": ["oma_proteins"],
-			"estimatedseconds": "1",
+			"estimatedseconds": "2",
 			"question": "All proteins per species that are orthologous to $$Oryctolaguscuniculus$$ $$APOCI$$ related protein and their cross reference links to OMA and Uniprot including the corresponding Ensembl gene identifier. ",
 			"vars": [
 				{
@@ -1024,7 +1024,7 @@
 			"id": "omaQ10",
 			"runcheck": "2019-08-20, 130.617s, 1results",
 			"parentIds": ["oma_proteins"],
-			"estimatedseconds": "140",
+			"estimatedseconds": "130",
 			"question": "The percentage of proteins in $$Drosophilamelanogaster$$ that has at least one paralogous sequence (protein)",
 			"vars": [
 				{
@@ -1107,7 +1107,7 @@
 			"id": "uniprotQ4",
 			"runcheck": "2019-08-20, 0.164s, 10results",
 			"parentIds": ["uniprot_proteins"],
-			"estimatedseconds": "8",
+			"estimatedseconds": "1",
 			"question": "Select all bacterial taxa, and their $$scientificname$$ from the UniProt taxonomy",
 			"vars": [
 				{
@@ -1130,7 +1130,7 @@
 			"id": "uniprotQ5",
 			"runcheck": "2019-08-20, 0.307s, 6results",
 			"parentIds": ["uniprot_proteins"],
-			"estimatedseconds": "8",
+			"estimatedseconds": "1",
 			"question": "which are the Ensembl transcript and genes for the $$A4HUMAN$$ protein ",
 			"vars": [
 				{
@@ -1150,7 +1150,7 @@
 			"id": "uniprotQ6",
 			"runcheck": "2019-08-20, 0.726s, 293results",
 			"parentIds": ["uniprot_proteins"],
-			"estimatedseconds": "8",
+			"estimatedseconds": "1",
 			"question": "Select all human UniProt entries with a sequence variant that leads to a $$lossoffunction$$",
 			"vars": [
 				{
@@ -1193,7 +1193,7 @@
 			"id": "uniprotQ8",
 			"runcheck": "2019-08.20, 0.287s, 10results",
 			"parentIds": ["uniprot_proteins"],
-			"estimatedseconds": "6",
+			"estimatedseconds": "1",
 			"question": "Select all UniProt proteins with $$TransmembraneAnnotation$$ and the regions' begin and end coordinates on the canonical sequence",
 			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX faldo: <http://biohackathon.org/resource/faldo#>\nSELECT ?protein ?begin ?end WHERE {\n\t?protein a up:Protein .\n\t?protein up:annotation ?annotation .\n\t?annotation a up:$$TransmembraneAnnotation$$ .\n\t?annotation up:range ?range .\n\t?range faldo:begin/faldo:position ?begin .\n\t?range faldo:end/faldo:position ?end .\n} \n$$innerlimit$$",
 			"vars": [
