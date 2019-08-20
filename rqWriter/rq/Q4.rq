@@ -1,6 +1,6 @@
 ### Id: Q4
 ### Handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### Question: Which are the Mouse's proteins encoded by genes which are expressed in the liver and are orthologous to Human's INS gene?
+### Question: Which are the mouse's proteins encoded by genes which are expressed in the liver and are orthologous to human's INS gene?
 ### Query characteristics (BGP, basic graph pattern): 3 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 2, #BGP_2 ≥ 13 and #BGP_3 = 5. BGP_2  has  2 property paths of length = 2, and 2 property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.
 ### Number of results: 2
 ### Result example: http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=MOUSE22529
@@ -12,9 +12,9 @@ PREFIX sio: <http://semanticscience.org/resource/>
 PREFIX lscr: <http://purl.org/lscr#>
 SELECT ?Oma_link {
 	SELECT DISTINCT * {
-		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql> {
-			?taxon up:commonName 'Human' .
-			?taxon2 up:commonName 'Mouse' .
+		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight> {
+			?taxon up:commonName 'human' .
+			?taxon2 up:commonName 'mouse' .
 		}
 		SERVICE <https://sparql.omabrowser.org/sparql> {
 			?cluster a orth:OrthologsCluster .
@@ -32,7 +32,7 @@ SELECT ?Oma_link {
 			?protein2 rdfs:seeAlso ?Oma_link .
 			FILTER ( ?node1 != ?node2 )
 		}
-		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql> {
+		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight> {
 			?geneB genex:isExpressedIn ?anat ;
 				lscr:xrefEnsemblGene ?geneEns .
 			?anat rdfs:label 'liver'^^xsd:string .
@@ -43,4 +43,4 @@ SELECT ?Oma_link {
 	LIMIT 10
 }
 LIMIT 10
-### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-13 13:42:01
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-20 16:45:27

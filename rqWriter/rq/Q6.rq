@@ -1,6 +1,6 @@
 ### Id: Q6
 ### Handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### Question: Which are the genes in Primates orthologous to a gene that is expressed in the Fruit fly’s brain?
+### Question: Which are the genes in Primates orthologous to a gene that is expressed in the fruit fly’s brain?
 ### Query characteristics (BGP, basic graph pattern): 2 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 6, and #BGP_2 ≥ 10 . BGP_2  has 3 property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.
 ### Number of results: 38
 ### Result example: http://omabrowser.org/ontology/oma#GENE_FBgn0000017	http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PONAB00390
@@ -11,14 +11,14 @@ PREFIX orth: <http://purl.org/net/orth#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
 SELECT DISTINCT ?id ?gene ?OMA_LINK WHERE {
 	SELECT * {
-		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql> {
+		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight> {
 			SELECT DISTINCT ?gene ?id {
 				?gene genex:isExpressedIn ?anat .
 				?anat rdfs:label 'brain'^^xsd:string .
 				?gene orth:organism ?o .
 				?o obo:RO_0002162 ?taxon .
 				?gene dcterms:identifier ?id .
-				?taxon up:commonName 'Fruit fly' .
+				?taxon up:commonName 'fruit fly' .
 			} LIMIT 10
 		}
 		SERVICE <https://sparql.omabrowser.org/sparql> {
@@ -41,4 +41,4 @@ SELECT DISTINCT ?id ?gene ?OMA_LINK WHERE {
 	}
 }
 LIMIT 10
-### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-13 13:42:01
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-20 16:45:27

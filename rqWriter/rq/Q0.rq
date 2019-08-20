@@ -40,8 +40,8 @@ SELECT DISTINCT ?protein ?orthologous_protein_rat ?id ?annotation_text WHERE {
 				FILTER(?node1 != ?node2)
 			}
 		}
-		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres> {
-			?gene genex:isExpressedIn ?a .
+		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight> {
+			 ?gene genex:isExpressedIn ?a .
 			?a rdfs:label "brain" .
 			?gene orth:organism ?s . 
 			?s obo:RO_0002162 taxon:10116. 
@@ -49,4 +49,4 @@ SELECT DISTINCT ?protein ?orthologous_protein_rat ?id ?annotation_text WHERE {
 		}
 	}
 }
-### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-13 13:42:01
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-20 16:45:27

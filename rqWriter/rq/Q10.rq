@@ -12,7 +12,7 @@ PREFIX lscr: <http://purl.org/lscr#>
 PREFIX orth: <http://purl.org/net/orth#>
 PREFIX up: <http://purl.uniprot.org/core/>
 SELECT distinct ?gene_id (?protein2 as ?orthologousTo) ?uniprot ?annotation_text WHERE {
-	SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres> {
+	SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight> {
 		SELECT DISTINCT ?gene ?gene_id {
 			?gene genex:isExpressedIn ?anat .
 			?gene dcterms:identifier ?gene_id .
@@ -39,4 +39,4 @@ SELECT distinct ?gene_id (?protein2 as ?orthologousTo) ?uniprot ?annotation_text
 		?annotation rdfs:comment ?annotation_text .
 	}
 }
-### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-13 13:42:01
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-20 16:45:27
