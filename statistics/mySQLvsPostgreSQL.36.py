@@ -1,9 +1,22 @@
 import requests, os, re
 import urllib.parse
 from pprint import pprint
+import datetime
+
+# pstring: what to print
+# thiverbose: should the string be printed into logfile also
+# newline: what is to be printed after the string (typically newline)
+# printbefore: what is to be printed before string
+def printwrite(pstring, thisverbose = 1, newline = "\n", printbefore = ""):
+    f = open("statistics", "a")
+    tmpstr = str(pstring)
+    print(tmpstr)
+    if thisverbose == 1:
+        f.write(printbefore + tmpstr + newline)
+    f.close();
 
 url1_title = "mySQL"
-url1 = "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight"
+url1 = "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql"
 
 url2_title = "postgreSQL"
 url2 = "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres"
@@ -19,21 +32,13 @@ loops = 10
 # verbose means, that the logfile gets verbose. console is always verbose
 verbose = 0
 
+printwrite('urls: ' + url1 + '(' + url1_title + '), ' + url2 + '(' + url2_title + ')')
+printwrite('Loops: ' + str(loops))
+printwrite('queries all the .rq files for their bgee light part only')
+
 # open statistics file
 f = open("statistics", "w")
 f.close()
-
-# pstring: what to print
-# thiverbose: should the string be printed into logfile also
-# newline: what is to be printed after the string (typically newline)
-# printbefore: what is to be printed before string
-def printwrite(pstring, thisverbose = 1, newline = "\n", printbefore = ""):
-    f = open("statistics", "a")
-    tmpstr = str(pstring)
-    print(tmpstr)
-    if thisverbose == 1:
-        f.write(printbefore + tmpstr + newline)
-    f.close();
 
 # where to get the .rq files from
 targetdir = '../rqWriter/rq/'
@@ -148,4 +153,4 @@ for filename, filedata in sums.items():
             printwrite(pointdata, 1, ",")
         printwrite("", 1)
 
-printwrite('### this statistics file ist created by bioSODA mySQLvsPostgreSQL.py (https://github.com/biosoda/bioquery/tree/master/statistics) - created at ' + now.strftime("%Y-%m-%d %H:%M:%S"))
+printwrite('### this statistics file ist created by bioSODA mySQLvsPostgreSQL.py (https://github.com/biosoda/bioquery/tree/master/statistics) - created at ' + datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S"))
