@@ -1,6 +1,6 @@
 ### Id: Q10
 ### Handled by endpoint: http://biosoda.expasy.org:8890/sparql
-### Question: The orthologs of a gene that is expressed in the [[ fruit fly’s brain ]] and the UniProt annotations of these orthologs.
+### Question: The orthologs of a gene that is expressed in the fruit fly’s brain and the UniProt annotations of these orthologs.
 ### Query characteristics (BGP, basic graph pattern): 3 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 6, #BGP_2 ≥ 6 and #BGP_3 = 2. BGP_2  has  2  property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.
 ### Number of results: 2269
 ### Result example: oma:GENE_FBgn0000008	<http://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=ATTCE14837>	<http://purl.uniprot.org/uniprot/A0A158NZZ1>	PDZ
@@ -11,12 +11,13 @@ PREFIX genex: <http://purl.org/genex#>
 PREFIX lscr: <http://purl.org/lscr#>
 PREFIX orth: <http://purl.org/net/orth#>
 PREFIX up: <http://purl.uniprot.org/core/>
-SELECT distinct ?gene_id (?protein2 as ?orthologousTo) ?uniprot ?annotation_text WHERE {
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT distinct ?gene_id ?orthologousTo ?uniprot ?annotation_text WHERE {
 	SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight> {
-		SELECT DISTINCT ?gene ?gene_id {
+		SELECT ?gene ?gene_id {
 			?gene genex:isExpressedIn ?anat .
 			?gene dcterms:identifier ?gene_id .
-			?anat rdfs:label "brain"^^xsd:string .
+			?anat rdfs:label 'brain' .
 			?gene orth:organism ?o .
 			?o obo:RO_0002162 ?taxon .
 			?taxon up:commonName "fruit fly" .
@@ -25,18 +26,21 @@ SELECT distinct ?gene_id (?protein2 as ?orthologousTo) ?uniprot ?annotation_text
 	}
 
 	SERVICE <https://sparql.omabrowser.org/sparql> {
-		?cluster a orth:OrthologsCluster .
-		?cluster orth:hasHomologousMember ?node1 .
-		?cluster orth:hasHomologousMember ?node2 .
-		?node2 orth:hasHomologousMember* ?protein2 .
-		?node1 orth:hasHomologousMember* ?protein1 .
-		?protein1 <http://semanticscience.org/resource/SIO_010079> ?gene .
-		?protein2 lscr:xrefUniprot ?uniprot .
-		filter(?node1 != ?node2)}
+		SELECT ?uniprot ?gene ?orthologousTo {
+			?cluster a orth:OrthologsCluster .
+			?cluster orth:hasHomologousMember ?node1 .
+			?cluster orth:hasHomologousMember ?node2 .
+			?node2 orth:hasHomologousMember* ?orthologousTo .
+			?node1 orth:hasHomologousMember* ?protein1 .
+			?protein1 sio:SIO_010079 ?gene .
+			?orthologousTo lscr:xrefUniprot ?uniprot .
+			filter(?node1 != ?node2)
+		}
+	}
 
 	SERVICE <http://sparql.uniprot.org/sparql>{
 		?uniprot up:annotation ?annotation .
 		?annotation rdfs:comment ?annotation_text .
 	}
 }
-### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-20 16:45:27
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-23 13:16:12

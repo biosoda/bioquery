@@ -12,7 +12,7 @@ PREFIX taxon: <http://purl.uniprot.org/taxonomy/>
 PREFIX up: <http://purl.uniprot.org/core/>
 PREFIX lscr: <http://purl.org/lscr#>
 PREFIX genex: <http://purl.org/genex#>
-SELECT DISTINCT ?protein ?orthologous_protein_rat ?id ?annotation_text WHERE {
+SELECT DISTINCT ?protein ?orthologous_protein ?gene ?annotation_text WHERE {
 	SELECT * {
 		SERVICE <http://sparql.uniprot.org/sparql> {
 			SELECT ?protein ?annotation_text WHERE {
@@ -25,17 +25,17 @@ SELECT DISTINCT ?protein ?orthologous_protein_rat ?id ?annotation_text WHERE {
 			}
 		}
 		SERVICE <https://sparql.omabrowser.org/sparql> {
-			SELECT ?orthologous_protein_rat ?protein ?id WHERE {
+			SELECT ?orthologous_protein ?protein ?gene WHERE {
 				?protein_OMA a orth:Protein .
-				?orthologous_protein_rat a orth:Protein .
+				?orthologous_protein a orth:Protein .
 				?cluster a orth:OrthologsCluster .
 				?cluster orth:hasHomologousMember ?node1 .
 				?cluster
 				orth:hasHomologousMember ?node2 .
 				?node2 orth:hasHomologousMember* ?protein_OMA .
-				?node1 orth:hasHomologousMember* ?orthologous_protein_rat .
-				?orthologous_protein_rat orth:organism/obo:RO_0002162 taxon:10116 . # rattus norvegicus
-				?orthologous_protein_rat sio:SIO_010079/lscr:xrefEnsemblGene ?id .
+				?node1 orth:hasHomologousMember* ?orthologous_protein .
+				?orthologous_protein orth:organism/obo:RO_0002162 taxon:10116 . # rattus norvegicus
+				?orthologous_protein sio:SIO_010079 ?gene .
 				?protein_OMA lscr:xrefUniprot ?protein .
 				FILTER(?node1 != ?node2)
 			}
@@ -44,9 +44,8 @@ SELECT DISTINCT ?protein ?orthologous_protein_rat ?id ?annotation_text WHERE {
 			 ?gene genex:isExpressedIn ?a .
 			?a rdfs:label "brain" .
 			?gene orth:organism ?s . 
-			?s obo:RO_0002162 taxon:10116. 
-			?gene lscr:xrefEnsemblGene ?id .
+			?s obo:RO_0002162 taxon:10116.
 		}
 	}
 }
-### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-20 16:45:27
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-23 13:16:12

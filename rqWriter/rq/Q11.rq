@@ -11,21 +11,21 @@ PREFIX genex: <http://purl.org/genex#>
 PREFIX lscr: <http://purl.org/lscr#>
 PREFIX orth: <http://purl.org/net/orth#>
 PREFIX up: <http://purl.uniprot.org/core/>
-SELECT DISTINCT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {
+PREFIX sio: <http://semanticscience.org/resource/>
+SELECT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {
 	SELECT * {
 		SERVICE <http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight> {
-			SELECT DISTINCT ?gene ?id {
+			SELECT ?gene {
 				?gene genex:isExpressedIn ?anat .
-				?anat rdfs:label 'brain'^^xsd:string .
+				?anat rdfs:label 'brain' .
 				?gene orth:organism ?o .
 				?o obo:RO_0002162 ?taxon .
-				?gene dcterms:identifier ?id .
 				?taxon up:commonName 'fruit fly' .
 			}
 			LIMIT 10
 		}
 		SERVICE <https://sparql.omabrowser.org/sparql> {
-			SELECT ?id ?OMA_LINK ?uniprot{
+			SELECT ?gene ?OMA_LINK ?uniprot{
 				?protein2 a orth:Protein .
 				?protein1 a orth:Protein .
 				?clusterPrimates a orth:OrthologsCluster .
@@ -35,7 +35,7 @@ SELECT DISTINCT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {
 				?node2 orth:hasHomologousMember* ?clusterPrimates .
 				?clusterPrimates orth:hasHomologousMember* ?protein2 .
 				?node1 orth:hasHomologousMember* ?protein1 .
-				?protein1 dcterms:identifier ?id .
+				?protein1 sio:SIO_010079 ?gene. #encoded by
 				?protein2 rdfs:seeAlso ?OMA_LINK .
 				?clusterPrimates orth:hasTaxonomicRange ?taxRange .
 				?taxRange orth:taxRange ?taxLevel .
@@ -52,4 +52,4 @@ SELECT DISTINCT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {
 		}
 	}
 }
-### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-20 16:45:27
+### this .rq file ist created by bioSODA rqWriter (https://github.com/biosoda/bioquery/tree/master/rqWriter) - created at 2019-08-23 13:16:12
