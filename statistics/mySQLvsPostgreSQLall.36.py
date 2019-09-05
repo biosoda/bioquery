@@ -1,7 +1,16 @@
-import requests, os, re, json
+import requests, os, re, json, sys
+import argparse
 import urllib.parse
 from pprint import pprint
 import datetime
+
+if __name__ == '__main__':
+   parser = argparse.ArgumentParser()
+   parser.add_argument('--loops')
+   parser.add_argument('--outputfile')
+   parser.add_argument('--inputfile')
+   args = parser.parse_args()
+
 
 url0 = 'http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight'
 
@@ -25,11 +34,17 @@ addlimits = 'LIMIT 10'
 
 # how many requests should be done:
 loops = 3
+if None != args.loops:
+    loops = int(args.loops)
 # verbose means, that the logfile gets verbose. console is always verbose
 verbose = 0
 
 # open statistics file
-f = open("statisticsall", "w")
+outputfile = "statisticsall"
+if None != args.outputfile:
+    outputfile = args.outputfile
+outputfile = outputfile + datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+f = open(outputfile, "w")
 f.close()
 
 # pstring: what to print
@@ -46,6 +61,11 @@ def printwrite(pstring, thisverbose = 1, newline = "\n", printbefore = ""):
 
 # where to get the .rq files from
 targetfile = '../biosoda_frontend/src/biosodadata.json'
+if None != args.inputfile:
+    targetfile = args.inputfile
+
+# on the server we deliver the json file next to the script:
+# targetfile = 'biosodadata.json'
 
 # initialise statistics variable
 sums = {}

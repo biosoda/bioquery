@@ -1,6 +1,6 @@
 LIMITS: LIMIT 10
 url0, 1, 2: http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight, http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql (mySQL), http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres (postgreSQL)
-Loops: 1
+Loops: None
 
 ===============
 googleform
@@ -9,633 +9,102 @@ no query
 ===============
 federatedOmaBgeeUniprotQ1
 ===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,84.406358,84.406358,84.406358,
-postgreSQL,141.440113,141.440113,141.440113,
-
-===============
-federatedOmaBgeeUniprotQ2
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,12.643535,12.643535,12.643535,
-postgreSQL,22.953031,22.953031,22.953031,
-
-===============
-federatedOmaBgeeUniprotQ3
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,5.390527,5.390527,5.390527,
-postgreSQL,117.647922,117.647922,117.647922,
-
-===============
-federatedOmaBgeeUniprotQ4
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,5.095532,5.095532,5.095532,
-postgreSQL,3.86596,3.86596,3.86596,
-
-===============
-federatedOmaBgeeUniprotQ5
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,14.789292,14.789292,14.789292,
-postgreSQL,13.617211,13.617211,13.617211,
-
-===============
-federatedBgeeUniprotQ1
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,18.130025,18.130025,18.130025,
-postgreSQL,16.272319,16.272319,16.272319,
-
-===============
-federatedBgeeUniprotQ2
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,81.140882,81.140882,81.140882,
-postgreSQL,1.202455,1.202455,1.202455,
-
-===============
-federatedBgeeUniprotQ3
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,1.47539,1.47539,1.47539,
-postgreSQL,1.218172,1.218172,1.218172,
-
-===============
-federatedOmaUniprotQ1
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,4.675501,4.675501,4.675501,
-postgreSQL,5.136621,5.136621,5.136621,
-
-===============
-federatedOmaUniprotQ2
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.285722,0.285722,0.285722,
-postgreSQL,0.238743,0.238743,0.238743,
-
-===============
-federatedOmaUniprotQ3
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.323177,0.323177,0.323177,
-postgreSQL,0.32393,0.32393,0.32393,
-
-===============
-federatedOmaBgeeQ1
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.337777,0.337777,0.337777,
-postgreSQL,0.230408,0.230408,0.230408,
-
-===============
-federatedOmaBgeeQ2
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,4.367009,4.367009,4.367009,
-postgreSQL,14.641602,14.641602,14.641602,
-
-===============
-federatedOmaBgeeQ3
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,3.914191,3.914191,3.914191,
-postgreSQL,13.720643,13.720643,13.720643,
-
-===============
-bgeeQ1
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.024728,0.024728,0.024728,
-postgreSQL,0.021989,0.021989,0.021989,
-
-===============
-bgeeQ2
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.940694,0.940694,0.940694,
-postgreSQL,1.094371,1.094371,1.094371,
-
-===============
-bgeeQ3
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,8.459356,8.459356,8.459356,
-postgreSQL,0.31182,0.31182,0.31182,
-
-===============
-bgeeQ4
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.54711,0.54711,0.54711,
-postgreSQL,0.354354,0.354354,0.354354,
-
-===============
-bgeeQ5
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,15.07971,15.07971,15.07971,
-postgreSQL,0.155902,0.155902,0.155902,
-
-===============
-bgeeQ6
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,5.980988,5.980988,5.980988,
-postgreSQL,0.131682,0.131682,0.131682,
-
-===============
-bgeeQ8
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,16.537462,16.537462,16.537462,
-postgreSQL,0.470342,0.470342,0.470342,
+LIMITS: LIMIT 10
+url0, 1, 2: http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight, http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql (mySQL), http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres (postgreSQL)
+Loops: None
 
 ===============
-bgeeQ10
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,1110.572645,1110.572645,1110.572645,
-postgreSQL,83.411707,83.411707,83.411707,
-
-===============
-omaQ1
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.544009,0.544009,0.544009,
-postgreSQL,0.151583,0.151583,0.151583,
-
-===============
-omaQ2
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.152748,0.152748,0.152748,
-postgreSQL,0.153675,0.153675,0.153675,
-
-===============
-omaQ3
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,1.961833,1.961833,1.961833,
-postgreSQL,1.963999,1.963999,1.963999,
-
-===============
-omaQ4
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.130617,0.130617,0.130617,
-postgreSQL,0.131002,0.131002,0.131002,
-
-===============
-omaQ5
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.152154,0.152154,0.152154,
-postgreSQL,0.156037,0.156037,0.156037,
-
-===============
-omaQ6
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.165706,0.165706,0.165706,
-postgreSQL,0.167265,0.167265,0.167265,
-
-===============
-omaQ7
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.170907,0.170907,0.170907,
-postgreSQL,0.164584,0.164584,0.164584,
-
-===============
-omaQ8
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,1.114259,1.114259,1.114259,
-postgreSQL,1.089489,1.089489,1.089489,
-
-===============
-omaQ9
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.173917,0.173917,0.173917,
-postgreSQL,0.172513,0.172513,0.172513,
-
-===============
-omaQ10
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,130.408533,130.408533,130.408533,
-postgreSQL,130.505248,130.505248,130.505248,
-
-===============
-uniprotQ1
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.17282,0.17282,0.17282,
-postgreSQL,0.110486,0.110486,0.110486,
-
-===============
-uniprotQ2
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.121842,0.121842,0.121842,
-postgreSQL,0.120732,0.120732,0.120732,
-
-===============
-uniprotQ3
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.112394,0.112394,0.112394,
-postgreSQL,0.119632,0.119632,0.119632,
-
-===============
-uniprotQ4
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.127881,0.127881,0.127881,
-postgreSQL,0.135793,0.135793,0.135793,
-
-===============
-uniprotQ5
-===============
-statistics
-===============
-1 tries
+googleform
+no query
 
-header,total,avg,0,
-mySQL,0.207409,0.207409,0.207409,
-postgreSQL,0.253941,0.253941,0.253941,
-
-===============
-uniprotQ6
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.420548,0.420548,0.420548,
-postgreSQL,0.379459,0.379459,0.379459,
-
-===============
-uniprotQ7
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.41552,0.41552,0.41552,
-postgreSQL,0.414271,0.414271,0.414271,
-
-===============
-uniprotQ8
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.280336,0.280336,0.280336,
-postgreSQL,0.30077,0.30077,0.30077,
-
-===============
-uniprotQ9
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.223906,0.223906,0.223906,
-postgreSQL,0.2482,0.2482,0.2482,
-
-===============
-uniprotQ10
-===============
-statistics
-===============
-1 tries
-
-header,total,avg,0,
-mySQL,0.222304,0.222304,0.222304,
-postgreSQL,0.22511,0.22511,0.22511,
-===============
-fullstat
 ===============
 federatedOmaBgeeUniprotQ1
-header,total,avg,0,
-mySQL,84.406358,84.406358,84.406358,
-postgreSQL,141.440113,141.440113,141.440113,
-federatedOmaBgeeUniprotQ2
-header,total,avg,0,
-mySQL,12.643535,12.643535,12.643535,
-postgreSQL,22.953031,22.953031,22.953031,
-federatedOmaBgeeUniprotQ3
-header,total,avg,0,
-mySQL,5.390527,5.390527,5.390527,
-postgreSQL,117.647922,117.647922,117.647922,
-federatedOmaBgeeUniprotQ4
-header,total,avg,0,
-mySQL,5.095532,5.095532,5.095532,
-postgreSQL,3.86596,3.86596,3.86596,
-federatedOmaBgeeUniprotQ5
-header,total,avg,0,
-mySQL,14.789292,14.789292,14.789292,
-postgreSQL,13.617211,13.617211,13.617211,
-federatedBgeeUniprotQ1
-header,total,avg,0,
-mySQL,18.130025,18.130025,18.130025,
-postgreSQL,16.272319,16.272319,16.272319,
-federatedBgeeUniprotQ2
-header,total,avg,0,
-mySQL,81.140882,81.140882,81.140882,
-postgreSQL,1.202455,1.202455,1.202455,
-federatedBgeeUniprotQ3
-header,total,avg,0,
-mySQL,1.47539,1.47539,1.47539,
-postgreSQL,1.218172,1.218172,1.218172,
-federatedOmaUniprotQ1
-header,total,avg,0,
-mySQL,4.675501,4.675501,4.675501,
-postgreSQL,5.136621,5.136621,5.136621,
-federatedOmaUniprotQ2
-header,total,avg,0,
-mySQL,0.285722,0.285722,0.285722,
-postgreSQL,0.238743,0.238743,0.238743,
-federatedOmaUniprotQ3
-header,total,avg,0,
-mySQL,0.323177,0.323177,0.323177,
-postgreSQL,0.32393,0.32393,0.32393,
-federatedOmaBgeeQ1
-header,total,avg,0,
-mySQL,0.337777,0.337777,0.337777,
-postgreSQL,0.230408,0.230408,0.230408,
-federatedOmaBgeeQ2
-header,total,avg,0,
-mySQL,4.367009,4.367009,4.367009,
-postgreSQL,14.641602,14.641602,14.641602,
-federatedOmaBgeeQ3
-header,total,avg,0,
-mySQL,3.914191,3.914191,3.914191,
-postgreSQL,13.720643,13.720643,13.720643,
-bgeeQ1
-header,total,avg,0,
-mySQL,0.024728,0.024728,0.024728,
-postgreSQL,0.021989,0.021989,0.021989,
-bgeeQ2
-header,total,avg,0,
-mySQL,0.940694,0.940694,0.940694,
-postgreSQL,1.094371,1.094371,1.094371,
-bgeeQ3
-header,total,avg,0,
-mySQL,8.459356,8.459356,8.459356,
-postgreSQL,0.31182,0.31182,0.31182,
-bgeeQ4
-header,total,avg,0,
-mySQL,0.54711,0.54711,0.54711,
-postgreSQL,0.354354,0.354354,0.354354,
-bgeeQ5
-header,total,avg,0,
-mySQL,15.07971,15.07971,15.07971,
-postgreSQL,0.155902,0.155902,0.155902,
-bgeeQ6
-header,total,avg,0,
-mySQL,5.980988,5.980988,5.980988,
-postgreSQL,0.131682,0.131682,0.131682,
-bgeeQ8
-header,total,avg,0,
-mySQL,16.537462,16.537462,16.537462,
-postgreSQL,0.470342,0.470342,0.470342,
-bgeeQ10
-header,total,avg,0,
-mySQL,1110.572645,1110.572645,1110.572645,
-postgreSQL,83.411707,83.411707,83.411707,
-omaQ1
-header,total,avg,0,
-mySQL,0.544009,0.544009,0.544009,
-postgreSQL,0.151583,0.151583,0.151583,
-omaQ2
-header,total,avg,0,
-mySQL,0.152748,0.152748,0.152748,
-postgreSQL,0.153675,0.153675,0.153675,
-omaQ3
-header,total,avg,0,
-mySQL,1.961833,1.961833,1.961833,
-postgreSQL,1.963999,1.963999,1.963999,
-omaQ4
-header,total,avg,0,
-mySQL,0.130617,0.130617,0.130617,
-postgreSQL,0.131002,0.131002,0.131002,
-omaQ5
-header,total,avg,0,
-mySQL,0.152154,0.152154,0.152154,
-postgreSQL,0.156037,0.156037,0.156037,
-omaQ6
-header,total,avg,0,
-mySQL,0.165706,0.165706,0.165706,
-postgreSQL,0.167265,0.167265,0.167265,
-omaQ7
-header,total,avg,0,
-mySQL,0.170907,0.170907,0.170907,
-postgreSQL,0.164584,0.164584,0.164584,
-omaQ8
-header,total,avg,0,
-mySQL,1.114259,1.114259,1.114259,
-postgreSQL,1.089489,1.089489,1.089489,
-omaQ9
-header,total,avg,0,
-mySQL,0.173917,0.173917,0.173917,
-postgreSQL,0.172513,0.172513,0.172513,
-omaQ10
-header,total,avg,0,
-mySQL,130.408533,130.408533,130.408533,
-postgreSQL,130.505248,130.505248,130.505248,
-uniprotQ1
-header,total,avg,0,
-mySQL,0.17282,0.17282,0.17282,
-postgreSQL,0.110486,0.110486,0.110486,
-uniprotQ2
-header,total,avg,0,
-mySQL,0.121842,0.121842,0.121842,
-postgreSQL,0.120732,0.120732,0.120732,
-uniprotQ3
-header,total,avg,0,
-mySQL,0.112394,0.112394,0.112394,
-postgreSQL,0.119632,0.119632,0.119632,
-uniprotQ4
-header,total,avg,0,
-mySQL,0.127881,0.127881,0.127881,
-postgreSQL,0.135793,0.135793,0.135793,
-uniprotQ5
-header,total,avg,0,
-mySQL,0.207409,0.207409,0.207409,
-postgreSQL,0.253941,0.253941,0.253941,
-uniprotQ6
-header,total,avg,0,
-mySQL,0.420548,0.420548,0.420548,
-postgreSQL,0.379459,0.379459,0.379459,
-uniprotQ7
-header,total,avg,0,
-mySQL,0.41552,0.41552,0.41552,
-postgreSQL,0.414271,0.414271,0.414271,
-uniprotQ8
-header,total,avg,0,
-mySQL,0.280336,0.280336,0.280336,
-postgreSQL,0.30077,0.30077,0.30077,
-uniprotQ9
-header,total,avg,0,
-mySQL,0.223906,0.223906,0.223906,
-postgreSQL,0.2482,0.2482,0.2482,
-uniprotQ10
-header,total,avg,0,
-mySQL,0.222304,0.222304,0.222304,
-postgreSQL,0.22511,0.22511,0.22511,
-### this statistics file ist created by bioSODA mySQLvsPostgreSQLall.py (https://github.com/biosoda/bioquery/tree/master/statistics) - created at 2019-08-21 11:44:32
+===============
+LIMITS: LIMIT 10
+url0, 1, 2: http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight, http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql (mySQL), http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres (postgreSQL)
+Loops: None
+
+===============
+googleform
+no query
+
+===============
+federatedOmaBgeeUniprotQ1
+===============
+LIMITS: LIMIT 10
+url0, 1, 2: http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight, http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql (mySQL), http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres (postgreSQL)
+Loops: None
+
+===============
+googleform
+no query
+
+===============
+federatedOmaBgeeUniprotQ1
+===============
+LIMITS: LIMIT 10
+url0, 1, 2: http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight, http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql (mySQL), http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres (postgreSQL)
+Loops: None
+
+===============
+googleform
+no query
+
+===============
+federatedOmaBgeeUniprotQ1
+===============
+LIMITS: LIMIT 10
+url0, 1, 2: http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight, http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql (mySQL), http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres (postgreSQL)
+Loops: None
+
+===============
+googleform
+no query
+
+===============
+federatedOmaBgeeUniprotQ1
+===============
+LIMITS: LIMIT 10
+url0, 1, 2: http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight, http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql (mySQL), http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres (postgreSQL)
+Loops: None
+
+===============
+googleform
+no query
+
+===============
+federatedOmaBgeeUniprotQ1
+===============
+LIMITS: LIMIT 10
+url0, 1, 2: http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight, http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql (mySQL), http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres (postgreSQL)
+Loops: None
+
+===============
+googleform
+no query
+
+===============
+federatedOmaBgeeUniprotQ1
+===============
+LIMITS: LIMIT 10
+url0, 1, 2: http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight, http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql (mySQL), http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres (postgreSQL)
+Loops: 3
+
+===============
+googleform
+no query
+
+===============
+federatedOmaBgeeUniprotQ1
+===============
+LIMITS: LIMIT 10
+url0, 1, 2: http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight, http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_mysql (mySQL), http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight_postgres (postgreSQL)
+Loops: 3
+
+===============
+googleform
+no query
+
+===============
+federatedOmaBgeeUniprotQ1
+===============
