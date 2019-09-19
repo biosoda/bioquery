@@ -741,7 +741,7 @@
 			"runcheck": "2019-08-20, 10.417, 100results",
 			"parentIds": ["bgee_anatomicEntity"],
 			"estimatedseconds": "11",
-			"question": "Anatomic entities where the $$apoc1$$ gene is expressed ",
+			"question": "Anatomic entities where the $$apoc1$$ gene is expressed",
 			"vars": [
 				{
 					"name": "apoc1",
@@ -761,7 +761,7 @@
 			"runcheck": "2019-08-20, 0.498s, 9results",
 			"parentIds": ["bgee_anatomicEntity"],
 			"estimatedseconds": "1",
-			"question": "Anatomic entities in $$rats$$ where the $$apoc1$$ gene is expressed ",
+			"question": "Anatomic entities in $$rats$$ where the $$apoc1$$ gene is expressed",
 			"vars": [
 				{
 					"name": "apoc1",
