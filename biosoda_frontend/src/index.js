@@ -413,7 +413,7 @@ class App extends Component {
 						link.href = row[onevar].value;
 						link.target = '_blank';
 						eltd.appendChild(link);
-					} else {
+					} else if (typeof(row[onevar]) !== "undefined") {
 						eltd.appendChild(document.createTextNode(row[onevar].value));
 					}
 					elrow.appendChild(eltd);

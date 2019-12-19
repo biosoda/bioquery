@@ -32,7 +32,7 @@
   "scripts": {
     "start": "cross-env PORT=3001 react-scripts start",
     "build": "react-scripts build",
-    "buildwar": "react-scripts build && \"C:/Program Files/7-Zip/7z\" a -tzip C:/Daten/bioquery.github/biosoda_frontend/build/build_biosodafrontend.war C:/Daten/bioquery.github/biosoda_frontend/build/*",
+    "buildwar": "react-scripts build && \"C:/Program Files/7-Zip/7z\" a -tzip C:/Daten/github.com.biosoda.bioquery/biosoda_frontend/build/build_biosodafrontend.war C:/Daten/github.com.biosoda.bioquery/biosoda_frontend/build/*",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
