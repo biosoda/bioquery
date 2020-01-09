@@ -6,43 +6,50 @@
 			"name": "federation server",
 			"moreinfo": "https://github.com/biosoda/bioquery",
 			"urlquery": "http://biosoda.expasy.org:8890/sparql?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
-			"expected": "true"
+			"expected": "true",
+			"CRONfail": "true"
 		},
 		{
 			"name": "UniProt",
 			"moreinfo": "https://www.uniprot.org/",
 			"urlquery": "https://sparql.uniprot.org/sparql/?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
-			"expected": "true"
+			"expected": "true",
+			"CRONfail": "false"
 		},
 		{
 			"name": "OMA",
 			"moreinfo": "https://omabrowser.org",
 			"urlquery": "https://sparql.omabrowser.org/lode/servlet/query?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
-			"expected": "true"
+			"expected": "true",
+			"CRONfail": "false"
 		},
 		{
 			"name": "Bgee",
 			"moreinfo": "https://bgee.org",
 			"urlquery": "http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight?query=PREFIX%20up%3A%20%3Chttp%3A%2F%2Fpurl.uniprot.org%2Fcore%2F%3E%0ASELECT%20*%20%7B%0A%09%3Fspecies%20a%20up%3ATaxon%20.%0A%09%3Fspecies%20up%3AscientificName%20%3Fname%20.%0A%09%3Fspecies%20up%3Arank%20up%3ASpecies%20.%0A%7D&format=JSON&limit=100&offset=0&inference=false",
-			"expected": "true"
+			"expected": "true",
+			"CRONfail": "true"
 		},
 		{
 			"name": "EBI",
 			"moreinfo": "https://www.ebi.ac.uk",
 			"urlquery": "https://www.ebi.ac.uk/rdf/services/sparql?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
-			"expected": "true"
+			"expected": "true",
+			"CRONfail": "false"
 		},
 		{
 			"name": "NIBB",
 			"moreinfo": "http://sparql.nibb.ac.jp/",
 			"urlquery": "http://sparql.nibb.ac.jp/sparql?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
-			"expected": "true"
+			"expected": "true",
+			"CRONfail": "false"
 		},
 		{
 			"name": "ORTHODB",
 			"moreinfo": "https://sparql.orthodb.org/",
 			"urlquery": "https://sparql.orthodb.org/sparql?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
-			"expected": "true"
+			"expected": "true",
+			"CRONfail": "false"
 		},
 		{
 			"name": "NoCEBO",
