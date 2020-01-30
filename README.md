@@ -1,7 +1,7 @@
 # BioQuery 
 A repository for code and documentation of the BioQuery BETA system.
 
-# Hint for users of the frontend
+## Hint for users of the frontend
 
 Some of the queries only work if you install a CORS plugin in your browser (e.g. Moesif CORS) to allow **C**ross-**O**rigin **R**esource **S**haring
 
