@@ -1,6 +1,10 @@
 # BioQuery 
 A repository for code and documentation of the BioQuery BETA system.
 
+# Hint for users of the frontend
+
+Some of the queries only work if you install a CORS plugin in your browser (e.g. Moesif CORS) to allow **C**ross-**O**rigin **R**esource **S**haring
+
 # Use and License
 
 Here data and code-source are licensed under the CC0 1.0 Universal (CC0 1.0). A human-readable version and explanation is available at the 
@@ -30,5 +34,3 @@ All supplementary material for the submission is available in the document in [S
 ## Source code for template-based search interface
 
 The source code for the template-based search interface running on http://biosoda.expasy.org/build_biosodafrontend/ is available for reference in the [biosoda_frontend](biosoda_frontend) folder.
-
-Some of the queries only work if you install a CORS plugin in your browser (e.g. Moesif CORS) to allow **C**ross-**O**rigin **R**esource **S**haring
