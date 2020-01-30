@@ -190,15 +190,15 @@ body {
 #uniprotQ9_subclasses {
 	width: 80px;
 }
-
+/*
 #services {
 	position: absolute;
 	top: 0; right: 0;
 	margin-top: 0.3em;
 	margin-right: 0.3em;
-}
+}*/
 #services a, #services div {
-	font-size: 0.7em;
+	font-size: 0.666em;
 }
 
 @keyframes changeLetter {

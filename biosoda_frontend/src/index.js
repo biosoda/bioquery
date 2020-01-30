@@ -699,18 +699,29 @@ class App extends Component {
 	const { searchString } = this.state;
 	return (
 		<div style={{ height: 700 }}>
-			<h3 style={{
-				maxWidth: '50%',
-				'backgroundColor': 'white'
-			}}>
-				<strong>Bio</strong>-Query
-				<span style={{ fontSize: "0.6em", position: 'relative', bottom: '0.6em', color: 'red', fontFamily: 'monospace' }} title="BETA-Version - Working prototype with limited functionality">β</span>:
-				Federated template <strong>s</strong>earch <strong>o</strong>ver biological <strong>da</strong>tabases 
-			</h3>
-		<div id="services">
-			<ServicePoints ref="servicepoints" lastUpdate={ this.state.servicepointsUpdated } />
-		</div>
 		<Row>
+			<Col lg={6} md={12}>
+				<h3 style={{
+					'backgroundColor': 'white'
+				}}>
+					<strong>Bio</strong>-Query
+					<span style={{ fontSize: "0.6em", position: 'relative', bottom: '0.6em', color: 'red', fontFamily: 'monospace' }} title="BETA-Version - Working prototype with limited functionality">β</span>:
+					Federated template <strong>s</strong>earch <strong>o</strong>ver biological <strong>da</strong>tabases 
+				</h3>
+			</Col>
+			<Col  lg={6} md={12} id="services" style={{
+				textAlign: 'right',
+				backgroundColor: 'rgba(222,222,222,0.222)',
+				padding: '0.222em',
+				margin: '0.222em auto'
+				// whiteSpace: 'nowrap'
+			}}>
+				<ServicePoints ref="servicepoints" lastUpdate={ this.state.servicepointsUpdated } />
+			</Col>
+		</Row>
+		<Row style={{
+			clear: 'both'
+		}}>
 			<Col sm={this.state.showSparql? "7": "12"}>
 			<form
 			  style={{

@@ -1098,18 +1098,15 @@
 			"runcheck": "2019-11-29 0.589s, 63results",
 			"parentIds": ["oma_pairwise_orthologs"],
 			"estimatedseconds": "1",
-			"question": "Retrieve pairwise orthologs of the $$HBB$$ gene from Ensembl dataset at the EBI RDF platform",
+			"question": "Retrieve from Ensembl dataset at the EBI RDF platform the pairwise orthologs of the gene with the $$P68871$$ UniProt accession number",
 			"vars": [
 				{
-					"name": "HBB",
-					"default": "HBB",
-					"defaultvalue": "http://purl.uniprot.org/uniprot/P68871",
-					"type": "list",
-					"datasource": "genesuniprot",
-					"flavour": "autocomplete"
+					"name": "P68871",
+					"default": "P68871",
+					"type": "string"
 				}
 			],
-			"SPARQL": "PREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX sio: <http://semanticscience.org/resource/>\nPREFIX ensembl: <http://rdf.ebi.ac.uk/resource/ensembl/>\nPREFIX ensemblterms: <http://rdf.ebi.ac.uk/terms/ensembl/>\nSELECT DISTINCT ?gene_uniprot_uri ?ortholog_uniprot_uri {\n\tVALUES (?gene_uniprot_uri){\n\t\t(<$$HBB$$>)\n\t\t#(<http://purl.uniprot.org/uniprot/P68871>)\n\t}\n\t?gene sio:SIO_000558 ?ortholog . # « is orthologous to »\n\t?gene obo:RO_0002162 ?taxon . # « in taxon »\n\t?ortholog obo:RO_0002162 ?ortholog_taxon.\n\t?ortholog ensemblterms:DEPENDENT ?ortholog_uniprot_uri.\n\t?gene ensemblterms:DEPENDENT ?gene_uniprot_uri.\n\tFILTER (\n\t\t?taxon != ?ortholog_taxon\n\t\t&&\n\t\tSTRSTARTS(STR(?ortholog_uniprot_uri),\"http://purl.uniprot.org/uniprot/\")\n\t)\n}",
+			"SPARQL": "PREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX sio: <http://semanticscience.org/resource/>\nPREFIX ensembl: <http://rdf.ebi.ac.uk/resource/ensembl/>\nPREFIX ensemblterms: <http://rdf.ebi.ac.uk/terms/ensembl/>\nSELECT DISTINCT ?gene_uniprot_uri ?ortholog_uniprot_uri {\n\tVALUES (?gene_uniprot_uri){\n\t\t(<http://purl.uniprot.org/uniprot/$$P68871$$>)\n\t}\n\t?gene sio:SIO_000558 ?ortholog . # « is orthologous to »\n\t?gene obo:RO_0002162 ?taxon . # « in taxon »\n\t?ortholog obo:RO_0002162 ?ortholog_taxon.\n\t?ortholog ensemblterms:DEPENDENT ?ortholog_uniprot_uri.\n\t?gene ensemblterms:DEPENDENT ?gene_uniprot_uri.\n\tFILTER (\n\t\t?taxon != ?ortholog_taxon\n\t)\n}",
 			"runat": "https://www.ebi.ac.uk/rdf/services/sparql",
 			"fetchUrl": "https://www.ebi.ac.uk/rdf/services/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://www.ebi.ac.uk/rdf/services/sparql",
@@ -1121,10 +1118,15 @@
 			"runcheck": "2019-11-29 0.416s, 61results",
 			"parentIds": ["oma_pairwise_orthologs"],
 			"estimatedseconds": "1",
-			"question": "Retrieve orthologs for the human BRCA2 gene from the Ensembl dataset",
+			"question": "Retrieve from Ensembl dataset at the EBI RDF platform the pairwise orthologs of the gene with the $$ENSG00000139618$$ Ensembl acession number ",
 			"vars": [
+				{
+					"name": "ENSG00000139618",
+					"default": "ENSG00000139618",
+					"type": "string"
+				}
 			],
-			"SPARQL": "PREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX sio: <http://semanticscience.org/resource/>\nPREFIX ensembl: <http://rdf.ebi.ac.uk/resource/ensembl/>\nPREFIX ensemblterms: <http://rdf.ebi.ac.uk/terms/ensembl/>\nSELECT DISTINCT ?gene ?ortholog_uniprot_uri {\n\tVALUES (?gene){\n\t\t(ensembl:ENSG00000139618)\n\t}\n\t?gene sio:SIO_000558 ?ortholog.\n\t?gene obo:RO_0002162 ?taxon.\n\t?ortholog obo:RO_0002162 ?ortholog_taxon.\n\t?ortholog ensemblterms:DEPENDENT ?ortholog_uniprot_uri.\n\t?gene ensemblterms:DEPENDENT ?gene_uniprot_uri.\n\tFILTER(\n\t\t?taxon != ?ortholog_taxon\n\t\t&&\n\t\tSTRSTARTS(STR(?ortholog_uniprot_uri),\"http://purl.uniprot.org/uniprot/\")\n\t)\n}",
+			"SPARQL": "PREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX sio: <http://semanticscience.org/resource/>\nPREFIX ensembl: <http://rdf.ebi.ac.uk/resource/ensembl/>\nPREFIX ensemblterms: <http://rdf.ebi.ac.uk/terms/ensembl/>\nSELECT DISTINCT ?gene ?ortholog_uniprot_uri {\n\tVALUES (?gene){\n\t\t(ensembl:$$ENSG00000139618$$)\n\t}\n\t?gene sio:SIO_000558 ?ortholog.\n\t?gene obo:RO_0002162 ?taxon.\n\t?ortholog obo:RO_0002162 ?ortholog_taxon.\n\t?ortholog ensemblterms:DEPENDENT ?ortholog_uniprot_uri.\n\t?gene ensemblterms:DEPENDENT ?gene_uniprot_uri.\n\tFILTER(\n\t\t?taxon != ?ortholog_taxon\n\t\t&&\n\t\tSTRSTARTS(STR(?ortholog_uniprot_uri),\"http://purl.uniprot.org/uniprot/\")\n\t)\n}",
 			"runat": "https://www.ebi.ac.uk/rdf/services/sparql",
 			"fetchUrl": "https://www.ebi.ac.uk/rdf/services/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://www.ebi.ac.uk/rdf/services/sparql",
@@ -1136,10 +1138,15 @@
 			"runcheck": "2019-11-29 0.142s, 100results",
 			"parentIds": ["oma_pairwise_orthologs"],
 			"estimatedseconds": "1",
-			"question": "Retrieve pairwise orthologs of the human HBB gene which are derived from the HOGs in the OMA database",
+			"question": "Retrieve pairwise orthologs which are derived from the HOGs in the OMA database of gene with the $$P68871$$ UniProt accession number",
 			"vars": [
+				{
+					"name": "P68871",
+					"default": "P68871",
+					"type": "string"
+				}
 			],
-			"SPARQL": "PREFIX oma: <http://omabrowser.org/ontology/oma#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX sio: <http://semanticscience.org/resource/>\nPREFIX lscr: <http://purl.org/lscr#>\nSELECT DISTINCT ?protein1 ?protein2 {\n\tVALUES (?protein1){\n\t\t(<http://purl.uniprot.org/uniprot/P68871>)\n\t}\n\t?cluster a orth:OrthologsCluster.\n\t?cluster orth:hasHomologousMember ?node1.\n\t?cluster orth:hasHomologousMember ?node2.\n\t?node1 orth:hasHomologousMember* ?protein_OMA_1.\n\t?node2 orth:hasHomologousMember* ?protein_OMA_2.\n\t?protein_OMA_1 lscr:xrefUniprot ?protein1.\n\t?protein_OMA_2 lscr:xrefUniprot ?protein2.\n\tFILTER(?node1 != ?node2)\n}",
+			"SPARQL": "PREFIX oma: <http://omabrowser.org/ontology/oma#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX sio: <http://semanticscience.org/resource/>\nPREFIX lscr: <http://purl.org/lscr#>\nSELECT DISTINCT ?protein1 ?protein2 {\n\tVALUES (?protein1){\n\t\t(<http://purl.uniprot.org/uniprot/$$P68871$$>)\n\t}\n\t?cluster a orth:OrthologsCluster.\n\t?cluster orth:hasHomologousMember ?node1.\n\t?cluster orth:hasHomologousMember ?node2.\n\t?node1 orth:hasHomologousMember* ?protein_OMA_1.\n\t?node2 orth:hasHomologousMember* ?protein_OMA_2.\n\t?protein_OMA_1 lscr:xrefUniprot ?protein1.\n\t?protein_OMA_2 lscr:xrefUniprot ?protein2.\n\tFILTER(?node1 != ?node2)\n}",
 			"runat": "https://sparql.omabrowser.org/lode/sparql",
 			"fetchUrl": "https://sparql.omabrowser.org/lode/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://sparql.omabrowser.org/lode/sparql",
@@ -1151,10 +1158,15 @@
 			"runcheck": "",
 			"parentIds": ["oma_pairwise_orthologs"],
 			"estimatedseconds": "0",
-			"question": "Retrieve pairwise orthologs of the human HBB gene which are derived from the HOGs in the MBGD database",
+			"question": "Retrieve pairwise orthologs which are derived from the HOGs in the MBGD database of gene with the $$P68871$$ UniProt accession number - only works if you disable CORS in your browser",
 			"vars": [
+				{
+					"name": "P68871",
+					"default": "P68871",
+					"type": "string"
+				}
 			],
-			"SPARQL": "PREFIX mbgdr: <http://mbgd.genome.ad.jp/rdf/resource/>\nPREFIX mbgd: <http://purl.jp/bio/11/mbgd#>\nPREFIX orth: <http://purl.org/net/orth#>\nSELECT ?protein1 ?protein2 WHERE {\n\tVALUES (?protein1){\n\t\t(<http://purl.uniprot.org/uniprot/P68871>)\n\t}\n\t?cluster a orth:OrthologsCluster.\n\t?cluster orth:hasHomologous ?node1.\n\t?cluster orth:hasHomologous ?node2.\n\t?node1 orth:hasHomologous* ?gene1.\n\t?node2 orth:hasHomologous* ?gene2.\n\t?gene1 mbgd:uniprot ?protein1.\n\t?gene2 mbgd:uniprot ?protein2.\n\tFILTER(?node1 != ?node2)\n}",
+			"SPARQL": "PREFIX mbgdr: <http://mbgd.genome.ad.jp/rdf/resource/>\nPREFIX mbgd: <http://purl.jp/bio/11/mbgd#>\nPREFIX orth: <http://purl.org/net/orth#>\nSELECT ?protein1 ?protein2 WHERE {\n\tVALUES (?protein1){\n\t\t(<http://purl.uniprot.org/uniprot/$$P68871$$>)\n\t}\n\t?cluster a orth:OrthologsCluster.\n\t?cluster orth:hasHomologous ?node1.\n\t?cluster orth:hasHomologous ?node2.\n\t?node1 orth:hasHomologous* ?gene1.\n\t?node2 orth:hasHomologous* ?gene2.\n\t?gene1 mbgd:uniprot ?protein1.\n\t?gene2 mbgd:uniprot ?protein2.\n\tFILTER(?node1 != ?node2)\n}",
 			"runat": "http://mbgd.genome.ad.jp/sparql/",
 			"fetchUrl": "http://sparql.nibb.ac.jp/sparql?default-graph-uri=&query=$$query$$&format=JSON&timeout=0&debug=on$$&limit=limit$$&offset=$$offset$$",
 			"fetchUrlShort": "http://sparql.nibb.ac.jp/sparql",
@@ -1166,10 +1178,15 @@
 			"runcheck": "2019-11-29 0.172s, 44results",
 			"parentIds": ["oma_homologous_groups"],
 			"estimatedseconds": "1",
-			"question": "Retrieve homologous groups (i.e. clusters) that contains the human HBB gene in the OMA database",
+			"question": "Retrieve homologous groups (i.e. clusters) which are derived from the HOGs in the OMA database that contain the gene with the $$P68871$$ UniProt accession number",
 			"vars": [
+				{
+					"name": "P68871",
+					"default": "P68871",
+					"type": "string"
+				}
 			],
-			"SPARQL": "PREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nSELECT DISTINCT ?cluster ?protein2_OMA_URI ?protein2_uniprot_URI ?tax_name {\n\tVALUES (?protein1_uniprot_URI){\n\t\t(<http://purl.uniprot.org/uniprot/P68871>)\n\t}\n\tVALUES (?tax_name){\n\t\t(\"Primates\")\n\t}\n\t?cluster a orth:OrthologsCluster.\n\t?cluster orth:hasHomologousMember* ?protein_OMA_1.\n\t?cluster orth:hasHomologousMember* ?protein2_OMA_URI.\n\t?protein_OMA_1 a orth:Protein.\n\t?protein2_OMA_URI a orth:Protein.\n\t?protein_OMA_1 lscr:xrefUniprot ?protein1_uniprot_URI.\n\tOPTIONAL {\n\t\t?protein2_OMA_URI lscr:xrefUniprot ?protein2_uniprot_URI.\n\t}\n\t?cluster orth:hasTaxonomicRange ?tax.\n\t?tax orth:taxRange ?tax_name.\n}",
+			"SPARQL": "PREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nSELECT DISTINCT ?cluster ?protein2_OMA_URI ?protein2_uniprot_URI ?tax_name {\n\tVALUES (?protein1_uniprot_URI){\n\t\t(<http://purl.uniprot.org/uniprot/$$P68871$$>)\n\t}\n\tVALUES (?tax_name){\n\t\t(\"Primates\")\n\t}\n\t?cluster a orth:OrthologsCluster.\n\t?cluster orth:hasHomologousMember* ?protein_OMA_1.\n\t?cluster orth:hasHomologousMember* ?protein2_OMA_URI.\n\t?protein_OMA_1 a orth:Protein.\n\t?protein2_OMA_URI a orth:Protein.\n\t?protein_OMA_1 lscr:xrefUniprot ?protein1_uniprot_URI.\n\tOPTIONAL {\n\t\t?protein2_OMA_URI lscr:xrefUniprot ?protein2_uniprot_URI.\n\t}\n\t?cluster orth:hasTaxonomicRange ?tax.\n\t?tax orth:taxRange ?tax_name.\n}",
 			"runat": "https://sparql.omabrowser.org/lode/sparql",
 			"fetchUrl": "https://sparql.omabrowser.org/lode/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://sparql.omabrowser.org/lode/sparql",
@@ -1178,13 +1195,18 @@
 		
 		{
 			"id": "omahandson_Q06",
-			"runcheck": "",
+			"runcheck": "2020-01-30 0.224s, 95results",
 			"parentIds": ["oma_homologous_groups"],
 			"estimatedseconds": "0",
-			"question": "Retrieve flat homologous groups (i.e. clusters) that contains the human HBB gene in OrthoDB",
+			"question": "Retrieve flat homologous groups (i.e. clusters) which are derived from the HOGs in the OrthoDB that contain the gene with the $$P68871$$ UniProt accession number",
 			"vars": [
+				{
+					"name": "P68871",
+					"default": "P68871",
+					"type": "string"
+				}
 			],
-			"SPARQL": "PREFIX orthodb: <http://purl.orthodb.org/>\nPREFIX up: <http://purl.uniprot.org/core/>\nSELECT DISTINCT ?groups ?species_name ?protein1_uniprot ?gene1 ?taxLevel_uniprot ?taxLevel WHERE {\n\tVALUES ?protein2_uniprot {\n\t\t<http://purl.uniprot.org/uniprot/P68871>\n\t}\n\tVALUES ?taxLevel {\n\t\t\"Primates\"\n\t}\n\t?gene2 a orthodb:Gene.\n\t?gene2 orthodb:memberOf ?groups.\n\t?gene1 a orthodb:Gene.\n\t?gene1 orthodb:memberOf ?groups.\n\t?gene1 up:organism ?organism.\n\t?organism a ?taxon.\n\t?taxon up:scientificName ?species_name.\n\t?groups orthodb:ogBuiltAt ?taxLevel_uniprot.\n\t?taxLevel_uniprot up:scientificName ?taxLevel.\n\t?gene2 orthodb:xref ?xref2.\n\t?xref2 orthodb:xrefResource ?protein2_uniprot.\n\t?protein2_uniprot a orthodb:Uniprot.\n\t?gene1 orthodb:xref ?xref.\n\t?xref a orthodb:Xref.\n\tOPTIONAL {\n\t\t?xref orthodb:xrefResource ?protein1_uniprot.\n\t\t?protein1_uniprot a orthodb:Uniprot.\n\t}\n}\nORDER BY ?groups, ?taxLevel",
+			"SPARQL": "PREFIX orthodb: <http://purl.orthodb.org/>\nPREFIX up: <http://purl.uniprot.org/core/>\nSELECT DISTINCT ?groups ?species_name ?protein1_uniprot ?gene1 ?taxLevel_uniprot ?taxLevel WHERE {\n\tVALUES ?protein2_uniprot {\n\t\t<http://purl.uniprot.org/uniprot/$$P68871$$>\n\t}\n\tVALUES ?taxLevel {\n\t\t\"Primates\"\n\t}\n\t?gene2 a orthodb:Gene.\n\t?gene2 orthodb:memberOf ?groups.\n\t?gene1 a orthodb:Gene.\n\t?gene1 orthodb:memberOf ?groups.\n\t?gene1 up:organism ?organism.\n\t?organism a ?taxon.\n\t?taxon up:scientificName ?species_name.\n\t?groups orthodb:ogBuiltAt ?taxLevel_uniprot.\n\t?taxLevel_uniprot up:scientificName ?taxLevel.\n\t?gene2 orthodb:xref ?xref2.\n\t?xref2 orthodb:xrefResource ?protein2_uniprot.\n\t?protein2_uniprot a orthodb:Uniprot.\n\t?gene1 orthodb:xref ?xref.\n\t?xref a orthodb:Xref.\n\tOPTIONAL {\n\t\t?xref orthodb:xrefResource ?protein1_uniprot.\n\t\t?protein1_uniprot a orthodb:Uniprot.\n\t}\n}\nORDER BY ?groups, ?taxLevel",
 			"runat": "https://sparql.orthodb.org",
 			"fetchUrl": "https://sparql.orthodb.org/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://sparql.orthodb.org",
@@ -1196,10 +1218,15 @@
 			"runcheck": "2019-11-29 0.72s, 100results",
 			"parentIds": ["oma_hierarchical_orthologous_groups"],
 			"estimatedseconds": "1",
-			"question": "Retrieve hierarchical orthologous groups that contain the human HBB gene in the OMA database",
+			"question": "Retrieve hierarchical orthologous groups from the OMA database that contain the gene with the $$P68871$$ UniProt accession number",
 			"vars": [
+				{
+					"name": "P68871",
+					"default": "P68871",
+					"type": "string"
+				}
 			],
-			"SPARQL": "PREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX taxon: <http://purl.uniprot.org/taxonomy/>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX lscr: <http://purl.org/lscr#>\nSELECT DISTINCT ?root_hog ?species_name ?protein1_uniprot (?protein1 as ?protein1_OMA) ?taxLevel {\n\tVALUES ?protein2_uniprot {\n\t\t<http://purl.uniprot.org/uniprot/P68871>\n\t}\n\t?root_hog obo:CDAO_0000148 ?hog_cluster. #has_Root\n\t?hog_cluster orth:hasHomologousMember* ?node1.\n\t?node1 a orth:OrthologsCluster.\n\t?node1 orth:hasTaxonomicRange ?level.\n\t?level orth:taxRange ?taxLevel.\n\t?node1 orth:hasHomologousMember* ?protein1.\n\t?hog_cluster orth:hasHomologousMember* ?protein2.\n\t?protein1 a orth:Protein.\n\t?protein1 orth:organism ?organism.\n\t?organism obo:RO_0002162 ?taxon.\n\t?taxon up:scientificName ?species_name.\n\tOPTIONAL {\n\t\t?protein1 lscr:xrefUniprot ?protein1_uniprot\n\t}\n\t?protein2 a orth:Protein.\n\t?protein2 lscr:xrefUniprot ?protein2_uniprot.\n} ORDER BY ?taxLevel",
+			"SPARQL": "PREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX taxon: <http://purl.uniprot.org/taxonomy/>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX lscr: <http://purl.org/lscr#>\nSELECT DISTINCT ?root_hog ?species_name ?protein1_uniprot (?protein1 as ?protein1_OMA) ?taxLevel {\n\tVALUES ?protein2_uniprot {\n\t\t<http://purl.uniprot.org/uniprot/$$P68871$$>\n\t}\n\t?root_hog obo:CDAO_0000148 ?hog_cluster. #has_Root\n\t?hog_cluster orth:hasHomologousMember* ?node1.\n\t?node1 a orth:OrthologsCluster.\n\t?node1 orth:hasTaxonomicRange ?level.\n\t?level orth:taxRange ?taxLevel.\n\t?node1 orth:hasHomologousMember* ?protein1.\n\t?hog_cluster orth:hasHomologousMember* ?protein2.\n\t?protein1 a orth:Protein.\n\t?protein1 orth:organism ?organism.\n\t?organism obo:RO_0002162 ?taxon.\n\t?taxon up:scientificName ?species_name.\n\tOPTIONAL {\n\t\t?protein1 lscr:xrefUniprot ?protein1_uniprot\n\t}\n\t?protein2 a orth:Protein.\n\t?protein2 lscr:xrefUniprot ?protein2_uniprot.\n} ORDER BY ?taxLevel",
 			"runat": "https://sparql.omabrowser.org/lode/sparql",
 			"fetchUrl": "https://sparql.omabrowser.org/lode/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://sparql.omabrowser.org/lode/sparql",
@@ -1208,16 +1235,21 @@
 		
 		{
 			"id": "omahandson_Q08",
-			"runcheck": "",
+			"runcheck": "2020-01-30 7.5s, 2377results",
 			"parentIds": ["oma_hierarchical_orthologous_groups"],
 			"estimatedseconds": "0",
-			"question": "Retrieve hierarchical orthologous groups that contains the human HBB gene in the OrthoDB database",
+			"question": "Retrieve hierarchical orthologous groups from the OrthoDB that contain the gene with the $$P68871$$ UniProt accession number",
 			"vars": [
+				{
+					"name": "P68871",
+					"default": "P68871",
+					"type": "string"
+				}
 			],
-			"SPARQL": "PREFIX orthodb: <http://purl.orthodb.org/>\nPREFIX up: <http://purl.uniprot.org/core/>\nSELECT DISTINCT ?hog_root ?species_name ?protein1_uniprot ?gene1 ?taxLevel_uniprot ?taxLevel WHERE {\n\tVALUES ?protein2_uniprot {\n\t\t<http://purl.uniprot.org/uniprot/P68871>\n\t}\n\t?gene2 a orthodb:Gene.\n\t?gene2 orthodb:memberOf ?groups.\n\t?gene2 orthodb:memberOf ?hog_root.\n\tFILTER NOT EXISTS {\n\t\t?hog_root orthodb:ancestralOG ?ancestor.\n\t}\n\t?groups orthodb:ancestralOG* ?hog_root.\n\t?gene1 a orthodb:Gene.\n\t?gene1 orthodb:memberOf ?groups.\n\t?gene1 up:organism ?organism.\n\t?organism a ?taxon.\n\t?taxon up:scientificName ?species_name.\n\t?groups orthodb:ogBuiltAt ?taxLevel_uniprot.\n\t?taxLevel_uniprot up:scientificName ?taxLevel.\n\t?gene2 orthodb:xref ?xref2.\n\t?xref2 orthodb:xrefResource ?protein2_uniprot.\n\t?protein2_uniprot a orthodb:Uniprot.\n\t?gene1 orthodb:xref ?xref.\n\t?xref orthodb:xrefResource ?protein1_uniprot.\n\t?protein1_uniprot a orthodb:Uniprot.\n} ORDER BY ?hog_root ?taxLevel",
+			"SPARQL": "PREFIX orthodb: <http://purl.orthodb.org/>\nPREFIX up: <http://purl.uniprot.org/core/>\nSELECT DISTINCT ?hog_root ?species_name ?protein1_uniprot ?gene1 ?taxLevel_uniprot ?taxLevel WHERE {\n\tVALUES ?protein2_uniprot {\n\t\t<http://purl.uniprot.org/uniprot/$$P68871$$>\n\t}\n\t?gene2 a orthodb:Gene.\n\t?gene2 orthodb:memberOf ?groups.\n\t?gene2 orthodb:memberOf ?hog_root.\n\tFILTER NOT EXISTS {\n\t\t?hog_root orthodb:ancestralOG ?ancestor.\n\t}\n\t?groups orthodb:ancestralOG* ?hog_root.\n\t?gene1 a orthodb:Gene.\n\t?gene1 orthodb:memberOf ?groups.\n\t?gene1 up:organism ?organism.\n\t?organism a ?taxon.\n\t?taxon up:scientificName ?species_name.\n\t?groups orthodb:ogBuiltAt ?taxLevel_uniprot.\n\t?taxLevel_uniprot up:scientificName ?taxLevel.\n\t?gene2 orthodb:xref ?xref2.\n\t?xref2 orthodb:xrefResource ?protein2_uniprot.\n\t?protein2_uniprot a orthodb:Uniprot.\n\t?gene1 orthodb:xref ?xref.\n\t?xref orthodb:xrefResource ?protein1_uniprot.\n\t?protein1_uniprot a orthodb:Uniprot.\n} ORDER BY ?hog_root ?taxLevel",
 			"runat": "https://sparql.orthodb.org",
-			"fetchUrl": "http://biosoda.expasy.org:8890/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "http://biosoda.expasy.org:8890/sparql",
+			"fetchUrl": "https://sparql.orthodb.org/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "https://sparql.orthodb.org/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		
