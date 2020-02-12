@@ -30,7 +30,7 @@ var connection = mysql.createConnection({
 var connection = mysql.createConnection({
 	host: 'localhost',
 	user: 'biosoda',
-	password: 'bi0s0da',
+	password: '***',
 	database: 'biosoda_logger'
 });
 
