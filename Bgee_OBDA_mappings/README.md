@@ -1,7 +1,7 @@
 # easyBgee v14 OBDA mappings
 + **bgee_genex_materialization.obda** contains the latest mappings and includes absence of gene expression data and expression scores mappings. The materialized RDF data including infereces based on the ontology axioms are accessible via the SPARQL endpoint https://bgee.org/sparql  
 
-+ **bgee_genex.obda mappings** are currently used to virtually generate the Bgee RDF graph from easyBgee [MySQL dump](ftp://ftp.bgee.org/bgee_v14/sql_lite_dump.tar.gz) 
++ **bgee_genex.obda mappings** are currently used to virtually generate the Bgee RDF graph from easyBgee MySQL dump (ftp://ftp.bgee.org/bgee_v14/sql_lite_dump.tar.gz) 
 and accessible via  the SPARQL endpoint at  http://biosoda.expasy.org:8080/rdf4j-server/repositories/bgeelight
 
 bgee_genex.obda mappings were used in the article published and available at 
