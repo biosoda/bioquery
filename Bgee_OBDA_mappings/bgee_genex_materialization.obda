@@ -23,7 +23,7 @@ swrla:		http://swrl.stanford.edu/ontologies/3.3/swrla.owl#
 swrlb:		http://www.w3.org/2003/11/swrlb#
 terms:		http://purl.org/dc/terms/
 uberon:		http://purl.obolibrary.org/obo/uberon#
-dcterms:		http://purl.org/dc/terms/
+dcterms:	http://purl.org/dc/terms/
 oboInOwl:	http://www.geneontology.org/formats/oboInOwl#
 
 [MappingDeclaration] @collection [[
@@ -76,7 +76,7 @@ source		SELECT g.geneId, gc.globalConditionId
 			ON g.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='EXPRESSED'
 
 mappingId	Gene
-target		oma:GENE_{geneId} a orth:Gene ; rdfs:label {geneName}^^xsd:string ; terms:description {geneDescription}^^xsd:string ; terms:identifier {geneId}^^xsd:string ; orth:organism bgee:ORGANISM_{speciesId} ; lscr:xrefEnsemblGene <http://rdf.ebi.ac.uk/resource/ensembl/{geneId}> . 
+target		oma:GENE_{geneId} a orth:Gene ; rdfs:seeAlso <https://bgee.org/?page=gene&gene_id={geneId}> ; rdfs:label {geneName}^^xsd:string ; terms:description {geneDescription}^^xsd:string ; terms:identifier {geneId}^^xsd:string ; orth:organism bgee:ORGANISM_{speciesId} ; lscr:xrefEnsemblGene <http://rdf.ebi.ac.uk/resource/ensembl/{geneId}> . 
 source		select geneId, geneName, geneDescription, speciesId from gene
 
 mappingId	AbsenceExpression
