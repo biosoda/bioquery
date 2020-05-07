@@ -91,7 +91,7 @@ class ExtraTarget extends Component {
 	}
 	render() {
 		var targetExplanation = 'the query will be answered directly by the source db';
-		if (this.props.superState.queryTargetShort === 'http://biosoda.expasy.org:8890/sparql') {
+		if (this.props.superState.queryTargetShort === 'http://biosoda-prod.cloudlab.zhaw.ch:8890/sparql') {
 			targetExplanation = 'the query will be sent to the federation server to fullfill the federated service calls';
 		}
 
@@ -238,7 +238,7 @@ class App extends Component {
 			query: query,
 			timetaken: timetaken
 		});
-		fetch('http://biosoda.expasy.org:3002/', {
+		fetch('http://biosoda-prod.cloudlab.zhaw.ch:3002/', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
@@ -378,8 +378,8 @@ class App extends Component {
 		query: '', // SPARQL query to display in the SPARQL query editor
 		queryHuman: 'none of our prepared queries', // human understandable query aka question
 		estimatedRuntime: 'unknown', // where applicable
-		queryTarget: 'http://biosoda.expasy.org:8890/sparql?query=$$query$$&format=JSON&limit=$$limit$$&offset=$$offset$$&inference=false', // where to send the SPARQL query
-		queryTargetShort: 'http://biosoda.expasy.org:8890/sparql',
+		queryTarget: 'http://biosoda-prod.cloudlab.zhaw.ch:8890/sparql?query=$$query$$&format=JSON&limit=$$limit$$&offset=$$offset$$&inference=false', // where to send the SPARQL query
+		queryTargetShort: 'http://biosoda-prod.cloudlab.zhaw.ch:8890/sparql',
 		queryHeaders: {},
 		asyncWaiter : '',
 		expanded: false,
