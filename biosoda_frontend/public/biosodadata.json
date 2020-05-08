@@ -636,10 +636,10 @@
 		},
 		{
 			"id": "federatedOmaBgeeQ3",
-			"runcheck": "2020-03-06, 1.758s, 10results",
+			"runcheck": "2020-05-08, 13.669s, 10results",
 			"rqid": "Q6",
 			"characteristics": "2 BGPs where all of them must be matched in a remote SPARQL endpoint (i.e.: SERVICE).  #BGP_1 = 6, and #BGP_2 ≥ 10 . BGP_2  has 3 property paths of zero or more occurrences of orth:hasHomologousMember. It defines a constraint by using the FILTER() function.",
-			"numberresults": "2",
+			"numberresults": "10",
 			"resultsexample": "http://omabrowser.org/ontology/oma#GENE_FBgn0000017\thttp://omabrowser.org/cgi-bin/gateway.pl?f=DisplayEntry&p1=PONAB00390",
 			"parentIds": ["federatedOmaBgee_genes"],
 			"estimatedseconds": "13",
@@ -667,7 +667,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nSELECT DISTINCT ?id ?gene ?OMA_LINK WHERE {\n\tSELECT * {\n\t\tSERVICE <https://bgee.org/sparql/> {\n\t\t\tSELECT DISTINCT ?gene ?id {\n\t\t\t\t?gene a orth:Gene .\n\t\t\t\t?gene genex:isExpressedIn ?cond .\n\t\t\t\t?cond genex:hasAnatomicalEntity ?anat .\n\t\t\t\t?anat rdfs:label '$$brain$$' .\n\t\t\t\t?gene orth:organism ?o .\n\t\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t\t?gene dcterms:identifier ?id .\n\t\t\t\t?taxon up:commonName '$$fruitfly$$' .\n\t\t\t} $$innerlimit$$\n\t\t}\n\t\tSERVICE <https://sparql.omabrowser.org/sparql/> {\n\t\t\t?protein2 a orth:Protein .\n\t\t\t?protein1 a orth:Protein .\n\t\t\t?clusterPrimates a orth:OrthologsCluster .\n\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t?node2 orth:hasHomologousMember* ?clusterPrimates .\n\t\t\t?clusterPrimates orth:hasHomologousMember* ?protein2 .\n\t\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t\t?protein1 dcterms:identifier ?id .\n\t\t\t?protein2 rdfs:seeAlso ?OMA_LINK .\n\t\t\t?clusterPrimates orth:hasTaxonomicRange ?taxRange .\n\t\t\t?taxRange orth:taxRange ?taxLevel .\n\t\t\tVALUES ?taxLevel { '$$primates$$' }\n\t\t\tFILTER ( ?node1 != ?node2 )\n\t\t}\n\t}\n}\n$$innerlimit$$",
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nSELECT DISTINCT ?orthologous_to_gene_id ?orthologous_to_gene ?hasOrtholog WHERE {\n\tSELECT * {\n\t\tSERVICE <https://bgee.org/sparql/> {\n\t\t\tSELECT DISTINCT ?gene ?orthologous_to_gene_id ?orthologous_to_gene {\n\t\t\t\t?gene a orth:Gene .\n\t\t\t\t?gene genex:isExpressedIn ?cond .\n\t\t\t\t?cond genex:hasAnatomicalEntity ?anat .\n\t\t\t\t?anat rdfs:label '$$brain$$' .\n\t\t\t\t?gene orth:organism ?o .\n\t\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t\t?gene dcterms:identifier ?orthologous_to_gene_id .\n\t\t\t\t?gene rdfs:seeAlso ?orthologous_to_gene .\n\t\t\t\t?taxon up:commonName '$$fruitfly$$' .\n\t\t\t} $$innerlimit10$$\n\t\t}\n\t\tSERVICE <https://sparql.omabrowser.org/sparql/> {\n\t\t\t?protein2 a orth:Protein .\n\t\t\t?protein1 a orth:Protein .\n\t\t\t?clusterPrimates a orth:OrthologsCluster .\n\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t?node2 orth:hasHomologousMember* ?clusterPrimates .\n\t\t\t?clusterPrimates orth:hasHomologousMember* ?protein2 .\n\t\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t\t?protein1 dcterms:identifier ?orthologous_to_gene_id .\n\t\t\t?protein2 rdfs:seeAlso ?hasOrtholog .\n\t\t\t?clusterPrimates orth:hasTaxonomicRange ?taxRange .\n\t\t\t?taxRange orth:taxRange ?taxLevel .\n\t\t\tVALUES ?taxLevel { '$$primates$$' }\n\t\t\tFILTER ( ?node1 != ?node2 )\n\t\t}\n\t}\n}\n$$innerlimit$$",
 			"fetchUrl": "http://biosoda-prod.cloudlab.zhaw.ch:8890/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "http://biosoda-prod.cloudlab.zhaw.ch:8890/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
