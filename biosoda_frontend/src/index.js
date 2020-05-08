@@ -483,6 +483,7 @@ class App extends Component {
 
 				if (this.state.useInnerLimits === true) {
 					newsparql = newsparql.split(varmasker + 'innerlimit' + varmasker).join('LIMIT ' + this.state.resultLimit);
+					newsparql = newsparql.split(varmasker + 'innerlimit10' + varmasker).join('LIMIT ' + this.state.resultLimit * 10);
 				} else {
 					newsparql = newsparql.split(varmasker + 'innerlimit' + varmasker).join('');
 				}
