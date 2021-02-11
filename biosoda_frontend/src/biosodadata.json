@@ -749,7 +749,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT distinct ?gene ?geneName {\n\t?gene a orth:Gene .\n\t?gene rdfs:label ?geneName .\n\t?gene orth:organism ?taxon .\n\t?taxon obo:RO_0002162 ?species . #in taxon property .\n\t?species up:commonName ?commonName .\n\tFILTER ( lcase(str(?commonName)) = lcase(\"$$fruitfly$$\") ) .\n}",
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT distinct ?gene_page ?geneName {\n\t?gene a orth:Gene .\n\t?gene rdfs:seeAlso ?gene_page .\n\t?gene rdfs:label ?geneName .\n\t?gene orth:organism ?taxon .\n\t?taxon obo:RO_0002162 ?species . #in taxon property .\n\t?species up:commonName ?commonName .\n\tFILTER ( lcase(str(?commonName)) = lcase(\"$$fruitfly$$\") ) .\n}",
 			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://bgee.org/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
