@@ -21,7 +21,7 @@ target		obo:{stageIdSPARQL} a <http://www.ebi.ac.uk/efo/EFO_0000399> ; rdfs:labe
 source		select stageId, replace(stageId,":","_") as stageIdSPARQL, stageName, stageDescription from stage WHERE stageId is not null
 
 mappingId	Species
-target		<http://purl.uniprot.org/taxonomy/{speciesId}> a up:Taxon ; up:scientificName {speciesConcatName} ; up:rank up:Species ; up:commonName {speciesCommonName} . bgee:ORGANISM_{speciesId} a orth:Organism ; obo:RO_0002162 <http://purl.uniprot.org/taxonomy/{speciesId}> . 
+target		<http://purl.uniprot.org/taxonomy/{speciesId}> a up:Taxon ; up:scientificName {speciesConcatName} ; up:rank up:Species ; up:commonName {speciesCommonName} . <https://bgee.org/?page=species&species_id={speciesId}> a orth:Organism ; obo:RO_0002162 <http://purl.uniprot.org/taxonomy/{speciesId}> . 
 source		select speciesId, speciesCommonName, genomeVersion, genomeSpeciesId, concat(genus, ' ', species) as speciesConcatName from species
 
 mappingId	AnatomicalEntity
@@ -29,7 +29,7 @@ target		obo:{anatEntityIdSPARQL} a genex:AnatomicalEntity ; dcterms:description 
 source		select anatEntityId, replace(anatEntityId,":","_") as anatEntityIdSPARQL, anatEntityName, anatEntityDescription from anatEntity
 
 mappingId	GeneInTaxon
-target		bgee:ORGANISM_{speciesId} obo:RO_0002162 <http://purl.uniprot.org/taxonomy/{speciesId}> . 
+target		<https://bgee.org/?page=species&species_id={speciesId}> obo:RO_0002162 <http://purl.uniprot.org/taxonomy/{speciesId}> . 
 source		select speciesId from gene
 
 mappingId	ExpressionCondition
@@ -65,7 +65,7 @@ source		SELECT g.geneId, gc.globalConditionId
 			ON g.bgeeGeneId = ge.bgeeGeneId
 
 mappingId	Gene
-target		oma:GENE_{geneId} a orth:Gene ; rdfs:label {geneName}^^xsd:string ; dcterms:description {geneDescription}^^xsd:string ; dcterms:identifier {geneId}^^xsd:string ; orth:organism bgee:ORGANISM_{speciesId} ; lscr:xrefEnsemblGene <http://rdf.ebi.ac.uk/resource/ensembl/{geneId}> . 
+target		oma:GENE_{geneId} a orth:Gene ; rdfs:label {geneName}^^xsd:string ; dcterms:description {geneDescription}^^xsd:string ; dcterms:identifier {geneId}^^xsd:string ; orth:organism <https://bgee.org/?page=species&species_id={speciesId}> ; lscr:xrefEnsemblGene <http://rdf.ebi.ac.uk/resource/ensembl/{geneId}> . 
 source		select geneId, geneName, geneDescription, speciesId from gene
 ]]
 
