@@ -41,11 +41,11 @@ source		select anatEntityId, replace(anatEntityId,':','_') as anatEntityIdSPARQL
 
 mappingId	ExpressionCondition
 target		bgee:EXPRESSION_CONDITION_{globalConditionId} a genex:ExpressionCondition ; genex:hasDevelopmentalStage obo:{stageIdSPARQL} ; genex:hasAnatomicalEntity obo:{anatEntityIdSPARQL} ; obo:RO_0002162 <http://purl.uniprot.org/taxonomy/{speciesId}>; genex:hasSex {sex}^^xsd:string; genex:hasStrain bgee:STRAIN_{strain_md5}. bgee:STRAIN_{strain_md5} rdfs:label {strain}^^xsd:string; a efo:EFO_0005135 . 
-source		select globalConditionId, replace(stageId,':','_') as stageIdSPARQL, replace(anatEntityId,':','_') as anatEntityIdSPARQL, speciesId, strain, sex, cellTypeId, md5(strain) as strain_md5 from globalCond and cellTypeId = 'GO:0005575'
+source		select globalConditionId, replace(stageId,':','_') as stageIdSPARQL, replace(anatEntityId,':','_') as anatEntityIdSPARQL, speciesId, strain, sex, cellTypeId, md5(strain) as strain_md5 from globalCond 
 
 mappingId	Expression
-target		bgee:EXPRESSION_{globalExpressionId} a genex:Expression ; genex:hasConfidenceLevel obo:{confidence} ; genex:hasExpressionCondition bgee:EXPRESSION_CONDITION_{globalConditionId} ; genex:hasSequenceUnit oma:GENE_{geneId} ; genex:hasExpressionLevel {score}^^xsd:string ; genex:hasFDRpvalue {fdrPvalue}^^xsd:double. 
-source		SELECT fdrPvalue, score, globalExpressionId, globalConditionId, gene.geneId, CASE summaryQuality when 'SILVER' then 'CIO_0000030' when 'GOLD' then  'CIO_0000029' ELSE  'CIO_0000031'  end as confidence FROM globalExpression as ge JOIN gene ON gene.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='EXPRESSED'
+target		bgee:EXPRESSION_{globalExpressionId} a genex:Expression ; genex:hasConfidenceLevel obo:{confidence} ; genex:hasExpressionCondition bgee:EXPRESSION_CONDITION_{globalConditionId} ; genex:hasSequenceUnit oma:GENE_{geneId} ; genex:hasExpressionLevel {score}^^xsd:string ; genex:hasFDRpvalue {pValue}^^xsd:double. 
+source		SELECT pValue, score, globalExpressionId, globalConditionId, gene.geneId, CASE summaryQuality when 'SILVER' then 'CIO_0000030' when 'GOLD' then  'CIO_0000029' ELSE  'CIO_0000031'  end as confidence FROM globalExpression as ge JOIN gene ON gene.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='EXPRESSED'
 
 mappingId	Gene_IsExpressedIn_anatEntity
 target		oma:GENE_{geneId} genex:isExpressedIn obo:{anatEntityIdSPARQL} . 
@@ -57,7 +57,7 @@ source		SELECT g.geneId, REPLACE(gc.anatEntityId,':','_') as anatEntityIdSPARQL
 			ON ge.globalConditionId = gc.globalConditionId
 			JOIN
 			gene as g
-			ON g.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='EXPRESSED' and gc.cellTypeId = 'GO:0005575' and gc.stageId = 'UBERON:0000104' and 
+			ON g.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='EXPRESSED' and gc.stageId = 'UBERON:0000104' and 
 			gc.sex = 'any' and gc.strain = 'wild-type'
 
 mappingId	Gene_IsExpressedIn_expressionCondition
@@ -70,15 +70,15 @@ source		SELECT g.geneId, gc.globalConditionId
 			ON ge.globalConditionId = gc.globalConditionId
 			JOIN
 			gene as g
-			ON g.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='EXPRESSED' and gc.cellTypeId = 'GO:0005575'
+			ON g.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='EXPRESSED' 
 
 mappingId	Gene
 target		oma:GENE_{geneId} a orth:Gene ; rdfs:seeAlso <https://bgee.org/?page=gene&gene_id={geneId}> ; rdfs:label {geneName}^^xsd:string ; terms:description {geneDescription}^^xsd:string ; terms:identifier {geneId}^^xsd:string ; orth:organism <https://bgee.org/?page=species&species_id={speciesId}> ; lscr:xrefEnsemblGene <http://rdf.ebi.ac.uk/resource/ensembl/{geneId}> . 
 source		select geneId, geneName, geneDescription, speciesId from gene
 
 mappingId	AbsenceExpression
-target		bgee:NOT_EXPRESSED_{globalExpressionId} a genex:AbsenceExpression ; genex:hasConfidenceLevel obo:{confidence} ; genex:hasExpressionCondition bgee:EXPRESSION_CONDITION_{globalConditionId} ; genex:hasSequenceUnit oma:GENE_{geneId} ; genex:hasExpressionLevel {score}^^xsd:string . 
-source		SELECT score, globalExpressionId, globalConditionId, gene.geneId, CASE summaryQuality when 'SILVER' then 'CIO_0000030' when 'GOLD' then  'CIO_0000029' ELSE  'CIO_0000031'  end as confidence FROM globalExpression as ge JOIN gene ON gene.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='NOT_EXPRESSED'
+target		bgee:NOT_EXPRESSED_{globalExpressionId} a genex:AbsenceExpression ; genex:hasConfidenceLevel obo:{confidence} ; genex:hasExpressionCondition bgee:EXPRESSION_CONDITION_{globalConditionId} ; genex:hasSequenceUnit oma:GENE_{geneId} ; genex:hasExpressionLevel {score}^^xsd:string ; genex:hasFDRpvalue {pValue}^^xsd:double. 
+source		SELECT pValue, score, globalExpressionId, globalConditionId, gene.geneId, CASE summaryQuality when 'SILVER' then 'CIO_0000030' when 'GOLD' then  'CIO_0000029' ELSE  'CIO_0000031'  end as confidence FROM globalExpression as ge JOIN gene ON gene.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='NOT_EXPRESSED'
 
 mappingId	Gene_IsNotExpressedIn_anatEntity
 target		oma:GENE_{geneId} genex:isAbsentIn obo:{anatEntityIdSPARQL} . 
@@ -90,7 +90,7 @@ source		SELECT g.geneId, REPLACE(gc.anatEntityId,':','_') as anatEntityIdSPARQL
 			         ON ge.globalConditionId = gc.globalConditionId
 			         JOIN
 			         gene as g
-			         ON g.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='NOT_EXPRESSED' and gc.cellTypeId = 'GO:0005575' and gc.stageId = 'UBERON:0000104' and gc.sex = 'any' and gc.strain = 'wild-type' 
+			         ON g.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='NOT_EXPRESSED' and gc.stageId = 'UBERON:0000104' and gc.sex = 'any' and gc.strain = 'wild-type' 
 
 mappingId	Gene_IsNotExpressedIn_expressionCondition
 target		oma:GENE_{geneId} genex:isAbsentIn bgee:EXPRESSION_CONDITION_{globalConditionId} . 
@@ -102,5 +102,5 @@ source		SELECT g.geneId, gc.globalConditionId
 			         ON ge.globalConditionId = gc.globalConditionId
 			         JOIN
 			         gene as g
-			         ON g.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='NOT_EXPRESSED' and gc.cellTypeId = 'GO:0005575'
+			         ON g.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='NOT_EXPRESSED' 
 ]]
