@@ -1,3 +1,6 @@
+# EasyBgee v15.0 OBDA mappings
++ **bgee_v15_genex.obda** contains the latest mappings adapted to the EasyBgee v15 data schema and data. It also includes post-composition terms (e.g. cell in organ) modelled as at least two assertions of the property [genex:hasAnatomicalEntity](https://biosoda.github.io/genex/#hasAnatomicalEntity). The materialized RDF data including infereces based on the ontology axioms will be accessible  early 2022 via the SPARQL endpoint https://bgee.org/sparql/. More information will be available at https://bgee.org/?page=sparql.  
+
 # EasyBgee v14, v14.1 and v14.2 OBDA mappings
 + **bgee_v14_genex.obda** contains the latest mappings and includes absence of gene expression and expression scores mappings. The materialized RDF data including infereces based on the ontology axioms are accessible via the SPARQL endpoint https://bgee.org/sparql/. More information is available at https://bgee.org/?page=sparql.  
 
