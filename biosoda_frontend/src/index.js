@@ -91,7 +91,7 @@ class ExtraTarget extends Component {
 	}
 	render() {
 		var targetExplanation = 'the query will be answered directly by the source db';
-		if (this.props.superState.queryTargetShort === 'http://biosoda-prod.cloudlab.zhaw.ch:8890/sparql') {
+		if (this.props.superState.queryTargetShort === 'https://biosoda.expasy.org:4443/sparql') {
 			targetExplanation = 'the query will be sent to the federation server to fullfill the federated service calls';
 		}
 
@@ -232,13 +232,14 @@ class App extends Component {
 	}
 
 	node_logger(goal, name, query, timetaken) {
+		return false;
 		var logbody = JSON.stringify({
 			goal: goal,
 			name: name,
 			query: query,
 			timetaken: timetaken
 		});
-		fetch('http://biosoda-prod.cloudlab.zhaw.ch:3002/', {
+		fetch('http://biosoda.expasy.org:3002/', {
 			method: 'POST',
 			headers: {
 				'Accept': 'application/json',
@@ -308,7 +309,7 @@ class App extends Component {
 		var queryHeaders = this.state.queryHeaders;
 		this.displayResults('');
 		this.state.servicepointsUpdated = Date.now();
-		this.node_logger('SPARQL', query, 'before', 0);
+		// this.node_logger('SPARQL', query, 'before', 0);
 		var microstart = Date.now();
 		return fetch(queryUrl, {headers: queryHeaders})
 		.then(res => res.json())
@@ -316,7 +317,7 @@ class App extends Component {
 			(result) => {
 				var microend = Date.now();
 				var microtaken = microend - microstart;
-				this.node_logger('SPARQL', query, 'after.resultcount: ' + result.results.bindings.length, microtaken);
+				// this.node_logger('SPARQL', query, 'after.resultcount: ' + result.results.bindings.length, microtaken);
 				this.displayResults(result, microtaken);
 			},
 			(error) => {
@@ -378,8 +379,8 @@ class App extends Component {
 		query: '', // SPARQL query to display in the SPARQL query editor
 		queryHuman: 'none of our prepared queries', // human understandable query aka question
 		estimatedRuntime: 'unknown', // where applicable
-		queryTarget: 'http://biosoda-prod.cloudlab.zhaw.ch:8890/sparql?query=$$query$$&format=JSON&limit=$$limit$$&offset=$$offset$$&inference=false', // where to send the SPARQL query
-		queryTargetShort: 'http://biosoda-prod.cloudlab.zhaw.ch:8890/sparql',
+		queryTarget: 'https://biosoda.expasy.org:4443/sparql?query=$$query$$&format=JSON&limit=$$limit$$&offset=$$offset$$&inference=false', // where to send the SPARQL query
+		queryTargetShort: 'https://biosoda.expasy.org:4443/sparql',
 		queryHeaders: {},
 		asyncWaiter : '',
 		expanded: false,
@@ -576,7 +577,7 @@ class App extends Component {
 }
 
 	fetchAutocompleteBiosoda(datasource, searchString, questionid, varname, searchFilter){
-		this.node_logger('async_'+questionid+"_"+varname, datasource, searchString, 0);
+		// this.node_logger('async_'+questionid+"_"+varname, datasource, searchString, 0);
 		var query = biosodadata.datasources[datasource].fetchQuery.split(varmasker + 'searchString' + varmasker).join(searchString.toLowerCase())
 
 		// searchFilter contains a list of extrafilters which have to be taken into account
@@ -740,7 +741,7 @@ class App extends Component {
 				value={searchString}
 				onChange={(event) => {
 					this.setState({ searchString: event.target.value });
-					this.node_logger('topsearch', event.target.value, '', 0);
+					// this.node_logger('topsearch', event.target.value, '', 0);
 				}}
 			  />
 			{ !this.state.expanded ?
