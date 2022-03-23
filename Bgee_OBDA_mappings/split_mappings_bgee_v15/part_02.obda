@@ -43,7 +43,7 @@ source		SELECT g.geneId, REPLACE(gc.cellTypeId,':','_') as anatEntityIdSPARQL
 
 
 mappingId	AbsenceExpression
-target		bgee:NOT_EXPRESSED_{globalExpressionId} a genex:AbsenceExpression ; genex:hasConfidenceLevel obo:{confidence} ; genex:hasExpressionCondition bgee:EXPRESSION_CONDITION_{globalConditionId} ; genex:hasSequenceUnit oma:GENE_{geneId} ; genex:hasExpressionLevel {score}^^xsd:string ; genex:hasFDRpvalue {pValue}^^xsd:double. 
+target		bgee:NOT_EXPRESSED_{globalExpressionId} a genex:AbsenceExpression ; genex:hasConfidenceLevel obo:{confidence} ; genex:hasExpressionCondition bgee:EXPRESSION_CONDITION_{globalConditionId} ; genex:hasSequenceUnit oma:GENE_{geneId} ; genex:hasExpressionLevel {score}^^xsd:double ; genex:hasFDRpvalue {pValue}^^xsd:double. 
 source		SELECT pValue, score, globalExpressionId, globalConditionId, gene.geneId, CASE summaryQuality when 'SILVER' then 'CIO_0000030' when 'GOLD' then  'CIO_0000029' ELSE  'CIO_0000031'  end as confidence FROM globalExpression as ge JOIN gene ON gene.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='NOT_EXPRESSED'
 
 
