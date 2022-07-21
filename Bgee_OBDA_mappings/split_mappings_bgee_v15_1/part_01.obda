@@ -1,0 +1,89 @@
+[PrefixDeclaration]
+:		http://biosoda.cloudlab.zhaw.ch#
+dc:		http://purl.org/dc/elements/1.1/
+up:		http://purl.uniprot.org/core/
+efo:		http://www.ebi.ac.uk/efo/
+obo:		http://purl.obolibrary.org/obo/
+oma:		http://omabrowser.org/ontology/oma#
+owl:		http://www.w3.org/2002/07/owl#
+pav:		http://purl.org/pav/
+rdf:		http://www.w3.org/1999/02/22-rdf-syntax-ns#
+sio:		http://semanticscience.org/resource/
+xml:		http://www.w3.org/XML/1998/namespace
+xsd:		http://www.w3.org/2001/XMLSchema#
+bgee:		http://bgee.org/#
+lscr:		http://purl.org/lscr#
+obda:		https://w3id.org/obda/vocabulary#
+orth:		http://purl.org/net/orth#
+rdfs:		http://www.w3.org/2000/01/rdf-schema#
+skos:		http://www.w3.org/2004/02/skos/core#
+swrl:		http://www.w3.org/2003/11/swrl#
+genex:		http://purl.org/genex#
+swrla:		http://swrl.stanford.edu/ontologies/3.3/swrla.owl#
+swrlb:		http://www.w3.org/2003/11/swrlb#
+terms:		http://purl.org/dc/terms/
+uberon:		http://purl.obolibrary.org/obo/uberon#
+dcterms:		http://purl.org/dc/terms/
+oboInOwl:	http://www.geneontology.org/formats/oboInOwl#
+
+[MappingDeclaration] @collection [[
+mappingId	Stage
+target		obo:{stageIdSPARQL} a efo:EFO_0000399 ; rdfs:label {stageName}^^xsd:string ; terms:description {stageDescription}^^xsd:string . 
+source		select stageId, replace(stageId,':','_') as stageIdSPARQL, stageName, stageDescription from stage WHERE stageId is not null
+
+mappingId	Species
+target		<http://purl.uniprot.org/taxonomy/{speciesId}> a up:Taxon ; up:scientificName {speciesConcatName} ; up:rank up:Species ; up:commonName {speciesCommonName} . <https://bgee.org/species/{speciesId}> a orth:Organism ; a obo:NCIT_C14250 ; obo:RO_0002162 <http://purl.uniprot.org/taxonomy/{speciesId}> . 
+source		select speciesId, speciesCommonName, genomeVersion, genomeSpeciesId, concat(genus, ' ', species) as speciesConcatName from species
+
+mappingId	AnatomicalEntity
+target		obo:{anatEntityIdSPARQL} a genex:AnatomicalEntity ; a obo:CARO_0000000 ; terms:description {anatEntityDescription}^^xsd:string ; rdfs:label {anatEntityName}^^xsd:string . obo:{organismPart} a efo:EFO_0000635 .
+source		SELECT anatEntityId, REPLACE(anatEntityId,':','_') AS anatEntityIdSPARQL, CASE WHEN anatEntityId NOT LIKE 'CL:%' THEN REPLACE(anatEntityId,':','_') END AS organismPart, anatEntityName, anatEntityDescription from anatEntity
+
+mappingId	ExpressionCondition
+target		bgee:EXPRESSION_CONDITION_{globalConditionId} a genex:ExpressionCondition ; genex:hasDevelopmentalStage obo:{stageIdSPARQL} ; genex:hasAnatomicalEntity obo:{anatEntityIdSPARQL} ; genex:hasAnatomicalEntity obo:{cellTypeIdSPARQL} ; obo:RO_0002162 <http://purl.uniprot.org/taxonomy/{speciesId}>; genex:hasSex {sex}^^xsd:string; genex:hasStrain bgee:STRAIN_{strain_md5}. bgee:STRAIN_{strain_md5} rdfs:label {strain}^^xsd:string; a efo:EFO_0005135 . 
+source		select globalConditionId, replace(stageId,':','_') as stageIdSPARQL, replace(anatEntityId,':','_') as anatEntityIdSPARQL, speciesId, strain, sex, replace(cellTypeId,':','_') as cellTypeIdSPARQL, md5(strain) as strain_md5 from globalCond 
+
+mappingId	Expression
+target		bgee:EXPRESSION_{globalExpressionId} a genex:Expression ; genex:hasConfidenceLevel obo:{confidence} ; genex:hasExpressionCondition bgee:EXPRESSION_CONDITION_{globalConditionId} ; genex:hasSequenceUnit oma:GENE_{geneId} ; genex:hasExpressionLevel {score}^^xsd:double ; genex:hasFDRpvalue {pValue}^^xsd:double. 
+source		SELECT pValue, score, globalExpressionId, globalConditionId, gene.geneId, CASE summaryQuality when 'SILVER' then 'CIO_0000030' when 'GOLD' then  'CIO_0000029' ELSE  'CIO_0000031'  end as confidence FROM globalExpression as ge JOIN gene ON gene.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='EXPRESSED'
+
+mappingId	Gene_IsExpressedIn_anatEntity
+target		oma:GENE_{geneId} genex:isExpressedIn obo:{anatEntityIdSPARQL} ; obo:RO_0002206 obo:{anatEntityIdSPARQL} . obo:{anatEntityIdSPARQL} obo:RO_0002292 oma:GENE_{geneId} .
+source		SELECT g.geneId, REPLACE(gc.anatEntityId,':','_') as anatEntityIdSPARQL
+			FROM
+			globalExpression as ge
+			JOIN
+			globalCond as gc
+			ON ge.globalConditionId = gc.globalConditionId
+			JOIN
+			gene as g
+			ON g.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='EXPRESSED' and gc.stageId = 'UBERON:0000104' and 
+			gc.sex = 'any' and gc.strain = 'wild-type'
+
+
+mappingId	Gene
+target		oma:GENE_{geneId} a orth:Gene ; a obo:SO_0000704 ; a orth:SequenceUnit ; rdfs:seeAlso <https://bgee.org/bgee15_0/gene/{geneId}> ; rdfs:label {geneName}^^xsd:string ; terms:description {geneDescription}^^xsd:string ; terms:identifier {geneId}^^xsd:string ; orth:organism <https://bgee.org/species/{speciesId}>  . 
+source		select geneId, geneName, geneDescription, speciesId from gene
+
+mappingId	Gene_xref_ensembl
+target		oma:GENE_{geneId} lscr:xrefEnsemblGene <http://rdf.ebi.ac.uk/resource/ensembl/{geneId}> . 
+source		select geneId, geneName, geneDescription, speciesId from gene where speciesId not in (7936,8355,9974)
+
+mappingId	Gene_xref_ncbi
+target		oma:GENE_{geneId} lscr:xrefNCBIGene <https://www.ncbi.nlm.nih.gov/gene/{geneId}> . 
+source		select geneId, geneName, geneDescription, speciesId from gene where speciesId in (7936,8355,9974)
+
+mappingId	Gene_IsNotExpressedIn_anatEntity
+target		oma:GENE_{geneId} genex:isAbsentIn obo:{anatEntityIdSPARQL} . 
+source		SELECT g.geneId, REPLACE(gc.anatEntityId,':','_') as anatEntityIdSPARQL
+			         FROM
+			         globalExpression as ge
+			         JOIN
+			         globalCond as gc
+			         ON ge.globalConditionId = gc.globalConditionId
+			         JOIN
+			         gene as g
+			         ON g.bgeeGeneId = ge.bgeeGeneId WHERE ge.callType='NOT_EXPRESSED' and gc.stageId = 'UBERON:0000104' and gc.sex = 'any' and gc.strain = 'wild-type' 
+
+
+]]
