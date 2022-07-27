@@ -29,7 +29,7 @@ oboInOwl:	http://www.geneontology.org/formats/oboInOwl#
 [MappingDeclaration] @collection [[
 mappingId	Stage
 target		obo:{stageIdSPARQL} a efo:EFO_0000399 ; rdfs:label {stageName}^^xsd:string ; terms:description {stageDescription}^^xsd:string . 
-source		select stageId, replace(stageId,":","_") as stageIdSPARQL, stageName, stageDescription from stage WHERE stageId is not null
+source		select stageId, replace(stageId,':','_') as stageIdSPARQL, stageName, stageDescription from stage WHERE stageId is not null
 
 mappingId	Species
 target		<http://purl.uniprot.org/taxonomy/{speciesId}> a up:Taxon ; up:scientificName {speciesConcatName} ; up:rank up:Species ; up:commonName {speciesCommonName} . bgee:ORGANISM_{speciesId} a orth:Organism ; obo:RO_0002162 <http://purl.uniprot.org/taxonomy/{speciesId}> . 
@@ -37,11 +37,11 @@ source		select speciesId, speciesCommonName, genomeVersion, genomeSpeciesId, con
 
 mappingId	AnatomicalEntity
 target		obo:{anatEntityIdSPARQL} a genex:AnatomicalEntity ; terms:description {anatEntityDescription}^^xsd:string ; rdfs:label {anatEntityName}^^xsd:string . 
-source		select anatEntityId, replace(anatEntityId,":","_") as anatEntityIdSPARQL, anatEntityName, anatEntityDescription from anatEntity
+source		select anatEntityId, replace(anatEntityId,':','_') as anatEntityIdSPARQL, anatEntityName, anatEntityDescription from anatEntity
 
 mappingId	ExpressionCondition
 target		bgee:EXPRESSION_CONDITION_{globalConditionId} a genex:ExpressionCondition ; genex:hasDevelopmentalStage obo:{stageIdSPARQL} ; genex:hasAnatomicalEntity obo:{anatEntityIdSPARQL} ; obo:RO_0002162 <http://purl.uniprot.org/taxonomy/{speciesId}> . 
-source		select globalConditionId, replace(stageId,":","_") as stageIdSPARQL, replace(anatEntityId,":","_") as anatEntityIdSPARQL, speciesId from globalCond
+source		select globalConditionId, replace(stageId,':','_') as stageIdSPARQL, replace(anatEntityId,':','_') as anatEntityIdSPARQL, speciesId from globalCond
 
 mappingId	Expression
 target		bgee:EXPRESSION_{globalExpressionId} a genex:Expression ; genex:hasConfidenceLevel obo:{confidence} ; genex:hasExpressionCondition bgee:EXPRESSION_CONDITION_{globalConditionId} ; genex:hasSequenceUnit oma:GENE_{geneId} ; genex:hasExpressionLevel {score}^^xsd:string . 
@@ -49,7 +49,7 @@ source		SELECT score, globalExpressionId, globalConditionId, gene.geneId, CASE s
 
 mappingId	Gene_IsExpressedIn_anatEntity
 target		oma:GENE_{geneId} genex:isExpressedIn obo:{anatEntityIdSPARQL} . 
-source		SELECT g.geneId, REPLACE(gc.anatEntityId,":","_") as anatEntityIdSPARQL
+source		SELECT g.geneId, REPLACE(gc.anatEntityId,':','_') as anatEntityIdSPARQL
 			FROM
 			globalExpression as ge
 			JOIN
@@ -81,7 +81,7 @@ source		SELECT score, globalExpressionId, globalConditionId, gene.geneId, CASE s
 
 mappingId	Gene_IsNotExpressedIn_anatEntity
 target		oma:GENE_{geneId} genex:isAbsentIn obo:{anatEntityIdSPARQL} . 
-source		SELECT g.geneId, REPLACE(gc.anatEntityId,":","_") as anatEntityIdSPARQL
+source		SELECT g.geneId, REPLACE(gc.anatEntityId,':','_') as anatEntityIdSPARQL
 			         FROM
 			         globalExpression as ge
 			         JOIN
