@@ -91,11 +91,11 @@ source		select geneId, geneName, geneDescription, speciesId from gene
 
 mappingId	Gene_xref_ensembl
 target		oma:GENE_{geneId} lscr:xrefEnsemblGene <http://rdf.ebi.ac.uk/resource/ensembl/{geneId}> . 
-source		select geneId, geneName, geneDescription, s.speciesId from gene as g join species as s on s.speciesId = g.speciesId where s.dataSourceId = 2
+source		select geneId, geneName, geneDescription, speciesId from gene where dataSourceId = 2
 
 mappingId	Gene_xref_ncbi
 target		oma:GENE_{geneId} lscr:xrefNCBIGene <https://www.ncbi.nlm.nih.gov/gene/{geneId}> . 
-source		select geneId, geneName, geneDescription, s.speciesId from gene as g join species as s on s.speciesId = g.speciesId where s.dataSourceId = 37
+source		select geneId, geneName, geneDescription, speciesId from gene where dataSourceId = 37
 
 mappingId	AbsenceExpression
 target		bgee:NOT_EXPRESSED_{globalExpressionId} a genex:AbsenceExpression ; genex:hasConfidenceLevel obo:{confidence} ; genex:hasExpressionCondition bgee:EXPRESSION_CONDITION_{globalConditionId} ; genex:hasSequenceUnit oma:GENE_{geneId} ; genex:hasExpressionLevel {score}^^xsd:double ; genex:hasFDRpvalue {pValue}^^xsd:double. 
