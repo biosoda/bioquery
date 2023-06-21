@@ -67,11 +67,11 @@ source		select geneId, geneName, geneDescription, speciesId from gene
 
 mappingId	Gene_xref_ensembl
 target		oma:GENE_{geneId} lscr:xrefEnsemblGene <http://rdf.ebi.ac.uk/resource/ensembl/{geneId}> . 
-source		select geneId, geneName, geneDescription, speciesId from gene where speciesId not in (7936,8355,9974)
+source		select geneId, geneName, geneDescription, speciesId from gene where dataSourceId = 2
 
 mappingId	Gene_xref_ncbi
 target		oma:GENE_{geneId} lscr:xrefNCBIGene <https://www.ncbi.nlm.nih.gov/gene/{geneId}> . 
-source		select geneId, geneName, geneDescription, speciesId from gene where speciesId in (7936,8355,9974)
+source		select geneId, geneName, geneDescription, speciesId from gene where dataSourceId = 37
 
 mappingId	Gene_IsNotExpressedIn_anatEntity
 target		oma:GENE_{geneId} genex:isAbsentIn obo:{anatEntityIdSPARQL} . 
