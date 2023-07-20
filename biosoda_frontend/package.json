@@ -1,10 +1,10 @@
 {
-  "name": "biosoda_frontend",
+  "name": "dbgi_frontend",
   "version": "0.0.0",
   "description": null,
   "keywords": [],
   "main": "index.js",
-  "homepage": "http://biosoda.expasy.org:8080/build_biosodafrontend/",
+  "homepage": "https://biosoda.expasy.org/bioquery-dbgi",
   "dependencies": {
     "ajv": "~6.0.0",
     "bootstrap": "~4.1.3",

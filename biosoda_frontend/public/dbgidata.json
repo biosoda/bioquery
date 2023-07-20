@@ -1,0 +1,77 @@
+{
+	"prefixes_all": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\nPREFIX dc: <http://purl.org/dc/elements/1.1/>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX dbpedia2: <http://dbpedia.org/property/>\nPREFIX dbpedia: <http://dbpedia.org/>\nPREFIX foaf: <http://xmlns.com/foaf/0.1/>\nPREFIX skos: <http://www.w3.org/2004/02/skos/core#>",
+	"prefixes": "",
+	"possibleServices": [
+		{
+			"name": "federation server",
+			"moreinfo": "https://github.com/biosoda/bioquery",
+			"urlquery": "https://biosoda.expasy.org:4443/sparql?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
+			"expected": "true",
+			"CRONfail": "true"
+		},
+		{
+			"name": "UniProt",
+			"moreinfo": "https://www.uniprot.org/",
+			"urlquery": "https://sparql.uniprot.org/sparql/?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
+			"expected": "true",
+			"CRONfail": "false"
+		}
+	],
+	"structure": [
+		{
+			"id": "preambel",
+			"parentId": null,
+			"title": "Contact form"
+		},
+		{
+			"id": "DBGI",
+			"parentId": null,
+			"title": "Sample DBGI Queries"
+		}
+	],
+	"questions": [
+		{
+			"id": "googleform",
+			"parentIds": ["preambel"],
+			"fullHTML": true,
+			"question": "<iframe src='https://docs.google.com/forms/d/e/1FAIpQLSc8-nNtwzR4KzEJNJcRPnOaGwm5wJ8kjIcNwi5WEkIc4WnGPA/viewform?embedded=true' width='640' height='250' frameborder='0' marginheight='0' marginwidth='0'>form is being loaded ...</iframe>"
+		},
+
+		{
+			"id": "Q0",
+                        "runcheck": "2020-03-06, 158s, 4415results",
+                        "rqid": "Q0",
+                        "characteristics": "",
+                        "numberresults": "",
+                        "resultsexample": "",
+                        "parentIds": ["DBGI"],
+                        "question": "Show all triples in the current DBGI graph",
+                        "estimatedseconds": "50",
+                        "vars": [
+                        ],
+                        "SPARQL": "SELECT * WHERE { ?s ?p ?o }",
+                        "fetchUrl": "http://dbgi.vital-it.ch:7200/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+                        "fetchUrlShort": "http://dbgi.vital-it.ch:7200/sparql",
+                        "queryHeaders": {"Accept": "application/sparql-results+json"}
+
+		},
+
+		{
+			"id": "Q1",
+			"runcheck": "2020-03-06, 158s, 4415results",
+			"rqid": "Q1",
+			"characteristics": "",
+			"numberresults": "",
+			"resultsexample": "", 
+			"parentIds": ["DBGI"],
+			"question": "Count all entries in the current ENPKG graph", 
+			"estimatedseconds": "50",
+			"vars": [
+			],
+			"SPARQL": "SELECT (Count (*) as ?count) WHERE { ?s ?p ?o }", 
+			"fetchUrl": "https://enpkg.commons-lab.org/graphdb/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "https://enpkg.commons-lab.org/graphdb/sparql",
+			"queryHeaders": {"Accept": "application/sparql-results+json"}
+		}
+]
+}
