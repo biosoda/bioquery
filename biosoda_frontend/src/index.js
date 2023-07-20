@@ -7,7 +7,7 @@ import Select from 'react-select';
 import { Async } from 'react-select'; // https://react-select.com/async
 import fetch from 'isomorphic-fetch';
 import './appstyles.css';
-import biosodadata from './biosodadata.json'; // https://stackoverflow.com/questions/29452822/how-to-fetch-data-from-local-json-file-on-react-native/37781882#37781882
+import dbgidata from './dbgidata.json'; // https://stackoverflow.com/questions/29452822/how-to-fetch-data-from-local-json-file-on-react-native/37781882#37781882
 import { Row, Col } from  'reactstrap';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'codemirror/lib/codemirror.css';
@@ -108,7 +108,7 @@ class ServicePoints extends Component {
 		super(props)
 	}
 	render() {
-		var allpoints = biosodadata.possibleServices.map((onepoint) => {
+		var allpoints = dbgidata.possibleServices.map((onepoint) => {
 			return <ServicePoint
 				key = {onepoint.name}
 				name = {onepoint.name}
@@ -291,7 +291,7 @@ class App extends Component {
 
 	handleSubmit() {
 		var query = this.state.query;
-		var queryUrl = this.state.queryTarget.replace(varmasker + 'query' + varmasker, encodeURIComponent(query)) // encodeURIComponent(biosodadata.prefixes)
+		var queryUrl = this.state.queryTarget.replace(varmasker + 'query' + varmasker, encodeURIComponent(query)) // encodeURIComponent(dbgidata.prefixes)
 			.replace(varmasker + 'offset' + varmasker, this.state.lookupOffset)
 			.split(' ').join('+')
 			// these splinters crash somehow on some endpoints:
@@ -348,7 +348,7 @@ class App extends Component {
 
   constructor(props) {
 	super(props);
-	document.title = "bioSODA web frontend";
+	document.title = "dbgi web frontend";
 
 	this.handleSubmit = this.handleSubmit.bind(this);
 	this._handleKeyPress = this._handleKeyPress.bind(this);
@@ -379,8 +379,8 @@ class App extends Component {
 		query: '', // SPARQL query to display in the SPARQL query editor
 		queryHuman: 'none of our prepared queries', // human understandable query aka question
 		estimatedRuntime: 'unknown', // where applicable
-		queryTarget: 'https://biosoda.expasy.org:4443/sparql?query=$$query$$&format=JSON&limit=$$limit$$&offset=$$offset$$&inference=false', // where to send the SPARQL query
-		queryTargetShort: 'https://biosoda.expasy.org:4443/sparql',
+		queryTarget: 'http://dbgi.vital-it.ch:7200//sparql?query=$$query$$&format=JSON&limit=$$limit$$&offset=$$offset$$&inference=false', // where to send the SPARQL query
+		queryTargetShort: 'http://dbgi.vital-it.ch:7200/sparql',
 		queryHeaders: {},
 		asyncWaiter : '',
 		expanded: false,
@@ -428,7 +428,7 @@ class App extends Component {
 	// https://stackoverflow.com/questions/15523514/find-by-key-deep-in-a-nested-object
 	// https://github.com/frontend-collective/react-sortable-tree/issues/49
 	// two kind of nodes: structure and questions
-	biosodadata.structure.forEach(function(element) {
+	dbgidata.structure.forEach(function(element) {
 		let NEW_NODE  = {
 			id: element.id,
 			title: element.title,
@@ -443,7 +443,7 @@ class App extends Component {
 		this.state.treeData = newTree.treeData;
 	}, this);
 
-	biosodadata.questions.forEach(function(el) {
+	dbgidata.questions.forEach(function(el) {
 		el.parentIds.forEach(function(element) {
 			var functionalQuestion = []; // we need that to have all questions as arrays even if they have no vars
 			functionalQuestion.push(el.question);
@@ -578,7 +578,7 @@ class App extends Component {
 
 	fetchAutocompleteBiosoda(datasource, searchString, questionid, varname, searchFilter){
 		// this.node_logger('async_'+questionid+"_"+varname, datasource, searchString, 0);
-		var query = biosodadata.datasources[datasource].fetchQuery.split(varmasker + 'searchString' + varmasker).join(searchString.toLowerCase())
+		var query = dbgidata.datasources[datasource].fetchQuery.split(varmasker + 'searchString' + varmasker).join(searchString.toLowerCase())
 
 		// searchFilter contains a list of extrafilters which have to be taken into account
 		var extracounter = 0;
@@ -590,12 +590,12 @@ class App extends Component {
 			extracounter++;
 		}
 
-		var queryURL = biosodadata.datasources[datasource].fetchUrl.replace(varmasker + 'query' + varmasker, encodeURIComponent(query))
+		var queryURL = dbgidata.datasources[datasource].fetchUrl.replace(varmasker + 'query' + varmasker, encodeURIComponent(query))
 			.replace(varmasker + '&limit=limit' + varmasker, '&limit=' + this.state.lookupLimit)
 			.replace(varmasker + 'offset' + varmasker, this.state.lookupOffset)
 			.replace(' ', '+');
 
-		var queryHeaders = biosodadata.datasources[datasource].queryHeaders;
+		var queryHeaders = dbgidata.datasources[datasource].queryHeaders;
 		return fetch(queryURL, {headers: queryHeaders})
 			.then((res) => res.json())
 			.then((json) => {
@@ -708,7 +708,7 @@ class App extends Component {
 				}}>
 					<strong>Bio</strong>-Query
 					<span style={{ fontSize: "0.6em", position: 'relative', bottom: '0.6em', color: 'red', fontFamily: 'monospace' }} title="BETA-Version - Working prototype with limited functionality">β</span>:
-					Federated template <strong>s</strong>earch <strong>o</strong>ver biological <strong>da</strong>tabases 
+					Federated template <strong>s</strong>earch <strong>o</strong>ver biological <strong>da</strong>tabases (<u><strong>DBGI</strong></u> Edition) 
 				</h3>
 			</Col>
 			<Col  lg={6} md={12} id="services" style={{
@@ -868,5 +868,5 @@ class App extends Component {
 }
 
 render(<App
-	developersdata = {biosodadata}
+	developersdata = {dbgidata}
 />, document.getElementById("root"));
