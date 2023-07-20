@@ -379,7 +379,7 @@ class App extends Component {
 		query: '', // SPARQL query to display in the SPARQL query editor
 		queryHuman: 'none of our prepared queries', // human understandable query aka question
 		estimatedRuntime: 'unknown', // where applicable
-		queryTarget: 'http://dbgi.vital-it.ch:7200//sparql?query=$$query$$&format=JSON&limit=$$limit$$&offset=$$offset$$&inference=false', // where to send the SPARQL query
+		queryTarget: 'http://dbgi.vital-it.ch:7200/sparql?query=$$query$$&format=JSON&limit=$$limit$$&offset=$$offset$$&inference=false', // where to send the SPARQL query
 		queryTargetShort: 'http://dbgi.vital-it.ch:7200/sparql',
 		queryHeaders: {},
 		asyncWaiter : '',
