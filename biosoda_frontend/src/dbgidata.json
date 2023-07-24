@@ -112,7 +112,7 @@
                         "numberresults": "",
                         "resultsexample": "",
                         "parentIds": ["DBGI"],
-                        "question": "Which samples have features (PI mode) annotated as $$template_np_class$$ alkaloids by CANOPUS with a probability score above 0.5, ordered by the decreasing count of features as $$template_np_class$$ alkaloids?",
+                        "question": "Which samples have features (PI mode) annotated as $$template_np_class$$ alkaloids by CANOPUS with a probability score above 0.5, ordered by the decreasing count of features?",
                         "estimatedseconds": "3",
                         "vars": [
 							 {
@@ -276,7 +276,7 @@
 ],
 "datasources": {
 	"example_annot":{
-			"fetchUrl":"http://dbgi.vital-it.ch:7200/repositories/dbgi-enpkg?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrl":"http://dbgi.vital-it.ch:7200/repositories/dbgi-enpkg?query=$$query$$&format=JSON$$&offset=$$offset$$&inference=false",
 			"queryHeaders": {"Accept": "application/sparql-results+json"},
 			"fetchQuery": "\n\n            SELECT distinct (strafter(str(?uri_class), \"https://enpkg.commons-lab.org/kg/npc_\") as ?value)\n            WHERE\n            {   \n                ?uri_class a <https://enpkg.commons-lab.org/kg/NPCClass>\t\n    }"
 	}
