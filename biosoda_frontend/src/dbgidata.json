@@ -112,11 +112,18 @@
                         "numberresults": "",
                         "resultsexample": "",
                         "parentIds": ["DBGI"],
-                        "question": "Which samples have features (PI mode) annotated as aspidosperma-type alkaloids by CANOPUS with a probability score above 0.5, ordered by the decreasing count of features as aspidosperma-type alkaloids?",
+                        "question": "Which samples have features (PI mode) annotated as $$template_np_class$$ alkaloids by CANOPUS with a probability score above 0.5, ordered by the decreasing count of features as $$template_np_class$$ alkaloids?",
                         "estimatedseconds": "3",
                         "vars": [
+							 {
+							"name": "template_np_class",
+							"default": "Aspidosperma_type",
+							"type": "list",
+							"datasource": "example_annot",
+							"flavour": "autocomplete"
+							 }
                         ],
-                        "SPARQL": "# Count the number of features annotated as aspidosperma type alkaloids \n# by CANOPUS (p>0.5) in the different samples\n\nPREFIX enpkg: <https://enpkg.commons-lab.org/kg/>\nPREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX wdt: <http://www.wikidata.org/prop/direct/>\nPREFIX wd: <http://www.wikidata.org/entity/>\n\nSELECT ?extract ?organe ?species_name ?genus_name ?family_name ?count_of_selected_class\nWHERE\n    {  \n    ?material enpkg:has_lab_process ?extract .\n        ?material enpkgmodule:has_organe ?organe .\n        ?material enpkg:has_wd_id ?wd_sp .\n        OPTIONAL\n        {\n            SERVICE <https://query.wikidata.org/sparql> {\n            ?wd_sp wdt:P225 ?species_name .\n            ?family wdt:P31 wd:Q16521 ;\n                wdt:P105 wd:Q35409 ;\n                wdt:P225 ?family_name ;\n                ^wdt:P171* ?wd_sp .\n            ?genus wdt:P31 wd:Q16521 ;\n                wdt:P105 wd:Q34740 ;\n                wdt:P225 ?genus_name ;\n                ^wdt:P171* ?wd_sp \n            }\n        }\n        {\n            SELECT ?extract (COUNT(DISTINCT ?feature) AS ?count_of_selected_class)\n            WHERE\n            {   \n                ?extract rdf:type enpkg:LabExtract .\n                    ?extract enpkg:has_LCMS ?lcms .\n                        ?lcms rdf:type ?LCMSAnalysisPos .\n                        ?lcms enpkg:has_lcms_feature_list ?feature_list .\n                            ?feature_list enpkg:has_lcms_feature ?feature .\n                                ?feature enpkg:has_canopus_annotation ?canopus .\n                                    ?canopus enpkg:has_canopus_npc_class ?np_class .\n                                    ?canopus enpkg:has_canopus_npc_class_prob ?class_prob .\n                                    FILTER(regex(str(?np_class), \"Aspidosperma_type\")) .\n                                    FILTER((?class_prob > 0.5)) .\n            } GROUP BY ?extract ORDER BY DESC(?count_of_selected_class)\n        }\n    }",
+                        "SPARQL": "# Count the number of features annotated as aspidosperma type alkaloids \n# by CANOPUS (p>0.5) in the different samples\n\nPREFIX enpkg: <https://enpkg.commons-lab.org/kg/>\nPREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX wdt: <http://www.wikidata.org/prop/direct/>\nPREFIX wd: <http://www.wikidata.org/entity/>\n\nSELECT ?extract ?organe ?species_name ?genus_name ?family_name ?count_of_selected_class\nWHERE\n    {  \n    ?material enpkg:has_lab_process ?extract .\n        ?material enpkgmodule:has_organe ?organe .\n        ?material enpkg:has_wd_id ?wd_sp .\n        OPTIONAL\n        {\n            SERVICE <https://query.wikidata.org/sparql> {\n            ?wd_sp wdt:P225 ?species_name .\n            ?family wdt:P31 wd:Q16521 ;\n                wdt:P105 wd:Q35409 ;\n                wdt:P225 ?family_name ;\n                ^wdt:P171* ?wd_sp .\n            ?genus wdt:P31 wd:Q16521 ;\n                wdt:P105 wd:Q34740 ;\n                wdt:P225 ?genus_name ;\n                ^wdt:P171* ?wd_sp \n            }\n        }\n        {\n            SELECT ?extract (COUNT(DISTINCT ?feature) AS ?count_of_selected_class)\n            WHERE\n            {   \n                ?extract rdf:type enpkg:LabExtract .\n                    ?extract enpkg:has_LCMS ?lcms .\n                        ?lcms rdf:type ?LCMSAnalysisPos .\n                        ?lcms enpkg:has_lcms_feature_list ?feature_list .\n                            ?feature_list enpkg:has_lcms_feature ?feature .\n                                ?feature enpkg:has_canopus_annotation ?canopus .\n                                    ?canopus enpkg:has_canopus_npc_class ?np_class .\n                                    ?canopus enpkg:has_canopus_npc_class_prob ?class_prob .\n                                    FILTER(regex(str(?np_class), \"$$template_np_class$$\")) .\n                                    FILTER((?class_prob > 0.5)) .\n            } GROUP BY ?extract ORDER BY DESC(?count_of_selected_class)\n        }\n    }",
                         "fetchUrl": "http://dbgi.vital-it.ch:7200/repositories/dbgi-enpkg?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
                         "fetchUrlShort": "http://dbgi.vital-it.ch:7200/repositories/dbgi-enpkg",
                         "queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -266,5 +273,12 @@
                         "queryHeaders": {"Accept": "application/sparql-results+json"}
 
         }
-]
+],
+"datasources": {
+	"example_annot":{
+			"fetchUrl":"http://dbgi.vital-it.ch:7200/repositories/dbgi-enpkg?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"queryHeaders": {"Accept": "application/sparql-results+json"},
+			"fetchQuery": "\n\n            SELECT distinct (strafter(str(?uri_class), \"https://enpkg.commons-lab.org/kg/npc_\") as ?value)\n            WHERE\n            {   \n                ?uri_class a <https://enpkg.commons-lab.org/kg/NPCClass>\t\n    }"
+	}
+}
 }
