@@ -3,6 +3,20 @@
 	"prefixes": "",
 	"possibleServices": [
 		{
+			"name": "DBGI",
+			"moreinfo":"http://dbgi.vital-it.ch:7200/",
+			"urlquery":"http://dbgi.vital-it.ch:7200/repositories/dbgi-enpkg?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
+			"expected":"true",
+			"CRONfail":"false"
+		},
+		{
+            "name": "ENPKG",
+            "moreinfo":"https://enpkg.commons-lab.org/graphdb/sparql",
+            "urlquery":"https://enpkg.commons-lab.org/repositories/dbgi-enpkg?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
+            "expected":"true",
+            "CRONfail":"false"
+        },
+		{
 			"name": "federation server",
 			"moreinfo": "https://github.com/biosoda/bioquery",
 			"urlquery": "https://biosoda.expasy.org:4443/sparql?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
@@ -15,7 +29,14 @@
 			"urlquery": "https://sparql.uniprot.org/sparql/?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
 			"expected": "true",
 			"CRONfail": "false"
-		}
+		},
+		{
+            "name": "Wikidata",
+            "moreinfo": "https://query.wikidata.org/",
+            "urlquery": "https://query.wikidata.org/sparql?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
+            "expected": "true",
+            "CRONfail": "false"
+        }
 	],
 	"structure": [
 		{
@@ -27,6 +48,16 @@
 			"id": "DBGI",
 			"parentId": null,
 			"title": "Sample DBGI Queries"
+		},
+		{
+            "id": "ENPKG",
+            "parentId": null,
+            "title": "Sample ENPKG Queries"
+        },
+        {
+            "id": "Wikidata",
+            "parentId": null,
+            "title": "Sample Wikidata Queries"
 		}
 	],
 	"questions": [
@@ -39,19 +70,19 @@
 
 		{
 			"id": "Q0",
-                        "runcheck": "2020-03-06, 158s, 4415results",
+                        "runcheck": "2023-07-24, 2s, 1results",
                         "rqid": "Q0",
                         "characteristics": "",
                         "numberresults": "",
                         "resultsexample": "",
                         "parentIds": ["DBGI"],
-                        "question": "Show all triples in the current DBGI graph",
-                        "estimatedseconds": "50",
+                        "question": "Count all triples in the current DBGI graph",
+                        "estimatedseconds": "3",
                         "vars": [
                         ],
-                        "SPARQL": "SELECT * WHERE { ?s ?p ?o }",
-                        "fetchUrl": "http://dbgi.vital-it.ch:7200/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-                        "fetchUrlShort": "http://dbgi.vital-it.ch:7200/sparql",
+                        "SPARQL": "SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }",
+                        "fetchUrl": "http://dbgi.vital-it.ch:7200/repositories/dbgi-enpkg?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+                        "fetchUrlShort": "http://dbgi.vital-it.ch:7200/repositories/dbgi-enpkg",
                         "queryHeaders": {"Accept": "application/sparql-results+json"}
 
 		},
@@ -63,15 +94,34 @@
 			"characteristics": "",
 			"numberresults": "",
 			"resultsexample": "", 
-			"parentIds": ["DBGI"],
-			"question": "Count all entries in the current ENPKG graph", 
+			"parentIds": ["ENPKG"],
+			"question": "Count all entries in the current ENPKG graph (NOTE: doesn't currently work...)", 
 			"estimatedseconds": "50",
 			"vars": [
 			],
-			"SPARQL": "SELECT (Count (*) as ?count) WHERE { ?s ?p ?o }", 
-			"fetchUrl": "https://enpkg.commons-lab.org/graphdb/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "https://enpkg.commons-lab.org/graphdb/sparql",
+			"SPARQL": "SELECT (COUNT (*) as ?count) WHERE { ?s ?p ?o }", 
+			"fetchUrl": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
-		}
+		},
+
+		{
+            "id": "Qw1",
+                        "runcheck": "2023-07-24, 2s, 1results",
+                        "rqid": "Q0",
+                        "characteristics": "",
+                        "numberresults": "",
+                        "resultsexample": "",
+                        "parentIds": ["Wikidata"],
+                        "question": "Count all triples in the current Wikidata graph",
+                        "estimatedseconds": "3",
+                        "vars": [
+                        ],
+                        "SPARQL": "SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }",
+                        "fetchUrl": "https://query.wikidata.org/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+                        "fetchUrlShort": "https://query.wikidata.org/",
+                        "queryHeaders": {"Accept": "application/sparql-results+json"}
+
+        }
 ]
 }

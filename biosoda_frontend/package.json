@@ -4,7 +4,7 @@
   "description": null,
   "keywords": [],
   "main": "index.js",
-  "homepage": "http://dbgi.vital-it.ch:3001/",
+  "homepage": "http://dbgi.vital-it.ch:8080/dbgi_query",
   "dependencies": {
     "ajv": "~6.0.0",
     "bootstrap": "~4.1.3",
