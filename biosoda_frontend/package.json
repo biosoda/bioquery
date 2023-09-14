@@ -32,7 +32,7 @@
   "scripts": {
     "start": "cross-env PORT=3001 react-scripts start",
     "build": "react-scripts build",
-    "buildwar": "copy C:\\Daten\\github.com.biosoda.bioquery\\biosoda_frontend\\src\\biosodadata.json C:\\Daten\\github.com.biosoda.bioquery\\biosoda_frontend\\public\\biosodadata.json && react-scripts build && \"C:/Program Files/7-Zip/7z\" a -tzip C:/Daten/github.com.biosoda.bioquery/biosoda_frontend/build/build_biosodafrontend.war C:/Daten/github.com.biosoda.bioquery/biosoda_frontend/build/*",
+    "buildwar": "copy C:\\Daten\\github.com.biosoda.bioquery\\biosoda_frontend\\src\\biosodadata.json C:\\Daten\\github.com.biosoda.bioquery\\biosoda_frontend\\public\\biosodadata.json && react-scripts --openssl-legacy-provider build && \"C:/Program Files/7-Zip/7z\" a -tzip C:/Daten/github.com.biosoda.bioquery/biosoda_frontend/build/build_biosodafrontend.war C:/Daten/github.com.biosoda.bioquery/biosoda_frontend/build/*",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },

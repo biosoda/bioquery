@@ -26,7 +26,7 @@
 		{
 			"name": "Bgee",
 			"moreinfo": "https://bgee.org",
-			"urlquery": "https://bgee.org/sparql/?query=PREFIX%20up%3A%20%3Chttp%3A%2F%2Fpurl.uniprot.org%2Fcore%2F%3E%0ASELECT%20*%20%7B%0A%09%3Fspecies%20a%20up%3ATaxon%20.%0A%09%3Fspecies%20up%3AscientificName%20%3Fname%20.%0A%09%3Fspecies%20up%3Arank%20up%3ASpecies%20.%0A%7D&format=JSON&limit=100&offset=0&inference=false",
+			"urlquery": "https://www.bgee.org/sparql/?query=PREFIX%20up%3A%20%3Chttp%3A%2F%2Fpurl.uniprot.org%2Fcore%2F%3E%0ASELECT%20*%20%7B%0A%09%3Fspecies%20a%20up%3ATaxon%20.%0A%09%3Fspecies%20up%3AscientificName%20%3Fname%20.%0A%09%3Fspecies%20up%3Arank%20up%3ASpecies%20.%0A%7D&format=JSON&limit=100&offset=0&inference=false",
 			"expected": "true",
 			"CRONfail": "true"
 		},
@@ -220,7 +220,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX sio: <http://semanticscience.org/resource/>\nSELECT distinct ?gene_id ?orthologousTo ?uniprot ?annotation_text WHERE {\n\tSERVICE <https://bgee.org/sparql/> {\n\t\tSELECT ?gene ?gene_id {\n\t\t\t?gene a orth:Gene .\n\t\t\t?gene genex:isExpressedIn ?anat .\n\t\t\t?gene dcterms:identifier ?gene_id .\n\t\t\t?anat rdfs:label '$$brain$$' .\n\t\t\t?gene orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t?taxon up:commonName \"$$fruitfly$$\" .\n\t\t}\n\t\t$$innerlimit$$\n\t}\n\n\tSERVICE <https://sparql.omabrowser.org/sparql/> {\n\t\tSELECT ?uniprot ?gene ?orthologousTo {\n\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t?node2 orth:hasHomologousMember* ?orthologousTo .\n\t\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t\t?protein1 sio:SIO_010079 ?gene .\n\t\t\t?orthologousTo lscr:xrefUniprot ?uniprot .\n\t\t\tfilter(?node1 != ?node2)\n\t\t}\n\t}\n\n\tSERVICE <http://sparql.uniprot.org/sparql>{\n\t\t?uniprot up:annotation ?annotation .\n\t\t?annotation rdfs:comment ?annotation_text .\n\t}\n}",
+			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX sio: <http://semanticscience.org/resource/>\nSELECT distinct ?gene_id ?orthologousTo ?uniprot ?annotation_text WHERE {\n\tSERVICE <https://www.bgee.org/sparql/> {\n\t\tSELECT ?gene ?gene_id {\n\t\t\t?gene a orth:Gene .\n\t\t\t?gene genex:isExpressedIn ?anat .\n\t\t\t?gene dcterms:identifier ?gene_id .\n\t\t\t?anat rdfs:label '$$brain$$' .\n\t\t\t?gene orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t?taxon up:commonName \"$$fruitfly$$\" .\n\t\t}\n\t\t$$innerlimit$$\n\t}\n\n\tSERVICE <https://sparql.omabrowser.org/sparql/> {\n\t\tSELECT ?uniprot ?gene ?orthologousTo {\n\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t?node2 orth:hasHomologousMember* ?orthologousTo .\n\t\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t\t?protein1 sio:SIO_010079 ?gene .\n\t\t\t?orthologousTo lscr:xrefUniprot ?uniprot .\n\t\t\tfilter(?node1 != ?node2)\n\t\t}\n\t}\n\n\tSERVICE <http://sparql.uniprot.org/sparql>{\n\t\t?uniprot up:annotation ?annotation .\n\t\t?annotation rdfs:comment ?annotation_text .\n\t}\n}",
 			"fetchUrl": "https://biosoda.expasy.org:4443/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://biosoda.expasy.org:4443/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -258,7 +258,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX sio: <http://semanticscience.org/resource/>\nSELECT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {\n\tSELECT * {\n\t\tSERVICE <https://bgee.org/sparql/> {\n\t\t\tSELECT ?gene {\n\t\t\t\t?gene genex:isExpressedIn ?anat .\n\t\t\t\t?anat rdfs:label '$$brain$$' .\n\t\t\t\t?gene orth:organism ?o .\n\t\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t\t?taxon up:commonName '$$fruitfly$$' .\n\t\t\t}\n\t\t\t$$innerlimit$$\n\t\t}\n\t\tSERVICE <https://sparql.omabrowser.org/sparql/> {\n\t\t\tSELECT ?gene ?OMA_LINK ?uniprot{\n\t\t\t\t?protein2 a orth:Protein .\n\t\t\t\t?protein1 a orth:Protein .\n\t\t\t\t?clusterPrimates a orth:OrthologsCluster .\n\t\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t\t?node2 orth:hasHomologousMember* ?clusterPrimates .\n\t\t\t\t?clusterPrimates orth:hasHomologousMember* ?protein2 .\n\t\t\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t\t\t?protein1 sio:SIO_010079 ?gene. #encoded by\n\t\t\t\t?protein2 rdfs:seeAlso ?OMA_LINK .\n\t\t\t\t?clusterPrimates orth:hasTaxonomicRange ?taxRange .\n\t\t\t\t?taxRange orth:taxRange ?taxLevel .\n\t\t\t\t?protein2 lscr:xrefUniprot ?uniprot .\n\t\t\t\tVALUES ?taxLevel { '$$primates$$' }\n\t\t\t\tFILTER ( ?node1 != ?node2 )\n\t\t\t}\n\t\t}\n\t\tSERVICE <https://sparql.uniprot.org/sparql> {\n\t\t\tSELECT ?annotation_text ?uniprot {\n\t\t\t\t?uniprot up:annotation ?annotation .\n\t\t\t\t?annotation rdfs:comment ?annotation_text .\n\t\t\t}\n\t\t}\n\t}\n}",
+			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX sio: <http://semanticscience.org/resource/>\nSELECT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {\n\tSELECT * {\n\t\tSERVICE <https://www.bgee.org/sparql/> {\n\t\t\tSELECT ?gene {\n\t\t\t\t?gene genex:isExpressedIn ?anat .\n\t\t\t\t?anat rdfs:label '$$brain$$' .\n\t\t\t\t?gene orth:organism ?o .\n\t\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t\t?taxon up:commonName '$$fruitfly$$' .\n\t\t\t}\n\t\t\t$$innerlimit$$\n\t\t}\n\t\tSERVICE <https://sparql.omabrowser.org/sparql/> {\n\t\t\tSELECT ?gene ?OMA_LINK ?uniprot{\n\t\t\t\t?protein2 a orth:Protein .\n\t\t\t\t?protein1 a orth:Protein .\n\t\t\t\t?clusterPrimates a orth:OrthologsCluster .\n\t\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t\t?node2 orth:hasHomologousMember* ?clusterPrimates .\n\t\t\t\t?clusterPrimates orth:hasHomologousMember* ?protein2 .\n\t\t\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t\t\t?protein1 sio:SIO_010079 ?gene. #encoded by\n\t\t\t\t?protein2 rdfs:seeAlso ?OMA_LINK .\n\t\t\t\t?clusterPrimates orth:hasTaxonomicRange ?taxRange .\n\t\t\t\t?taxRange orth:taxRange ?taxLevel .\n\t\t\t\t?protein2 lscr:xrefUniprot ?uniprot .\n\t\t\t\tVALUES ?taxLevel { '$$primates$$' }\n\t\t\t\tFILTER ( ?node1 != ?node2 )\n\t\t\t}\n\t\t}\n\t\tSERVICE <https://sparql.uniprot.org/sparql> {\n\t\t\tSELECT ?annotation_text ?uniprot {\n\t\t\t\t?uniprot up:annotation ?annotation .\n\t\t\t\t?annotation rdfs:comment ?annotation_text .\n\t\t\t}\n\t\t}\n\t}\n}",
 			"fetchUrl": "https://biosoda.expasy.org:4443/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://biosoda.expasy.org:4443/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -296,7 +296,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX sio: <http://semanticscience.org/resource/>\nSELECT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {\n\tSERVICE <https://bgee.org/sparql/> {\n\t\tSELECT ?gene {\n\t\t\t?gene genex:isExpressedIn ?anat .\n\t\t\t?anat rdfs:label '$$brain$$' .\n\t\t\t?gene orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t?taxon up:commonName '$$rat$$' .\n\t\t}\n\t\t$$innerlimit$$\n\t}\n\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t?taxon2 up:commonName '$$human$$' .\n\t}\n\tSERVICE <https://sparql.omabrowser.org/lode/sparql> {\n\t\t?protein2 a orth:Protein .\n\t\t?protein1 a orth:Protein .\n\t\t?cluster a orth:OrthologsCluster .\n\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t?node2 orth:hasHomologousMember* ?protein2 .\n\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t?protein1 sio:SIO_010079 ?gene. #encoded by\n\t\t?protein2 rdfs:seeAlso ?OMA_LINK .\n\t\t?protein2 orth:organism/obo:RO_0002162 ?taxon2 .\n\t\t?protein2 lscr:xrefUniprot ?uniprot .\n\t\tFILTER ( ?node1 != ?node2 )\n\t}\n\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t?uniprot up:annotation ?annotation .\n\t\t?annotation rdfs:comment ?annotation_text .\n\t\t?annotation a up:Disease_Annotation .\n\t}\n}",
+			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX sio: <http://semanticscience.org/resource/>\nSELECT ?gene ?OMA_LINK ?uniprot ?annotation_text WHERE {\n\tSERVICE <https://www.bgee.org/sparql/> {\n\t\tSELECT ?gene {\n\t\t\t?gene genex:isExpressedIn ?anat .\n\t\t\t?anat rdfs:label '$$brain$$' .\n\t\t\t?gene orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t?taxon up:commonName '$$rat$$' .\n\t\t}\n\t\t$$innerlimit$$\n\t}\n\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t?taxon2 up:commonName '$$human$$' .\n\t}\n\tSERVICE <https://sparql.omabrowser.org/lode/sparql> {\n\t\t?protein2 a orth:Protein .\n\t\t?protein1 a orth:Protein .\n\t\t?cluster a orth:OrthologsCluster .\n\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t?node2 orth:hasHomologousMember* ?protein2 .\n\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t?protein1 sio:SIO_010079 ?gene. #encoded by\n\t\t?protein2 rdfs:seeAlso ?OMA_LINK .\n\t\t?protein2 orth:organism/obo:RO_0002162 ?taxon2 .\n\t\t?protein2 lscr:xrefUniprot ?uniprot .\n\t\tFILTER ( ?node1 != ?node2 )\n\t}\n\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t?uniprot up:annotation ?annotation .\n\t\t?annotation rdfs:comment ?annotation_text .\n\t\t?annotation a up:Disease_Annotation .\n\t}\n}",
 			"fetchUrl": "https://biosoda.expasy.org:4443/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://biosoda.expasy.org:4443/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -326,7 +326,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX sio: <http://semanticscience.org/resource/>\nPREFIX taxon: <http://purl.uniprot.org/taxonomy/>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX genex: <http://purl.org/genex#>\nSELECT DISTINCT ?protein ?orthologous_protein ?gene ?annotation_text WHERE {\n\tSELECT * {\n\t\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t\tSELECT ?protein ?annotation_text WHERE {\n\t\t\t\t?protein a up:Protein ;\n\t\t\t\tup:organism taxon:9606 ;\n\t\t\t\tup:annotation ?annotation .\n\t\t\t\t?annotation rdfs:comment ?annotation_text .\n\t\t\t\t?annotation a up:Disease_Annotation .\n\t\t\t\tFILTER CONTAINS (?annotation_text, \"$$glioblastoma$$\")\n\t\t\t}\n\t\t}\n\t\tSERVICE <https://sparql.omabrowser.org/sparql/> {\n\t\t\tSELECT ?orthologous_protein ?protein ?gene WHERE {\n\t\t\t\t?protein_OMA a orth:Protein .\n\t\t\t\t?orthologous_protein a orth:Protein .\n\t\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t\t?cluster\n\t\t\t\torth:hasHomologousMember ?node2 .\n\t\t\t\t?node2 orth:hasHomologousMember* ?protein_OMA .\n\t\t\t\t?node1 orth:hasHomologousMember* ?orthologous_protein .\n\t\t\t\t?orthologous_protein orth:organism/obo:RO_0002162 taxon:10116 . # rattus norvegicus\n\t\t\t\t?orthologous_protein sio:SIO_010079 ?gene .\n\t\t\t\t?protein_OMA lscr:xrefUniprot ?protein .\n\t\t\t\tFILTER(?node1 != ?node2)\n\t\t\t}\n\t\t}\n\t\tSERVICE <https://bgee.org/sparql/> {\n\t\t\t ?gene genex:isExpressedIn ?a .\n\t\t\t?a rdfs:label \"$$brain$$\" .\n\t\t\t?gene orth:organism ?s . \n\t\t\t?s obo:RO_0002162 taxon:10116.\n\t\t}\n\t}\n}",
+			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX sio: <http://semanticscience.org/resource/>\nPREFIX taxon: <http://purl.uniprot.org/taxonomy/>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX genex: <http://purl.org/genex#>\nSELECT DISTINCT ?protein ?orthologous_protein ?gene ?annotation_text WHERE {\n\tSELECT * {\n\t\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t\tSELECT ?protein ?annotation_text WHERE {\n\t\t\t\t?protein a up:Protein ;\n\t\t\t\tup:organism taxon:9606 ;\n\t\t\t\tup:annotation ?annotation .\n\t\t\t\t?annotation rdfs:comment ?annotation_text .\n\t\t\t\t?annotation a up:Disease_Annotation .\n\t\t\t\tFILTER CONTAINS (?annotation_text, \"$$glioblastoma$$\")\n\t\t\t}\n\t\t}\n\t\tSERVICE <https://sparql.omabrowser.org/sparql/> {\n\t\t\tSELECT ?orthologous_protein ?protein ?gene WHERE {\n\t\t\t\t?protein_OMA a orth:Protein .\n\t\t\t\t?orthologous_protein a orth:Protein .\n\t\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t\t?cluster\n\t\t\t\torth:hasHomologousMember ?node2 .\n\t\t\t\t?node2 orth:hasHomologousMember* ?protein_OMA .\n\t\t\t\t?node1 orth:hasHomologousMember* ?orthologous_protein .\n\t\t\t\t?orthologous_protein orth:organism/obo:RO_0002162 taxon:10116 . # rattus norvegicus\n\t\t\t\t?orthologous_protein sio:SIO_010079 ?gene .\n\t\t\t\t?protein_OMA lscr:xrefUniprot ?protein .\n\t\t\t\tFILTER(?node1 != ?node2)\n\t\t\t}\n\t\t}\n\t\tSERVICE <https://www.bgee.org/sparql/> {\n\t\t\t ?gene genex:isExpressedIn ?a .\n\t\t\t?a rdfs:label \"$$brain$$\" .\n\t\t\t?gene orth:organism ?s . \n\t\t\t?s obo:RO_0002162 taxon:10116.\n\t\t}\n\t}\n}",
 			"fetchUrl": "https://biosoda.expasy.org:4443/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://biosoda.expasy.org:4443/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -359,7 +359,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX up:<http://purl.uniprot.org/core/>\nPREFIX taxon:<http://purl.uniprot.org/taxonomy/>\nPREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orth:<http://purl.org/net/orth#>\nPREFIX dcterms:<http://purl.org/dc/terms/>\nPREFIX obo:<http://purl.obolibrary.org/obo/>\nPREFIX lscr:<http://purl.org/lscr#>\nPREFIX genex:<http://purl.org/genex#>\nPREFIX sio: <http://semanticscience.org/resource/>\n\nSELECT ?gene ?orthologous_protein2 WHERE {\n\tSELECT * {\n\t\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t\tSELECT ?protein1 WHERE {\n\t\t\t?protein1 a up:Protein;\n\t\t\t\tup:organism/up:scientificName 'Homo sapiens' ;\n\t\t\t\tup:annotation ?annotation .\n\t\t\t\t?annotation rdfs:comment ?annotation_text.\n\t\t\t\t?annotation a up:Disease_Annotation .\n\t\t\t\tFILTER CONTAINS (?annotation_text, \"$$cancer$$\")\n\t\t\t}\n\t\t}\n\n\t\tSERVICE <https://sparql.omabrowser.org/sparql/> {\n\t\t\tSELECT ?orthologous_protein2 ?protein1 ?gene WHERE {\n\t\t\t\t?protein_OMA a orth:Protein .\n\t\t\t\t?orthologous_protein2 a orth:Protein .\n\t\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t\t?node2 orth:hasHomologousMember* ?protein_OMA .\n\t\t\t\t?node1 orth:hasHomologousMember* ?orthologous_protein2 \n\t\t\t\t.?orthologous_protein2 orth:organism/obo:RO_0002162/up:scientificName '$$rat$$' .\n\t\t\t\t?orthologous_protein2 sio:SIO_010079 ?gene .\n\t\t\t\t?protein_OMA lscr:xrefUniprot ?protein1 .\n\t\t\t\tFILTER(?node1 != ?node2)\n\t\t\t}\n\t\t}\n\n\t\tSERVICE <https://bgee.org/sparql/> {\n\t\t\t?gene genex:isExpressedIn ?anatEntity .\n\t\t\t?anatEntity rdfs:label '$$brain$$' .\n\t\t\t?gene orth:organism ?org . \n\t\t\t?org obo:RO_0002162 taxon:10116 .\n\t\t}\n\t}\n}",
+			"SPARQL": "PREFIX up:<http://purl.uniprot.org/core/>\nPREFIX taxon:<http://purl.uniprot.org/taxonomy/>\nPREFIX rdfs:<http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orth:<http://purl.org/net/orth#>\nPREFIX dcterms:<http://purl.org/dc/terms/>\nPREFIX obo:<http://purl.obolibrary.org/obo/>\nPREFIX lscr:<http://purl.org/lscr#>\nPREFIX genex:<http://purl.org/genex#>\nPREFIX sio: <http://semanticscience.org/resource/>\n\nSELECT ?gene ?orthologous_protein2 WHERE {\n\tSELECT * {\n\t\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t\tSELECT ?protein1 WHERE {\n\t\t\t?protein1 a up:Protein;\n\t\t\t\tup:organism/up:scientificName 'Homo sapiens' ;\n\t\t\t\tup:annotation ?annotation .\n\t\t\t\t?annotation rdfs:comment ?annotation_text.\n\t\t\t\t?annotation a up:Disease_Annotation .\n\t\t\t\tFILTER CONTAINS (?annotation_text, \"$$cancer$$\")\n\t\t\t}\n\t\t}\n\n\t\tSERVICE <https://sparql.omabrowser.org/sparql/> {\n\t\t\tSELECT ?orthologous_protein2 ?protein1 ?gene WHERE {\n\t\t\t\t?protein_OMA a orth:Protein .\n\t\t\t\t?orthologous_protein2 a orth:Protein .\n\t\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t\t?node2 orth:hasHomologousMember* ?protein_OMA .\n\t\t\t\t?node1 orth:hasHomologousMember* ?orthologous_protein2 \n\t\t\t\t.?orthologous_protein2 orth:organism/obo:RO_0002162/up:scientificName '$$rat$$' .\n\t\t\t\t?orthologous_protein2 sio:SIO_010079 ?gene .\n\t\t\t\t?protein_OMA lscr:xrefUniprot ?protein1 .\n\t\t\t\tFILTER(?node1 != ?node2)\n\t\t\t}\n\t\t}\n\n\t\tSERVICE <https://www.bgee.org/sparql/> {\n\t\t\t?gene genex:isExpressedIn ?anatEntity .\n\t\t\t?anatEntity rdfs:label '$$brain$$' .\n\t\t\t?gene orth:organism ?org . \n\t\t\t?org obo:RO_0002162 taxon:10116 .\n\t\t}\n\t}\n}",
 			"fetchUrl": "https://biosoda.expasy.org:4443/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://biosoda.expasy.org:4443/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -391,7 +391,7 @@
 					"fullList": false
 				}
 			],
-			"SPARQL": "PREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX up: <http://purl.uniprot.org/core/>\nSELECT DISTINCT ?anat_label ?GO_CLASS ?GO_LABEL {\n\tSERVICE <https://bgee.org/sparql/> {\n\t\tSELECT ?geneEns ?anat_label {\n\t\t\t?geneB a orth:Gene .\n\t\t\t?geneB genex:isExpressedIn ?anat .\n\t\t\t?geneB rdfs:label ?anatLabel ;\n\t\t\t\tlscr:xrefEnsemblGene ?geneEns .\n\t\t\tFILTER (UCASE($anatLabel) = UCASE('$$ins$$'))\n\t\t\t?anat rdfs:label ?anat_label .\n\t\t\t?geneB orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon2 .\n\t\t\t?taxon2 up:commonName '$$zebrafish$$' .\n\t\t}\n\t}\n\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t?uniprot rdfs:seeAlso / up:transcribedFrom ?geneEns .\n\t\t?uniprot a up:Protein .\n\t\t?uniprot up:classifiedWith ?GO_CLASS .\n\t\t?GO_CLASS rdfs:label ?GO_LABEL .\n\t}\n}\n$$innerlimit$$",
+			"SPARQL": "PREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX up: <http://purl.uniprot.org/core/>\nSELECT DISTINCT ?anat_label ?GO_CLASS ?GO_LABEL {\n\tSERVICE <https://www.bgee.org/sparql/> {\n\t\tSELECT ?geneEns ?anat_label {\n\t\t\t?geneB a orth:Gene .\n\t\t\t?geneB genex:isExpressedIn ?anat .\n\t\t\t?geneB rdfs:label ?anatLabel ;\n\t\t\t\tlscr:xrefEnsemblGene ?geneEns .\n\t\t\tFILTER (UCASE($anatLabel) = UCASE('$$ins$$'))\n\t\t\t?anat rdfs:label ?anat_label .\n\t\t\t?geneB orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon2 .\n\t\t\t?taxon2 up:commonName '$$zebrafish$$' .\n\t\t}\n\t}\n\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t?uniprot rdfs:seeAlso / up:transcribedFrom ?geneEns .\n\t\t?uniprot a up:Protein .\n\t\t?uniprot up:classifiedWith ?GO_CLASS .\n\t\t?GO_CLASS rdfs:label ?GO_LABEL .\n\t}\n}\n$$innerlimit$$",
 			"fetchUrl": "https://biosoda.expasy.org:4443/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://biosoda.expasy.org:4443/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -422,7 +422,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nSELECT DISTINCT ?geneEns ?uniprot ?annotation_text {\n\tSERVICE <https://bgee.org/sparql/> {\n\t\tSELECT ?geneEns {\n\t\t\t?geneB a orth:Gene .\n\t\t\t?geneB genex:isExpressedIn ?cond .\n\t\t\t?cond genex:hasAnatomicalEntity ?anat .\n\t\t\t\t?geneB lscr:xrefEnsemblGene ?geneEns .\n\t\t?anat rdfs:label '$$pancreas$$' .\n\t\t?geneB orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon2 .\n\t\t\t?taxon2 up:commonName '$$human$$' .\n\t\t}\n\t\t$$innerlimit$$\n\t}\n\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t?uniprot rdfs:seeAlso / up:transcribedFrom ?geneEns .\n\t\t?uniprot up:annotation ?annotation .\n\t\t?annotation rdfs:comment ?annotation_text .\n\t}\n}",
+			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nSELECT DISTINCT ?geneEns ?uniprot ?annotation_text {\n\tSERVICE <https://www.bgee.org/sparql/> {\n\t\tSELECT ?geneEns {\n\t\t\t?geneB a orth:Gene .\n\t\t\t?geneB genex:isExpressedIn ?cond .\n\t\t\t?cond genex:hasAnatomicalEntity ?anat .\n\t\t\t\t?geneB lscr:xrefEnsemblGene ?geneEns .\n\t\t?anat rdfs:label '$$pancreas$$' .\n\t\t?geneB orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon2 .\n\t\t\t?taxon2 up:commonName '$$human$$' .\n\t\t}\n\t\t$$innerlimit$$\n\t}\n\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t?uniprot rdfs:seeAlso / up:transcribedFrom ?geneEns .\n\t\t?uniprot up:annotation ?annotation .\n\t\t?annotation rdfs:comment ?annotation_text .\n\t}\n}",
 			"fetchUrl": "https://biosoda.expasy.org:4443/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://biosoda.expasy.org:4443/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -460,7 +460,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nSELECT DISTINCT ?geneEns ?uniprot ?annotation_text {\n\tSERVICE <https://bgee.org/sparql/> {\n\t\tSELECT ?geneEns {\n\t\t\t?geneB genex:isExpressedIn ?cond ;\n\t\t\t\tlscr:xrefEnsemblGene ?geneEns .\n\t\t\t?cond genex:hasDevelopmentalStage ?st .\n\t\t\t?cond genex:hasAnatomicalEntity ?anat .\n\t\t\t?st rdfs:label '$$infantstage$$' .\n\t\t\t?anat rdfs:label '$$brain$$' .\n\t\t\t?geneB orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon2 .\n\t\t\t?taxon2 up:commonName '$$human$$' .\n\t\t}\n\t\t$$innerlimit$$\n\t}\n\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t?uniprot rdfs:seeAlso / up:transcribedFrom ?geneEns .\n\t\t?uniprot up:annotation ?annotation .\n\t\t?annotation a up:Disease_Annotation .\n\t\t?annotation rdfs:comment ?annotation_text .\n\t}\n}",
+			"SPARQL": "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX lscr: <http://purl.org/lscr#>\nPREFIX orth: <http://purl.org/net/orth#>\nSELECT DISTINCT ?geneEns ?uniprot ?annotation_text {\n\tSERVICE <https://www.bgee.org/sparql/> {\n\t\tSELECT ?geneEns {\n\t\t\t?geneB genex:isExpressedIn ?cond ;\n\t\t\t\tlscr:xrefEnsemblGene ?geneEns .\n\t\t\t?cond genex:hasDevelopmentalStage ?st .\n\t\t\t?cond genex:hasAnatomicalEntity ?anat .\n\t\t\t?st rdfs:label '$$infantstage$$' .\n\t\t\t?anat rdfs:label '$$brain$$' .\n\t\t\t?geneB orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon2 .\n\t\t\t?taxon2 up:commonName '$$human$$' .\n\t\t}\n\t\t$$innerlimit$$\n\t}\n\tSERVICE <http://sparql.uniprot.org/sparql> {\n\t\t?uniprot rdfs:seeAlso / up:transcribedFrom ?geneEns .\n\t\t?uniprot up:annotation ?annotation .\n\t\t?annotation a up:Disease_Annotation .\n\t\t?annotation rdfs:comment ?annotation_text .\n\t}\n}",
 			"fetchUrl": "https://biosoda.expasy.org:4443/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://biosoda.expasy.org:4443/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -598,7 +598,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX sio: <http://semanticscience.org/resource/>\nPREFIX lscr: <http://purl.org/lscr#>\nSELECT ?name1 ?protein1 ?name2 ?protein2 ?OMA_link2 ?anatomicalEntity {\n\tSELECT DISTINCT * {\n\t\tSERVICE <https://bgee.org/sparql/> {\n\t\t\t?taxon up:commonName '$$human$$' ;\n\t\t\t\tup:commonName ?name1 .\n\t\t\t?taxon2 up:commonName '$$mouse$$' ;\n\t\t\t\tup:commonName ?name2 .\n\t\t}\n\t\tSERVICE <https://sparql.omabrowser.org/sparql/> {\n\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t?node2 orth:hasHomologousMember* ?protein2 .\n\t\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t\t?protein1 a orth:Protein .\n\t\t\t?protein1 rdfs:label '$$INS$$' ;\n\t\t\t\torth:organism/obo:RO_0002162 ?taxon .\n\t\t\t?protein2 a orth:Protein ;\n\t\t\t\tsio:SIO_010079 ?gene ; #is encoded by\n\t\t\t\torth:organism/obo:RO_0002162 ?taxon2 .\n\t\t\t?gene lscr:xrefEnsemblGene ?geneEns .\n\t\t\t?protein2 rdfs:seeAlso ?OMA_link2 .\n\t\t\tFILTER ( ?node1 != ?node2 )\n\t\t}\n\t\tSERVICE <https://bgee.org/sparql/> {\n\t\t\t?geneB a orth:Gene .\n\t\t\t\t?geneB genex:isExpressedIn ?cond .\n\t\t\t\t?cond genex:hasAnatomicalEntity ?anat .\n\t\t\t\t?geneB lscr:xrefEnsemblGene ?geneEns .\n\t\t\t?anat rdfs:label '$$liver$$' ;\n\t\t\t\trdfs:label ?anatomicalEntity .\n\t\t\t?geneB orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon2 .\n\t\t}\n\t}\n\t$$innerlimit$$\n}\n$$innerlimit$$",
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX sio: <http://semanticscience.org/resource/>\nPREFIX lscr: <http://purl.org/lscr#>\nSELECT ?name1 ?protein1 ?name2 ?protein2 ?OMA_link2 ?anatomicalEntity {\n\tSELECT DISTINCT * {\n\t\tSERVICE <https://www.bgee.org/sparql/> {\n\t\t\t?taxon up:commonName '$$human$$' ;\n\t\t\t\tup:commonName ?name1 .\n\t\t\t?taxon2 up:commonName '$$mouse$$' ;\n\t\t\t\tup:commonName ?name2 .\n\t\t}\n\t\tSERVICE <https://sparql.omabrowser.org/sparql/> {\n\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t?node2 orth:hasHomologousMember* ?protein2 .\n\t\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t\t?protein1 a orth:Protein .\n\t\t\t?protein1 rdfs:label '$$INS$$' ;\n\t\t\t\torth:organism/obo:RO_0002162 ?taxon .\n\t\t\t?protein2 a orth:Protein ;\n\t\t\t\tsio:SIO_010079 ?gene ; #is encoded by\n\t\t\t\torth:organism/obo:RO_0002162 ?taxon2 .\n\t\t\t?gene lscr:xrefEnsemblGene ?geneEns .\n\t\t\t?protein2 rdfs:seeAlso ?OMA_link2 .\n\t\t\tFILTER ( ?node1 != ?node2 )\n\t\t}\n\t\tSERVICE <https://www.bgee.org/sparql/> {\n\t\t\t?geneB a orth:Gene .\n\t\t\t\t?geneB genex:isExpressedIn ?cond .\n\t\t\t\t?cond genex:hasAnatomicalEntity ?anat .\n\t\t\t\t?geneB lscr:xrefEnsemblGene ?geneEns .\n\t\t\t?anat rdfs:label '$$liver$$' ;\n\t\t\t\trdfs:label ?anatomicalEntity .\n\t\t\t?geneB orth:organism ?o .\n\t\t\t?o obo:RO_0002162 ?taxon2 .\n\t\t}\n\t}\n\t$$innerlimit$$\n}\n$$innerlimit$$",
 			"fetchUrl": "https://biosoda.expasy.org:4443/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://biosoda.expasy.org:4443/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -629,7 +629,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nSELECT DISTINCT ?id ?OMA_LINK WHERE {\n\tSELECT * {\n\t\tSERVICE <https://bgee.org/sparql/> {\n\t\t\tSELECT DISTINCT ?gene ?id {\n\t\t\t\t?gene a orth:Gene .\n\t\t\t\t?gene genex:isExpressedIn ?anat .\n\t\t\t\t?anat rdfs:label '$$brain$$' .\n\t\t\t\t?gene orth:organism ?o .\n\t\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t\t?gene dcterms:identifier ?id .\n\t\t\t\t?taxon up:commonName '$$fruitfly$$' .\n\t\t\t}\n\t\t\tLIMIT 100\n\t\t}\n\t\tSERVICE <https://sparql.omabrowser.org/lode/sparql> {\n\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t?node2 orth:hasHomologousMember* ?protein2 .\n\t\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t\t?protein1 dcterms:identifier ?id .\n\t\t\t?protein2 rdfs:seeAlso ?OMA_LINK .\n\t\t\tFILTER ( ?node1 != ?node2 )\n\t\t}\n\t}\n}\n$$innerlimit$$",
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nSELECT DISTINCT ?id ?OMA_LINK WHERE {\n\tSELECT * {\n\t\tSERVICE <https://www.bgee.org/sparql/> {\n\t\t\tSELECT DISTINCT ?gene ?id {\n\t\t\t\t?gene a orth:Gene .\n\t\t\t\t?gene genex:isExpressedIn ?anat .\n\t\t\t\t?anat rdfs:label '$$brain$$' .\n\t\t\t\t?gene orth:organism ?o .\n\t\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t\t?gene dcterms:identifier ?id .\n\t\t\t\t?taxon up:commonName '$$fruitfly$$' .\n\t\t\t}\n\t\t\tLIMIT 100\n\t\t}\n\t\tSERVICE <https://sparql.omabrowser.org/lode/sparql> {\n\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t?node2 orth:hasHomologousMember* ?protein2 .\n\t\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t\t?protein1 dcterms:identifier ?id .\n\t\t\t?protein2 rdfs:seeAlso ?OMA_LINK .\n\t\t\tFILTER ( ?node1 != ?node2 )\n\t\t}\n\t}\n}\n$$innerlimit$$",
 			"fetchUrl": "https://biosoda.expasy.org:4443/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://biosoda.expasy.org:4443/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -667,7 +667,7 @@
 					"flavour": "autocomplete"
 				}
 			],
-			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nSELECT DISTINCT ?orthologous_to_gene_id ?orthologous_to_gene ?hasOrtholog WHERE {\n\tSELECT * {\n\t\tSERVICE <https://bgee.org/sparql/> {\n\t\t\tSELECT DISTINCT ?gene ?orthologous_to_gene_id ?orthologous_to_gene {\n\t\t\t\t?gene a orth:Gene .\n\t\t\t\t?gene genex:isExpressedIn ?anat .\n\t\t\t\t?anat rdfs:label '$$brain$$' .\n\t\t\t\t?gene orth:organism ?o .\n\t\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t\t?gene dcterms:identifier ?orthologous_to_gene_id .\n\t\t\t\t?gene rdfs:seeAlso ?orthologous_to_gene .\n\t\t\t\t?taxon up:commonName '$$fruitfly$$' .\n\t\t\t} LIMIT 100\n\t\t}\n\t\tSERVICE <https://sparql.omabrowser.org/sparql/> {\n\t\t\t?protein2 a orth:Protein .\n\t\t\t?protein1 a orth:Protein .\n\t\t\t?clusterPrimates a orth:OrthologsCluster .\n\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t?node2 orth:hasHomologousMember* ?clusterPrimates .\n\t\t\t?clusterPrimates orth:hasHomologousMember* ?protein2 .\n\t\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t\t?protein1 dcterms:identifier ?orthologous_to_gene_id .\n\t\t\t?protein2 rdfs:seeAlso ?hasOrtholog .\n\t\t\t?clusterPrimates orth:hasTaxonomicRange ?taxRange .\n\t\t\t?taxRange orth:taxRange ?taxLevel .\n\t\t\tVALUES ?taxLevel { '$$primates$$' }\n\t\t\tFILTER ( ?node1 != ?node2 )\n\t\t}\n\t}\n}\n$$innerlimit$$",
+			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nSELECT DISTINCT ?orthologous_to_gene_id ?orthologous_to_gene ?hasOrtholog WHERE {\n\tSELECT * {\n\t\tSERVICE <https://www.bgee.org/sparql/> {\n\t\t\tSELECT DISTINCT ?gene ?orthologous_to_gene_id ?orthologous_to_gene {\n\t\t\t\t?gene a orth:Gene .\n\t\t\t\t?gene genex:isExpressedIn ?anat .\n\t\t\t\t?anat rdfs:label '$$brain$$' .\n\t\t\t\t?gene orth:organism ?o .\n\t\t\t\t?o obo:RO_0002162 ?taxon .\n\t\t\t\t?gene dcterms:identifier ?orthologous_to_gene_id .\n\t\t\t\t?gene rdfs:seeAlso ?orthologous_to_gene .\n\t\t\t\t?taxon up:commonName '$$fruitfly$$' .\n\t\t\t} LIMIT 100\n\t\t}\n\t\tSERVICE <https://sparql.omabrowser.org/sparql/> {\n\t\t\t?protein2 a orth:Protein .\n\t\t\t?protein1 a orth:Protein .\n\t\t\t?clusterPrimates a orth:OrthologsCluster .\n\t\t\t?cluster a orth:OrthologsCluster .\n\t\t\t?cluster orth:hasHomologousMember ?node1 .\n\t\t\t?cluster orth:hasHomologousMember ?node2 .\n\t\t\t?node2 orth:hasHomologousMember* ?clusterPrimates .\n\t\t\t?clusterPrimates orth:hasHomologousMember* ?protein2 .\n\t\t\t?node1 orth:hasHomologousMember* ?protein1 .\n\t\t\t?protein1 dcterms:identifier ?orthologous_to_gene_id .\n\t\t\t?protein2 rdfs:seeAlso ?hasOrtholog .\n\t\t\t?clusterPrimates orth:hasTaxonomicRange ?taxRange .\n\t\t\t?taxRange orth:taxRange ?taxLevel .\n\t\t\tVALUES ?taxLevel { '$$primates$$' }\n\t\t\tFILTER ( ?node1 != ?node2 )\n\t\t}\n\t}\n}\n$$innerlimit$$",
 			"fetchUrl": "https://biosoda.expasy.org:4443/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
 			"fetchUrlShort": "https://biosoda.expasy.org:4443/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
@@ -692,8 +692,8 @@
 				}
 			],
 			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT * {\n\t?species a up:Taxon .\n\t?species $$scientificname$$ ?name .\n\t?species up:rank up:Species .\n}",
-			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "https://bgee.org/sparql",
+			"fetchUrl": "https://www.bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "https://www.bgee.org/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -710,8 +710,8 @@
 				}
 			],
 			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX dcterms: <http://purl.org/dc/terms/>\nSELECT ?geneName ?geneId {\n\t?gene a orth:Gene .\n\t?gene rdfs:label ?geneName .\n\t?gene dcterms:identifier ?geneId .\n\t?gene dcterms:description ?desc .\n\tFILTER CONTAINS ( ?desc, '$$lung$$' )\n}",
-			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "https://bgee.org/sparql",
+			"fetchUrl": "https://www.bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "https://www.bgee.org/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -730,8 +730,8 @@
 				}
 			],
 			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT ?name {\n\t?gene a orth:Gene .\n\t?gene rdfs:label ?geneName .\n\t?gene orth:organism ?organism . #orth v2\n\t?organism obo:RO_0002162 ?taxon . #label: in taxon .\n\t?taxon up:scientificName ?name .\n\tFILTER ( UCASE(?geneName) = UCASE('$$Mtco1$$') )\n}",
-			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "https://bgee.org/sparql",
+			"fetchUrl": "https://www.bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "https://www.bgee.org/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -750,8 +750,8 @@
 				}
 			],
 			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT distinct ?gene_page ?geneName {\n\t?gene a orth:Gene .\n\t?gene rdfs:seeAlso ?gene_page .\n\t?gene rdfs:label ?geneName .\n\t?gene orth:organism ?taxon .\n\t?taxon obo:RO_0002162 ?species . #in taxon property .\n\t?species up:commonName ?commonName .\n\tFILTER ( lcase(str(?commonName)) = lcase(\"$$fruitfly$$\") ) .\n}",
-			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "https://bgee.org/sparql",
+			"fetchUrl": "https://www.bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "https://www.bgee.org/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -777,8 +777,8 @@
 				}
 			],
 			"SPARQL": "PREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT DISTINCT ?anatName {\n\t?cond genex:hasAnatomicalEntity ?anatEntity .\n\t?anatEntity rdfs:label ?anatName .\n\t?cond genex:hasDevelopmentalStage ?stage .\n\t?stage rdfs:label ?stageName .\n\t?cond obo:RO_0002162 ?taxon .\n\t?taxon up:commonName ?commonName .\n\tFILTER ( lcase(str(?commonName)) = lcase(\"$$human$$\") ).\n\tFILTER ( CONTAINS(?stageName, \"$$youngadult$$\") )\n}",
-			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "https://bgee.org/sparql",
+			"fetchUrl": "https://www.bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "https://www.bgee.org/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -797,8 +797,8 @@
 				}
 			],
 			"SPARQL": "PREFIX orth: <http://purl.org/net/orth#>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT ?anatEntity ?anatName {\n\t?seq a orth:Gene .\n\t?seq genex:isExpressedIn ?cond.\n\t?seq rdfs:label '$$apoc1$$' .\n\t?cond genex:hasAnatomicalEntity ?anatEntity .\n\t?anatEntity rdfs:label ?anatName . \n} $$innerlimit$$",
-			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "https://bgee.org/sparql",
+			"fetchUrl": "https://www.bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "https://www.bgee.org/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -825,8 +825,8 @@
 				}
 			],
 			"SPARQL": "PREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT DISTINCT ?anatEntity ?anatName {\n\t?seq a orth:Gene .\n\t?seq genex:isExpressedIn ?cond .\n\t?seq rdfs:label ?geneName .\n\t?expr genex:hasExpressionCondition ?cond .\n\t?cond genex:hasAnatomicalEntity ?anatEntity .\n\t?anatEntity rdfs:label ?anatName .\n\t?cond obo:RO_0002162 <$$rats$$> . \n\tFILTER (LCASE(?geneName) = LCASE('$$apoc1$$') )\n}",
-			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "https://bgee.org/sparql",
+			"fetchUrl": "https://www.bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "https://www.bgee.org/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -859,8 +859,8 @@
 				}
 			],
 			"SPARQL": "PREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT DISTINCT ?anatEntity ?anatName {\n\t?seq a orth:Gene .\n\t?seq genex:isExpressedIn ?cond .\n\t?seq rdfs:label ?geneName .\n\t?cond genex:hasAnatomicalEntity ?anatEntity .\n\t?anatEntity rdfs:label ?anatName .\n\t?cond genex:hasDevelopmentalStage ?stage .\n\t?stage rdfs:label\n\t?stageName .\n\t?cond obo:RO_0002162 ?taxon . #in taxon property .\n\t?taxon up:commonName ?commonName .\n\tFILTER ( lcase(str(?commonName)) = lcase(\"$$mouse$$\") ) .\n\tFILTER ( CONTAINS(?stageName,'$$adult$$') && LCASE(?geneName) = LCASE('$$apoc1$$') )\n}",
-			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "https://bgee.org/sparql",
+			"fetchUrl": "https://www.bgee.org/sparql/?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "https://www.bgee.org/sparql",
 			"queryHeaders": {"Accept": "application/sparql-results+json"}
 		},
 		{
@@ -1526,37 +1526,37 @@
 			"fetchQuery": "PREFIX up: <http://purl.uniprot.org/core/> SELECT DISTINCT ?name ?value WHERE {  ?value a up:Taxon .  ?value up:commonName ?name . ?value up:rank up:Species . FILTER(CONTAINS(lcase(str(?name)), \"$$searchString$$\"))}"
 		},
 		"anatomicentities": {
-			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$",
+			"fetchUrl": "https://www.bgee.org/sparql/?query=$$query$$",
 			"queryHeaders": {"Accept": "application/sparql-results+json"},
 			"fetchQuery": "PREFIX genex: <http://purl.org/genex#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nSELECT DISTINCT ?value {\n?anatEntity a genex:AnatomicalEntity .\n?anatEntity rdfs:label ?value .\nFILTER(CONTAINS(lcase(str(?value)), \"$$searchString$$\"))\n}"
 		},
 		"anatomicentities_extraspecies": {
-			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$",
+			"fetchUrl": "https://www.bgee.org/sparql/?query=$$query$$",
 			"queryHeaders": {"Accept": "application/sparql-results+json"},
 			"fetchQuery": "PREFIX genex: <http://purl.org/genex#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nPREFIX orth: <http://purl.org/net/orth#>\nPREFIX up: <http://purl.uniprot.org/core/>\nPREFIX obo: <http://purl.obolibrary.org/obo/>\nSELECT DISTINCT ?value {\n?gene genex:isExpressedIn ?anat .\n?anat rdfs:label ?value .\n?gene orth:organism ?o .\n?o obo:RO_0002162 ?taxon .\n?taxon up:commonName \"$$extra_0$$\" .\n?anat a genex:AnatomicalEntity .\nFILTER(CONTAINS(lcase(str(?value)), \"$$searchString$$\"))\n}"
 		},
 		"stages": {
-			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$",
+			"fetchUrl": "https://www.bgee.org/sparql/?query=$$query$$",
 			"queryHeaders": {"Accept": "application/sparql-results+json"},
 			"fetchQuery": "PREFIX genex: <http://purl.org/genex#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nSELECT DISTINCT ?value { ?stage a <http://www.ebi.ac.uk/efo/EFO_0000399> .\n?stage rdfs:label ?value .\nFILTER(CONTAINS(lcase(str(?value)), \"$$searchString$$\"))\n} LIMIT 100"
 		},
 		"genesbgee": {
-			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$",
+			"fetchUrl": "https://www.bgee.org/sparql/?query=$$query$$",
 			"queryHeaders": {"Accept": "application/sparql-results+json"},
 			"fetchQuery": "PREFIX orth: <http://purl.org/net/orth#>\nPREFIX genex: <http://purl.org/genex#>\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\nSELECT DISTINCT ?value { ?gene a orth:Gene .\n?gene rdfs:label ?value .\nFILTER(STRSTARTS(lcase(str(?value)), \"$$searchString$$\"))\n} LIMIT 100"
 		},
 		"speciesbgee": {
-			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$",
+			"fetchUrl": "https://www.bgee.org/sparql/?query=$$query$$",
 			"queryHeaders": {"Accept": "application/sparql-results+json"},
 			"fetchQuery": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT DISTINCT ?value {\n?species a up:Taxon .\n?species up:scientificName ?value .\n?species up:rank up:Species .\n\nFILTER(CONTAINS(lcase(str(?value)), \"$$searchString$$\"))\n} ORDER BY ?value"
 		},
 		"speciesbgeecommon": {
-			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$",
+			"fetchUrl": "https://www.bgee.org/sparql/?query=$$query$$",
 			"queryHeaders": {"Accept": "application/sparql-results+json"},
 			"fetchQuery": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT DISTINCT ?value {\n?species a up:Taxon .\n?species up:commonName ?value .\n?species up:rank up:Species .\n\nFILTER(CONTAINS(lcase(str(?value)), \"$$searchString$$\"))\n} ORDER BY ?value"
 		},
 		"speciesbgeecommonIRI": {
-			"fetchUrl": "https://bgee.org/sparql/?query=$$query$$",
+			"fetchUrl": "https://www.bgee.org/sparql/?query=$$query$$",
 			"queryHeaders": {"Accept": "application/sparql-results+json"},
 			"fetchQuery": "PREFIX up: <http://purl.uniprot.org/core/>\nSELECT DISTINCT ?name ?value {\n?value a up:Taxon .\n?value up:commonName ?name .\n?value up:rank up:Species .\n\nFILTER(CONTAINS(lcase(str(?name)), \"$$searchString$$\"))\n} ORDER BY ?value"
 		},
