@@ -1,7 +1,7 @@
 # How to cite this work
 Ana Claudia Sima, Tarcisio Mendes de Farias, Erich Zbinden, Maria Anisimova, Manuel Gil, Heinz Stockinger, Kurt Stockinger, Marc Robinson-Rechavi, Christophe Dessimoz, Enabling semantic queries across federated bioinformatics databases, Database, Volume 2019, 2019, baz106, https://doi.org/10.1093/database/baz106
 
-# BioQuery 
+# Bio-Query 
 A repository for code and documentation of the BioQuery BETA system.
 
 ## Hint for users of the frontend
@@ -20,7 +20,7 @@ The full set of Ontop mappings used to expose relational Bgee data as a virtual 
 
 ## Federated Queries Catalog
 
-The Excel spreadsheet containing the 12 federated queries used to evaluate our system are available in the [Queries](https://github.com/biosoda/bioquery/tree/master/Queries) folder. They can also be modified and executed in our template-based search interface at http://biosoda.expasy.org/build_biosodafrontend/ .
+The Excel spreadsheet containing the 12 federated queries used to evaluate our system are available in the [Queries](https://github.com/biosoda/bioquery/tree/master/Queries) folder. They can also be modified and executed in our template-based search interface at http://purl.org/bioquery .
 
 ## GenEx documentation
 
