@@ -3,19 +3,27 @@
 	"prefixes": "",
 	"possibleServices": [
 		{
-			"name": "federation server",
-			"moreinfo": "https://github.com/biosoda/bioquery",
-			"urlquery": "https://biosoda.expasy.org:4443/sparql?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
-			"expected": "true",
-			"CRONfail": "true"
+			"name": "ENPKG",
+			"moreinfo":"https://enpkg.commons-lab.org/graphdb/",
+			"urlquery":"https://enpkg.commons-lab.org/graphdb/repositories/ENPKG?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
+			"expected":"true",
+			"CRONfail":"false"
 		},
+		
 		{
 			"name": "UniProt",
 			"moreinfo": "https://www.uniprot.org/",
 			"urlquery": "https://sparql.uniprot.org/sparql/?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
 			"expected": "true",
 			"CRONfail": "false"
-		}
+		},
+		{
+            "name": "Wikidata",
+            "moreinfo": "https://query.wikidata.org/",
+            "urlquery": "https://query.wikidata.org/sparql?format=json&query=ASK+%7B%3Fa+a+%3Fb%7D",
+            "expected": "true",
+            "CRONfail": "false"
+        }
 	],
 	"structure": [
 		{
@@ -24,9 +32,19 @@
 			"title": "Contact form"
 		},
 		{
+            		"id": "ENPKG",
+            		"parentId": null,
+            		"title": "Sample ENPKG Queries"
+        	},
+		{
 			"id": "DBGI",
 			"parentId": null,
 			"title": "Sample DBGI Queries"
+		},
+        	{
+            		"id": "Wikidata",
+            		"parentId": null,
+            		"title": "Sample Wikidata Queries"
 		}
 	],
 	"questions": [
@@ -38,40 +56,234 @@
 		},
 
 		{
-			"id": "Q0",
-                        "runcheck": "2020-03-06, 158s, 4415results",
+			"id": "Qd0",
+                        "runcheck": "2023-07-24, 2s, 1results",
+                        "rqid": "Qd0",
+                        "characteristics": "",
+                        "numberresults": "",
+                        "resultsexample": "",
+                        "parentIds": ["ENPKG"],
+                        "question": "Count all triples in the current ENPKG graph",
+                        "estimatedseconds": "3",
+                        "vars": [
+                        ],
+                        "SPARQL": "SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }",
+                        "fetchUrl": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+                        "fetchUrlShort": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG",
+                        "queryHeaders": {"Accept": "application/sparql-results+json"}
+
+		},
+		{
+            "id": "Qd1",
+                        "runcheck": "2023-07-24, 2s, 1results",
+                        "rqid": "Qd1",
+                        "characteristics": "",
+                        "numberresults": "",
+                        "resultsexample": "",
+                        "parentIds": ["ENPKG"],
+                        "question": "Q1) How many features (PI and NI modes) have the same SIRIUS/CSI:FingerID and ISDB annotation?",
+                        "estimatedseconds": "3",
+                        "vars": [
+                        ],
+                        "SPARQL": "# Count the number of features with the same ISDB\n# and SIRIUS annotations\n\nPREFIX enpkg: <https://enpkg.commons-lab.org/kg/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\n\nSELECT (COUNT(?feature) AS ?count) \nWHERE\n    {\n        ?lcms enpkg:has_massive_doi ?massive_doi .\n        # FILTER(regex(str(?massive_doi), \"MSV000087728\")) # MassIVE id filter, MSV000087728 is pf1600, MSV000093464 is 337 Korean medicinal plants, if you want to query both you can pipe \"MSV000087728|MSV000093464\". You can apply or not these filters by ucommenting/commenting this line.\n        ?lcms enpkg:has_lcms_feature_list ?feature_list .\n        ?feature_list enpkg:has_lcms_feature ?feature .\n        ?feature enpkg:has_sirius_annotation ?sirius_annotation .\n            ?sirius_annotation rdf:type enpkg:SiriusStructureAnnotation .\n            ?sirius_annotation enpkg:has_InChIkey2D ?sirius_ik2d .\n        ?feature enpkg:has_isdb_annotation ?isdb_annotation .\n            ?isdb_annotation rdf:type enpkg:IsdbAnnotation .\n            ?isdb_annotation enpkg:has_InChIkey2D ?isdb_ik2d .\n    FILTER(?isdb_ik2d = ?sirius_ik2d) .\n    }\n",
+			"fetchUrl": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+                        "fetchUrlShort": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG",
+                        "queryHeaders": {"Accept": "application/sparql-results+json"}
+
+        },
+		{
+            "id": "Qd2",
+                        "runcheck": "2023-07-24, 2s, 1results",
+                        "rqid": "Qd2",
+                        "characteristics": "",
+                        "numberresults": "",
+                        "resultsexample": "",
+                        "parentIds": ["ENPKG"],
+                        "question": "Q2) Which samples have features (PI mode) annotated as $$template_np_class$$ alkaloids by CANOPUS with a probability score above 0.5, ordered by the decreasing count of features?",
+                        "estimatedseconds": "3",
+                        "vars": [
+							 {
+							"name": "template_np_class",
+							"default": "Aspidosperma_type",
+							"type": "list",
+							"datasource": "example_annot",
+							"flavour": "autocomplete"
+							 }
+                        ],
+                        "SPARQL":"# Count the number of features annotated as aspidosperma type alkaloids \n# by CANOPUS (p>0.5) in the different samples\n\nPREFIX enpkg: <https://enpkg.commons-lab.org/kg/>\nPREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX wdt: <http://www.wikidata.org/prop/direct/>\nPREFIX wd: <http://www.wikidata.org/entity/>\n\nSELECT ?extract ?organe ?species_name ?genus_name ?family_name ?count_of_selected_class\nWHERE\n    {  \n    ?material enpkg:has_lab_process ?extract .\n        ?material enpkgmodule:has_organe ?organe .\n        ?material enpkg:has_wd_id ?wd_sp .\n        OPTIONAL\n        {\n            SERVICE <https://query.wikidata.org/sparql> {\n            ?wd_sp wdt:P225 ?species_name .\n            ?family wdt:P31 wd:Q16521 ;\n                wdt:P105 wd:Q35409 ;\n                wdt:P225 ?family_name ;\n                ^wdt:P171* ?wd_sp .\n            ?genus wdt:P31 wd:Q16521 ;\n                wdt:P105 wd:Q34740 ;\n                wdt:P225 ?genus_name ;\n                ^wdt:P171* ?wd_sp \n            }\n        }\n        {\n            SELECT ?extract (COUNT(DISTINCT ?feature) AS ?count_of_selected_class)\n            WHERE\n            {   \n                ?extract rdf:type enpkg:LabExtract .\n                    ?extract enpkg:has_LCMS ?lcms .\n                        ?lcms rdf:type enpkg:LCMSAnalysisPos .\n                        ?lcms enpkg:has_lcms_feature_list ?feature_list .\n                            ?feature_list enpkg:has_lcms_feature ?feature .\n                                ?feature enpkg:has_canopus_annotation ?canopus .\n                                    ?canopus enpkg:has_canopus_npc_class ?np_class .\n                                    ?canopus enpkg:has_canopus_npc_class_prob ?class_prob .\n                                    FILTER(regex(str(?np_class), \"$$template_np_class$$\")) .\n                                    FILTER((?class_prob > 0.5)) .\n            } GROUP BY ?extract ORDER BY DESC(?count_of_selected_class)\n        }\n    }\n",
+			"fetchUrl": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+                        "fetchUrlShort": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG",
+                        "queryHeaders": {"Accept": "application/sparql-results+json"}
+
+        },
+		{
+            "id": "Qd3",
+                        "runcheck": "2023-07-24, 2s, 1results",
+                        "rqid": "Qd3",
+                        "characteristics": "",
+                        "numberresults": "",
+                        "resultsexample": "",
+                        "parentIds": ["ENPKG"],
+                        "question": "Q3) Among the structural annotations from Tabernaemontana coffeoides (Apocynaceae) seeds extract, which ones contain an aspidospermidine substructure?",
+                        "estimatedseconds": "3",
+                        "vars": [
+                        ],
+                        "SPARQL": "# Among the structural annotations in Tabernaemontana coffeoides seeds extract,\n# get the ones that contain an Aspidospermidine scaffold scaffold.\n\nPREFIX enpkg: <https://enpkg.commons-lab.org/kg/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX wdt: <http://www.wikidata.org/prop/direct/>\nPREFIX wd: <http://www.wikidata.org/entity/>\nPREFIX idsm: <https://idsm.elixir-czech.cz/sparql/endpoint/>\nPREFIX sachem: <http://bioinfo.uochb.cas.cz/rdf/v1.0/sachem#>\n\nSELECT DISTINCT ?ik2d ?smiles\nWHERE\n    { \n    ?extract rdf:type enpkg:LabExtract .\n    FILTER(regex(str(?extract), \"VGF152_B02\")) # Tabernaemontana coffeoides seeds extract\n        ?extract enpkg:has_LCMS ?lcms .\n            ?lcms enpkg:has_lcms_feature_list ?feature_list .\n            ?feature_list enpkg:has_lcms_feature ?feature .\n                ?feature enpkg:has_sirius_annotation|enpkg:has_isdb_annotation ?annotation . \n                ?annotation enpkg:has_InChIkey2D ?ik2d .\n                    ?ik2d enpkg:has_smiles ?smiles .\n                    ?ik2d enpkg:is_InChIkey2D_of ?ik .\n                        ?ik enpkg:has_wd_id ?wd_id .\n                        SERVICE idsm:wikidata {\n                            VALUES ?SUBSTRUCTURE {\n                            \"CCC12CCCN3C1C4(CC3)C(CC2)NC5=CC=CC=C45\" # Aspidospermidine scaffold\n                            }\n                            ?wd_id sachem:substructureSearch _:b16.\n                            _:b16 sachem:query ?SUBSTRUCTURE.\n                        }      \n    }",
+			"fetchUrl": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+                        "fetchUrlShort": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG",
+                        "queryHeaders": {"Accept": "application/sparql-results+json"}
+
+        },
+		{
+            "id": "Qd4",
+                        "runcheck": "2023-07-24, 2s, 1results",
+                        "rqid": "Qd4",
+                        "characteristics": "",
+                        "numberresults": "",
+                        "resultsexample": "",
+                        "parentIds": ["ENPKG"],
+                        "question": "Q4) Among the SIRIUS structural annotations from Tabernaemontana coffeoides (Apocynaceae) seeds extract, which ones are reported in the Tabernaemontana genus in WD?",
+                        "estimatedseconds": "3",
+                        "vars": [
+                        ],
+                        "SPARQL": "# Select, among SIRIUS anotations of Tabernaemontana coffeoides seeds extract,\n# the ones that are reported in the Tabernaemontana genus.\n\nPREFIX enpkg: <https://enpkg.commons-lab.org/kg/>\nPREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX wdt: <http://www.wikidata.org/prop/direct/>\nPREFIX wd: <http://www.wikidata.org/entity/>\nPREFIX prov: <http://www.w3.org/ns/prov#>\nPREFIX pr: <http://www.wikidata.org/prop/reference/>\n\nSELECT DISTINCT ?ik2d ?genus\nWHERE\n    {  \n    ?material enpkg:has_lab_process ?extract .\n    ?material enpkgmodule:has_organe ?organe ;\n            enpkg:has_wd_id ?wd_sp .\n    FILTER(regex(str(?extract), \"VGF152_B02\")) # Tabernaemontana coffeoides seeds extract\n    ?extract enpkg:has_LCMS ?lcms .\n        ?lcms rdf:type enpkg:LCMSAnalysisPos .\n        ?lcms enpkg:has_lcms_feature_list ?feature_list .\n            ?feature_list enpkg:has_lcms_feature ?feature .\n                ?feature enpkg:has_sirius_annotation ?annotation . \n                    ?annotation enpkg:has_InChIkey2D ?ik2d .\n                        ?ik2d enpkg:has_smiles ?smiles .\n                        ?ik2d enpkg:is_InChIkey2D_of ?ik .\n                            ?ik enpkg:has_wd_id ?wd_id .\n        {\n        SELECT DISTINCT ?wd_id ?genus WHERE {\n            ?material enpkg:has_lab_process ?extract ;\n                enpkg:has_wd_id ?wd_sp .\n                FILTER(regex(str(?extract), \"VGF152_B02\")) .\n                OPTIONAL{\n                    service <https://query.wikidata.org/sparql> {\n                        ?wd_sp wdt:P225 ?species_name .\n                        ?genus wdt:P31 wd:Q16521 ;\n                                wdt:P105 wd:Q34740 ;\n                                ^wdt:P171* ?wd_sp .\n                        ?childtaxa wdt:P171* ?genus .\n                        ?wd_id wdt:P703 ?childtaxa\n                    }\n                }\n            }\n        }\n    }",
+			"fetchUrl": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+                        "fetchUrlShort": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG",
+                        "queryHeaders": {"Accept": "application/sparql-results+json"}
+
+        },
+		{
+            "id": "Qd5",
+                        "runcheck": "2023-07-24, 2s, 1results",
+                        "rqid": "Qd5",
+                        "characteristics": "",
+                        "numberresults": "",
+                        "resultsexample": "",
+                        "parentIds": ["ENPKG"],
+                        "question": "Q5) Which compounds annotated in the active extract of Melochia umbellata have activity against T. cruzi reported (in ChEMBL), and in which taxon they are reported (in Wikidata)?",
+                        "estimatedseconds": "3",
+                        "vars": [
+                        ],
+                        "SPARQL": "# Among structural annotations in Melochia umbellata extract,\n# select the ones that have an activity reported against T. cruzi (ChEMBL)\n# with the taxon they are already reported in (Wikidata).\n\nPREFIX enpkg: <https://enpkg.commons-lab.org/kg/>\nPREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX wdt: <http://www.wikidata.org/prop/direct/>\nPREFIX wd: <http://www.wikidata.org/entity/>\n\nSELECT DISTINCT ?ik ?chemblid ?name ?type ?value ?wd_id ?taxon ?taxon_name\nWHERE\n    {\n    service <https://query.wikidata.org/sparql> {\n        ?wd_id wdt:P31 wd:Q113145171 .\n            ?wd_id wdt:P703 ?taxon .\n            ?taxon wdt:P225 ?taxon_name .\n        }   \n        { SELECT DISTINCT ?ik ?chemblid ?name ?type ?value ?wd_id\n            WHERE\n            { \n                ?sample rdf:type enpkg:LabExtract\n                FILTER(regex(str(?sample), \"VGF156_A06\")) # Melochia umbellata extract \n                ?sample enpkg:has_LCMS ?lcms .\n                    ?lcms rdf:type enpkg:LCMSAnalysisPos .\n                    ?lcms enpkg:has_lcms_feature_list ?feature_list .\n                        ?feature_list enpkg:has_lcms_feature ?feature .\n                            {?feature enpkg:has_sirius_annotation ?annotation .\n                                ?annotation enpkg:has_InChIkey2D ?ik2d .\n                                ?annotation enpkg:has_cosmic_score ?cosmic .\n                                ?annotation enpkg:has_zodiac_score ?zodiac .\n                                FILTER((?cosmic > 0.5) && (?zodiac > 0.8))}\n                            UNION\n                            {?feature enpkg:has_isdb_annotation ?annotation .\n                                ?annotation enpkg:has_taxo_score ?taxo .\n                                FILTER(?taxo >= 6)}\n\n                ?annotation enpkg:has_InChIkey2D ?ik2d .\n                    ?ik2d enpkg:has_smiles ?smiles .\n                    ?ik2d enpkg:is_InChIkey2D_of ?ik .\n                        ?ik enpkgmodule:has_chembl_id ?chemblid .\n                        ?ik enpkg:has_wd_id ?wd_id .\n                            ?chemblid enpkgmodule:has_chembl_activity ?chembl_activity .\n                            ?chembl_activity enpkgmodule:target_name ?name .\n                            FILTER(regex(str(?name), \"Trypanosoma cruzi\")) \n                            ?chembl_activity enpkgmodule:activity_type ?type .\n                            ?chembl_activity enpkgmodule:activity_value ?value .\n            }\n        }      \n    }",
+			"fetchUrl": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+                        "fetchUrlShort": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG",
+                        "queryHeaders": {"Accept": "application/sparql-results+json"}
+
+        },
+		{
+            "id": "Qd6",
+                        "runcheck": "2023-07-24, 2s, 1results",
+                        "rqid": "Qd6",
+                        "characteristics": "",
+                        "numberresults": "",
+                        "resultsexample": "",
+                        "parentIds": ["ENPKG"],
+                        "question": "Q6) Which features have the most fragments and neutral losses in common with feature #1 from Waltheria indica aerial part in PI mode (the [M+H]+ ion of waltherione G in this extract)?",
+                        "estimatedseconds": "3",
+                        "vars": [
+                        ],
+                        "SPARQL": "# Count for a given LCMS feature of the dataset the number of peak/loss\n# in common with a given feature\n\nPREFIX enpkg: <https://enpkg.commons-lab.org/kg/>\nPREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX wdt: <http://www.wikidata.org/prop/direct/>\n            \nSELECT ?feature (SAMPLE(?rt) AS ?rt) (SAMPLE(?parent_mass) AS ?parent_mass) (COUNT(?peakloss) AS ?count)\nWHERE\n    { \n        ?lcms enpkg:has_massive_doi ?massive_doi .\n        FILTER(regex(str(?massive_doi), \"MSV000087728\")) # MassIVE id filter\n        ?lcms rdf:type enpkg:LCMSAnalysisPos .\n        ?lcms enpkg:has_lcms_feature_list ?feature_list .\n        ?feature_list enpkg:has_lcms_feature ?feature .\n        ?feature rdf:type enpkg:LCMSFeature .\n        ?feature enpkg:has_spec2vec_doc ?doc .\n        ?feature enpkg:has_parent_mass ?parent_mass .\n        ?feature enpkg:has_retention_time ?rt .\n            ?doc enpkg:has_spec2vec_loss|enpkg:has_spec2vec_peak ?peakloss .\n\n        {SELECT ?peakloss WHERE {\n            ?feature rdf:type enpkg:LCMSFeature\n            FILTER(regex(str(?feature), \"SC_AP_Wi_DCM_features_ms2_pos.mgf:scan:1$\")) # [M+H]+ of waltherione G\n            ?feature enpkg:has_spec2vec_doc ?doc .\n                ?doc enpkg:has_spec2vec_loss|enpkg:has_spec2vec_peak ?peakloss .\n            }\n        }\n    }\n    GROUP BY ?feature ORDER BY DESC(?count)\n",
+			"fetchUrl": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+                        "fetchUrlShort": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG",
+                        "queryHeaders": {"Accept": "application/sparql-results+json"}
+
+        },
+		{
+            "id": "Qd7",
+                        "runcheck": "2023-07-24, 2s, 1results",
+                        "rqid": "Qd7",
+                        "characteristics": "",
+                        "numberresults": "",
+                        "resultsexample": "",
+                        "parentIds": ["ENPKG"],
+                        "question": "Q7) Filter the PI mode features of Melochia umbellate annotated as [M+H]+ by SIRIUS to keep the ones for which a feature in NI mode is detected with the same retention time (± 3 seconds) and a mass corresponding to the [M-H]- adduct (± 5 ppm).",
+                        "estimatedseconds": "3",
+                        "vars": [
+                        ],
+                        "SPARQL": "# Among Melochia umbellata LCMS features in PI mode,\n# get the ones that are annoatted as [M+H]+ by SIRIUS and for which\n# a LCMS feature in NI mode with the corresponding [M-H]- m/z is found.\n\nPREFIX enpkg: <https://enpkg.commons-lab.org/kg/>\nPREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX wdt: <http://www.wikidata.org/prop/direct/>\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\n\nSELECT DISTINCT ?feature ?rt ?pm ?feature_opp ?rt_opp ?pm_opp\nWHERE\n    { \n    VALUES ?ppm {\n        \"5\"^^xsd:decimal # m/z tolerance\n        }\n    VALUES ?rt_tol {\n        \"0.05\"^^xsd:decimal # RT tolerance (minute)\n        }\n\n    ?sample rdf:type enpkg:LabExtract\n    FILTER(regex(str(?sample), \"VGF156_A06\")) #Melochia umbellata\n    \n    ?sample enpkg:has_LCMS ?lcms .\n        ?lcms rdf:type enpkg:LCMSAnalysisPos .\n        ?lcms enpkg:has_lcms_feature_list ?feature_list .\n            ?feature_list enpkg:has_lcms_feature ?feature .                    \n                ?feature enpkg:has_parent_mass ?pm .\n                ?feature enpkg:has_retention_time ?rt .\n                ?feature enpkg:has_sirius_annotation ?sirius .\n                    ?sirius enpkg:has_sirius_adduct ?adduct .\n                    FILTER(regex(str(?adduct), \"[M+H]+\"))\n        \n    ?sample enpkg:has_LCMS ?lcms_opp .\n    ?lcms_opp rdf:type enpkg:LCMSAnalysisNeg .\n    ?lcms_opp enpkg:has_lcms_feature_list ?feature_list_opp .\n        ?feature_list_opp enpkg:has_lcms_feature ?feature_opp .\n        ?feature_opp enpkg:has_parent_mass ?pm_opp .\n        ?feature_opp enpkg:has_retention_time ?rt_opp .\n    FILTER(((?rt - ?rt_tol) < ?rt_opp) && ((?rt + ?rt_tol) > ?rt_opp))\n    FILTER((?pm_opp > ((?pm - 2.014) - ((?ppm * 0.000001) * (?pm - 2.014)))) && (?pm_opp < ((?pm - 2.014) + ((?ppm * 0.000001) * (?pm - 2.014)))))\n    }\n\n",
+			"fetchUrl": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+                        "fetchUrlShort": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG",
+                        "queryHeaders": {"Accept": "application/sparql-results+json"}
+
+        },
+		{
+            "id": "Qd8",
+                        "runcheck": "2023-07-24, 2s, 1results",
+                        "rqid": "Qd8",
+                        "characteristics": "",
+                        "numberresults": "",
+                        "resultsexample": "",
+                        "parentIds": ["ENPKG"],
+                        "question": "Q8) For features from Melochia umbellata in PI mode with SIRIUS annotations, get the ones for which a feature in NI mode with the same retention time (± 3 sec) has the same SIRIUS annotation (2D IK).",
+                        "estimatedseconds": "3",
+                        "vars": [
+                        ],
+                        "SPARQL": "# Get the PI mode LCMS features with SIRIUS annotation for which\n# a LCMS feature in NI mode of the same extract is annotated with\n# the same IK2D and has the same RT.\n\nPREFIX enpkg: <https://enpkg.commons-lab.org/kg/>\nPREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX wdt: <http://www.wikidata.org/prop/direct/>\n            \nSELECT DISTINCT ?feature ?feature_opp ?ik2d ?rt ?rt_opp\nWHERE\n    {\n    VALUES ?rt_tol {\n        \"0.05\"^^xsd:decimal # RT tolerance (minute)\n        }\n    ?sample rdf:type enpkg:LabExtract\n    FILTER(regex(str(?sample), \"VGF156_A06\"))\n\n    ?sample enpkg:has_LCMS ?lcms .\n        ?lcms rdf:type enpkg:LCMSAnalysisPos .\n        ?lcms enpkg:has_lcms_feature_list ?feature_list .\n            ?feature_list enpkg:has_lcms_feature ?feature .                    \n                ?feature enpkg:has_retention_time ?rt .\n                ?feature enpkg:has_sirius_annotation ?sirius .\n                    ?sirius enpkg:has_InChIkey2D ?ik2d .\n                    \n        \n    ?sample enpkg:has_LCMS ?lcms_opp .\n    ?lcms_opp rdf:type enpkg:LCMSAnalysisNeg .\n    ?lcms_opp enpkg:has_lcms_feature_list ?feature_list_opp .\n        ?feature_list_opp enpkg:has_lcms_feature ?feature_opp .\n            ?feature_opp enpkg:has_retention_time ?rt_opp .\n            ?feature_opp enpkg:has_sirius_annotation ?sirius_opp .\n                ?sirius_opp enpkg:has_InChIkey2D ?ik2d .\n\n    FILTER(((?rt - ?rt_tol) < ?rt_opp) && ((?rt + ?rt_tol) > ?rt_opp))\n    }\n\n",
+			"fetchUrl": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+                        "fetchUrlShort": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG",
+                        "queryHeaders": {"Accept": "application/sparql-results+json"}
+
+        },
+	{
+            "id": "Qd9",
+                        "runcheck": "2023-07-24, 2s, 1results",
+                        "rqid": "Qd9",
+                        "characteristics": "",
+                        "numberresults": "",
+                        "resultsexample": "",
+                        "parentIds": ["ENPKG"],
+                        "question": "Q9) For features from Melochia umbellata in PI mode with SIRIUS annotations, get the ones for which a feature in NI mode with the same retention time (± 3 sec) has  the same SIRIUS annotation (2D IK).",
+                        "estimatedseconds": "3",
+                        "vars": [
+                        ],
+			"SPARQL": "# summary: Spectral search peak-loss\n# description: Search, through counts of common peaks and loss, spectrally related features within or across datasets. Return their species and upper taxonomy through a federated Wikidata search\n# endpoint: https://enpkg.commons-lab.org/graphdb/sparql\n# tags:\n#   - ENPKG\n#   - Natural products\n\nPREFIX enpkg: <https://enpkg.commons-lab.org/kg/>\nPREFIX enpkgmodule: <https://enpkg.commons-lab.org/module/>\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\nPREFIX wdt: <http://www.wikidata.org/prop/direct/>        \nPREFIX wd: <http://www.wikidata.org/entity/>\n\nSELECT ?family_name ?genus_name ?species_name ?wd_sp ?feature ?sub_rt ?sub_parent_mass ?count\nWHERE {\n    # Subquery to get the top N hits with their Wikidata IDs\n    {\n        SELECT ?wd_sp ?feature (SAMPLE(?rt) AS ?sub_rt) (SAMPLE(?parent_mass) AS ?sub_parent_mass) (COUNT(?peakloss) AS ?count)\n        WHERE {\n            ?material enpkg:has_lab_process ?extract .\n            ?material enpkg:has_wd_id ?wd_sp .\n            ?material enpkg:submitted_taxon ?taxon .\n            ?extract rdf:type enpkg:LabExtract .\n            ?extract enpkg:has_LCMS ?lcms .\n            ?lcms enpkg:has_massive_doi ?massive_doi .\n            FILTER(regex(str(?massive_doi), \"MSV000093464\")) # MassIVE id filter, MSV000087728 is pf1600, MSV000093464 is 337 Korean medicinal plants, if you want to query both you can pipe \"MSV000087728|MSV000093464\". You can apply or not these filters by ucommenting/commenting this line.\n            ?lcms rdf:type enpkg:LCMSAnalysisPos .\n            ?lcms enpkg:has_lcms_feature_list ?feature_list .\n            ?feature_list enpkg:has_lcms_feature ?feature .\n            ?feature rdf:type enpkg:LCMSFeature .\n            ?feature enpkg:has_spec2vec_doc ?doc .\n            ?feature enpkg:has_parent_mass ?parent_mass .\n            ?feature enpkg:has_retention_time ?rt .\n            ?doc enpkg:has_spec2vec_loss|enpkg:has_spec2vec_peak ?peakloss .\n            \n            {\n                SELECT ?peakloss WHERE {\n                    ?feature rdf:type enpkg:LCMSFeature\n                    FILTER(regex(str(?feature), \"mzspec:MSV000087728:VGF151_E05_features_ms2_pos.mgf:scan:4$\")) # USI of the feature of interest \n                    ?feature enpkg:has_spec2vec_doc ?doc .\n                    ?doc enpkg:has_spec2vec_loss|enpkg:has_spec2vec_peak ?peakloss .\n                }\n            }\n        }\n        GROUP BY ?wd_sp ?feature\n        ORDER BY DESC(?count)\n        LIMIT 5\n    }\n\n    # Outer query to fetch species names from Wikidata\n    # Fetching taxonomic information from Wikidata\n    SERVICE <https://query.wikidata.org/sparql> {\n        ?wd_sp wdt:P225 ?species_name .\n        OPTIONAL {\n            ?family wdt:P31 wd:Q16521 ;\n                    wdt:P105 wd:Q35409 ;\n                    wdt:P225 ?family_name ;\n                    ^wdt:P171* ?wd_sp .\n        }\n        OPTIONAL {\n            ?genus wdt:P31 wd:Q16521 ;\n                    wdt:P105 wd:Q34740 ;\n                    wdt:P225 ?genus_name ;\n                    ^wdt:P171* ?wd_sp .\n        }\n    }\n}\nGROUP BY ?family_name ?genus_name ?species_name ?wd_sp ?feature ?sub_rt ?sub_parent_mass ?count\nORDER BY DESC(?count)\n",
+			"fetchUrl": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+                        "fetchUrlShort": "https://enpkg.commons-lab.org/graphdb/repositories/ENPKG",
+                        "queryHeaders": {"Accept": "application/sparql-results+json"}
+
+        },
+	{
+			"id": "Qe0",
+			"runcheck": "2020-03-06, 158s, 4415results",
+			"rqid": "Qe0",
+			"characteristics": "",
+			"numberresults": "",
+			"resultsexample": "",
+			"parentIds": ["DBGI"],
+			"question": "Count all entries in the current DBGI graph",
+			"estimatedseconds": "50",
+			"vars": [
+			],
+			"SPARQL": "SELECT (COUNT (*) as ?count) WHERE { ?s ?p ?o }",
+			"fetchUrl": "https://biosoda.unil.ch/graphdb/repositories/dbgi-enpkg?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+			"fetchUrlShort": "https://biosoda.unil.ch/sparql/graphdb/repositories/dbgi-enpkg",
+			"queryHeaders": {"Accept": "application/sparql-results+json"}
+		},
+
+		{
+            "id": "Qw1",
+                        "runcheck": "2023-07-24, 2s, 1results",
                         "rqid": "Q0",
                         "characteristics": "",
                         "numberresults": "",
                         "resultsexample": "",
-                        "parentIds": ["DBGI"],
-                        "question": "Show all triples in the current DBGI graph",
-                        "estimatedseconds": "50",
+                        "parentIds": ["Wikidata"],
+                        "question": "Count all triples in the current Wikidata graph",
+                        "estimatedseconds": "3",
                         "vars": [
                         ],
-                        "SPARQL": "SELECT * WHERE { ?s ?p ?o }",
-                        "fetchUrl": "http://dbgi.vital-it.ch:7200/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-                        "fetchUrlShort": "http://dbgi.vital-it.ch:7200/sparql",
+                        "SPARQL": "SELECT (COUNT(*) as ?count) WHERE { ?s ?p ?o }",
+                        "fetchUrl": "https://query.wikidata.org/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
+                        "fetchUrlShort": "https://query.wikidata.org/",
                         "queryHeaders": {"Accept": "application/sparql-results+json"}
 
-		},
-
-		{
-			"id": "Q1",
-			"runcheck": "2020-03-06, 158s, 4415results",
-			"rqid": "Q1",
-			"characteristics": "",
-			"numberresults": "",
-			"resultsexample": "", 
-			"parentIds": ["DBGI"],
-			"question": "Count all entries in the current ENPKG graph", 
-			"estimatedseconds": "50",
-			"vars": [
-			],
-			"SPARQL": "SELECT (Count (*) as ?count) WHERE { ?s ?p ?o }", 
-			"fetchUrl": "https://enpkg.commons-lab.org/graphdb/sparql?query=$$query$$&format=JSON$$&limit=limit$$&offset=$$offset$$&inference=false",
-			"fetchUrlShort": "https://enpkg.commons-lab.org/graphdb/sparql",
-			"queryHeaders": {"Accept": "application/sparql-results+json"}
-		}
-]
+        }
+],
+"datasources": {
+	"example_annot":{
+			"fetchUrl":"https://enpkg.commons-lab.org/graphdb/repositories/ENPKG?query=$$query$$&format=JSON$$&offset=$$offset$$&inference=false",
+			"queryHeaders": {"Accept": "application/sparql-results+json"},
+			"fetchQuery": "\n\n            SELECT distinct (strafter(str(?uri_class), \"https://enpkg.commons-lab.org/kg/npc_\") as ?value)\n            WHERE\n            {   \n                ?uri_class a <https://enpkg.commons-lab.org/kg/NPCClass>\t\n    }"
+	}
+}
 }
