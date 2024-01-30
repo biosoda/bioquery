@@ -1,10 +1,10 @@
 {
-  "name": "dbgi_frontend",
+  "name": "bioquery-dbgi",
   "version": "0.0.0",
   "description": null,
   "keywords": [],
   "main": "index.js",
-  "homepage": "http://dbgi.vital-it.ch:8080/dbgi_query",
+  "homepage": "https://biosoda.expasy.org/bioquery-dbgi",
   "dependencies": {
     "ajv": "~6.0.0",
     "bootstrap": "~4.1.3",
