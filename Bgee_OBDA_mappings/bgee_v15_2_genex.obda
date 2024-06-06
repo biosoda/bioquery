@@ -32,7 +32,7 @@ target		obo:{stageIdSPARQL} a efo:EFO_0000399 ; rdfs:label {stageName}^^xsd:stri
 source		select stageId, replace(stageId,':','_') as stageIdSPARQL, stageName, stageDescription from stage WHERE stageId is not null
 
 mappingId	Species
-target		<http://purl.uniprot.org/taxonomy/{speciesId}> a up:Taxon ; terms:identifier {speciesId}^^xsd:string ; up:scientificName {speciesConcatName} ; up:rank up:Species ; up:commonName {speciesCommonName} . <https://bgee.org/species/{speciesId}> a orth:Organism ; a obo:NCIT_C14250 ; obo:RO_0002162 <http://purl.uniprot.org/taxonomy/{speciesId}> . 
+target		<http://purl.uniprot.org/taxonomy/{speciesId}> a up:Taxon ; terms:identifier {speciesId}^^xsd:integer ; up:scientificName {speciesConcatName} ; up:rank up:Species ; up:commonName {speciesCommonName} . <https://bgee.org/species/{speciesId}> a orth:Organism ; a obo:NCIT_C14250 ; obo:RO_0002162 <http://purl.uniprot.org/taxonomy/{speciesId}> . 
 source		select speciesId, speciesCommonName, genomeVersion, genomeSpeciesId, concat(genus, ' ', species) as speciesConcatName from species
 
 mappingId	AnatomicalEntity
