@@ -22,25 +22,7 @@
             "id": "S00000004",
             "name": "Bgee",
             "moreinfo": "https://bgee.org",
-            "urlquery": "https://www.bgee.org/sparql/?query=PREFIX%20up%3A%20%3Chttp%3A%2F%2Fpurl.uniprot.org%2Fcore%2F%3E%0ASELECT%20*%20%7B%0A%09%3Fspecies%20a%20up%3ATaxon%20.%0A%09%3Fspecies%20up%3AscientificName%20%3Fname%20.%0A%09%3Fspecies%20up%3Arank%20up%3ASpecies%20.%0A%7D&format=srj&limit=100&offset=0&inference=false"
-        },
-        {
-            "id": "S00000005",
-            "name": "EBI",
-            "moreinfo": "https://www.ebi.ac.uk",
-            "urlquery": "https://www.ebi.ac.uk/rdf/services/sparql?format=srj&query=ASK+%7B%3Fa+a+%3Fb%7D"
-        },
-        {
-            "id": "S00000006",
-            "name": "NIBB",
-            "moreinfo": "http://sparql.nibb.ac.jp/",
-            "urlquery": "http://sparql.nibb.ac.jp/sparql?format=srj&query=ASK+%7B%3Fa+a+%3Fb%7D"
-        },
-        {
-            "id": "S00000007",
-            "name": "ORTHODB",
-            "moreinfo": "https://sparql.orthodb.org/",
-            "urlquery": "https://sparql.orthodb.org/sparql?format=srj&query=ASK+%7B%3Fa+a+%3Fb%7D"
+            "urlquery": "https://www.bgee.org/sparql/?query=PREFIX%20up%3A%20%3Chttp%3A%2F%2Fpurl.uniprot.org%2Fcore%2F%3E%0ASELECT%20*%20%7B%0A%09%3Fspecies%20a%20up%3ATaxon%20.%0A%09%3Fspecies%20up%3AscientificName%20%3Fname%20.%0A%09%3Fspecies%20up%3Arank%20up%3ASpecies%20.%0A%7D&format=application%2Fsparql-results%2Bjson&limit=100&offset=0&inference=false"
         }
     ],
     "structure": [
