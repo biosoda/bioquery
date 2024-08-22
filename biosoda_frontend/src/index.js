@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { render } from "react-dom";
-import { toggleExpandedForAll } from "react-sortable-tree"; // SortableTree, 
+import { addNodeUnderParent, toggleExpandedForAll } from "react-sortable-tree"; // SortableTree,
 import 'react-sortable-tree/style.css';
-import { addNodeUnderParent } from "react-sortable-tree"; // find
 import Select from 'react-select';
 import { Async } from 'react-select'; // https://react-select.com/async
 import fetch from 'isomorphic-fetch';
@@ -24,7 +23,7 @@ class SparqlInputField extends Component {
 		var options = {
 			lineNumbers: true,
 			mode: 'sparql',
-			// plaeholder does not work today in this version ... 
+			// plaeholder does not work today in this version ...
 			placeholder: "Enter SPARQL query here or select one of the templates on the left"
 		};
 
@@ -148,7 +147,7 @@ class ServicePoint extends Component {
 	fetchStatus() {
 		fetch(
 			this.props.urlquery,
-			{ 
+			{
 				method: 'GET',
 				headers: {
 					//'Access-Control-Allow-Origin': '*',
@@ -170,7 +169,7 @@ class ServicePoint extends Component {
 			})
 		})
 		.catch(error => {
-			console.log(error);
+			console.warn(error);
 			this.setState({ error: error, isLoading: false })
 		})
 	}
@@ -227,7 +226,7 @@ class App extends Component {
 
 	_handleKeyPress (e) {
 	  if (e.key === 'Enter') {
-		this.handleSubmit();
+			this.handleSubmit();
 	  }
 	}
 
@@ -328,253 +327,287 @@ class App extends Component {
 	}
 
   expand(expanded) {
-	var toggleData = toggleExpandedForAll({
-            treeData: this.state.treeData,
-            expanded,
-        });
+		var toggleData = toggleExpandedForAll({
+				treeData: this.state.treeData,
+				expanded,
+		});
     this.setState({
         treeData: toggleData,
     });
   }
   collapseAll() {
-	this.setState({ expanded: false });
+		this.setState({ expanded: false });
     this.expand(false);
   }
-  
+
   expandAll() {
-	this.setState({ expanded: true });
+		this.setState({ expanded: true });
     this.expand(true);
   }
 
   constructor(props) {
-	super(props);
-	document.title = "bioSODA web frontend";
+		super(props);
+		document.title = "bioSODA web frontend";
 
-	this.handleSubmit = this.handleSubmit.bind(this);
-	this._handleKeyPress = this._handleKeyPress.bind(this);
+		this.handleSubmit = this.handleSubmit.bind(this);
+		this._handleKeyPress = this._handleKeyPress.bind(this);
 
-	this.updateCode = this.updateCode.bind(this);
-	this.handleShow = this.handleShow.bind(this);
-	this.handleRun = this.handleRun.bind(this);
+		this.updateCode = this.updateCode.bind(this);
+		this.handleShow = this.handleShow.bind(this);
+		this.handleRun = this.handleRun.bind(this);
 
-	this.expandAll = this.expandAll.bind(this);
-	this.collapseAll = this.collapseAll.bind(this);
-	this.displayResults = this.displayResults.bind(this);
+		this.expandAll = this.expandAll.bind(this);
+		this.collapseAll = this.collapseAll.bind(this);
+		this.displayResults = this.displayResults.bind(this);
 
-	this.state = {
-		searchString: '',
-		showSparql: false,
-		showSpinner: false,
-		sparqlEndpointURL: '',
-		hasResults: false,
-		servicepointsUpdated: Date.now(),
-		value: '',
-		dynamicvals: [],
-		treeData: [],
-		resultOffset: 0,
-		resultLimit: 10,
-		lookupLimit: 100, // limits the results on var sparql lookups
-		useInnerLimits: true, // the inner limits may produce at least some data before timeout
-		lookupOffset: 0, // probably never changes but who knows ;-)
-		query: '', // SPARQL query to display in the SPARQL query editor
-		queryHuman: 'none of our prepared queries', // human understandable query aka question
-		estimatedRuntime: 'unknown', // where applicable
-		queryTarget: 'https://biosoda.expasy.org:4443/sparql?query=$$query$$&format=JSON&limit=$$limit$$&offset=$$offset$$&inference=false', // where to send the SPARQL query
-		queryTargetShort: 'https://biosoda.expasy.org:4443/sparql',
-		queryHeaders: {},
-		asyncWaiter : '',
-		expanded: false,
-	};
-
-	// functionalities taken from lodestar/lode.js
-	this['renderedTableFromJSON'] = (json) => {
-		var eltable = document.createElement('table');
-		var _results = json.results.bindings;
-		var _variables = json.head.vars;
-		var elthead = document.createElement('thead');
-		for (let onevar of _variables) {
-			if (onevar.endsWith('_noshow')) break;
-			var elth = document.createElement('th');
-			elth.appendChild(document.createTextNode(onevar));
-			elthead.appendChild(elth);
-		}
-		eltable.appendChild(elthead);
-		for (let row of _results) {
-			var elrow = document.createElement('tr');
-			for (let onevar of _variables) {
-				// console.log(onevar);
-				if (!onevar.endsWith('_noshow')) {
-					var eltd = document.createElement('td');
-					// row[onevar].type holds the type of the element uri, int, bool, ...
-					if (typeof(row[onevar]) !== "undefined" && row[onevar].type === 'uri') {
-						var link = document.createElement('a');
-						var text = document.createTextNode(row[onevar].value);
-						link.appendChild(text);
-						link.title = 'linked resource';
-						link.href = row[onevar].value;
-						link.target = '_blank';
-						eltd.appendChild(link);
-					} else if (typeof(row[onevar]) !== "undefined") {
-						eltd.appendChild(document.createTextNode(row[onevar].value));
-					}
-					elrow.appendChild(eltd);
-				}
-			}
-			eltable.append(elrow);
-		}
-		return(eltable);
-	}
-
-	// https://stackoverflow.com/questions/15523514/find-by-key-deep-in-a-nested-object
-	// https://github.com/frontend-collective/react-sortable-tree/issues/49
-	// two kind of nodes: structure and questions
-	biosodadata.structure.forEach(function(element) {
-		let NEW_NODE  = {
-			id: element.id,
-			title: element.title,
+		this.state = {
+			searchString: '',
+			showSparql: false,
+			showSpinner: false,
+			sparqlEndpointURL: '',
+			hasResults: false,
+			servicepointsUpdated: Date.now(),
+			value: '',
+			dynamicvals: [],
+			treeData: [],
+			resultOffset: 0,
+			resultLimit: 10,
+			lookupLimit: 100, // limits the results on var sparql lookups
+			useInnerLimits: true, // the inner limits may produce at least some data before timeout
+			lookupOffset: 0, // probably never changes but who knows ;-)
+			query: '', // SPARQL query to display in the SPARQL query editor
+			queryHuman: 'none of our prepared queries', // human understandable query aka question
+			estimatedRuntime: 'unknown', // where applicable
+			queryTarget: 'https://biosoda.expasy.org:4443/sparql?query=$$query$$&format=JSON&limit=$$limit$$&offset=$$offset$$&inference=false', // where to send the SPARQL query
+			queryTargetShort: 'https://biosoda.expasy.org:4443/sparql',
+			queryHeaders: {},
+			asyncWaiter : '',
+			expanded: false,
 		};
-		let newTree = addNodeUnderParent({
-			treeData: this.state.treeData,
-			newNode: NEW_NODE,
-			expandParent: true,
-			parentKey: element.parentId, // here we want to find the correct key using getParent from link above or similar/better
-			getNodeKey: ({ node }) =>  node.id
-		});
-		this.state.treeData = newTree.treeData;
-	}, this);
 
-	biosodadata.questions.forEach(function(el) {
-		el.parentIds.forEach(function(element) {
-			var functionalQuestion = []; // we need that to have all questions as arrays even if they have no vars
-			functionalQuestion.push(el.question);
-			this['updateQuery_'+el.id] = (event) => {
-				var newsparql = el.SPARQL;
-				var humanReadable = el.question;
-				var newEstimatedRuntimeSeconds = el.estimatedseconds * 2;
-				var estimatedRuntime = (newEstimatedRuntimeSeconds).toString();
-				if (typeof(estimatedRuntime) == 'undefined') {
-					estimatedRuntime = 'unknown';
-				} else {
-					estimatedRuntime = estimatedRuntime.toHHMMSS();
-				}
-				if (typeof(el.vars) !== "undefined") {
-					for (let onevar of el.vars) {
-						var tmptype = onevar.type;
-						if (tmptype === 'string' || tmptype === 'list' || tmptype === 'simplelist') {
-							var originalval = varmasker + onevar.name + varmasker;
-							var replaceval;
-							var replacevalhuman;
-							if (typeof(this.state.dynamicvals[el.id]) === 'undefined' || typeof(this.state.dynamicvals[el.id][onevar.name]) === 'undefined' || typeof(this.state.dynamicvals[el.id][onevar.name]['label']) === 'undefined') {
-								if (typeof(onevar.defaultvalue) === "undefined") onevar.defaultvalue = onevar.default;
-								replaceval = onevar.defaultvalue;
-								replacevalhuman = onevar.default;
-							} else {
-								replaceval = this.state.dynamicvals[el.id][onevar.name]['value'];
-								if (typeof (this.state.dynamicvals[el.id][onevar.name]['label']) !== "undefined") {
-									replacevalhuman = this.state.dynamicvals[el.id][onevar.name]['label'];
-								} else {
-									replacevalhuman = this.state.dynamicvals[el.id][onevar.name]['value'];
-								}
-							}
-							newsparql = newsparql.split(originalval).join(replaceval.split("'").join("\\'")); // better than .replace because it replaces all of the occurences
-							humanReadable = humanReadable.split(originalval).join(replacevalhuman); // better than .replace because it replaces all of the occurences
-						}
-					}
-				}
-
-				if (this.state.useInnerLimits === true) {
-					newsparql = newsparql.split(varmasker + 'innerlimit' + varmasker).join('LIMIT ' + this.state.resultLimit);
-					newsparql = newsparql.split(varmasker + 'innerlimit10' + varmasker).join('LIMIT ' + this.state.resultLimit * 10);
-				} else {
-					newsparql = newsparql.split(varmasker + 'innerlimit' + varmasker).join('');
-				}
-
-				this.setState({ query: newsparql, queryTarget: el.fetchUrl, queryTargetShort: el.fetchUrlShort, queryHeaders: el.queryHeaders, queryHuman: humanReadable, estimatedRuntime: estimatedRuntime, estimatedRuntimeSeconds: newEstimatedRuntimeSeconds });
-				if(typeof(this.refs.sparqy) !== 'undefined') {
-					this.refs.sparqy.refs.cm.getCodeMirror().doc.setValue(newsparql);
-				}
-				return true; // is needed to break the asynchronity - is it?
-			};
-			if (typeof(el.vars) !== "undefined") {
-				for (let onevar of el.vars) {
-					if (onevar.type ==='string') {
-						functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<input
-							key={onevar.name}
-							name={onevar.name}
-							id={el.id + "_" + onevar.name}
-							defaultValue={onevar.default}
-							onChange={(evt) => this.handleChange(evt.value, el.id, onevar.name, evt)}
-						/>));
-					}
-					if (onevar.type === 'simplelist') {
-						var tmpoptions = onevar.listvalues;
-						// if is defined listlabels, we can add them also
-						
-						functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<Select
-							key={onevar.name}
-							name={onevar.name}
-							id={el.id + "_" + onevar.name}
-							defaultValue={{value: onevar.defaultvalue, label: onevar.default}}
-							classNamePrefix="my-select"
-							options = {tmpoptions}
-							className="reactSelect"
-							onChange={(evt) => this.handleChangeSelect(el.id, onevar.name, evt)}
-						/>));
-					}
-					if (onevar.type === 'list') {
-						if (onevar.flavour === 'autocomplete') {
-							this['fetchAutocomplete_'+onevar.name] = function(searchKey) {
-								var searchFilter = [];
-								if (typeof(onevar.fullList) !== "undefined" && onevar.fullList === true) {
-									searchKey = '';
-								}
-								if (typeof(onevar.extrafilter) !== "undefined") {
-									searchFilter = onevar.extrafilter;
-								}
-							return this.fetchAutocompleteBiosoda(onevar.datasource, searchKey, el.id, onevar.name, searchFilter);
-						};
-						functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<Async
-							key={onevar.name}
-							name={onevar.name}
-							id={el.id + "_" + onevar.name}
-							classNamePrefix="my-select"
-							className="autocomplete"
-							dataExtrafilter={onevar.extrafilter}
-							defaultValue={{label: onevar.default}}
-							noOptionsMessage={({ inputValue }) => !inputValue && 'Type keyword above to perform search. Found options will be listed here ...'}
-							onChange={(evt) => this.handleChange(evt.value, el.id, onevar.name, evt)}
-							cacheOptions loadOptions={this['fetchAutocomplete_'+onevar.name].bind(this)}
-						/>));
-						}
-					}
-				}
+		// functionalities taken from lodestar/lode.js
+		this['renderedTableFromJSON'] = (json) => {
+			var eltable = document.createElement('table');
+			var _results = json.results.bindings;
+			var _variables = json.head.vars;
+			var elthead = document.createElement('thead');
+			for (let onevar of _variables) {
+				if (onevar.endsWith('_noshow')) break;
+				var elth = document.createElement('th');
+				elth.appendChild(document.createTextNode(onevar));
+				elthead.appendChild(elth);
 			}
-
-			functionalQuestion.push(<button key={'showSPARQL_' + el.id} className="btn btn-primary buttonInfo" title="show query in SPARQL query editor" onClick={() => this.handleShow(el.id)}>i</button>);
-			functionalQuestion.push(<button key={'submitquery_' + el.id} className="btn btn-success buttonSubmit" title="directly run this query" onClick={() => this.handleRun(el.id)}>&gt;</button>);
-
-			if (typeof(el.fullHTML) !== "undefined") {
-				functionalQuestion = [];
-				functionalQuestion.push(<div key={el.id} dangerouslySetInnerHTML={{__html: el.question}} code={el.question} />);
+			eltable.appendChild(elthead);
+			for (let row of _results) {
+				var elrow = document.createElement('tr');
+				for (let onevar of _variables) {
+					// console.log(onevar);
+					if (!onevar.endsWith('_noshow')) {
+						var eltd = document.createElement('td');
+						// row[onevar].type holds the type of the element uri, int, bool, ...
+						if (typeof(row[onevar]) !== "undefined" && row[onevar].type === 'uri') {
+							var link = document.createElement('a');
+							var text = document.createTextNode(row[onevar].value);
+							link.appendChild(text);
+							link.title = 'linked resource';
+							link.href = row[onevar].value;
+							link.target = '_blank';
+							eltd.appendChild(link);
+						} else if (typeof(row[onevar]) !== "undefined") {
+							eltd.appendChild(document.createTextNode(row[onevar].value));
+						}
+						elrow.appendChild(eltd);
+					}
+				}
+				eltable.append(elrow);
 			}
+			return(eltable);
+		}
 
+		// https://stackoverflow.com/questions/15523514/find-by-key-deep-in-a-nested-object
+		// https://github.com/frontend-collective/react-sortable-tree/issues/49
+		// two kind of nodes: structure and questions
+		biosodadata.structure.forEach(function(element) {
 			let NEW_NODE  = {
-				id: el.id,
-				title: functionalQuestion,
-				estimatedSeconds: el.estimatedseconds
+				id: element.id,
+				title: element.title,
 			};
-
 			let newTree = addNodeUnderParent({
 				treeData: this.state.treeData,
 				newNode: NEW_NODE,
 				expandParent: true,
-				parentKey: element, // here we want to find the correct key using getParent from link above or similar/better
+				parentKey: element.parentId, // here we want to find the correct key using getParent from link above or similar/better
 				getNodeKey: ({ node }) =>  node.id
 			});
 			this.state.treeData = newTree.treeData;
 		}, this);
-	}, this);
-}
+
+		biosodadata.questions.forEach(function(el) {
+			el.parentIds.forEach(function(element) {
+				var functionalQuestion = []; // we need that to have all questions as arrays even if they have no vars
+				functionalQuestion.push(el.question);
+				this['updateQuery_'+el.id] = (event) => {
+					var newsparql = el.SPARQL;
+					var humanReadable = el.question;
+					var newEstimatedRuntimeSeconds = el.estimatedseconds * 2;
+					var estimatedRuntime = (newEstimatedRuntimeSeconds).toString();
+					if (typeof(estimatedRuntime) == 'undefined') {
+						estimatedRuntime = 'unknown';
+					} else {
+						estimatedRuntime = estimatedRuntime.toHHMMSS();
+					}
+					if (typeof(el.vars) !== "undefined") {
+						for (let onevar of el.vars) {
+							var tmptype = onevar.type;
+							if (tmptype === 'string' || tmptype === 'list' || tmptype === 'simplelist') {
+								var originalval = varmasker + onevar.name + varmasker;
+								var replaceval;
+								var replacevalhuman;
+								if (typeof(this.state.dynamicvals[el.id]) === 'undefined' || typeof(this.state.dynamicvals[el.id][onevar.name]) === 'undefined' || typeof(this.state.dynamicvals[el.id][onevar.name]['label']) === 'undefined') {
+									if (typeof(onevar.defaultvalue) === "undefined") onevar.defaultvalue = onevar.default;
+									replaceval = onevar.defaultvalue;
+									replacevalhuman = onevar.default;
+								} else {
+									replaceval = this.state.dynamicvals[el.id][onevar.name]['value'];
+									if (typeof (this.state.dynamicvals[el.id][onevar.name]['label']) !== "undefined") {
+										replacevalhuman = this.state.dynamicvals[el.id][onevar.name]['label'];
+									} else {
+										replacevalhuman = this.state.dynamicvals[el.id][onevar.name]['value'];
+									}
+								}
+								newsparql = newsparql.split(originalval).join(replaceval.split("'").join("\\'")); // better than .replace because it replaces all of the occurences
+								humanReadable = humanReadable.split(originalval).join(replacevalhuman); // better than .replace because it replaces all of the occurences
+							}
+						}
+					}
+
+					if (this.state.useInnerLimits === true) {
+						newsparql = newsparql.split(varmasker + 'innerlimit' + varmasker).join('LIMIT ' + this.state.resultLimit);
+						newsparql = newsparql.split(varmasker + 'innerlimit10' + varmasker).join('LIMIT ' + this.state.resultLimit * 10);
+					} else {
+						newsparql = newsparql.split(varmasker + 'innerlimit' + varmasker).join('');
+					}
+
+					this.setState({ query: newsparql, queryTarget: el.fetchUrl, queryTargetShort: el.fetchUrlShort, queryHeaders: el.queryHeaders, queryHuman: humanReadable, estimatedRuntime: estimatedRuntime, estimatedRuntimeSeconds: newEstimatedRuntimeSeconds });
+					if(typeof(this.refs.sparqy) !== 'undefined') {
+						this.refs.sparqy.refs.cm.getCodeMirror().doc.setValue(newsparql);
+					}
+					return true; // is needed to break the asynchronity - is it?
+				};
+				if (typeof(el.vars) !== "undefined") {
+					for (let onevar of el.vars) {
+						if (onevar.type ==='string') {
+							functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<input
+								key={onevar.name}
+								name={onevar.name}
+								id={el.id + "_" + onevar.name}
+								defaultValue={onevar.default}
+								onChange={(evt) => this.handleChange(evt.value, el.id, onevar.name, evt)}
+							/>));
+						}
+						if (onevar.type === 'simplelist') {
+							var tmpoptions = onevar.listvalues;
+							// if is defined listlabels, we can add them also
+
+							functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<Select
+								key={onevar.name}
+								name={onevar.name}
+								id={el.id + "_" + onevar.name}
+								defaultValue={{value: onevar.defaultvalue, label: onevar.default}}
+								classNamePrefix="my-select"
+								options = {tmpoptions}
+								className="reactSelect"
+								onChange={(evt) => this.handleChangeSelect(el.id, onevar.name, evt)}
+							/>));
+						}
+						if (onevar.type === 'list') {
+							if (onevar.flavour === 'autocomplete') {
+								this['fetchAutocomplete_'+onevar.name] = function(searchKey) {
+									var searchFilter = [];
+									if (typeof(onevar.fullList) !== "undefined" && onevar.fullList === true) {
+										searchKey = '';
+									}
+									if (typeof(onevar.extrafilter) !== "undefined") {
+										searchFilter = onevar.extrafilter;
+									}
+								return this.fetchAutocompleteBiosoda(onevar.datasource, searchKey, el.id, onevar.name, searchFilter);
+							};
+							functionalQuestion = reactStringReplace(functionalQuestion, varmasker + onevar.name + varmasker, (match, i) => (<Async
+								key={onevar.name}
+								name={onevar.name}
+								id={el.id + "_" + onevar.name}
+								classNamePrefix="my-select"
+								className="autocomplete"
+								dataExtrafilter={onevar.extrafilter}
+								defaultValue={{label: onevar.default}}
+								noOptionsMessage={({ inputValue }) => !inputValue && 'Type keyword above to perform search. Found options will be listed here ...'}
+								onChange={(evt) => this.handleChange(evt.value, el.id, onevar.name, evt)}
+								cacheOptions loadOptions={this['fetchAutocomplete_'+onevar.name].bind(this)}
+							/>));
+							}
+						}
+					}
+				}
+
+				functionalQuestion.push(<button key={'showSPARQL_' + el.id} className="btn btn-primary buttonInfo" title="show query in SPARQL query editor" onClick={() => this.handleShow(el.id)}>i</button>);
+				functionalQuestion.push(<button key={'submitquery_' + el.id} className="btn btn-success buttonSubmit" title="directly run this query" onClick={() => this.handleRun(el.id)}>&gt;</button>);
+				// NOTE: We use the question label to create a URL for the query because expanding only a specific node ID is completely broken
+				// It's not ideal, but does the job for now
+				functionalQuestion.push(
+					<button
+						key={'geturl_' + el.id}
+						className="btn buttonInfo"
+						style={{ padding: "0 0.1em"}}
+						title="get query search URL"
+						onClick={() => navigator.clipboard.writeText(`${window.location.origin}${window.location.pathname}?search=${encodeURIComponent(el.question.split('$$')[0])}`)}
+					>
+						🔗
+					</button>
+				);
+
+				if (typeof(el.fullHTML) !== "undefined") {
+					functionalQuestion = [];
+					functionalQuestion.push(<div key={el.id} dangerouslySetInnerHTML={{__html: el.question}} code={el.question} />);
+				}
+
+				let NEW_NODE  = {
+					id: el.id,
+					title: functionalQuestion,
+					estimatedSeconds: el.estimatedseconds,
+					// expanded: true,
+				};
+
+				let newTree = addNodeUnderParent({
+					treeData: this.state.treeData,
+					newNode: NEW_NODE,
+					expandParent: true,
+					parentKey: element, // here we want to find the correct key using getParent from link above or similar/better
+					getNodeKey: ({ node }) =>  node.id
+				});
+				this.state.treeData = newTree.treeData;
+			}, this);
+		}, this);
+
+		const searchParams = new URLSearchParams(window.location.search);
+    const requestSearch = searchParams.get('search');
+		if (requestSearch) this.state.searchString = requestSearch;
+
+		// NOTE: in case we want to add filtering on queryID,
+		// but right now only this.state.expanded is used to expand all without distinctions
+		// if (queryId) {
+		// 	const expandedTree = map({
+		// 		treeData: this.state.treeData,
+		// 		callback: ({ node }) => {
+		// 			if (node.id === queryId) return { ...node, expanded: true }
+		// 			return node;
+		// 		},
+		// 		getNodeKey: ({ treeIndex }) => treeIndex,
+		// 		ignoreCollapsed: false,
+		// 	});
+		// 	this.state.treeData = expandedTree;
+		// 	// this.state.expanded = true;
+		// }
+	}
 
 	fetchAutocompleteBiosoda(datasource, searchString, questionid, varname, searchFilter){
 		// this.node_logger('async_'+questionid+"_"+varname, datasource, searchString, 0);
@@ -708,7 +741,7 @@ class App extends Component {
 				}}>
 					<strong>Bio</strong>-Query
 					<span style={{ fontSize: "0.6em", position: 'relative', bottom: '0.6em', color: 'red', fontFamily: 'monospace' }} title="BETA-Version - Working prototype with limited functionality">β</span>:
-					Federated template <strong>s</strong>earch <strong>o</strong>ver biological <strong>da</strong>tabases 
+					Federated template <strong>s</strong>earch <strong>o</strong>ver biological <strong>da</strong>tabases
 				</h3>
 			</Col>
 			<Col  lg={6} md={12} id="services" style={{
@@ -814,7 +847,7 @@ class App extends Component {
 				About
 			</a>
 
-			
+
 			</form>
 				<div style={{ height: '700px', overflow: 'hidden', padding: '1em', overflowY: 'auto'}}>
 				<TreeSearch
@@ -824,7 +857,7 @@ class App extends Component {
 					lastActiveId={this.state.lastActiveId}
 					useInnerLimits={this.state.useInnerLimits}
 				/>
-				
+
 								</div>
 			</Col>
 			 { this.state.showSparql ?

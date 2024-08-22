@@ -18,7 +18,7 @@
 							</ul>
 						</<li>
 					</ul>
-				
+
 				</li>
 				<li></li>
 				<li></li>
@@ -139,7 +139,7 @@ export class NestedNodes extends Component {
 						})}
 					</ul>
 				</li>
-			); 
+			);
 		}
 	}
 
