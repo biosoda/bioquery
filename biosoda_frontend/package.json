@@ -27,7 +27,7 @@
     "reactstrap": "~6.5.0"
   },
   "devDependencies": {
-    "react-scripts": "~2.1.2"
+    "react-scripts": "~5.0.1"
   },
   "scripts": {
     "start": "cross-env PORT=3001 react-scripts start",
