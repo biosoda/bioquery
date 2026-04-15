@@ -90,14 +90,14 @@ class ExtraTarget extends Component {
 	}
 	render() {
 		var targetExplanation = 'the query will be answered directly by the source db';
-		if (this.props.superState.queryTargetShort === 'https://biosoda.expasy.org:4443/sparql') {
+		if (this.props.superState.queryTargetShort === 'https://www.bgee.org/sparql/') {
 			targetExplanation = 'the query will be sent to the federation server to fullfill the federated service calls';
 		}
 
 		var isAvNow = this.isAvailable(this.props.superState.queryTargetShort);
 
 		return(
-			<span> ({ targetExplanation }) - {isAvNow} - last check: { new Date(Date.now()).toLocaleString() }</span>
+			<span> ({ targetExplanation }) - last check: { new Date(Date.now()).toLocaleString() }</span>
 		)
 	}
 }
