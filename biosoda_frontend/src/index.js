@@ -97,7 +97,7 @@ class ExtraTarget extends Component {
 		var isAvNow = this.isAvailable(this.props.superState.queryTargetShort);
 
 		return(
-			<span> ({ targetExplanation }) - last check: { new Date(Date.now()).toLocaleString() }</span>
+			<span> ({ targetExplanation }) - {isAvNow} - last check: { new Date(Date.now()).toLocaleString() }</span>
 		)
 	}
 }
